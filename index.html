@@ -614,6 +614,67 @@ select {
   flex-shrink: 0;
 }
 
+/* =========================
+   SWYCH SIGNAL
+========================= */
+
+.swych-signal {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .6px;
+  color: #aaa;
+}
+
+.signal-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #777;
+  flex-shrink: 0;
+}
+
+.signal-dot.strong {
+  background: var(--success);
+}
+
+.signal-dot.medium {
+  background: #d8c56a;
+}
+
+.signal-dot.low {
+  background: #777;
+}
+
+.signal-score {
+  color: white;
+}
+
+.creator-signal-large {
+  margin-top: 14px;
+  padding-top: 13px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.creator-signal-label {
+  color: var(--muted);
+  font-size: 9px;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+.creator-signal-value {
+  font-size: 11px;
+  font-weight: 700;
+}
+
 .reality-card-bottom {
   border-top: 1px solid var(--border);
   padding: 15px 20px;
@@ -1590,13 +1651,14 @@ select {
 
     <div class="welcome-center">
       <div class="welcome-title">
-        YOU<br>
-        WOULDN'T<br>
-        LAST.
+        LIVE<br>
+        SOMEONE<br>
+        ELSE'S<br>
+        REALITY.
       </div>
 
       <div class="welcome-description">
-        Drop your reality. Enter someone else's. Complete the mission. Earn FLUX.
+        Drop your reality. Enter someone else's. Complete missions. Earn FLUX.
       </div>
     </div>
 
@@ -1627,8 +1689,9 @@ select {
       </button>
 
       <div id="authTitle" class="auth-title">CREATE ACCOUNT</div>
+
       <div id="authSubtitle" class="auth-subtitle">
-        Create your SWYCHED identity.
+        Create your SWYCHED identity and start exploring different Realities.
       </div>
     </div>
 
@@ -1732,7 +1795,6 @@ select {
 
       <button class="home-action" onclick="showScreen('explore')">
         <div class="action-icon">
-          <!-- SAME EXPLORE ICON USED IN NAV -->
           <svg class="app-icon" viewBox="0 0 24 24" fill="none"
                stroke="currentColor" stroke-width="1.8"
                stroke-linecap="round" stroke-linejoin="round">
@@ -1751,7 +1813,6 @@ select {
 
       <button class="home-action" onclick="showScreen('drop')">
         <div class="action-icon">
-          <!-- SAME DROP ICON USED IN NAV -->
           <svg class="app-icon" viewBox="0 0 24 24" fill="none"
                stroke="currentColor" stroke-width="1.8"
                stroke-linecap="round">
@@ -1770,7 +1831,6 @@ select {
 
       <button class="home-action" onclick="showScreen('swych')">
         <div class="action-icon">
-          <!-- SAME SWYCH ICON USED IN NAV -->
           <svg class="app-icon" viewBox="0 0 24 24" fill="none"
                stroke="currentColor" stroke-width="1.8"
                stroke-linecap="round" stroke-linejoin="round">
@@ -1971,9 +2031,11 @@ select {
 
         </div>
 
+        <div id="dropCreatorSignal"></div>
+
         <div class="status-note">
           Verified creators have been recognized by SWYCHED as reliable creators.
-          Verification is not something a creator can simply select on a Drop.
+          Your SWYCH SIGNAL also shows how much experience a creator has.
         </div>
       </div>
 
@@ -2232,6 +2294,9 @@ select {
       <div id="profileBio" class="profile-bio">
       </div>
 
+      <!-- SWYCH SIGNAL -->
+      <div id="profileSignal"></div>
+
       <div class="profile-actions">
         <button
           class="small-button"
@@ -2289,13 +2354,13 @@ select {
         <div id="profileVerificationStatus" class="verification-status">
         </div>
 
+        <div id="profileVerificationSignal"></div>
+
         <div class="verification-description">
           Verified creators are marked as reliable by SWYCHED.
-          In the real app, verification would be granted by SWYCHED staff
-          or an admin system rather than self-selected.
+          Your SWYCH SIGNAL shows your experience based on completed missions.
         </div>
 
-        <!-- Prototype-only control -->
         <button
           id="demoVerifyButton"
           class="demo-verify-button"
@@ -2471,7 +2536,6 @@ select {
       class="nav-item"
       onclick="showScreen('profile')"
     >
-      <!-- HEAD + BODY OUTLINE -->
       <svg class="app-icon" viewBox="0 0 24 24" fill="none"
            stroke="currentColor" stroke-width="1.8"
            stroke-linecap="round" stroke-linejoin="round">
@@ -2501,72 +2565,153 @@ select {
 ========================= */
 
 function getAccounts() {
+
   try {
-    return JSON.parse(localStorage.getItem("swychedAccounts")) || [];
+
+    const accounts =
+      JSON.parse(
+        localStorage.getItem("swychedAccounts")
+      ) || [];
+
+    /*
+      Migrate older accounts so the new
+      SWYCH SIGNAL system works.
+    */
+
+    let changed = false;
+
+    accounts.forEach(account => {
+
+      if (typeof account.verified !== "boolean") {
+        account.verified = false;
+        changed = true;
+      }
+
+      if (typeof account.reputation !== "number") {
+        account.reputation = 0;
+        changed = true;
+      }
+
+      if (typeof account.completedMissions !== "number") {
+        account.completedMissions = 0;
+        changed = true;
+      }
+
+      if (typeof account.ratings !== "number") {
+        account.ratings = 0;
+        changed = true;
+      }
+
+      if (typeof account.ratingTotal !== "number") {
+        account.ratingTotal = 0;
+        changed = true;
+      }
+
+    });
+
+    if (changed) {
+      saveAccounts(accounts);
+    }
+
+    return accounts;
+
   } catch {
+
     return [];
+
   }
+
 }
 
+
 function saveAccounts(accounts) {
+
   localStorage.setItem(
     "swychedAccounts",
     JSON.stringify(accounts)
   );
+
 }
+
 
 function getSession() {
-  return localStorage.getItem("swychedSession");
+
+  return localStorage.getItem(
+    "swychedSession"
+  );
+
 }
+
 
 function setSession(id) {
-  localStorage.setItem("swychedSession", id);
+
+  localStorage.setItem(
+    "swychedSession",
+    id
+  );
+
 }
+
 
 function clearSession() {
-  localStorage.removeItem("swychedSession");
+
+  localStorage.removeItem(
+    "swychedSession"
+  );
+
 }
 
+
 function getCurrentAccount() {
-  const session = getSession();
+
+  const session =
+    getSession();
 
   if (!session) {
     return null;
   }
 
-  const accounts = getAccounts();
+  const accounts =
+    getAccounts();
 
-  const account = accounts.find(
-    account => account.id === session
-  );
+  return accounts.find(
+    account =>
+      account.id === session
+  ) || null;
 
-  if (account && typeof account.verified !== "boolean") {
-    account.verified = false;
-    saveCurrentAccount(account);
-  }
-
-  return account || null;
 }
+
 
 function saveCurrentAccount(updated) {
 
-  const accounts = getAccounts();
+  const accounts =
+    getAccounts();
 
-  const index = accounts.findIndex(
-    account => account.id === updated.id
-  );
+  const index =
+    accounts.findIndex(
+      account =>
+        account.id === updated.id
+    );
 
   if (index !== -1) {
-    accounts[index] = updated;
+
+    accounts[index] =
+      updated;
+
     saveAccounts(accounts);
+
   }
+
 }
 
+
 function normalizeUsername(username) {
+
   return username
     .trim()
     .replace(/^@/, "")
     .toLowerCase();
+
 }
 
 
@@ -2577,15 +2722,21 @@ function normalizeUsername(username) {
 function getDrops() {
 
   try {
+
     return JSON.parse(
-      localStorage.getItem("swychedDrops")
+      localStorage.getItem(
+        "swychedDrops"
+      )
     ) || [];
 
   } catch {
+
     return [];
+
   }
 
 }
+
 
 function saveDrops(drops) {
 
@@ -2648,9 +2799,11 @@ const LEVELS = [
   }
 ];
 
+
 function getLevel(flux) {
 
-  let result = LEVELS[0];
+  let result =
+    LEVELS[0];
 
   for (const level of LEVELS) {
 
@@ -2664,29 +2817,38 @@ function getLevel(flux) {
 
 }
 
+
 function getProgress(flux) {
 
-  const level = getLevel(flux);
+  const level =
+    getLevel(flux);
 
   if (level.next === null) {
+
     return {
       percentage: 100,
       current: flux,
       target: "MAX"
     };
+
   }
 
-  const range = level.next - level.min;
+  const range =
+    level.next -
+    level.min;
 
-  const progress = flux - level.min;
+  const progress =
+    flux -
+    level.min;
 
-  const percentage = Math.max(
-    0,
-    Math.min(
-      100,
-      (progress / range) * 100
-    )
-  );
+  const percentage =
+    Math.max(
+      0,
+      Math.min(
+        100,
+        (progress / range) * 100
+      )
+    );
 
   return {
     percentage,
@@ -2698,39 +2860,251 @@ function getProgress(flux) {
 
 
 /* =========================
+   SWYCH SIGNAL
+========================= */
+
+/*
+  SWYCH SIGNAL is a simple reliability/
+  experience indicator.
+
+  It is based primarily on completed
+  missions, with ratings becoming useful
+  later when a rating system is added.
+
+  0 missions = 0%
+  1 mission = 10%
+  ...
+  10+ missions = 100%
+
+  Verified status does NOT automatically
+  increase the signal.
+*/
+
+function getSwychSignal(account) {
+
+  if (!account) {
+
+    return {
+      score: 0,
+      label: "NEW",
+      className: "low"
+    };
+
+  }
+
+  const completed =
+    Math.max(
+      0,
+      Number(
+        account.completedMissions || 0
+      )
+    );
+
+  const ratings =
+    Math.max(
+      0,
+      Number(
+        account.ratings || 0
+      )
+    );
+
+  const ratingTotal =
+    Math.max(
+      0,
+      Number(
+        account.ratingTotal || 0
+      )
+    );
+
+  const ratingAverage =
+    ratings > 0
+      ? ratingTotal / ratings
+      : 0;
+
+  /*
+    Experience contributes up to 70%.
+  */
+
+  const experienceScore =
+    Math.min(
+      70,
+      completed * 7
+    );
+
+  /*
+    Ratings contribute up to 30%.
+  */
+
+  const ratingScore =
+    ratings > 0
+      ? Math.min(
+          30,
+          (ratingAverage / 5) * 30
+        )
+      : 0;
+
+  const score =
+    Math.round(
+      Math.min(
+        100,
+        experienceScore +
+        ratingScore
+      )
+    );
+
+  let label =
+    "NEW";
+
+  let className =
+    "low";
+
+  if (score >= 80) {
+
+    label =
+      "STRONG";
+
+    className =
+      "strong";
+
+  } else if (score >= 45) {
+
+    label =
+      "RISING";
+
+    className =
+      "medium";
+
+  } else if (score > 0) {
+
+    label =
+      "BUILDING";
+
+    className =
+      "low";
+
+  }
+
+  return {
+    score,
+    label,
+    className
+  };
+
+}
+
+
+function getSwychSignalHTML(account) {
+
+  const signal =
+    getSwychSignal(account);
+
+  return `
+
+    <div class="swych-signal">
+
+      <span
+        class="signal-dot ${signal.className}"
+      ></span>
+
+      <span>SWYCH SIGNAL</span>
+
+      <span class="signal-score">
+        ${signal.score}% · ${signal.label}
+      </span>
+
+    </div>
+
+  `;
+
+}
+
+
+function getLargeSwychSignalHTML(account) {
+
+  const signal =
+    getSwychSignal(account);
+
+  return `
+
+    <div class="creator-signal-large">
+
+      <div class="creator-signal-label">
+        SWYCH SIGNAL
+      </div>
+
+      <div class="creator-signal-value">
+        ${signal.score}% · ${signal.label}
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================
    FLUX
 ========================= */
 
 function addFlux(amount) {
 
-  const account = getCurrentAccount();
+  const account =
+    getCurrentAccount();
 
-  if (!account) return;
+  if (!account) return 0;
 
   /*
     Individual missions can never award
     more than 250 FLUX.
   */
 
-  const safeAmount = Math.min(
-    250,
-    Math.max(
-      0,
-      Number(amount) || 0
-    )
-  );
+  const safeAmount =
+    Math.min(
+      250,
+      Math.max(
+        0,
+        Number(amount) || 0
+      )
+    );
 
   account.flux =
-    Number(account.flux || 0) +
+    Number(
+      account.flux || 0
+    ) +
     safeAmount;
 
   account.swyches =
-    Number(account.swyches || 0) +
+    Number(
+      account.swyches || 0
+    ) +
     1;
 
-  saveCurrentAccount(account);
+  /*
+    Completing a mission also improves
+    the creator/player's SWYCH SIGNAL.
+  */
+
+  account.completedMissions =
+    Number(
+      account.completedMissions || 0
+    ) +
+    1;
+
+  account.reputation =
+    Math.min(
+      1000,
+      Number(
+        account.reputation || 0
+      ) + 50
+    );
+
+  saveCurrentAccount(
+    account
+  );
 
   return safeAmount;
+
 }
 
 
@@ -2754,18 +3128,23 @@ const appScreens = [
   "editProfile"
 ];
 
+
 function showScreen(screenId) {
 
   if (
     !getCurrentAccount() &&
     !["welcome", "auth"].includes(screenId)
   ) {
-    screenId = "welcome";
+
+    screenId =
+      "welcome";
+
   }
 
   appScreens.forEach(id => {
 
-    const screen = document.getElementById(id);
+    const screen =
+      document.getElementById(id);
 
     if (!screen) return;
 
@@ -2776,22 +3155,37 @@ function showScreen(screenId) {
 
   });
 
-  currentScreen = screenId;
+  currentScreen =
+    screenId;
 
-  const account = getCurrentAccount();
+  const account =
+    getCurrentAccount();
 
-  const nav = document.getElementById("bottomNav");
+  const nav =
+    document.getElementById(
+      "bottomNav"
+    );
 
   if (
     account &&
     !["welcome", "auth"].includes(screenId)
   ) {
-    nav.classList.remove("hidden");
+
+    nav.classList.remove(
+      "hidden"
+    );
+
   } else {
-    nav.classList.add("hidden");
+
+    nav.classList.add(
+      "hidden"
+    );
+
   }
 
-  updateNav(screenId);
+  updateNav(
+    screenId
+  );
 
   if (screenId === "home") {
     renderHome();
@@ -2830,13 +3224,19 @@ function updateNav(screenId) {
     profile: "navProfile"
   };
 
-  Object.values(navMap).forEach(id => {
+  Object.values(
+    navMap
+  ).forEach(id => {
 
     const element =
       document.getElementById(id);
 
     if (element) {
-      element.classList.remove("active");
+
+      element.classList.remove(
+        "active"
+      );
+
     }
 
   });
@@ -2847,10 +3247,16 @@ function updateNav(screenId) {
   if (activeId) {
 
     const active =
-      document.getElementById(activeId);
+      document.getElementById(
+        activeId
+      );
 
     if (active) {
-      active.classList.add("active");
+
+      active.classList.add(
+        "active"
+      );
+
     }
 
   }
@@ -2864,29 +3270,45 @@ function updateNav(screenId) {
 
 function showAuth(mode) {
 
-  authMode = mode;
+  authMode =
+    mode;
 
   const title =
-    document.getElementById("authTitle");
+    document.getElementById(
+      "authTitle"
+    );
 
   const subtitle =
-    document.getElementById("authSubtitle");
+    document.getElementById(
+      "authSubtitle"
+    );
 
   const nameGroup =
-    document.getElementById("nameGroup");
+    document.getElementById(
+      "nameGroup"
+    );
 
   const submit =
-    document.getElementById("authSubmit");
+    document.getElementById(
+      "authSubmit"
+    );
 
   const nameInput =
-    document.getElementById("authName");
+    document.getElementById(
+      "authName"
+    );
 
   const error =
-    document.getElementById("authError");
+    document.getElementById(
+      "authError"
+    );
 
-  error.textContent = "";
+  error.textContent =
+    "";
 
-  document.getElementById("authForm").reset();
+  document.getElementById(
+    "authForm"
+  ).reset();
 
   if (mode === "signup") {
 
@@ -2894,11 +3316,14 @@ function showAuth(mode) {
       "CREATE ACCOUNT";
 
     subtitle.textContent =
-      "Create your SWYCHED identity.";
+      "Create your SWYCHED identity and start exploring different Realities.";
 
-    nameGroup.classList.remove("hidden");
+    nameGroup.classList.remove(
+      "hidden"
+    );
 
-    nameInput.required = true;
+    nameInput.required =
+      true;
 
     submit.textContent =
       "CREATE ACCOUNT";
@@ -2911,16 +3336,21 @@ function showAuth(mode) {
     subtitle.textContent =
       "Enter your SWYCHED account.";
 
-    nameGroup.classList.add("hidden");
+    nameGroup.classList.add(
+      "hidden"
+    );
 
-    nameInput.required = false;
+    nameInput.required =
+      false;
 
     submit.textContent =
       "LOG IN";
 
   }
 
-  showScreen("auth");
+  showScreen(
+    "auth"
+  );
 
 }
 
@@ -2931,19 +3361,28 @@ function handleAuth(event) {
 
   const username =
     normalizeUsername(
-      document.getElementById("authUsername").value
+      document.getElementById(
+        "authUsername"
+      ).value
     );
 
   const password =
-    document.getElementById("authPassword").value;
+    document.getElementById(
+      "authPassword"
+    ).value;
 
   const name =
-    document.getElementById("authName").value.trim();
+    document.getElementById(
+      "authName"
+    ).value.trim();
 
   const error =
-    document.getElementById("authError");
+    document.getElementById(
+      "authError"
+    );
 
-  error.textContent = "";
+  error.textContent =
+    "";
 
   if (!username || !password) {
 
@@ -2954,7 +3393,8 @@ function handleAuth(event) {
 
   }
 
-  const accounts = getAccounts();
+  const accounts =
+    getAccounts();
 
   if (authMode === "signup") {
 
@@ -3004,29 +3444,43 @@ function handleAuth(event) {
 
       swyches: 0,
 
-      /*
-        Verification starts false.
+      verified: false,
 
-        In a real production version this value
-        must be controlled by a backend/admin system.
-      */
-      verified: false
+      reputation: 0,
+
+      completedMissions: 0,
+
+      ratings: 0,
+
+      ratingTotal: 0,
+
+      createdAt:
+        Date.now()
 
     };
 
-    accounts.push(account);
+    accounts.push(
+      account
+    );
 
-    saveAccounts(accounts);
+    saveAccounts(
+      accounts
+    );
 
-    setSession(account.id);
+    setSession(
+      account.id
+    );
 
     showToast(
       "Account created."
     );
 
-    showScreen("home");
+    showScreen(
+      "home"
+    );
 
     return;
+
   }
 
 
@@ -3048,13 +3502,17 @@ function handleAuth(event) {
 
   }
 
-  setSession(account.id);
+  setSession(
+    account.id
+  );
 
   showToast(
     "Welcome back."
   );
 
-  showScreen("home");
+  showScreen(
+    "home"
+  );
 
 }
 
@@ -3063,11 +3521,18 @@ function logout() {
 
   clearSession();
 
-  currentReality = null;
-  currentProofData = null;
-  pendingDrop = null;
+  currentReality =
+    null;
 
-  showScreen("welcome");
+  currentProofData =
+    null;
+
+  pendingDrop =
+    null;
+
+  showScreen(
+    "welcome"
+  );
 
 }
 
@@ -3084,7 +3549,9 @@ function renderHome() {
   if (!account) return;
 
   const flux =
-    Number(account.flux || 0);
+    Number(
+      account.flux || 0
+    );
 
   const level =
     getLevel(flux);
@@ -3132,7 +3599,9 @@ function renderHome() {
   document.getElementById(
     "homeSwitched"
   ).textContent =
-    Number(account.swyches || 0);
+    Number(
+      account.swyches || 0
+    );
 
 }
 
@@ -3142,6 +3611,7 @@ function renderHome() {
 ========================= */
 
 let missionNumber = 0;
+
 
 function addMission() {
 
@@ -3153,7 +3623,9 @@ function addMission() {
     );
 
   const wrapper =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
 
   wrapper.className =
     "mission-builder";
@@ -3219,14 +3691,6 @@ function addMission() {
         PHOTO PROOF
       </div>
 
-      <!--
-        CUSTOM BUTTONS ARE USED INSTEAD OF
-        HIDDEN RADIO INPUTS.
-
-        This makes REQUIRED fully clickable
-        on mobile and desktop.
-      -->
-
       <div class="proof-toggle">
 
         <button
@@ -3257,7 +3721,9 @@ function addMission() {
 
   `;
 
-  container.appendChild(wrapper);
+  container.appendChild(
+    wrapper
+  );
 
 }
 
@@ -3360,17 +3826,21 @@ function renumberMissions() {
 function capFluxInput(input) {
 
   let value =
-    Number(input.value);
+    Number(
+      input.value
+    );
 
   if (value > 250) {
 
-    input.value = 250;
+    input.value =
+      250;
 
   }
 
   if (value < 1) {
 
-    input.value = 1;
+    input.value =
+      1;
 
   }
 
@@ -3381,21 +3851,26 @@ function clearDropBuilder() {
 
   document.getElementById(
     "dropTitle"
-  ).value = "";
+  ).value =
+    "";
 
   document.getElementById(
     "dropDescription"
-  ).value = "";
+  ).value =
+    "";
 
   document.getElementById(
     "dropCategory"
-  ).value = "SPORTS";
+  ).value =
+    "SPORTS";
 
   document.getElementById(
     "missionBuilders"
-  ).innerHTML = "";
+  ).innerHTML =
+    "";
 
-  missionNumber = 0;
+  missionNumber =
+    0;
 
   addMission();
 
@@ -3461,7 +3936,11 @@ function collectDropData() {
 
   const missions = [];
 
-  for (let i = 0; i < builders.length; i++) {
+  for (
+    let i = 0;
+    i < builders.length;
+    i++
+  ) {
 
     const builder =
       builders[i];
@@ -3499,12 +3978,15 @@ function collectDropData() {
         250,
         Math.max(
           1,
-          parseInt(fluxEl.value) || 1
+          parseInt(
+            fluxEl.value
+          ) || 1
         )
       );
 
     const proofRequired =
-      proofEl?.value === "true";
+      proofEl?.value ===
+      "true";
 
     missions.push({
 
@@ -3562,8 +4044,13 @@ function getVerifiedBadgeHTML(
   account
 ) {
 
-  if (!account || !account.verified) {
+  if (
+    !account ||
+    !account.verified
+  ) {
+
     return "";
+
   }
 
   return `
@@ -3586,7 +4073,15 @@ function renderDropCreatorStatus() {
       "dropCreatorStatus"
     );
 
-  if (!account || !element) return;
+  const signalElement =
+    document.getElementById(
+      "dropCreatorSignal"
+    );
+
+  if (
+    !account ||
+    !element
+  ) return;
 
   if (account.verified) {
 
@@ -3605,6 +4100,15 @@ function renderDropCreatorStatus() {
 
   }
 
+  if (signalElement) {
+
+    signalElement.innerHTML =
+      getLargeSwychSignalHTML(
+        account
+      );
+
+  }
+
 }
 
 
@@ -3619,12 +4123,14 @@ function previewDrop() {
 
   if (!drop) return;
 
-  pendingDrop = drop;
+  pendingDrop =
+    drop;
 
   const creator =
     getCurrentAccount();
 
-  let missionsHTML = "";
+  let missionsHTML =
+    "";
 
   drop.missions.forEach(
     (mission, index) => {
@@ -3671,15 +4177,21 @@ function previewDrop() {
       <div class="preview-main">
 
         <div class="category-tag">
-          ${escapeHTML(drop.category)}
+          ${escapeHTML(
+            drop.category
+          )}
         </div>
 
         <div class="reality-title">
-          ${escapeHTML(drop.title)}
+          ${escapeHTML(
+            drop.title
+          )}
         </div>
 
         <div class="reality-description">
-          ${escapeHTML(drop.description)}
+          ${escapeHTML(
+            drop.description
+          )}
         </div>
 
         <div class="creator-row">
@@ -3709,6 +4221,10 @@ function previewDrop() {
                 creator.username
               )}
             </div>
+
+            ${getSwychSignalHTML(
+              creator
+            )}
 
           </div>
 
@@ -3756,9 +4272,12 @@ function publishDrop() {
     pendingDrop
   );
 
-  saveDrops(drops);
+  saveDrops(
+    drops
+  );
 
-  pendingDrop = null;
+  pendingDrop =
+    null;
 
   clearDropBuilder();
 
@@ -3836,13 +4355,16 @@ function renderExplore() {
 
     `;
 
-    renderExcl(account);
+    renderExcl(
+      account
+    );
 
     return;
 
   }
 
-  let html = "";
+  let html =
+    "";
 
   drops.forEach(
     drop => {
@@ -3923,6 +4445,10 @@ function renderExplore() {
                   )}
                 </div>
 
+                ${getSwychSignalHTML(
+                  creator
+                )}
+
               </div>
 
             </div>
@@ -3976,7 +4502,9 @@ function renderExplore() {
       </div>
     `;
 
-  renderExcl(account);
+  renderExcl(
+    account
+  );
 
 }
 
@@ -3993,10 +4521,15 @@ function renderExcl(account) {
       "exclButton"
     );
 
-  if (!card || !button) return;
+  if (
+    !card ||
+    !button
+  ) return;
 
   if (
-    Number(account.flux || 0) >= 25000
+    Number(
+      account.flux || 0
+    ) >= 25000
   ) {
 
     card.classList.remove(
@@ -4007,18 +4540,20 @@ function renderExcl(account) {
       "excl-unlocked"
     );
 
-    button.disabled = false;
+    button.disabled =
+      false;
 
     button.textContent =
       "ENTER EXCL";
 
-    button.onclick = function() {
+    button.onclick =
+      function() {
 
-      showToast(
-        "EXCL is unlocked."
-      );
+        showToast(
+          "EXCL is unlocked."
+        );
 
-    };
+      };
 
   } else {
 
@@ -4030,18 +4565,14 @@ function renderExcl(account) {
       "excl-unlocked"
     );
 
-    /*
-      IMPORTANT:
-      The locked EXCL button is disabled,
-      so it cannot be clicked.
-    */
-
-    button.disabled = true;
+    button.disabled =
+      true;
 
     button.textContent =
       "LOCKED";
 
-    button.onclick = null;
+    button.onclick =
+      null;
 
   }
 
@@ -4052,7 +4583,9 @@ function renderExcl(account) {
    OPEN REALITY
 ========================= */
 
-function openReality(dropId) {
+function openReality(
+  dropId
+) {
 
   const drops =
     getDrops();
@@ -4147,6 +4680,10 @@ function renderReality() {
               creator.username
             )}
           </div>
+
+          ${getSwychSignalHTML(
+            creator
+          )}
 
         </div>
 
@@ -4295,7 +4832,8 @@ function renderSwychMission() {
       ) || 0
     );
 
-  currentProofData = null;
+  currentProofData =
+    null;
 
   document.getElementById(
     "swychContent"
@@ -4437,7 +4975,10 @@ function previewMissionProof(input) {
       "proofPreview"
     );
 
-  if (!file || !preview) return;
+  if (
+    !file ||
+    !preview
+  ) return;
 
   if (
     !file.type.startsWith(
@@ -4449,7 +4990,8 @@ function previewMissionProof(input) {
       "Please choose an image."
     );
 
-    input.value = "";
+    input.value =
+      "";
 
     return;
 
@@ -4510,7 +5052,10 @@ function removeMissionProof() {
     );
 
   if (input) {
-    input.value = "";
+
+    input.value =
+      "";
+
   }
 
   if (preview) {
@@ -4569,14 +5114,6 @@ function completeMission() {
         ) || 0
       )
     );
-
-  /*
-    Store local completion history.
-
-    In a real app this should be stored
-    server-side so creators can actually
-    review proof from other users.
-  */
 
   saveCompletion({
 
@@ -4646,7 +5183,9 @@ function getCompletions() {
 }
 
 
-function saveCompletion(completion) {
+function saveCompletion(
+  completion
+) {
 
   const completions =
     getCompletions();
@@ -4654,11 +5193,6 @@ function saveCompletion(completion) {
   completions.unshift(
     completion
   );
-
-  /*
-    Keep the local prototype from
-    growing forever.
-  */
 
   const limited =
     completions.slice(
@@ -4688,7 +5222,9 @@ function renderProfile() {
   if (!account) return;
 
   const flux =
-    Number(account.flux || 0);
+    Number(
+      account.flux || 0
+    );
 
   const level =
     getLevel(flux);
@@ -4722,6 +5258,17 @@ function renderProfile() {
     "profileBio"
   ).textContent =
     account.bio || "";
+
+  /*
+    SWYCH SIGNAL
+  */
+
+  document.getElementById(
+    "profileSignal"
+  ).innerHTML =
+    getLargeSwychSignalHTML(
+      account
+    );
 
   const verifiedBadge =
     document.getElementById(
@@ -4789,7 +5336,15 @@ function renderVerificationStatus(
       "demoVerifyButton"
     );
 
-  if (!status || !button) return;
+  const signal =
+    document.getElementById(
+      "profileVerificationSignal"
+    );
+
+  if (
+    !status ||
+    !button
+  ) return;
 
   if (account.verified) {
 
@@ -4825,17 +5380,26 @@ function renderVerificationStatus(
 
   }
 
+  if (signal) {
+
+    signal.innerHTML =
+      getSwychSignalHTML(
+        account
+      );
+
+  }
+
 }
 
 
 /*
   PROTOTYPE ONLY.
 
-  This simulates the verification system so
-  you can test how the badge looks.
+  This simulates verification so you
+  can test the feature.
 
-  In production, users should NOT be able
-  to verify themselves.
+  In production, verification should
+  be controlled by a backend/admin system.
 */
 
 function toggleDemoVerification() {
@@ -4853,7 +5417,9 @@ function toggleDemoVerification() {
   );
 
   renderProfile();
+
   renderDropCreatorStatus();
+
   renderExplore();
 
   showToast(
@@ -4869,7 +5435,9 @@ function toggleDemoVerification() {
    MY DROPS
 ========================= */
 
-function renderMyDrops(account) {
+function renderMyDrops(
+  account
+) {
 
   const container =
     document.getElementById(
@@ -4881,14 +5449,18 @@ function renderMyDrops(account) {
   const drops =
     getDrops().filter(
       drop =>
-        drop.creatorId === account.id
+        drop.creatorId ===
+        account.id
     );
 
   if (!drops.length) {
 
     container.innerHTML = `
 
-      <div class="empty-state" style="min-height:170px">
+      <div
+        class="empty-state"
+        style="min-height:170px"
+      >
 
         <div>
 
@@ -4910,7 +5482,8 @@ function renderMyDrops(account) {
 
   }
 
-  let html = "";
+  let html =
+    "";
 
   drops.forEach(
     drop => {
@@ -4946,6 +5519,12 @@ function renderMyDrops(account) {
                   drop.category
                 )}
 
+              </div>
+
+              <div style="margin-top:9px">
+                ${getSwychSignalHTML(
+                  account
+                )}
               </div>
 
               ${
@@ -4995,7 +5574,9 @@ function renderMyDrops(account) {
 }
 
 
-function deleteDrop(dropId) {
+function deleteDrop(
+  dropId
+) {
 
   const account =
     getCurrentAccount();
@@ -5037,6 +5618,7 @@ function deleteDrop(dropId) {
   );
 
   renderProfile();
+
   renderExplore();
 
   showToast(
@@ -5099,7 +5681,10 @@ function saveProfile() {
       "editBio"
     ).value.trim();
 
-  if (!name || !username) {
+  if (
+    !name ||
+    !username
+  ) {
 
     showToast(
       "Name and username are required."
@@ -5257,11 +5842,6 @@ function initializeApp() {
   const account =
     getCurrentAccount();
 
-  /*
-    If someone already has an account
-    logged in, go straight to Home.
-  */
-
   if (account) {
 
     showScreen(
@@ -5275,11 +5855,6 @@ function initializeApp() {
     );
 
   }
-
-  /*
-    Make sure Drop always starts
-    with one mission available.
-  */
 
   const missionContainer =
     document.getElementById(
