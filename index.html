@@ -25,6 +25,22 @@
       min-height: 100vh;
       margin: auto;
       padding: 24px;
+      padding-bottom: 100px;
+    }
+
+    .screen {
+      display: none;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    /* WELCOME */
+
+    .welcome {
+      padding-top: 90px;
+      text-align: center;
     }
 
     .logo {
@@ -33,21 +49,17 @@
       letter-spacing: -1px;
     }
 
-    .hero {
-      padding-top: 90px;
-      text-align: center;
+    .welcome h1 {
+      margin-top: 100px;
+      font-size: 52px;
+      line-height: .9;
+      letter-spacing: -4px;
     }
 
-    .hero h1 {
-      font-size: 48px;
-      line-height: 0.95;
-      letter-spacing: -3px;
-    }
-
-    .hero p {
-      margin-top: 20px;
-      color: #aaa;
-      font-size: 16px;
+    .welcome p {
+      margin-top: 22px;
+      color: #999;
+      line-height: 1.6;
     }
 
     .button {
@@ -63,41 +75,147 @@
       cursor: pointer;
     }
 
-    .button:hover {
-      opacity: 0.85;
+    /* HOME */
+
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    .flux {
-      margin-top: 30px;
-      padding: 20px;
-      border: 1px solid #333;
-      border-radius: 18px;
+    .profile-circle {
+      width: 42px;
+      height: 42px;
+      border: 1px solid #444;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
     }
 
-    .flux-label {
+    .greeting {
+      margin-top: 40px;
+    }
+
+    .greeting p {
       color: #888;
+      font-size: 14px;
+    }
+
+    .greeting h2 {
+      margin-top: 5px;
+      font-size: 30px;
+    }
+
+    .flux-card {
+      margin-top: 25px;
+      padding: 22px;
+      border-radius: 20px;
+      background: #fff;
+      color: #000;
+    }
+
+    .flux-title {
       font-size: 12px;
-      text-transform: uppercase;
+      font-weight: bold;
       letter-spacing: 2px;
     }
 
     .flux-number {
+      margin-top: 8px;
+      font-size: 38px;
+      font-weight: 900;
+    }
+
+    .flux-level {
+      margin-top: 5px;
+      font-size: 13px;
+      color: #555;
+    }
+
+    .section-title {
+      margin-top: 35px;
+      margin-bottom: 15px;
+      font-size: 13px;
+      letter-spacing: 2px;
+      color: #888;
+    }
+
+    .reality-card {
+      padding: 20px;
+      margin-bottom: 12px;
+      border: 1px solid #292929;
+      border-radius: 18px;
+    }
+
+    .reality-icon {
+      font-size: 25px;
+    }
+
+    .reality-card h3 {
+      margin-top: 12px;
+      font-size: 20px;
+    }
+
+    .reality-card p {
       margin-top: 6px;
-      font-size: 32px;
-      font-weight: 800;
+      color: #888;
+      font-size: 13px;
+    }
+
+    .enter {
+      margin-top: 15px;
+      padding: 10px 15px;
+      border: 1px solid #444;
+      border-radius: 10px;
+      background: transparent;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* NAVIGATION */
+
+    .nav {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 430px;
+      padding: 12px 15px 18px;
+      background: rgba(0,0,0,.96);
+      border-top: 1px solid #222;
+      display: none;
+      justify-content: space-around;
+    }
+
+    .nav button {
+      background: none;
+      border: none;
+      color: #777;
+      font-size: 11px;
+      cursor: pointer;
+    }
+
+    .nav button.active {
+      color: white;
     }
   </style>
 </head>
 
 <body>
 
-  <main class="app">
+<div class="app">
 
-    <div class="logo">
-      SWYCHD
-    </div>
+  <!-- WELCOME SCREEN -->
 
-    <section class="hero">
+  <section id="welcome" class="screen active">
+
+    <div class="welcome">
+
+      <div class="logo">SWYCHD</div>
 
       <h1>
         LIVE<br>
@@ -110,29 +228,155 @@
         Earn your FLUX.
       </p>
 
-      <button class="button" onclick="startApp()">
+      <button class="button" onclick="openHome()">
         GET SWYCHD
       </button>
 
-      <div class="flux">
-        <div class="flux-label">
-          Your FLUX
-        </div>
+    </div>
 
-        <div class="flux-number">
-          0 ⚡
-        </div>
+  </section>
+
+
+  <!-- HOME SCREEN -->
+
+  <section id="home" class="screen">
+
+    <div class="top">
+
+      <div class="logo">SWYCHD</div>
+
+      <div class="profile-circle">
+        A
       </div>
 
-    </section>
+    </div>
 
-  </main>
+    <div class="greeting">
 
-  <script>
-    function startApp() {
-      alert("Welcome to SWYCHD 🔄");
-    }
-  </script>
+      <p>WELCOME BACK</p>
+
+      <h2>Ready to SWYCH?</h2>
+
+    </div>
+
+
+    <div class="flux-card">
+
+      <div class="flux-title">
+        YOUR FLUX
+      </div>
+
+      <div class="flux-number">
+        0 ⚡
+      </div>
+
+      <div class="flux-level">
+        NEW SWITCHER · 500 FLUX to unlock
+      </div>
+
+    </div>
+
+
+    <div class="section-title">
+      TRENDING REALITIES
+    </div>
+
+
+    <div class="reality-card">
+
+      <div class="reality-icon">⚽</div>
+
+      <h3>Academy Soccer Day</h3>
+
+      <p>
+        Experience a full day as a competitive
+        soccer player.
+      </p>
+
+      <p>
+        8 missions · 🔥 Hard
+      </p>
+
+      <button class="enter">
+        VIEW REALITY
+      </button>
+
+    </div>
+
+
+    <div class="reality-card">
+
+      <div class="reality-icon">🎮</div>
+
+      <h3>Pro Gamer Grind</h3>
+
+      <p>
+        Can you handle the schedule?
+      </p>
+
+      <p>
+        6 missions · ⚡ Medium
+      </p>
+
+      <button class="enter">
+        VIEW REALITY
+      </button>
+
+    </div>
+
+  </section>
+
+</div>
+
+
+<!-- BOTTOM NAV -->
+
+<nav id="nav" class="nav">
+
+  <button class="active" onclick="showHome()">
+    🏠<br>HOME
+  </button>
+
+  <button>
+    🌎<br>EXPLORE
+  </button>
+
+  <button>
+    ＋<br>DROP
+  </button>
+
+  <button>
+    🔄<br>SWYCHES
+  </button>
+
+  <button>
+    👤<br>PROFILE
+  </button>
+
+</nav>
+
+
+<script>
+
+  function openHome() {
+
+    document.getElementById("welcome").classList.remove("active");
+
+    document.getElementById("home").classList.add("active");
+
+    document.getElementById("nav").style.display = "flex";
+
+  }
+
+  function showHome() {
+
+    document.getElementById("welcome").classList.remove("active");
+
+    document.getElementById("home").classList.add("active");
+
+  }
+
+</script>
 
 </body>
 </html>
