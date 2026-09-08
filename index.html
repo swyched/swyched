@@ -5,11 +5,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>SWYCHD</title>
+  <title>SWYCHED</title>
 
-  <!-- SWYCHD FONT -->
+  <!-- SWYCHED FONT -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link
     href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
     rel="stylesheet"
@@ -23,6 +24,10 @@
 
     * {
       box-sizing: border-box;
+    }
+
+    html {
+      background: #000;
     }
 
     body {
@@ -63,7 +68,7 @@
     .logo {
       font-size: 29px;
       font-weight: 700;
-      letter-spacing: -1.8px;
+      letter-spacing: -2px;
     }
 
 
@@ -75,20 +80,20 @@
       font-size: 36px;
       line-height: 1;
       font-weight: 700;
-      letter-spacing: -1.5px;
+      letter-spacing: -1.8px;
       margin-top: 40px;
     }
 
     h2 {
       font-size: 24px;
       font-weight: 700;
-      letter-spacing: -0.8px;
+      letter-spacing: -1px;
     }
 
     h3 {
       font-size: 18px;
       font-weight: 700;
-      letter-spacing: -0.4px;
+      letter-spacing: -0.5px;
     }
 
     p {
@@ -139,6 +144,11 @@
       border-radius: 18px;
       padding: 20px;
       margin-top: 15px;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 8px;
     }
 
 
@@ -260,20 +270,26 @@
 
 
     /* =========================
-       WELCOME PAGE
+       WELCOME
     ========================= */
 
     #welcome {
       min-height: 100vh;
-      display: flex;
+      padding: 25px 20px;
+
+      display: none;
       flex-direction: column;
       justify-content: center;
+    }
+
+    #welcome.active {
+      display: flex;
     }
 
     #welcome h1 {
       font-size: 48px;
       margin-top: 35px;
-      letter-spacing: -2.5px;
+      letter-spacing: -2.8px;
     }
 
     #welcome p {
@@ -283,12 +299,24 @@
 
 
     /* =========================
-       REALITY CARDS
+       PROFILE
     ========================= */
 
-    .card h3 {
-      margin-top: 0;
-      margin-bottom: 8px;
+    .profile-circle {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: #fff;
+      color: #000;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      font-size: 25px;
+      font-weight: 700;
+
+      margin-top: 25px;
     }
 
   </style>
@@ -297,528 +325,533 @@
 
 <body>
 
-  <div class="app">
+<div class="app">
 
 
-    <!-- =========================
-         WELCOME
-    ========================= -->
+  <!-- =========================
+       WELCOME
+  ========================= -->
 
-    <section id="welcome" class="screen active">
+  <section id="welcome" class="screen active">
 
-      <div class="logo">
-        SWYCHD
+    <div class="logo">
+      SWYCHED
+    </div>
+
+    <h1>
+      LIVE<br>
+      DIFFERENT.
+    </h1>
+
+    <p>
+      Live someone else's reality.
+      Experience challenges, complete missions,
+      and earn FLUX.
+    </p>
+
+    <button
+      class="main-button"
+      onclick="openHome()"
+    >
+      GET SWYCHED
+    </button>
+
+  </section>
+
+
+
+  <!-- =========================
+       HOME
+  ========================= -->
+
+  <section id="home" class="screen">
+
+    <div class="logo">
+      SWYCHED
+    </div>
+
+    <h1>
+      Ready to SWYCH?
+    </h1>
+
+
+    <!-- FLUX -->
+
+    <div class="card">
+
+      <div class="small">
+        YOUR FLUX
       </div>
 
-      <h1>
-        LIVE<br>
-        DIFFERENT.
-      </h1>
+      <div class="flux">
+        0 ⚡
+      </div>
+
+      <div class="small">
+        NEW SWITCHER · 500 FLUX TO UNLOCK
+      </div>
+
+    </div>
+
+
+    <h2>
+      Trending Realities
+    </h2>
+
+
+    <!-- SOCCER -->
+
+    <div class="card">
+
+      <h3>
+        ⚽ Academy Soccer Day
+      </h3>
 
       <p>
-        Live someone else's reality.
-        Experience challenges, complete missions,
-        and earn FLUX.
+        Experience a full day of elite soccer training.
       </p>
 
       <button
         class="main-button"
-        onclick="openHome()"
+        onclick="selectReality()"
       >
-        GET SWYCHD
+        SWYCH THIS REALITY
       </button>
 
-    </section>
+    </div>
 
 
+    <!-- GAMING -->
 
-    <!-- =========================
-         HOME
-    ========================= -->
+    <div class="card">
 
-    <section id="home" class="screen">
-
-      <div class="logo">
-        SWYCHD
-      </div>
-
-      <h1>
-        Ready to SWYCH?
-      </h1>
-
-
-      <!-- FLUX -->
-
-      <div class="card">
-
-        <div class="small">
-          YOUR FLUX
-        </div>
-
-        <div class="flux">
-          0 ⚡
-        </div>
-
-        <div class="small">
-          NEW SWITCHER · 500 FLUX TO UNLOCK
-        </div>
-
-      </div>
-
-
-      <h2>
-        Trending Realities
-      </h2>
-
-
-      <!-- SOCCER -->
-
-      <div class="card">
-
-        <h3>
-          ⚽ Academy Soccer Day
-        </h3>
-
-        <p>
-          Experience a full day of elite soccer training.
-        </p>
-
-        <button
-          class="main-button"
-          onclick="selectReality()"
-        >
-          SWYCH THIS REALITY
-        </button>
-
-      </div>
-
-
-      <!-- GAMING -->
-
-      <div class="card">
-
-        <h3>
-          🎮 Pro Gamer Grind
-        </h3>
-
-        <p>
-          Experience a competitive gaming routine.
-        </p>
-
-        <button
-          class="main-button"
-          onclick="selectReality()"
-        >
-          SWYCH THIS REALITY
-        </button>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- =========================
-         EXPLORE
-    ========================= -->
-
-    <section id="explore" class="screen">
-
-      <div class="logo">
-        SWYCHD
-      </div>
-
-      <h1>
-        Explore
-      </h1>
-
-
-      <input
-        class="search"
-        type="text"
-        placeholder="Search realities..."
-      >
-
-
-      <!-- CATEGORIES -->
-
-      <div class="chips">
-
-        <button
-          class="chip selected"
-          onclick="selectCategory(this)"
-        >
-          ALL
-        </button>
-
-        <button
-          class="chip"
-          onclick="selectCategory(this)"
-        >
-          SPORTS
-        </button>
-
-        <button
-          class="chip"
-          onclick="selectCategory(this)"
-        >
-          STUDENT
-        </button>
-
-        <button
-          class="chip"
-          onclick="selectCategory(this)"
-        >
-          GAMING
-        </button>
-
-        <button
-          class="chip"
-          onclick="selectCategory(this)"
-        >
-          MUSIC
-        </button>
-
-        <button
-          class="chip"
-          onclick="selectCategory(this)"
-        >
-          BUSINESS
-        </button>
-
-      </div>
-
-
-      <h2>
-        Trending DROPS
-      </h2>
-
-
-      <!-- REALITY 1 -->
-
-      <div class="card">
-
-        <h3>
-          ⚽ Academy Soccer Day
-        </h3>
-
-        <p>
-          Train like an academy player.
-        </p>
-
-        <button
-          class="main-button"
-          onclick="selectReality()"
-        >
-          SWYCH THIS REALITY
-        </button>
-
-      </div>
-
-
-      <!-- REALITY 2 -->
-
-      <div class="card">
-
-        <h3>
-          📚 Straight-A Student
-        </h3>
-
-        <p>
-          Experience a productive student routine.
-        </p>
-
-        <button
-          class="main-button"
-          onclick="selectReality()"
-        >
-          SWYCH THIS REALITY
-        </button>
-
-      </div>
-
-
-      <!-- REALITY 3 -->
-
-      <div class="card">
-
-        <h3>
-          💼 Young Entrepreneur
-        </h3>
-
-        <p>
-          Experience the day of a young founder.
-        </p>
-
-        <button
-          class="main-button"
-          onclick="selectReality()"
-        >
-          SWYCH THIS REALITY
-        </button>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- =========================
-         DROP
-    ========================= -->
-
-    <section id="drop" class="screen">
-
-      <div class="logo">
-        SWYCHD
-      </div>
-
-      <h1>
-        DROP
-      </h1>
+      <h3>
+        🎮 Pro Gamer Grind
+      </h3>
 
       <p>
-        Create your Reality and let someone else experience it.
+        Experience a competitive gaming routine.
       </p>
 
+      <button
+        class="main-button"
+        onclick="selectReality()"
+      >
+        SWYCH THIS REALITY
+      </button>
 
-      <div class="card">
+    </div>
 
-        <h2>
-          Coming next
-        </h2>
-
-        <p>
-          Create missions, set rules, and earn FLUX when
-          people successfully SWYCH your Reality.
-        </p>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- =========================
-         SWYCHES
-    ========================= -->
-
-    <section id="swcyhes" class="screen">
-
-      <div class="logo">
-        SWYCHD
-      </div>
-
-      <h1>
-        SWYCHES
-      </h1>
-
-
-      <div class="card">
-
-        <h2>
-          Your active SWYCHES
-        </h2>
-
-        <p>
-          No active realities yet.
-        </p>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- =========================
-         PROFILE
-    ========================= -->
-
-    <section id="profile" class="screen">
-
-      <div class="logo">
-        SWYCHD
-      </div>
-
-      <h1>
-        Your Profile
-      </h1>
-
-
-      <div class="card">
-
-        <h2>
-          A
-        </h2>
-
-        <p>
-          NEW SWITCHER
-        </p>
-
-        <div class="flux">
-          0 ⚡ FLUX
-        </div>
-
-      </div>
-
-    </section>
-
-  </div>
+  </section>
 
 
 
   <!-- =========================
-       BOTTOM NAVIGATION
+       EXPLORE
   ========================= -->
 
-  <nav
-    id="nav"
-    class="nav"
-    style="display: none;"
-  >
+  <section id="explore" class="screen">
 
-    <button
-      type="button"
-      class="active"
-      onclick="showScreen('home', this)"
+    <div class="logo">
+      SWYCHED
+    </div>
+
+    <h1>
+      Explore
+    </h1>
+
+
+    <input
+      class="search"
+      type="text"
+      placeholder="Search realities..."
     >
-      HOME
-    </button>
 
 
-    <button
-      type="button"
-      onclick="showScreen('explore', this)"
-    >
-      EXPLORE
-    </button>
+    <div class="chips">
+
+      <button
+        class="chip selected"
+        onclick="selectCategory(this)"
+      >
+        ALL
+      </button>
+
+      <button
+        class="chip"
+        onclick="selectCategory(this)"
+      >
+        SPORTS
+      </button>
+
+      <button
+        class="chip"
+        onclick="selectCategory(this)"
+      >
+        STUDENT
+      </button>
+
+      <button
+        class="chip"
+        onclick="selectCategory(this)"
+      >
+        GAMING
+      </button>
+
+      <button
+        class="chip"
+        onclick="selectCategory(this)"
+      >
+        MUSIC
+      </button>
+
+      <button
+        class="chip"
+        onclick="selectCategory(this)"
+      >
+        BUSINESS
+      </button>
+
+    </div>
 
 
-    <button
-      type="button"
-      onclick="showScreen('drop', this)"
-    >
+    <h2>
+      Trending DROPS
+    </h2>
+
+
+    <!-- REALITY 1 -->
+
+    <div class="card">
+
+      <h3>
+        ⚽ Academy Soccer Day
+      </h3>
+
+      <p>
+        Train like an academy player.
+      </p>
+
+      <button
+        class="main-button"
+        onclick="selectReality()"
+      >
+        SWYCH THIS REALITY
+      </button>
+
+    </div>
+
+
+    <!-- REALITY 2 -->
+
+    <div class="card">
+
+      <h3>
+        📚 Straight-A Student
+      </h3>
+
+      <p>
+        Experience a productive student routine.
+      </p>
+
+      <button
+        class="main-button"
+        onclick="selectReality()"
+      >
+        SWYCH THIS REALITY
+      </button>
+
+    </div>
+
+
+    <!-- REALITY 3 -->
+
+    <div class="card">
+
+      <h3>
+        💼 Young Entrepreneur
+      </h3>
+
+      <p>
+        Experience the day of a young founder.
+      </p>
+
+      <button
+        class="main-button"
+        onclick="selectReality()"
+      >
+        SWYCH THIS REALITY
+      </button>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================
+       DROP
+  ========================= -->
+
+  <section id="drop" class="screen">
+
+    <div class="logo">
+      SWYCHED
+    </div>
+
+    <h1>
       DROP
-    </button>
+    </h1>
 
+    <p>
+      Create your Reality and let someone else experience it.
+    </p>
 
-    <button
-      type="button"
-      onclick="showScreen('swcyhes', this)"
-    >
-      SWYCHES
-    </button>
+    <div class="card">
 
+      <h2>
+        Create a Reality
+      </h2>
 
-    <button
-      type="button"
-      onclick="showScreen('profile', this)"
-    >
-      PROFILE
-    </button>
+      <p>
+        Build missions around your real life and let
+        other people experience them.
+      </p>
 
-  </nav>
+      <button
+        class="main-button"
+        onclick="createReality()"
+      >
+        CREATE YOUR DROP
+      </button>
+
+    </div>
+
+  </section>
 
 
 
   <!-- =========================
-       JAVASCRIPT
+       SWYCHES
   ========================= -->
 
-  <script>
+  <section id="swcyhes" class="screen">
 
-    /* OPEN HOME */
+    <div class="logo">
+      SWYCHED
+    </div>
 
-    function openHome() {
+    <h1>
+      SWYCHES
+    </h1>
 
-      document
-        .getElementById("welcome")
-        .classList.remove("active");
+    <div class="card">
 
-      document
-        .getElementById("home")
-        .classList.add("active");
+      <h2>
+        Your active SWYCHES
+      </h2>
 
-      document
-        .getElementById("nav")
-        .style.display = "flex";
+      <p>
+        No active realities yet.
+      </p>
 
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================
+       PROFILE
+  ========================= -->
+
+  <section id="profile" class="screen">
+
+    <div class="logo">
+      SWYCHED
+    </div>
+
+    <h1>
+      Your Profile
+    </h1>
+
+    <div class="profile-circle">
+      A
+    </div>
+
+    <div class="card">
+
+      <h3>
+        NEW SWITCHER
+      </h3>
+
+      <div class="flux">
+        0 ⚡
+      </div>
+
+      <div class="small">
+        500 FLUX TO UNLOCK SWITCHER
+      </div>
+
+    </div>
+
+  </section>
+
+
+</div>
+
+
+
+<!-- =========================
+     BOTTOM NAVIGATION
+========================= -->
+
+<nav
+  id="nav"
+  class="nav"
+  style="display: none;"
+>
+
+  <button
+    type="button"
+    class="active"
+    onclick="showScreen('home', this)"
+  >
+    HOME
+  </button>
+
+  <button
+    type="button"
+    onclick="showScreen('explore', this)"
+  >
+    EXPLORE
+  </button>
+
+  <button
+    type="button"
+    onclick="showScreen('drop', this)"
+  >
+    DROP
+  </button>
+
+  <button
+    type="button"
+    onclick="showScreen('swcyhes', this)"
+  >
+    SWYCHES
+  </button>
+
+  <button
+    type="button"
+    onclick="showScreen('profile', this)"
+  >
+    PROFILE
+  </button>
+
+</nav>
+
+
+
+<script>
+
+  /* =========================
+     OPEN HOME
+  ========================= */
+
+  function openHome() {
+
+    document
+      .getElementById("welcome")
+      .classList.remove("active");
+
+    document
+      .getElementById("home")
+      .classList.add("active");
+
+    document
+      .getElementById("nav")
+      .style.display = "flex";
+
+    window.scrollTo(0, 0);
+
+  }
+
+
+  /* =========================
+     CHANGE SCREEN
+  ========================= */
+
+  function showScreen(screenId, button) {
+
+    const screens =
+      document.querySelectorAll(".screen");
+
+    screens.forEach(function(screen) {
+      screen.classList.remove("active");
+    });
+
+
+    const selectedScreen =
+      document.getElementById(screenId);
+
+    if (selectedScreen) {
+      selectedScreen.classList.add("active");
     }
 
 
-    /* CHANGE SCREEN */
+    const navButtons =
+      document.querySelectorAll(".nav button");
 
-    function showScreen(screenId, button) {
-
-      const screens =
-        document.querySelectorAll(".screen");
-
-      screens.forEach(function(screen) {
-
-        screen.classList.remove("active");
-
-      });
+    navButtons.forEach(function(navButton) {
+      navButton.classList.remove("active");
+    });
 
 
-      const selectedScreen =
-        document.getElementById(screenId);
-
-      if (selectedScreen) {
-
-        selectedScreen.classList.add("active");
-
-      }
-
-
-      const navButtons =
-        document.querySelectorAll(".nav button");
-
-      navButtons.forEach(function(navButton) {
-
-        navButton.classList.remove("active");
-
-      });
-
-
-      if (button) {
-
-        button.classList.add("active");
-
-      }
-
-      window.scrollTo(0, 0);
-
+    if (button) {
+      button.classList.add("active");
     }
 
+    window.scrollTo(0, 0);
 
-    /* SELECT REALITY */
-
-    function selectReality() {
-
-      alert("Reality selected 🔄");
-
-    }
+  }
 
 
-    /* CATEGORY BUTTONS */
+  /* =========================
+     REALITY
+  ========================= */
 
-    function selectCategory(button) {
+  function selectReality() {
+    alert("SWYCH selected 🔄");
+  }
 
-      const chips =
-        document.querySelectorAll(".chip");
 
-      chips.forEach(function(chip) {
+  /* =========================
+     CREATE DROP
+  ========================= */
 
-        chip.classList.remove("selected");
+  function createReality() {
+    alert("Reality creation coming next 🚀");
+  }
 
-      });
 
-      button.classList.add("selected");
+  /* =========================
+     CATEGORY
+  ========================= */
 
-    }
+  function selectCategory(button) {
 
-  </script>
+    const chips =
+      document.querySelectorAll(".chip");
+
+    chips.forEach(function(chip) {
+      chip.classList.remove("selected");
+    });
+
+    button.classList.add("selected");
+
+  }
+
+</script>
 
 </body>
-
 </html>
