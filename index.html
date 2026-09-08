@@ -13,20 +13,20 @@
 <style>
 
 /* =========================================================
-   SWYCHED — MOBILE APP UI
+   SWYCHED — APP UI V2
 ========================================================= */
 
 :root{
     --black:#000;
-    --bg:#050505;
-    --surface:#0b0b0b;
-    --surface2:#101010;
-    --surface3:#151515;
+    --bg:#060606;
+    --surface:#0c0c0c;
+    --surface2:#111;
+    --surface3:#171717;
     --white:#f5f5f2;
     --muted:#777;
-    --dim:#4a4a4a;
+    --dim:#505050;
     --line:#202020;
-    --line2:#292929;
+    --line2:#2c2c2c;
     --gold:#d4af37;
 }
 
@@ -59,30 +59,37 @@ select{
 
 button{
     cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+}
+
+button:active{
+    transform:scale(.985);
 }
 
 button:disabled{
     cursor:not-allowed;
 }
 
+
 /* =========================================================
-   APP FRAME
+   APP SHELL
 ========================================================= */
 
 .app-shell{
     width:100%;
-    max-width:480px;
+    max-width:470px;
     min-height:100vh;
     margin:0 auto;
+    position:relative;
+    overflow-x:hidden;
+
     background:
         radial-gradient(
             circle at 50% -10%,
-            rgba(255,255,255,.035),
-            transparent 35%
+            rgba(255,255,255,.045),
+            transparent 34%
         ),
         var(--bg);
-    position:relative;
-    overflow-x:hidden;
 }
 
 @media(min-width:600px){
@@ -93,14 +100,14 @@ button:disabled{
 
     .app-shell{
         min-height:calc(100vh - 36px);
-        border:1px solid #171717;
-        border-radius:30px;
+        border:1px solid #191919;
+        border-radius:32px;
         box-shadow:
-            0 30px 100px rgba(0,0,0,.75),
+            0 35px 110px rgba(0,0,0,.8),
             0 0 0 1px rgba(255,255,255,.015);
     }
-
 }
+
 
 /* =========================================================
    SCREENS
@@ -109,71 +116,81 @@ button:disabled{
 .screen{
     display:none;
     min-height:100vh;
-    padding:22px 18px 125px;
+    padding:24px 19px 135px;
+    animation:screenIn .25s ease;
 }
 
 .screen.active{
     display:block;
 }
 
+@keyframes screenIn{
+    from{
+        opacity:0;
+        transform:translateY(7px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
 .container{
     width:100%;
 }
+
 
 /* =========================================================
    TYPOGRAPHY
 ========================================================= */
 
 .logo{
-    font-size:54px;
+    font-size:53px;
     line-height:.82;
     font-weight:700;
     letter-spacing:-.095em;
 }
 
 .eyebrow{
-    color:#666;
-    font-size:9px;
+    color:#626262;
+    font-size:8px;
     font-weight:700;
     letter-spacing:1.7px;
 }
 
 .title{
-    margin-top:7px;
-    font-size:36px;
-    line-height:.9;
+    margin-top:8px;
+    font-size:34px;
+    line-height:.92;
     font-weight:700;
     letter-spacing:-.075em;
 }
 
 .subtitle{
     margin-top:12px;
-    color:#707070;
-    font-size:13px;
-    line-height:1.65;
+    color:#6a6a6a;
+    font-size:12px;
+    line-height:1.7;
 }
 
 .display{
-    font-size:58px;
+    font-size:57px;
     line-height:.84;
     font-weight:700;
     letter-spacing:-.09em;
 }
 
-.muted{
-    color:#666;
-}
 
 /* =========================================================
-   APP TOP BAR
+   APP HEADER
 ========================================================= */
 
 .app-top{
     display:flex;
-    justify-content:space-between;
     align-items:center;
-    min-height:42px;
-    margin-bottom:28px;
+    justify-content:space-between;
+    min-height:40px;
+    margin-bottom:30px;
 }
 
 .app-wordmark{
@@ -186,14 +203,14 @@ button:disabled{
     display:flex;
     align-items:center;
     gap:7px;
-    padding:8px 11px;
-    border:1px solid #242424;
+    padding:8px 12px;
+    border:1px solid #252525;
     border-radius:999px;
-    background:#0c0c0c;
-    color:#aaa;
+    background:#0d0d0d;
+    color:#a2a2a2;
     font-size:8px;
     font-weight:700;
-    letter-spacing:.9px;
+    letter-spacing:.7px;
 }
 
 .app-flux-dot{
@@ -201,7 +218,9 @@ button:disabled{
     height:6px;
     border-radius:50%;
     background:#fff;
+    box-shadow:0 0 8px rgba(255,255,255,.35);
 }
+
 
 /* =========================================================
    BUTTONS
@@ -210,13 +229,16 @@ button:disabled{
 .primary,
 .secondary{
     width:100%;
-    min-height:56px;
+    min-height:57px;
     padding:16px 18px;
     border-radius:16px;
     font-size:9px;
     font-weight:700;
-    letter-spacing:1.2px;
-    transition:.18s ease;
+    letter-spacing:1.25px;
+    transition:
+        transform .16s ease,
+        background .16s ease,
+        border-color .16s ease;
 }
 
 .primary{
@@ -245,17 +267,18 @@ button:disabled{
     align-items:center;
     border:0;
     background:none;
-    color:#666;
-    font-size:9px;
+    color:#5b5b5b;
+    font-size:8px;
     font-weight:700;
     letter-spacing:1px;
-    padding:7px 0;
-    margin-bottom:25px;
+    padding:8px 0;
+    margin-bottom:24px;
 }
 
 .back:hover{
     color:#fff;
 }
+
 
 /* =========================================================
    WELCOME
@@ -264,7 +287,7 @@ button:disabled{
 #welcome{
     display:none;
     min-height:100vh;
-    padding:24px 20px;
+    padding:25px 20px;
     align-items:center;
 }
 
@@ -277,9 +300,9 @@ button:disabled{
 }
 
 .welcome-mark{
-    width:64px;
-    height:64px;
-    border-radius:20px;
+    width:62px;
+    height:62px;
+    border-radius:19px;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -288,15 +311,16 @@ button:disabled{
     font-size:11px;
     font-weight:700;
     letter-spacing:-.05em;
-    margin-bottom:30px;
+    margin-bottom:31px;
+    box-shadow:0 12px 35px rgba(255,255,255,.06);
 }
 
 .welcome-main{
-    padding-bottom:42px;
+    padding-bottom:43px;
 }
 
 .welcome-main .logo{
-    font-size:clamp(55px,15vw,76px);
+    font-size:clamp(54px,15vw,74px);
 }
 
 .welcome-tag{
@@ -307,14 +331,14 @@ button:disabled{
 }
 
 .welcome-description{
-    margin-top:32px;
-    padding:20px;
-    border:1px solid #1c1c1c;
-    border-radius:19px;
+    margin-top:31px;
+    padding:21px;
+    border:1px solid #1e1e1e;
+    border-radius:20px;
     background:#090909;
-    color:#676767;
+    color:#696969;
     font-size:12px;
-    line-height:1.7;
+    line-height:1.75;
 }
 
 .welcome-actions{
@@ -324,8 +348,9 @@ button:disabled{
 }
 
 .welcome-actions button{
-    min-height:60px;
+    min-height:61px;
 }
+
 
 /* =========================================================
    AUTH
@@ -338,31 +363,32 @@ button:disabled{
 }
 
 .auth-brand{
-    padding-top:24px;
-    margin-bottom:35px;
+    padding-top:5px;
+    margin-bottom:36px;
 }
 
 .auth-brand p{
     max-width:330px;
     margin-top:18px;
     color:#666;
-    font-size:13px;
-    line-height:1.65;
+    font-size:12px;
+    line-height:1.7;
 }
 
 .auth-form{
+    padding:24px 20px 23px;
     border:1px solid #202020;
+    border-radius:24px;
     background:#090909;
-    border-radius:23px;
-    padding:23px 20px 22px;
+    box-shadow:0 20px 60px rgba(0,0,0,.2);
 }
 
 .auth-form .title{
-    font-size:30px;
+    font-size:29px;
 }
 
 .form-group{
-    margin-top:25px;
+    margin-top:26px;
 }
 
 label{
@@ -371,25 +397,25 @@ label{
     font-size:8px;
     font-weight:700;
     letter-spacing:1.5px;
-    margin-bottom:9px;
+    margin-bottom:10px;
 }
 
 input,
 textarea,
 select{
     width:100%;
-    border:1px solid #242424;
+    border:1px solid #252525;
     background:#0d0d0d;
     color:#fff;
-    border-radius:14px;
-    padding:16px 15px;
+    border-radius:15px;
+    padding:16px;
     font-size:14px;
     outline:none;
-    transition:.18s;
+    transition:.18s ease;
 }
 
 input{
-    min-height:52px;
+    min-height:53px;
 }
 
 input:focus,
@@ -414,29 +440,30 @@ select{
 }
 
 .auth-submit{
-    margin-top:30px;
+    margin-top:31px;
 }
 
 .auth-note{
     margin-top:17px;
     color:#414141;
     font-size:8px;
-    line-height:1.6;
+    line-height:1.7;
 }
+
 
 /* =========================================================
    HOME
 ========================================================= */
 
 .home-screen{
-    padding-top:17px;
+    padding-top:18px;
 }
 
 .home-header{
     display:flex;
-    justify-content:space-between;
     align-items:center;
-    margin-bottom:34px;
+    justify-content:space-between;
+    margin-bottom:35px;
 }
 
 .home-user{
@@ -446,9 +473,9 @@ select{
 }
 
 .small-avatar{
-    width:35px;
-    height:35px;
-    border-radius:50%;
+    width:37px;
+    height:37px;
+    border-radius:13px;
     background:#eee;
     color:#000;
     display:flex;
@@ -465,66 +492,69 @@ select{
 
 .home-user-text span{
     display:block;
-    margin-top:3px;
+    margin-bottom:3px;
     color:#4d4d4d;
-    font-size:8px;
+    font-size:7px;
     font-weight:500;
+    letter-spacing:.5px;
 }
 
 .home-greeting{
-    font-size:35px;
-    line-height:.95;
+    font-size:34px;
+    line-height:.96;
     font-weight:700;
     letter-spacing:-.075em;
 }
 
 .home-copy{
-    max-width:350px;
-    margin-top:13px;
+    max-width:340px;
+    margin-top:14px;
     color:#696969;
     font-size:12px;
-    line-height:1.65;
+    line-height:1.7;
 }
 
+
 /* =========================================================
-   FLUX HERO
+   FLUX CARD
 ========================================================= */
 
 .flux-card{
     position:relative;
     overflow:hidden;
-    margin-top:29px;
-    padding:24px;
-    border:1px solid #252525;
-    border-radius:25px;
+    margin-top:32px;
+    padding:25px;
+    border:1px solid #282828;
+    border-radius:26px;
     background:
         radial-gradient(
             circle at 100% 0%,
-            rgba(255,255,255,.07),
+            rgba(255,255,255,.075),
             transparent 42%
         ),
-        linear-gradient(145deg,#101010,#080808);
+        linear-gradient(145deg,#111,#080808);
+    box-shadow:0 18px 55px rgba(0,0,0,.22);
 }
 
-.flux-card::after{
+.flux-card::before{
     content:"";
     position:absolute;
-    width:150px;
-    height:150px;
-    right:-90px;
-    bottom:-90px;
+    width:190px;
+    height:190px;
+    right:-130px;
+    bottom:-130px;
     border-radius:50%;
     background:rgba(255,255,255,.025);
 }
 
 .flux-card-top{
     display:flex;
-    justify-content:space-between;
     align-items:center;
+    justify-content:space-between;
 }
 
 .flux-label{
-    color:#666;
+    color:#686868;
     font-size:8px;
     font-weight:700;
     letter-spacing:1.5px;
@@ -534,24 +564,25 @@ select{
     color:#444;
     font-size:8px;
     font-weight:700;
-    letter-spacing:1.2px;
+    letter-spacing:1px;
 }
 
 .flux-number{
-    margin-top:25px;
-    font-size:68px;
+    margin-top:27px;
+    font-size:66px;
     line-height:.8;
     font-weight:700;
     letter-spacing:-.1em;
+    transition:.3s ease;
 }
 
 .flux-meta{
     display:flex;
-    justify-content:space-between;
     align-items:end;
-    margin-top:29px;
+    justify-content:space-between;
+    margin-top:31px;
     padding-top:18px;
-    border-top:1px solid #1e1e1e;
+    border-top:1px solid #202020;
 }
 
 .flux-level{
@@ -566,12 +597,13 @@ select{
     letter-spacing:1px;
 }
 
+
 /* =========================================================
    HOME ACTIONS
 ========================================================= */
 
 .home-section{
-    margin-top:31px;
+    margin-top:37px;
 }
 
 .section-label{
@@ -584,71 +616,72 @@ select{
 .action-grid{
     display:flex;
     flex-direction:column;
-    gap:12px;
-    margin-top:13px;
+    gap:13px;
+    margin-top:15px;
 }
 
 .action-card{
     position:relative;
     width:100%;
-    min-height:102px;
-    padding:21px;
+    min-height:110px;
+    padding:23px;
     text-align:left;
     border:1px solid #202020;
-    border-radius:20px;
+    border-radius:21px;
     background:#0a0a0a;
     color:#fff;
-    transition:.18s;
+    transition:.18s ease;
 }
 
 .action-card:hover{
-    border-color:#3a3a3a;
+    border-color:#3c3c3c;
     background:#101010;
 }
 
 .action-card-title{
-    font-size:17px;
+    font-size:18px;
     font-weight:700;
     letter-spacing:-.04em;
 }
 
 .action-card-copy{
-    margin-top:7px;
+    margin-top:8px;
     color:#555;
-    font-size:9px;
-    letter-spacing:.7px;
+    font-size:8px;
+    letter-spacing:.8px;
 }
 
 .action-arrow{
     position:absolute;
-    right:20px;
     top:50%;
-    transform:translateY(-50%);
-    width:30px;
-    height:30px;
-    border-radius:50%;
+    right:21px;
+    width:32px;
+    height:32px;
     display:flex;
     align-items:center;
     justify-content:center;
+    transform:translateY(-50%);
     border:1px solid #292929;
-    color:#777;
+    border-radius:50%;
+    color:#888;
 }
+
 
 /* =========================================================
    HOW IT WORKS
 ========================================================= */
 
 .how-card{
-    margin-top:30px;
-    padding:21px;
-    border:1px solid #1b1b1b;
-    border-radius:20px;
+    margin-top:34px;
+    padding:23px;
+    border:1px solid #1c1c1c;
+    border-radius:22px;
     background:#080808;
 }
 
 .how-title{
     margin-top:8px;
-    font-size:18px;
+    font-size:19px;
     font-weight:700;
     letter-spacing:-.04em;
 }
@@ -656,19 +689,19 @@ select{
 .how-steps{
     display:flex;
     flex-direction:column;
-    gap:18px;
-    margin-top:22px;
+    gap:21px;
+    margin-top:24px;
 }
 
 .how-step{
     display:flex;
-    gap:13px;
     align-items:flex-start;
+    gap:14px;
 }
 
 .how-number{
-    width:27px;
-    height:27px;
+    width:29px;
+    height:29px;
     flex:none;
     display:flex;
     align-items:center;
@@ -686,18 +719,19 @@ select{
 }
 
 .how-step p{
-    margin-top:4px;
+    margin-top:5px;
     color:#505050;
     font-size:9px;
-    line-height:1.5;
+    line-height:1.55;
 }
+
 
 /* =========================================================
    EXPLORE
 ========================================================= */
 
 .explore-header{
-    margin-bottom:25px;
+    margin-bottom:27px;
 }
 
 .explore-title-row{
@@ -707,22 +741,21 @@ select{
 }
 
 .explore-title-row .title{
-    font-size:38px;
+    font-size:37px;
 }
 
 .explore-subtitle{
-    margin-top:10px;
+    margin-top:11px;
     color:#666;
     font-size:12px;
 }
 
 .search-box{
-    margin-top:24px;
-    position:relative;
+    margin-top:25px;
 }
 
 .search-box input{
-    height:54px;
+    height:55px;
     border-radius:17px;
     padding-left:18px;
     background:#0b0b0b;
@@ -731,10 +764,10 @@ select{
 .chips{
     display:flex;
     gap:8px;
-    margin-top:14px;
+    margin-top:15px;
+    padding:2px 0 4px;
     overflow-x:auto;
     scrollbar-width:none;
-    padding:2px 0 4px;
 }
 
 .chips::-webkit-scrollbar{
@@ -743,15 +776,16 @@ select{
 
 .chip{
     flex:none;
-    min-height:35px;
+    min-height:36px;
     padding:8px 14px;
-    border:1px solid #242424;
+    border:1px solid #252525;
     border-radius:999px;
     background:#090909;
-    color:#555;
+    color:#575757;
     font-size:8px;
     font-weight:700;
     letter-spacing:1px;
+    transition:.18s ease;
 }
 
 .chip.active{
@@ -760,43 +794,53 @@ select{
     color:#000;
 }
 
+
 /* =========================================================
-   FEED
+   EXPLORE FEED
 ========================================================= */
 
 #exploreList{
     display:flex;
     flex-direction:column;
-    gap:17px;
-    margin-top:25px;
+    gap:18px;
+    margin-top:28px;
 }
 
 .feed-card{
-    padding:20px;
-    border:1px solid #202020;
-    border-radius:22px;
+    position:relative;
+    padding:22px;
+    border:1px solid #222;
+    border-radius:24px;
     background:
-        linear-gradient(145deg,#0e0e0e,#080808);
+        linear-gradient(145deg,#0f0f0f,#080808);
+    transition:
+        transform .18s ease,
+        border-color .18s ease;
+}
+
+.feed-card:hover{
+    transform:translateY(-2px);
+    border-color:#343434;
 }
 
 .feed-top{
     display:flex;
     align-items:flex-start;
     justify-content:space-between;
-    gap:15px;
+    gap:14px;
 }
 
 .feed-category{
     color:#555;
     font-size:8px;
     font-weight:700;
-    letter-spacing:1.2px;
+    letter-spacing:1.3px;
 }
 
 .feed-title{
-    margin-top:7px;
-    font-size:22px;
-    line-height:1;
+    margin-top:8px;
+    font-size:21px;
+    line-height:1.02;
     font-weight:700;
     letter-spacing:-.055em;
 }
@@ -804,7 +848,7 @@ select{
 .feed-count{
     flex:none;
     padding:7px 9px;
-    border:1px solid #242424;
+    border:1px solid #252525;
     border-radius:999px;
     color:#555;
     font-size:7px;
@@ -813,27 +857,27 @@ select{
 }
 
 .feed-description{
-    margin-top:15px;
+    margin-top:17px;
     color:#707070;
     font-size:11px;
-    line-height:1.65;
+    line-height:1.7;
 }
 
 .creator-row{
     display:flex;
     align-items:center;
     gap:10px;
-    margin-top:21px;
+    margin-top:23px;
 }
 
 .avatar{
-    width:36px;
-    height:36px;
+    width:37px;
+    height:37px;
     flex:none;
     display:flex;
     align-items:center;
     justify-content:center;
-    border-radius:50%;
+    border-radius:13px;
     background:#eee;
     color:#000;
     font-size:11px;
@@ -855,16 +899,17 @@ select{
 .feed-actions{
     display:flex;
     gap:9px;
-    margin-top:20px;
+    margin-top:21px;
 }
 
 .feed-actions button{
-    min-height:45px;
-    border-radius:13px;
+    min-height:47px;
+    border-radius:14px;
     padding:10px 13px;
     font-size:8px;
     font-weight:700;
     letter-spacing:1px;
+    transition:.18s;
 }
 
 .feed-open{
@@ -874,35 +919,40 @@ select{
     color:#000;
 }
 
+.feed-open:hover{
+    background:#ddd;
+}
+
 .feed-delete{
     border:1px solid #292929;
     background:#080808;
     color:#777;
 }
 
+
 /* =========================================================
    EMPTY STATE
 ========================================================= */
 
 .empty-card{
-    margin-top:25px;
-    padding:30px 21px;
-    border:1px dashed #252525;
-    border-radius:21px;
+    margin-top:27px;
+    padding:31px 22px;
+    border:1px dashed #292929;
+    border-radius:22px;
     background:#080808;
 }
 
 .empty-icon{
-    width:42px;
-    height:42px;
+    width:43px;
+    height:43px;
     display:flex;
     align-items:center;
     justify-content:center;
+    margin-bottom:22px;
     border-radius:14px;
     background:#141414;
-    color:#666;
+    color:#777;
     font-size:17px;
-    margin-bottom:21px;
 }
 
 .empty-card strong{
@@ -913,70 +963,72 @@ select{
 }
 
 .empty-card p{
-    margin-top:8px;
+    margin-top:9px;
     color:#555;
     font-size:11px;
-    line-height:1.6;
+    line-height:1.65;
 }
 
 .empty-card .primary{
-    margin-top:22px;
+    margin-top:23px;
 }
+
 
 /* =========================================================
    EXCL
 ========================================================= */
 
 .excl-wrapper{
-    margin-top:48px;
-    padding-top:30px;
-    border-top:1px solid #171717;
+    margin-top:55px;
+    padding-top:31px;
+    border-top:1px solid #191919;
 }
 
 .excl-heading{
+    margin-bottom:13px;
     color:#75612c;
     font-size:8px;
     font-weight:700;
-    letter-spacing:1.7px;
-    margin-bottom:12px;
+    letter-spacing:1.8px;
 }
 
 .excl-card{
     position:relative;
     overflow:hidden;
-    padding:24px;
+    padding:26px;
     border:1px solid #392f14;
-    border-radius:24px;
+    border-radius:26px;
     background:
         radial-gradient(
             circle at 100% 0%,
-            rgba(212,175,55,.13),
+            rgba(212,175,55,.14),
             transparent 45%
         ),
-        #090806;
+        linear-gradient(145deg,#0c0a06,#080806);
 }
 
 .excl-card.locked{
-    opacity:.72;
+    opacity:.76;
 }
 
 .excl-card.unlocked{
-    border-color:#756126;
+    border-color:#816b29;
+    box-shadow:0 0 45px rgba(212,175,55,.05);
 }
 
 .excl-top{
     display:flex;
-    justify-content:space-between;
     align-items:center;
+    justify-content:space-between;
 }
 
 .excl-icon{
-    width:40px;
-    height:40px;
-    border-radius:50%;
+    width:41px;
+    height:41px;
     display:flex;
     align-items:center;
     justify-content:center;
+    border-radius:50%;
     background:var(--gold);
     color:#000;
     font-size:7px;
@@ -984,27 +1036,28 @@ select{
 }
 
 .excl-title{
-    margin-top:30px;
-    font-size:47px;
+    margin-top:32px;
+    font-size:46px;
     line-height:.8;
     font-weight:700;
     letter-spacing:-.08em;
 }
 
 .excl-description{
-    margin-top:16px;
+    margin-top:17px;
     color:#716b58;
     font-size:11px;
-    line-height:1.65;
+    line-height:1.7;
 }
 
 .excl-lock{
-    margin-top:20px;
+    margin-top:22px;
     color:#927a2e;
     font-size:8px;
     font-weight:700;
     letter-spacing:1px;
 }
+
 
 /* =========================================================
    DROP
@@ -1012,53 +1065,54 @@ select{
 
 .drop-intro-card{
     margin-top:22px;
-    padding:21px;
+    padding:23px;
     border:1px solid #202020;
-    border-radius:21px;
+    border-radius:22px;
     background:#090909;
 }
 
 .drop-intro-title{
-    margin-top:8px;
+    margin-top:9px;
     font-size:22px;
+    line-height:1.05;
     font-weight:700;
     letter-spacing:-.055em;
 }
 
 .drop-intro-copy{
-    margin-top:8px;
+    margin-top:9px;
     color:#5e5e5e;
     font-size:11px;
-    line-height:1.6;
+    line-height:1.7;
 }
 
 .drop-form{
-    margin-top:30px;
+    margin-top:31px;
 }
 
 .form-card{
-    padding:19px;
+    padding:21px;
     border:1px solid #1e1e1e;
-    border-radius:19px;
+    border-radius:21px;
     background:#090909;
 }
 
 .form-card + .form-card{
-    margin-top:13px;
+    margin-top:14px;
 }
 
 .builder-section{
-    margin-top:39px;
+    margin-top:43px;
 }
 
 .builder-heading{
     display:flex;
-    justify-content:space-between;
     align-items:end;
+    justify-content:space-between;
 }
 
 .builder-heading .title{
-    font-size:31px;
+    font-size:30px;
 }
 
 .max-label{
@@ -1069,11 +1123,23 @@ select{
 }
 
 .mission-builder{
-    margin-top:16px;
-    padding:20px;
+    margin-top:18px;
+    padding:22px;
     border:1px solid #242424;
-    border-radius:20px;
+    border-radius:21px;
     background:#0b0b0b;
+    animation:cardIn .22s ease;
+}
+
+@keyframes cardIn{
+    from{
+        opacity:0;
+        transform:translateY(5px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
 .mission-number{
@@ -1084,7 +1150,7 @@ select{
 }
 
 .mission-builder .form-group{
-    margin-top:21px;
+    margin-top:22px;
 }
 
 .mission-builder textarea{
@@ -1093,24 +1159,26 @@ select{
 
 .add-mission{
     width:100%;
-    min-height:53px;
-    margin-top:12px;
+    min-height:55px;
+    margin-top:13px;
     border:1px dashed #303030;
-    border-radius:16px;
+    border-radius:17px;
     background:#080808;
     color:#666;
     font-size:8px;
     font-weight:700;
     letter-spacing:1.2px;
+    transition:.18s;
 }
 
 .add-mission:hover{
     color:#fff;
     border-color:#666;
+    background:#0d0d0d;
 }
 
 .remove-mission{
-    margin-top:18px;
+    margin-top:19px;
     border:0;
     background:none;
     color:#444;
@@ -1119,22 +1187,27 @@ select{
     letter-spacing:1px;
 }
 
+.remove-mission:hover{
+    color:#888;
+}
+
+
 /* =========================================================
    PREVIEW / REALITY
 ========================================================= */
 
 .preview-card{
-    margin-top:23px;
+    margin-top:24px;
 }
 
 .reality-card{
-    padding:22px;
-    border:1px solid #222;
-    border-radius:23px;
+    padding:24px;
+    border:1px solid #242424;
+    border-radius:25px;
     background:
         radial-gradient(
             circle at 100% 0%,
-            rgba(255,255,255,.045),
+            rgba(255,255,255,.05),
             transparent 45%
         ),
         #0a0a0a;
@@ -1148,53 +1221,59 @@ select{
 }
 
 .reality-name{
-    margin-top:10px;
-    font-size:34px;
-    line-height:.9;
+    margin-top:11px;
+    font-size:33px;
+    line-height:.93;
     font-weight:700;
     letter-spacing:-.075em;
 }
 
 .reality-description{
-    margin-top:15px;
+    margin-top:16px;
     color:#707070;
     font-size:11px;
-    line-height:1.65;
+    line-height:1.7;
 }
 
 .missions-heading{
-    margin-top:34px;
+    margin-top:38px;
 }
 
 .missions-heading .title{
-    font-size:29px;
+    font-size:28px;
 }
 
 .mission-item{
-    margin-top:13px;
-    padding:20px;
+    position:relative;
+    margin-top:14px;
+    padding:21px;
     border:1px solid #202020;
-    border-radius:19px;
+    border-radius:20px;
     background:#0a0a0a;
+    transition:.18s;
+}
+
+.mission-item:hover{
+    border-color:#343434;
 }
 
 .mission-item h3{
     font-size:16px;
-    line-height:1.2;
+    line-height:1.25;
     font-weight:700;
     letter-spacing:-.035em;
 }
 
 .mission-item p{
-    margin-top:9px;
+    margin-top:10px;
     color:#666;
     font-size:11px;
-    line-height:1.65;
+    line-height:1.7;
 }
 
 .reward{
     display:inline-flex;
-    margin-top:16px;
+    margin-top:17px;
     padding:7px 10px;
     border-radius:999px;
     background:#161616;
@@ -1204,40 +1283,79 @@ select{
     letter-spacing:1px;
 }
 
+
 /* =========================================================
-   STATUS / COMPLETE
+   MISSION CHECKLIST
+========================================================= */
+
+.mission-check{
+    position:absolute;
+    top:20px;
+    right:20px;
+    width:25px;
+    height:25px;
+    border:1px solid #292929;
+    border-radius:50%;
+    background:#080808;
+}
+
+.mission-item.completed{
+    border-color:#555;
+}
+
+.mission-item.completed .mission-check{
+    border-color:#fff;
+    background:#fff;
+}
+
+.mission-item.completed .mission-check::after{
+    content:"✓";
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:100%;
+    color:#000;
+    font-size:12px;
+    font-weight:700;
+}
+
+
+/* =========================================================
+   STATUS
 ========================================================= */
 
 .status-screen{
-    min-height:calc(100vh - 100px);
+    min-height:calc(100vh - 160px);
     display:flex;
     align-items:center;
 }
 
 .status-card{
     width:100%;
-    padding:28px 23px;
-    border:1px solid #202020;
-    border-radius:25px;
+    padding:30px 24px;
+    border:1px solid #222;
+    border-radius:26px;
     background:
         radial-gradient(
             circle at 100% 0%,
-            rgba(255,255,255,.06),
+            rgba(255,255,255,.065),
             transparent 45%
         ),
         #090909;
+    box-shadow:0 25px 70px rgba(0,0,0,.25);
 }
 
 .status-card .display{
-    margin-top:17px;
+    margin-top:18px;
 }
 
 .status-actions{
     display:flex;
     flex-direction:column;
     gap:11px;
-    margin-top:30px;
+    margin-top:31px;
 }
+
 
 /* =========================================================
    PROFILE
@@ -1245,21 +1363,22 @@ select{
 
 .profile-header{
     display:flex;
-    justify-content:space-between;
     align-items:center;
-    margin-bottom:27px;
+    justify-content:space-between;
+    margin-bottom:29px;
 }
 
 .profile-header-title{
-    font-size:25px;
+    margin-top:7px;
+    font-size:26px;
     font-weight:700;
     letter-spacing:-.06em;
 }
 
 .profile-card{
-    padding:22px;
+    padding:23px;
     border:1px solid #222;
-    border-radius:24px;
+    border-radius:25px;
     background:#0a0a0a;
 }
 
@@ -1270,14 +1389,14 @@ select{
 }
 
 .profile-avatar{
-    width:70px;
-    height:70px;
-    border-radius:23px;
-    background:#eee;
-    color:#000;
+    width:72px;
+    height:72px;
     display:flex;
     align-items:center;
     justify-content:center;
+    border-radius:22px;
+    background:#eee;
+    color:#000;
     font-size:24px;
     font-weight:700;
 }
@@ -1295,20 +1414,20 @@ select{
 }
 
 .profile-bio{
-    margin-top:19px;
+    margin-top:20px;
     color:#666;
     font-size:11px;
-    line-height:1.65;
+    line-height:1.7;
 }
 
 .edit-button{
     width:100%;
-    min-height:45px;
-    margin-top:20px;
+    min-height:47px;
+    margin-top:21px;
     border:1px solid #292929;
     background:#050505;
     color:#fff;
-    border-radius:14px;
+    border-radius:15px;
     font-size:8px;
     font-weight:700;
     letter-spacing:1px;
@@ -1318,27 +1437,28 @@ select{
     border-color:#777;
 }
 
+
 /* =========================================================
-   PROFILE LEVEL
+   LEVEL
 ========================================================= */
 
 .level-card{
-    margin-top:14px;
-    padding:22px;
+    margin-top:15px;
+    padding:23px;
     border:1px solid #202020;
-    border-radius:22px;
+    border-radius:23px;
     background:#090909;
 }
 
 .level-top{
     display:flex;
-    justify-content:space-between;
     align-items:end;
+    justify-content:space-between;
 }
 
 .level-number{
-    margin-top:7px;
-    font-size:27px;
+    margin-top:8px;
+    font-size:28px;
     font-weight:700;
     letter-spacing:-.06em;
 }
@@ -1352,10 +1472,10 @@ select{
 
 .progress-track{
     width:100%;
-    height:6px;
-    margin-top:21px;
-    border-radius:999px;
+    height:7px;
+    margin-top:22px;
     overflow:hidden;
+    border-radius:999px;
     background:#222;
 }
 
@@ -1364,7 +1484,7 @@ select{
     height:100%;
     border-radius:999px;
     background:#fff;
-    transition:.35s;
+    transition:width .7s cubic-bezier(.2,.8,.2,1);
 }
 
 .progress-text{
@@ -1378,42 +1498,43 @@ select{
 .stats-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:12px;
-    margin-top:14px;
+    gap:13px;
+    margin-top:15px;
 }
 
 .stat-card{
-    padding:20px;
+    padding:21px;
     border:1px solid #202020;
-    border-radius:19px;
+    border-radius:20px;
     background:#090909;
 }
 
 .stat-number{
-    font-size:34px;
+    font-size:35px;
     line-height:.9;
     font-weight:700;
     letter-spacing:-.07em;
 }
 
 .stat-label{
-    margin-top:9px;
+    margin-top:10px;
     color:#444;
     font-size:8px;
     font-weight:700;
     letter-spacing:1.4px;
 }
 
+
 /* =========================================================
    PROFILE DROPS
 ========================================================= */
 
 .profile-drops-section{
-    margin-top:39px;
+    margin-top:43px;
 }
 
 .profile-drops-title{
-    margin-top:7px;
+    margin-top:8px;
     font-size:28px;
     line-height:.9;
     font-weight:700;
@@ -1423,46 +1544,48 @@ select{
 #profileDropsList{
     display:flex;
     flex-direction:column;
-    gap:13px;
-    margin-top:17px;
+    gap:14px;
+    margin-top:19px;
 }
+
 
 /* =========================================================
    SWYCH HISTORY
 ========================================================= */
 
 .history-card{
-    margin-top:24px;
-    padding:25px;
+    margin-top:27px;
+    padding:27px;
     border:1px solid #202020;
-    border-radius:23px;
+    border-radius:25px;
     background:#090909;
 }
 
 .history-number{
-    margin-top:15px;
-    font-size:62px;
+    margin-top:17px;
+    font-size:61px;
     line-height:.8;
     font-weight:700;
     letter-spacing:-.09em;
 }
 
 .history-copy{
-    margin-top:15px;
+    margin-top:17px;
     color:#5c5c5c;
     font-size:11px;
-    line-height:1.6;
+    line-height:1.7;
 }
+
 
 /* =========================================================
    EDIT PROFILE
 ========================================================= */
 
 .edit-card{
-    margin-top:23px;
-    padding:20px;
+    margin-top:24px;
+    padding:21px;
     border:1px solid #202020;
-    border-radius:22px;
+    border-radius:23px;
     background:#090909;
 }
 
@@ -1470,11 +1593,12 @@ select{
     display:flex;
     flex-direction:column;
     gap:11px;
-    margin-top:30px;
+    margin-top:31px;
 }
 
+
 /* =========================================================
-   BOTTOM NAV
+   BOTTOM NAV — NATIVE APP STYLE
 ========================================================= */
 
 #nav{
@@ -1482,19 +1606,19 @@ select{
     position:fixed;
     z-index:100;
     left:50%;
-    bottom:16px;
+    bottom:15px;
     transform:translateX(-50%);
-    width:calc(100% - 28px);
-    max-width:452px;
-    height:76px;
+    width:calc(100% - 26px);
+    max-width:445px;
+    height:78px;
     padding:7px;
     border:1px solid #292929;
-    border-radius:25px;
-    background:rgba(11,11,11,.94);
-    backdrop-filter:blur(22px);
-    -webkit-backdrop-filter:blur(22px);
+    border-radius:26px;
+    background:rgba(10,10,10,.94);
+    backdrop-filter:blur(24px);
+    -webkit-backdrop-filter:blur(24px);
     box-shadow:
-        0 15px 50px rgba(0,0,0,.7),
+        0 18px 55px rgba(0,0,0,.75),
         0 0 0 1px rgba(255,255,255,.01);
 }
 
@@ -1502,20 +1626,20 @@ select{
     width:100%;
     height:100%;
     display:grid;
-    grid-template-columns:1fr 1fr 1.15fr 1fr 1fr;
-    gap:4px;
+    grid-template-columns:1fr 1fr 1.12fr 1fr 1fr;
+    gap:3px;
 }
 
 .nav-btn{
     position:relative;
     border:0;
-    border-radius:18px;
+    border-radius:19px;
     background:transparent;
     color:#4c4c4c;
     font-size:7px;
     font-weight:700;
-    letter-spacing:.9px;
-    transition:.18s;
+    letter-spacing:.8px;
+    transition:.18s ease;
 }
 
 .nav-btn:hover{
@@ -1525,10 +1649,10 @@ select{
 
 .nav-icon{
     display:flex;
-    justify-content:center;
     align-items:center;
+    justify-content:center;
     height:20px;
-    margin-bottom:3px;
+    margin-bottom:4px;
     font-size:15px;
     font-weight:400;
     line-height:1;
@@ -1541,12 +1665,12 @@ select{
 
 .nav-drop{
     align-self:center;
-    height:58px;
-    border-radius:19px;
+    height:59px;
+    margin-top:-16px;
+    border-radius:20px;
     background:#fff;
     color:#000;
-    margin-top:-15px;
-    box-shadow:0 8px 25px rgba(0,0,0,.4);
+    box-shadow:0 10px 28px rgba(0,0,0,.45);
 }
 
 .nav-drop:hover{
@@ -1555,12 +1679,14 @@ select{
 }
 
 .nav-drop .nav-icon{
-    font-size:23px;
+    height:22px;
     margin-bottom:1px;
+    font-size:23px;
 }
 
+
 /* =========================================================
-   DESKTOP APP SHELL
+   DESKTOP
 ========================================================= */
 
 @media(min-width:600px){
@@ -1572,8 +1698,8 @@ select{
     #nav{
         bottom:28px;
     }
-
 }
+
 
 /* =========================================================
    SMALL PHONES
@@ -1591,22 +1717,21 @@ select{
     }
 
     .home-greeting{
-        font-size:31px;
+        font-size:30px;
     }
 
     .flux-number{
-        font-size:61px;
+        font-size:60px;
     }
 
     .title{
-        font-size:33px;
+        font-size:32px;
     }
 
     #nav{
-        width:calc(100% - 18px);
-        bottom:9px;
+        width:calc(100% - 16px);
+        bottom:8px;
     }
-
 }
 
 </style>
@@ -1887,36 +2012,30 @@ select{
             <div class="how-steps">
 
                 <div class="how-step">
-
                     <div class="how-number">01</div>
 
                     <div>
                         <strong>FIND A REALITY</strong>
                         <p>Explore challenges created by other people.</p>
                     </div>
-
                 </div>
 
                 <div class="how-step">
-
                     <div class="how-number">02</div>
 
                     <div>
                         <strong>SWYCH</strong>
                         <p>Step into their Reality and complete the missions.</p>
                     </div>
-
                 </div>
 
                 <div class="how-step">
-
                     <div class="how-number">03</div>
 
                     <div>
                         <strong>EARN FLUX</strong>
                         <p>Build your progression and unlock more.</p>
                     </div>
-
                 </div>
 
             </div>
@@ -1951,20 +2070,12 @@ select{
 
         <div class="explore-header">
 
-            <div class="explore-title-row">
+            <div class="eyebrow">
+                DISCOVER
+            </div>
 
-                <div>
-
-                    <div class="eyebrow">
-                        DISCOVER
-                    </div>
-
-                    <div class="title">
-                        EXPLORE
-                    </div>
-
-                </div>
-
+            <div class="title">
+                EXPLORE
             </div>
 
             <div class="explore-subtitle">
@@ -2140,7 +2251,7 @@ select{
                 + ADD MISSION
             </button>
 
-            <div style="margin-top:24px;">
+            <div style="margin-top:27px;">
                 <button class="primary" onclick="previewDrop()">
                     PREVIEW DROP
                 </button>
@@ -2176,7 +2287,7 @@ select{
 
         <div id="dropPreviewContent" class="preview-card"></div>
 
-        <div style="margin-top:27px;">
+        <div style="margin-top:29px;">
             <button class="primary" onclick="publishDrop()">
                 PUBLISH DROP
             </button>
@@ -2260,26 +2371,38 @@ select{
     <div class="container">
 
         <div class="app-top">
-            <div class="app-wordmark">SWYCHED</div>
-            <div class="eyebrow">ACTIVE SWYCH</div>
+
+            <div class="app-wordmark">
+                SWYCHED
+            </div>
+
+            <div class="app-flux-pill">
+                <div class="app-flux-dot"></div>
+                <span id="swychFlux">0 FLUX</span>
+            </div>
+
         </div>
 
         <button class="back" onclick="showScreen('reality')">
             ← REALITY
         </button>
 
+        <div class="eyebrow">
+            ACTIVE SWYCH
+        </div>
+
         <div class="title">
             MISSIONS
         </div>
 
         <div class="subtitle">
-            Complete every mission to finish this Reality.
+            Tap each mission when you've completed it.
         </div>
 
         <div id="missionList"></div>
 
-        <div style="margin-top:25px;">
-            <button class="primary" onclick="completeReality()">
+        <div style="margin-top:29px;">
+            <button id="completeButton" class="primary" onclick="completeReality()">
                 COMPLETE SWYCH
             </button>
         </div>
@@ -2309,7 +2432,7 @@ select{
 
             <div id="earnedText" class="subtitle"></div>
 
-            <div style="margin-top:30px;">
+            <div style="margin-top:31px;">
                 <button class="primary" onclick="showScreen('explore')">
                     EXPLORE
                 </button>
@@ -2323,7 +2446,7 @@ select{
 
 
 <!-- =========================================================
-     SWYCH
+     SWYCH HISTORY
 ========================================================= -->
 
 <section id="swych" class="screen">
@@ -2338,7 +2461,7 @@ select{
 
             <div class="app-flux-pill">
                 <div class="app-flux-dot"></div>
-                <span id="swychFlux">0 FLUX</span>
+                <span id="swychFluxTop">0 FLUX</span>
             </div>
 
         </div>
@@ -2572,7 +2695,7 @@ select{
 
 
 <!-- =========================================================
-     NAV
+     BOTTOM NAV
 ========================================================= -->
 
 <div id="nav">
@@ -2580,43 +2703,28 @@ select{
     <div class="nav-inner">
 
         <button class="nav-btn" data-screen="home" onclick="showScreen('home')">
-
             <div class="nav-icon">⌂</div>
-
             HOME
-
         </button>
 
         <button class="nav-btn" data-screen="explore" onclick="showScreen('explore')">
-
             <div class="nav-icon">⌕</div>
-
             EXPLORE
-
         </button>
 
         <button class="nav-btn nav-drop" onclick="createReality()">
-
             <div class="nav-icon">+</div>
-
             DROP
-
         </button>
 
         <button class="nav-btn" data-screen="swych" onclick="showScreen('swych')">
-
             <div class="nav-icon">↻</div>
-
             SWYCH
-
         </button>
 
         <button class="nav-btn" data-screen="profile" onclick="showScreen('profile')">
-
             <div class="nav-icon">○</div>
-
             PROFILE
-
         </button>
 
     </div>
@@ -2632,22 +2740,29 @@ select{
    STATE
 ========================================================= */
 
-let currentAuthMode = "signup";
-let currentUser = null;
-let userFlux = 0;
-let completedSwcyhes = 0;
-let publishedDrops = [];
-let selectedReality = null;
-let currentCategory = "ALL";
-let missionCount = 0;
-let currentMissionTotal = 0;
+let currentAuthMode="signup";
+let currentUser=null;
+
+let userFlux=0;
+let completedSwcyhes=0;
+
+let publishedDrops=[];
+
+let selectedReality=null;
+
+let currentCategory="ALL";
+
+let missionCount=0;
+let currentMissionTotal=0;
+
+let completedMissionIndexes=[];
 
 
 /* =========================================================
    LEVELS
 ========================================================= */
 
-const levels = [
+const levels=[
     {level:1,min:0,next:500},
     {level:2,min:500,next:2000},
     {level:3,min:2000,next:5000},
@@ -2658,14 +2773,14 @@ const levels = [
 
 
 /* =========================================================
-   STORAGE HELPERS
+   STORAGE
 ========================================================= */
 
 function getAccounts(){
 
     try{
         return JSON.parse(
-            localStorage.getItem("swychedAccounts") || "[]"
+            localStorage.getItem("swychedAccounts")||"[]"
         );
     }catch{
         return [];
@@ -2705,7 +2820,7 @@ function clearSession(){
 
 function normalizeUsername(username){
 
-    return username
+    return String(username||"")
         .replace(/^@/,"")
         .trim()
         .toLowerCase();
@@ -2714,18 +2829,14 @@ function normalizeUsername(username){
 
 function createAccountId(){
 
-    return "user_" +
-        Date.now() +
-        "_" +
+    return "user_"+
+        Date.now()+
+        "_"+
         Math.random()
             .toString(36)
             .slice(2,9);
 }
 
-
-/* =========================================================
-   ACCOUNT LOOKUP
-========================================================= */
 
 function getCurrentAccount(){
 
@@ -2734,10 +2845,8 @@ function getCurrentAccount(){
     const accounts=getAccounts();
 
     return accounts.find(function(account){
-
         return account.id===currentUser.id;
-
-    }) || currentUser;
+    })||currentUser;
 }
 
 
@@ -2748,19 +2857,13 @@ function saveCurrentAccount(){
     const accounts=getAccounts();
 
     const index=accounts.findIndex(function(account){
-
         return account.id===currentUser.id;
-
     });
 
     if(index!==-1){
-
         accounts[index]=currentUser;
-
     }else{
-
         accounts.push(currentUser);
-
     }
 
     saveAccounts(accounts);
@@ -2778,23 +2881,18 @@ function showScreen(id){
         id!=="auth" &&
         !currentUser
     ){
-
         showAuth("login");
         return;
     }
 
     document.querySelectorAll(".screen").forEach(function(screen){
-
         screen.classList.remove("active");
-
     });
 
     const target=document.getElementById(id);
 
     if(target){
-
         target.classList.add("active");
-
     }
 
     if(id==="profile"){
@@ -2824,7 +2922,8 @@ function showScreen(id){
 
 function updateNav(screen){
 
-    document.querySelectorAll(".nav-btn[data-screen]")
+    document
+        .querySelectorAll(".nav-btn[data-screen]")
         .forEach(function(button){
 
             button.classList.remove("active");
@@ -2842,7 +2941,7 @@ function updateNav(screen){
 
 
 /* =========================================================
-   AUTH SCREEN
+   AUTH
 ========================================================= */
 
 function showAuth(mode){
@@ -2897,7 +2996,8 @@ function showAuth(mode){
     document.getElementById("auth")
         .classList.add("active");
 
-    document.getElementById("nav").style.display="none";
+    document.getElementById("nav")
+        .style.display="none";
 
     window.scrollTo(0,0);
 }
@@ -2915,11 +3015,12 @@ function submitAuth(){
         .trim();
 
     if(password===""){
-
         alert("Enter a password.");
-
         return;
     }
+
+
+    /* ================= SIGN UP ================= */
 
     if(currentAuthMode==="signup"){
 
@@ -2934,16 +3035,12 @@ function submitAuth(){
             .trim();
 
         if(name===""){
-
             alert("Enter a display name.");
-
             return;
         }
 
         if(username===""){
-
             alert("Choose a username.");
-
             return;
         }
 
@@ -2954,14 +3051,13 @@ function submitAuth(){
 
         const exists=accounts.some(function(account){
 
-            return normalizeUsername(account.username)===normalized;
+            return normalizeUsername(account.username)===
+                normalized;
 
         });
 
         if(exists){
-
             alert("That username is already taken.");
-
             return;
         }
 
@@ -2990,15 +3086,15 @@ function submitAuth(){
     }
 
 
+    /* ================= LOGIN ================= */
+
     const username=
         document.getElementById("loginUsername")
         .value
         .trim();
 
     if(username===""){
-
         alert("Enter your username.");
-
         return;
     }
 
@@ -3009,14 +3105,13 @@ function submitAuth(){
 
     let account=accounts.find(function(item){
 
-        return normalizeUsername(item.username)===normalized;
+        return normalizeUsername(item.username)===
+            normalized;
 
     });
 
 
-    /* -------------------------------------------------------
-       OLD PROTOTYPE MIGRATION
-    ------------------------------------------------------- */
+    /* Old prototype migration */
 
     if(!account){
 
@@ -3040,14 +3135,13 @@ function submitAuth(){
                         username:parsed.username,
                         password:parsed.password||"",
                         bio:parsed.bio||"",
-                        flux:0,
-                        swyches:0
+                        flux:Number(parsed.flux)||0,
+                        swyches:Number(parsed.swyches)||0
                     };
 
                     accounts.push(account);
 
                     saveAccounts(accounts);
-
                 }
 
             }catch{}
@@ -3059,7 +3153,9 @@ function submitAuth(){
 
     if(!account){
 
-        alert("No account found with that username.");
+        alert(
+            "No account found with that username."
+        );
 
         return;
     }
@@ -3120,10 +3216,9 @@ function logout(){
     if(currentUser){
 
         currentUser.flux=userFlux;
-        currentUser.swcyhes=completedSwcyhes;
+        currentUser.swyches=completedSwcyhes;
 
         saveCurrentAccount();
-
     }
 
     currentUser=null;
@@ -3154,7 +3249,7 @@ function saveProgress(){
     if(!currentUser)return;
 
     currentUser.flux=userFlux;
-    currentUser.swcyches=completedSwcyhes;
+    currentUser.swyches=completedSwcyhes;
 
     saveCurrentAccount();
 }
@@ -3171,12 +3266,12 @@ function loadProgress(){
     }
 
     userFlux=Number(currentUser.flux)||0;
-    completedSwcyhes=Number(currentUser.swcyches)||0;
+    completedSwcyhes=Number(currentUser.swyches)||0;
 }
 
 
 /* =========================================================
-   DROPS STORAGE
+   DROPS
 ========================================================= */
 
 function saveDrops(){
@@ -3215,7 +3310,6 @@ function loadProfile(){
     loadProgress();
 
     const name=currentUser.name||"User";
-
     const username=currentUser.username||"user";
 
     const displayUsername=
@@ -3301,16 +3395,12 @@ function saveProfile(){
         .trim();
 
     if(name===""){
-
         alert("Display name cannot be empty.");
-
         return;
     }
 
     if(username===""){
-
         alert("Username cannot be empty.");
-
         return;
     }
 
@@ -3323,7 +3413,8 @@ function saveProfile(){
 
         return(
             account.id!==currentUser.id &&
-            normalizeUsername(account.username)===normalized
+            normalizeUsername(account.username)===
+            normalized
         );
 
     });
@@ -3358,9 +3449,7 @@ function getCurrentLevel(){
     levels.forEach(function(level){
 
         if(userFlux>=level.min){
-
             current=level;
-
         }
 
     });
@@ -3373,57 +3462,36 @@ function updateFlux(){
 
     const level=getCurrentLevel();
 
-    const homeFlux=
-        document.getElementById("homeFlux");
 
-    if(homeFlux){
+    const elements={
+        homeFlux:document.getElementById("homeFlux"),
+        homeFluxMini:document.getElementById("homeFluxMini"),
+        exploreFlux:document.getElementById("exploreFlux"),
+        profileFluxMini:document.getElementById("profileFluxMini"),
+        swychFlux:document.getElementById("swychFlux"),
+        swychFluxTop:document.getElementById("swychFluxTop")
+    };
 
-        homeFlux.textContent=
+
+    Object.keys(elements).forEach(function(key){
+
+        const element=elements[key];
+
+        if(element){
+
+            element.textContent=
+                userFlux.toLocaleString()+
+                " FLUX";
+
+        }
+
+    });
+
+
+    if(elements.homeFlux){
+
+        elements.homeFlux.textContent=
             userFlux.toLocaleString();
-
-    }
-
-
-    const homeFluxMini=
-        document.getElementById("homeFluxMini");
-
-    if(homeFluxMini){
-
-        homeFluxMini.textContent=
-            userFlux.toLocaleString()+" FLUX";
-
-    }
-
-
-    const exploreFlux=
-        document.getElementById("exploreFlux");
-
-    if(exploreFlux){
-
-        exploreFlux.textContent=
-            userFlux.toLocaleString()+" FLUX";
-
-    }
-
-
-    const profileFluxMini=
-        document.getElementById("profileFluxMini");
-
-    if(profileFluxMini){
-
-        profileFluxMini.textContent=
-            userFlux.toLocaleString()+" FLUX";
-
-    }
-
-
-    const swychFlux=
-        document.getElementById("swychFlux");
-
-    if(swychFlux){
-
-        swychFlux.textContent=
-            userFlux.toLocaleString()+" FLUX";
 
     }
 
@@ -3451,8 +3519,10 @@ function updateFlux(){
         }else{
 
             homeNext.textContent=
-                (level.next-userFlux)
-                .toLocaleString()+
+                Math.max(
+                    0,
+                    level.next-userFlux
+                ).toLocaleString()+
                 " TO NEXT";
 
         }
@@ -3497,10 +3567,8 @@ function updateFlux(){
         }
 
         if(text){
-
             text.textContent=
                 "MAX LEVEL • EXCL UNLOCKED";
-
         }
 
     }else{
@@ -3522,16 +3590,22 @@ function updateFlux(){
 
         if(bar){
 
-            bar.style.width=
-                percentage+"%";
+            requestAnimationFrame(function(){
+
+                bar.style.width=
+                    percentage+"%";
+
+            });
 
         }
 
         if(text){
 
             text.textContent=
-                (level.next-userFlux)
-                .toLocaleString()+
+                Math.max(
+                    0,
+                    level.next-userFlux
+                ).toLocaleString()+
                 " FLUX TO NEXT LEVEL";
 
         }
@@ -3576,7 +3650,7 @@ function createReality(){
 
 
 /* =========================================================
-   ADD MISSION
+   MISSIONS BUILDER
 ========================================================= */
 
 function addMission(){
@@ -3661,7 +3735,6 @@ function removeMission(button){
     button.parentElement.remove();
 
     renumberMissions();
-
 }
 
 
@@ -3679,7 +3752,6 @@ function renumberMissions(){
                 "MISSION "+(index+1);
 
     });
-
 }
 
 
@@ -3768,23 +3840,17 @@ function previewDrop(){
     const data=getDropData();
 
     if(data.name===""){
-
         alert("Give your Reality a name.");
-
         return;
     }
 
     if(data.description===""){
-
         alert("Add a description.");
-
         return;
     }
 
     if(data.missions.length===0){
-
         alert("Add at least one complete mission.");
-
         return;
     }
 
@@ -4239,7 +4305,7 @@ function openReality(drop){
         </div>
 
         <div style="
-            margin-top:27px;
+            margin-top:31px;
             display:flex;
             flex-direction:column;
             gap:11px;
@@ -4281,13 +4347,10 @@ function deleteDrop(id){
 
     const drop=
         publishedDrops.find(function(item){
-
             return item.id===id;
-
         });
 
     if(!drop)return;
-
 
     if(
         !currentUser ||
@@ -4301,7 +4364,6 @@ function deleteDrop(id){
         return;
     }
 
-
     if(
         !confirm(
             "Delete this Drop? This cannot be undone."
@@ -4309,17 +4371,12 @@ function deleteDrop(id){
     ){
 
         return;
-
     }
-
 
     publishedDrops=
         publishedDrops.filter(function(item){
-
             return item.id!==id;
-
         });
-
 
     saveDrops();
 
@@ -4339,40 +4396,48 @@ function startReality(){
 
     if(!selectedReality)return;
 
-
     const list=
         document.getElementById("missionList");
 
     list.innerHTML="";
 
+    completedMissionIndexes=[];
 
-    selectedReality.missions
-        .forEach(function(mission,index){
 
-            const item=
-                document.createElement("div");
+    selectedReality.missions.forEach(function(mission,index){
 
-            item.className="mission-item";
+        const item=
+            document.createElement("div");
 
-            item.innerHTML=`
+        item.className="mission-item";
 
-                <h3>
-                    ${index+1}. ${escapeHTML(mission.name)}
-                </h3>
+        item.dataset.index=index;
 
-                <p>
-                    ${escapeHTML(mission.description)}
-                </p>
+        item.innerHTML=`
 
-                <div class="reward">
-                    +${mission.flux} FLUX
-                </div>
+            <button
+                class="mission-check"
+                aria-label="Mark mission complete"
+                onclick="toggleMission(${index})"
+            ></button>
 
-            `;
+            <h3>
+                ${index+1}. ${escapeHTML(mission.name)}
+            </h3>
 
-            list.appendChild(item);
+            <p>
+                ${escapeHTML(mission.description)}
+            </p>
 
-        });
+            <div class="reward">
+                +${mission.flux} FLUX
+            </div>
+
+        `;
+
+        list.appendChild(item);
+
+    });
 
 
     currentMissionTotal=
@@ -4386,23 +4451,113 @@ function startReality(){
         );
 
 
+    updateMissionButton();
+
     showScreen("missions");
 }
 
 
 /* =========================================================
-   COMPLETE
+   TOGGLE MISSION
+========================================================= */
+
+function toggleMission(index){
+
+    const item=document.querySelector(
+        '.mission-item[data-index="'+index+'"]'
+    );
+
+    if(!item)return;
+
+
+    const alreadyCompleted=
+        completedMissionIndexes.includes(index);
+
+
+    if(alreadyCompleted){
+
+        completedMissionIndexes=
+            completedMissionIndexes.filter(function(i){
+                return i!==index;
+            });
+
+        item.classList.remove("completed");
+
+    }else{
+
+        completedMissionIndexes.push(index);
+
+        item.classList.add("completed");
+
+    }
+
+    updateMissionButton();
+}
+
+
+function updateMissionButton(){
+
+    const button=
+        document.getElementById("completeButton");
+
+    if(!button)return;
+
+    const total=
+        selectedReality
+        ? selectedReality.missions.length
+        : 0;
+
+    const complete=
+        completedMissionIndexes.length;
+
+    if(complete===total && total>0){
+
+        button.textContent=
+            "COMPLETE SWYCH ✓";
+
+        button.disabled=false;
+
+    }else{
+
+        button.textContent=
+            "COMPLETE ALL MISSIONS ("+
+            complete+
+            "/"+
+            total+
+            ")";
+
+        button.disabled=true;
+
+    }
+}
+
+
+/* =========================================================
+   COMPLETE REALITY
 ========================================================= */
 
 function completeReality(){
 
     if(!selectedReality)return;
 
+    const total=
+        selectedReality.missions.length;
+
+    if(
+        completedMissionIndexes.length!==total
+    ){
+
+        alert(
+            "Complete every mission before finishing the SWYCH."
+        );
+
+        return;
+    }
+
 
     userFlux+=currentMissionTotal;
 
     completedSwcyhes++;
-
 
     saveProgress();
 
@@ -4546,7 +4701,6 @@ function renderProfileDrops(){
         );
 
     });
-
 }
 
 
@@ -4569,7 +4723,8 @@ function renderEXCL(){
     section.innerHTML=`
 
         <div class="excl-heading">
-            ${unlocked
+            ${
+                unlocked
                 ? "EXCLUSIVE ACCESS"
                 : "LOCKED FEATURE"
             }
@@ -4633,14 +4788,12 @@ function renderEXCL(){
 function filterRealities(){
 
     renderExplore();
-
 }
 
 
 function selectCategory(button,category){
 
     currentCategory=category;
-
 
     document.querySelectorAll(".chip")
         .forEach(function(chip){
@@ -4649,9 +4802,7 @@ function selectCategory(button,category){
 
         });
 
-
     button.classList.add("active");
-
 
     renderExplore();
 }
@@ -4682,22 +4833,16 @@ window.addEventListener("load",function(){
 
     loadDrops();
 
-
     document.querySelectorAll(".screen")
         .forEach(function(screen){
-
             screen.classList.remove("active");
-
         });
-
 
     document.getElementById("welcome")
         .classList.add("active");
 
-
     document.getElementById("nav")
         .style.display="none";
-
 
     currentUser=null;
 
