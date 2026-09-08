@@ -5,6 +5,7 @@
 <head>
 
   <meta charset="UTF-8">
+
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
@@ -21,6 +22,10 @@
   >
 
   <style>
+
+    /* =========================
+       GLOBAL
+    ========================= */
 
     * {
       box-sizing: border-box;
@@ -134,15 +139,10 @@
     }
 
     .main-button:disabled {
+      opacity: 0.4;
       cursor: default;
       transform: none;
-      opacity: 0.4;
     }
-
-
-    /* =========================
-       SECONDARY BUTTON
-    ========================= */
 
     .secondary-button {
       width: 100%;
@@ -210,7 +210,6 @@
       font-size: 12px;
       color: #777;
       font-weight: 700;
-      letter-spacing: 0.2px;
     }
 
     .input,
@@ -267,7 +266,7 @@
 
 
     /* =========================
-       CATEGORY CHIPS
+       CHIPS
     ========================= */
 
     .chips {
@@ -299,7 +298,7 @@
 
 
     /* =========================
-       BOTTOM NAV
+       NAVIGATION
     ========================= */
 
     .nav {
@@ -334,13 +333,9 @@
       color: #fff;
     }
 
-    .nav button:hover {
-      color: #fff;
-    }
-
 
     /* =========================
-       WELCOME
+       WELCOME / ACCOUNT
     ========================= */
 
     #welcome {
@@ -369,7 +364,70 @@
 
 
     /* =========================
-       MISSION CREATOR
+       ACCOUNT CREATION
+    ========================= */
+
+    #account {
+      min-height: 100vh;
+    }
+
+    .account-title {
+      margin-top: 70px;
+    }
+
+
+    /* =========================
+       PROFILE
+    ========================= */
+
+    .profile-circle {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      background: #fff;
+      color: #000;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      font-size: 27px;
+      font-weight: 700;
+
+      margin-top: 25px;
+    }
+
+
+    /* =========================
+       PROGRESS BAR
+    ========================= */
+
+    .progress-background {
+      width: 100%;
+      height: 10px;
+      background: #222;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-top: 14px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: #fff;
+      border-radius: 20px;
+      transition: width 0.4s ease;
+    }
+
+    .progress-row {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+    }
+
+
+    /* =========================
+       MISSION BUILDER
     ========================= */
 
     .mission-builder {
@@ -415,34 +473,29 @@
 
 
     /* =========================
-       PROFILE
-    ========================= */
-
-    .profile-circle {
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      background: #fff;
-      color: #000;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      font-size: 25px;
-      font-weight: 700;
-
-      margin-top: 25px;
-    }
-
-
-    /* =========================
-       EMPTY STATE
+       EMPTY EXPLORE
     ========================= */
 
     .empty {
       text-align: center;
-      padding: 40px 20px;
+      padding: 70px 20px;
+    }
+
+    .empty-icon {
+      font-size: 38px;
+      margin-bottom: 10px;
+    }
+
+
+    /* =========================
+       SUCCESS
+    ========================= */
+
+    .success-container {
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
   </style>
@@ -481,10 +534,75 @@
 
     <button
       class="main-button"
-      onclick="openHome()"
+      onclick="openAccount()"
     >
-      GET SWYCHED
+      GET STARTED
     </button>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       CREATE ACCOUNT
+  ====================================================== -->
+
+  <section
+    id="account"
+    class="screen"
+  >
+
+    <div class="logo">
+      SWYCHED
+    </div>
+
+    <h1 class="account-title">
+      Create your<br>
+      account.
+    </h1>
+
+    <p>
+      Set up your SWYCHED profile before
+      entering the app.
+    </p>
+
+
+    <div class="card">
+
+      <label class="input-label">
+        DISPLAY NAME
+      </label>
+
+      <input
+        id="accountName"
+        class="input"
+        type="text"
+        maxlength="30"
+        placeholder="e.g. Aidan"
+      >
+
+
+      <label class="input-label">
+        USERNAME
+      </label>
+
+      <input
+        id="accountUsername"
+        class="input"
+        type="text"
+        maxlength="20"
+        placeholder="e.g. aidan"
+      >
+
+
+      <button
+        class="main-button"
+        onclick="createAccount()"
+      >
+        CREATE ACCOUNT
+      </button>
+
+    </div>
 
   </section>
 
@@ -521,39 +639,60 @@
         0 ⚡
       </div>
 
-      <div class="small">
-        NEW SWITCHER · 500 FLUX TO UNLOCK
+      <div
+        id="homeLevel"
+        class="small"
+      >
+        NEW · 500 FLUX TO SWITCHER
       </div>
 
     </div>
 
 
     <h2>
-      Trending Realities
+      Explore Realities
     </h2>
 
 
-    <div id="homeRealityList">
+    <div class="card">
 
-      <div class="card">
+      <h3>
+        What is a SWYCH?
+      </h3>
 
-        <h3>
-          ⚽ Academy Soccer Day
-        </h3>
+      <p>
+        Someone drops their Reality.
+        You enter it, complete their missions,
+        and experience their routine.
+      </p>
 
-        <p>
-          Experience a realistic soccer training
-          routine using basic equipment.
-        </p>
+      <button
+        class="main-button"
+        onclick="showScreen('explore')"
+      >
+        EXPLORE DROPS
+      </button>
 
-        <button
-          class="main-button"
-          onclick="openSampleReality()"
-        >
-          SWYCH THIS REALITY
-        </button>
+    </div>
 
-      </div>
+
+    <div class="card">
+
+      <h3>
+        Have a Reality of your own?
+      </h3>
+
+      <p>
+        Drop your routine and let someone
+        else experience it.
+      </p>
+
+      <button
+        class="secondary-button"
+        onclick="createReality()"
+      >
+        CREATE A DROP
+      </button>
 
     </div>
 
@@ -577,6 +716,11 @@
     <h1>
       Explore
     </h1>
+
+    <p>
+      Discover Realities dropped by the
+      SWYCHED community.
+    </p>
 
 
     <input
@@ -635,62 +779,40 @@
     </div>
 
 
-    <h2>
-      Trending DROPS
-    </h2>
-
-
     <div id="exploreList">
 
-      <!-- SAMPLE REALITY -->
+      <!--
+        IMPORTANT:
+        Explore intentionally starts EMPTY.
+        User-created DROPs will be inserted here.
+      -->
 
       <div
-        class="card reality-card"
-        data-category="SPORTS"
-        data-title="Academy Soccer Day"
+        id="exploreEmpty"
+        class="empty"
       >
 
-        <div class="small">
-          SPORTS · SOCCER
+        <div class="empty-icon">
+          ◇
         </div>
 
         <h3>
-          ⚽ Academy Soccer Day
+          NOTHING HERE YET.
         </h3>
 
         <p>
-          Train like a developing soccer player.
+          Be the first person to DROP
+          a Reality.
         </p>
-
-        <div class="small">
-          6 MISSIONS · +250 FLUX
-        </div>
 
         <button
           class="main-button"
-          onclick="openSampleReality()"
+          onclick="createReality()"
         >
-          VIEW REALITY
+          DROP YOUR REALITY
         </button>
 
       </div>
-
-    </div>
-
-
-    <div
-      id="emptyExplore"
-      class="empty"
-      style="display:none;"
-    >
-
-      <h3>
-        NO DROPS FOUND
-      </h3>
-
-      <p>
-        Try another search or create your own DROP.
-      </p>
 
     </div>
 
@@ -716,21 +838,18 @@
     </h1>
 
     <p>
-      Create a Reality from your real life
-      and let someone else experience it.
+      Turn your real life into an experience
+      someone else can SWYCH.
     </p>
 
+
+    <!-- REALITY INFORMATION -->
 
     <div class="card">
 
       <div class="small">
-        STEP 1
+        STEP 1 · YOUR REALITY
       </div>
-
-      <h2>
-        Build Your Reality
-      </h2>
-
 
       <label class="input-label">
         REALITY NAME
@@ -741,7 +860,7 @@
         class="input"
         type="text"
         maxlength="50"
-        placeholder="e.g. My Saturday Soccer Routine"
+        placeholder="e.g. My Saturday Routine"
       >
 
 
@@ -796,67 +915,25 @@
 
 
 
-    <!-- MISSION BUILDER -->
+    <!-- MISSIONS -->
 
     <div class="card">
 
       <div class="small">
-        STEP 2
+        STEP 2 · MISSIONS
       </div>
 
       <h2>
-        Add Missions
+        Build the experience.
       </h2>
 
       <p>
-        Give people specific, realistic tasks
-        they can actually complete.
+        Create realistic missions that
+        someone else can actually complete.
       </p>
 
+
       <div id="missionBuilder">
-
-        <!-- FIRST MISSION -->
-
-        <div class="mission-builder">
-
-          <div class="mission-number">
-            MISSION 01
-          </div>
-
-          <label class="input-label">
-            MISSION NAME
-          </label>
-
-          <input
-            class="input mission-name"
-            type="text"
-            maxlength="50"
-            placeholder="e.g. Morning Walk"
-          >
-
-          <label class="input-label">
-            WHAT DO THEY DO?
-          </label>
-
-          <textarea
-            class="textarea mission-description"
-            maxlength="200"
-            placeholder="Be specific. Example: Walk for 20 minutes at a comfortable pace."
-          ></textarea>
-
-          <label class="input-label">
-            FLUX REWARD
-          </label>
-
-          <input
-            class="input mission-flux"
-            type="number"
-            min="10"
-            max="500"
-            value="50"
-          >
-
-        </div>
 
       </div>
 
@@ -865,7 +942,7 @@
         class="secondary-button"
         onclick="addMission()"
       >
-        + ADD ANOTHER MISSION
+        + ADD MISSION
       </button>
 
     </div>
@@ -877,16 +954,16 @@
     <div class="card">
 
       <div class="small">
-        STEP 3
+        STEP 3 · PUBLISH
       </div>
 
       <h2>
-        Preview
+        Ready to DROP?
       </h2>
 
       <p>
-        See what your DROP will look like
-        before publishing.
+        Preview your Reality before making
+        it available in Explore.
       </p>
 
       <button
@@ -915,6 +992,7 @@
       SWYCHED
     </div>
 
+
     <button
       class="secondary-button"
       onclick="showScreen('drop')"
@@ -923,20 +1001,19 @@
     </button>
 
 
-    <div class="small" style="margin-top:25px;">
+    <div
+      class="small"
+      style="margin-top:25px;"
+    >
       DROP PREVIEW
     </div>
 
-    <h1
-      id="previewName"
-    >
+    <h1 id="previewName">
       Your Reality
     </h1>
 
-    <p
-      id="previewDescription"
-    >
-      Your description
+    <p id="previewDescription">
+      Your description.
     </p>
 
 
@@ -946,11 +1023,10 @@
         CATEGORY
       </div>
 
-      <h3
-        id="previewCategory"
-      >
+      <h3 id="previewCategory">
         SPORTS
       </h3>
+
 
       <div class="small">
         MISSIONS
@@ -962,6 +1038,7 @@
       >
         0
       </div>
+
 
       <div class="small">
         TOTAL FLUX
@@ -1001,7 +1078,7 @@
 
 
   <!-- =====================================================
-       PUBLISHED REALITY
+       PUBLISHED
   ====================================================== -->
 
   <section
@@ -1013,52 +1090,53 @@
       SWYCHED
     </div>
 
-    <div class="small" style="margin-top:35px;">
-      DROP PUBLISHED
-    </div>
 
-    <h1>
-      YOUR REALITY<br>
-      IS LIVE.
-    </h1>
+    <div class="success-container">
 
-    <p>
-      Your DROP has been added to Explore.
-      Other people can now discover it.
-    </p>
+      <div class="small">
+        DROP PUBLISHED
+      </div>
 
+      <h1>
+        YOUR REALITY<br>
+        IS LIVE.
+      </h1>
 
-    <div class="card">
-
-      <h3
-        id="publishedName"
-      >
-        Reality
-      </h3>
-
-      <p
-        id="publishedInfo"
-      >
-        Your Reality is live.
+      <p>
+        Your DROP has been added to Explore.
+        Other people can now discover it.
       </p>
 
+
+      <div class="card">
+
+        <h3 id="publishedName">
+          Reality
+        </h3>
+
+        <p id="publishedInfo">
+          Your Reality is live.
+        </p>
+
+      </div>
+
+
+      <button
+        class="main-button"
+        onclick="showScreen('explore')"
+      >
+        VIEW IN EXPLORE
+      </button>
+
+
+      <button
+        class="secondary-button"
+        onclick="createReality()"
+      >
+        CREATE ANOTHER DROP
+      </button>
+
     </div>
-
-
-    <button
-      class="main-button"
-      onclick="showScreen('explore')"
-    >
-      VIEW IN EXPLORE
-    </button>
-
-
-    <button
-      class="secondary-button"
-      onclick="showScreen('drop')"
-    >
-      CREATE ANOTHER DROP
-    </button>
 
   </section>
 
@@ -1077,6 +1155,7 @@
       SWYCHED
     </div>
 
+
     <button
       class="secondary-button"
       onclick="showScreen('explore')"
@@ -1086,23 +1165,21 @@
 
 
     <div
-      class="small"
       id="realityCategoryDisplay"
+      class="small"
       style="margin-top:25px;"
     >
       SPORTS
     </div>
 
-    <h1
-      id="realityTitle"
-    >
-      Academy Soccer Day
+
+    <h1 id="realityTitle">
+      Reality
     </h1>
 
-    <p
-      id="realityDescription"
-    >
-      Experience a realistic soccer training day.
+
+    <p id="realityDescription">
+      Reality description.
     </p>
 
 
@@ -1113,7 +1190,7 @@
       </div>
 
       <p id="realityStats">
-        6 MISSIONS · +250 FLUX
+        0 MISSIONS · +0 FLUX
       </p>
 
     </div>
@@ -1122,7 +1199,7 @@
     <div class="card">
 
       <h3>
-        What you'll experience
+        Missions
       </h3>
 
       <div id="realityMissionPreview">
@@ -1143,7 +1220,7 @@
 
 
   <!-- =====================================================
-       ACTIVE SWYCH
+       ACTIVE MISSIONS
   ====================================================== -->
 
   <section
@@ -1155,13 +1232,16 @@
       SWYCHED
     </div>
 
-    <div class="small" style="margin-top:25px;">
+
+    <div
+      class="small"
+      style="margin-top:25px;"
+    >
       ACTIVE SWYCH
     </div>
 
-    <h1
-      id="activeRealityTitle"
-    >
+
+    <h1 id="activeRealityTitle">
       Reality
     </h1>
 
@@ -1178,6 +1258,7 @@
       >
         0 / 0
       </div>
+
 
       <div class="small">
         FLUX EARNED
@@ -1201,7 +1282,7 @@
 
 
   <!-- =====================================================
-       SWYCH COMPLETE
+       COMPLETE
   ====================================================== -->
 
   <section
@@ -1214,14 +1295,7 @@
     </div>
 
 
-    <div
-      style="
-        min-height:70vh;
-        display:flex;
-        flex-direction:column;
-        justify-content:center;
-      "
-    >
+    <div class="success-container">
 
       <div class="small">
         SWYCH COMPLETE
@@ -1233,8 +1307,8 @@
       </h1>
 
       <p>
-        You completed the Reality.
-        You experienced someone else's world.
+        You completed the Reality and
+        experienced someone else's routine.
       </p>
 
 
@@ -1284,18 +1358,16 @@
       SWYCHES
     </h1>
 
-    <div
-      id="activeSwyches"
-      class="card"
-    >
+
+    <div class="card">
 
       <h2>
-        No active SWYCHES
+        Your active SWYCHES
       </h2>
 
       <p>
-        When you SWYCH a Reality, it will
-        appear here.
+        Realities you are currently experiencing
+        will appear here.
       </p>
 
     </div>
@@ -1317,20 +1389,58 @@
       SWYCHED
     </div>
 
+
     <h1>
       Your Profile
     </h1>
 
-    <div class="profile-circle">
+
+    <div
+      id="profileCircle"
+      class="profile-circle"
+    >
       A
     </div>
 
 
+    <h2
+      id="profileDisplayName"
+      style="margin-bottom:0;"
+    >
+      User
+    </h2>
+
+
+    <div
+      id="profileUsername"
+      class="small"
+    >
+      @username
+    </div>
+
+
+    <button
+      class="secondary-button"
+      onclick="openEditProfile()"
+    >
+      EDIT PROFILE
+    </button>
+
+
+
+    <!-- FLUX PROGRESS -->
+
     <div class="card">
 
-      <h3>
-        NEW SWITCHER
+      <div class="small">
+        FLUX LEVEL
+      </div>
+
+
+      <h3 id="profileLevel">
+        NEW
       </h3>
+
 
       <div
         id="profileFlux"
@@ -1339,12 +1449,40 @@
         0 ⚡
       </div>
 
-      <div class="small">
-        500 FLUX TO UNLOCK SWITCHER
+
+      <div class="progress-background">
+
+        <div
+          id="fluxProgress"
+          class="progress-fill"
+        ></div>
+
+      </div>
+
+
+      <div class="progress-row">
+
+        <div
+          id="currentLevelText"
+          class="small"
+        >
+          NEW
+        </div>
+
+        <div
+          id="nextLevelText"
+          class="small"
+        >
+          SWITCHER · 500
+        </div>
+
       </div>
 
     </div>
 
+
+
+    <!-- DROP STATS -->
 
     <div class="card">
 
@@ -1368,12 +1506,91 @@
   </section>
 
 
+
+  <!-- =====================================================
+       EDIT PROFILE
+  ====================================================== -->
+
+  <section
+    id="editProfile"
+    class="screen"
+  >
+
+    <div class="logo">
+      SWYCHED
+    </div>
+
+
+    <h1>
+      Edit<br>
+      Profile
+    </h1>
+
+
+    <div class="card">
+
+      <label class="input-label">
+        DISPLAY NAME
+      </label>
+
+      <input
+        id="editDisplayName"
+        class="input"
+        type="text"
+        maxlength="30"
+      >
+
+
+      <label class="input-label">
+        USERNAME
+      </label>
+
+      <input
+        id="editUsername"
+        class="input"
+        type="text"
+        maxlength="20"
+      >
+
+
+      <label class="input-label">
+        BIO
+      </label>
+
+      <textarea
+        id="editBio"
+        class="textarea"
+        maxlength="150"
+        placeholder="Tell people a little about yourself."
+      ></textarea>
+
+
+      <button
+        class="main-button"
+        onclick="saveProfile()"
+      >
+        SAVE PROFILE
+      </button>
+
+
+      <button
+        class="secondary-button"
+        onclick="showScreen('profile')"
+      >
+        CANCEL
+      </button>
+
+    </div>
+
+  </section>
+
+
 </div>
 
 
 
 <!-- =====================================================
-     BOTTOM NAVIGATION
+     NAVIGATION
 ====================================================== -->
 
 <nav
@@ -1390,6 +1607,7 @@
     HOME
   </button>
 
+
   <button
     type="button"
     onclick="showScreen('explore', this)"
@@ -1397,12 +1615,14 @@
     EXPLORE
   </button>
 
+
   <button
     type="button"
-    onclick="showScreen('drop', this)"
+    onclick="createReality()"
   >
     DROP
   </button>
+
 
   <button
     type="button"
@@ -1410,6 +1630,7 @@
   >
     SWYCHES
   </button>
+
 
   <button
     type="button"
@@ -1440,27 +1661,317 @@
 
   let currentCategory = "ALL";
 
+  let missionCount = 0;
+
+  let accountCreated = false;
+
 
 
   /* =====================================================
-     OPEN HOME
+     FLUX LEVELS
   ====================================================== */
 
-  function openHome() {
+  const fluxLevels = [
+
+    {
+      name: "NEW",
+      min: 0,
+      next: 500
+    },
+
+    {
+      name: "SWITCHER",
+      min: 500,
+      next: 2000
+    },
+
+    {
+      name: "PULSE",
+      min: 2000,
+      next: 5000
+    },
+
+    {
+      name: "SHIFT",
+      min: 5000,
+      next: 10000
+    },
+
+    {
+      name: "ALTER",
+      min: 10000,
+      next: 25000
+    },
+
+    {
+      name: "PRIME",
+      min: 25000,
+      next: null
+    }
+
+  ];
+
+
+
+  /* =====================================================
+     OPEN ACCOUNT
+  ====================================================== */
+
+  function openAccount() {
+
+    showScreen("account");
+
+  }
+
+
+
+  /* =====================================================
+     CREATE ACCOUNT
+  ====================================================== */
+
+  function createAccount() {
+
+    const name =
+      document
+        .getElementById("accountName")
+        .value
+        .trim();
+
+
+    const username =
+      document
+        .getElementById("accountUsername")
+        .value
+        .trim();
+
+
+    if (name === "") {
+
+      alert("Enter a display name.");
+
+      return;
+
+    }
+
+
+    if (username === "") {
+
+      alert("Choose a username.");
+
+      return;
+
+    }
+
+
+    localStorage.setItem(
+      "swychedAccount",
+      JSON.stringify({
+        name: name,
+        username: username,
+        bio: ""
+      })
+    );
+
+
+    accountCreated = true;
+
+
+    loadProfile();
+
 
     document
       .getElementById("welcome")
       .classList.remove("active");
 
+
+    document
+      .getElementById("account")
+      .classList.remove("active");
+
+
     document
       .getElementById("home")
       .classList.add("active");
 
+
     document
       .getElementById("nav")
-      .style.display = "flex";
+      .style.display =
+        "flex";
+
+
+    updateFlux();
+
 
     window.scrollTo(0, 0);
+
+  }
+
+
+
+  /* =====================================================
+     LOAD ACCOUNT
+  ====================================================== */
+
+  function loadProfile() {
+
+    const saved =
+      localStorage.getItem(
+        "swychedAccount"
+      );
+
+
+    if (!saved) {
+
+      return;
+
+    }
+
+
+    const account =
+      JSON.parse(saved);
+
+
+    accountCreated = true;
+
+
+    document
+      .getElementById("profileDisplayName")
+      .innerText =
+        account.name;
+
+
+    document
+      .getElementById("profileUsername")
+      .innerText =
+        "@" + account.username;
+
+
+    document
+      .getElementById("profileCircle")
+      .innerText =
+        account.name
+          .charAt(0)
+          .toUpperCase();
+
+  }
+
+
+
+  /* =====================================================
+     EDIT PROFILE
+  ====================================================== */
+
+  function openEditProfile() {
+
+    const saved =
+      localStorage.getItem(
+        "swychedAccount"
+      );
+
+
+    if (!saved) {
+
+      return;
+
+    }
+
+
+    const account =
+      JSON.parse(saved);
+
+
+    document
+      .getElementById("editDisplayName")
+      .value =
+        account.name;
+
+
+    document
+      .getElementById("editUsername")
+      .value =
+        account.username;
+
+
+    document
+      .getElementById("editBio")
+      .value =
+        account.bio || "";
+
+
+    showScreen("editProfile");
+
+  }
+
+
+
+  /* =====================================================
+     SAVE PROFILE
+  ====================================================== */
+
+  function saveProfile() {
+
+    const name =
+      document
+        .getElementById("editDisplayName")
+        .value
+        .trim();
+
+
+    const username =
+      document
+        .getElementById("editUsername")
+        .value
+        .trim();
+
+
+    const bio =
+      document
+        .getElementById("editBio")
+        .value
+        .trim();
+
+
+    if (name === "") {
+
+      alert(
+        "Display name cannot be empty."
+      );
+
+      return;
+
+    }
+
+
+    if (username === "") {
+
+      alert(
+        "Username cannot be empty."
+      );
+
+      return;
+
+    }
+
+
+    localStorage.setItem(
+      "swychedAccount",
+      JSON.stringify({
+
+        name: name,
+
+        username: username,
+
+        bio: bio
+
+      })
+    );
+
+
+    loadProfile();
+
+
+    showScreen("profile");
 
   }
 
@@ -1476,41 +1987,59 @@
   ) {
 
     const screens =
-      document.querySelectorAll(".screen");
+      document.querySelectorAll(
+        ".screen"
+      );
 
 
-    screens.forEach(function(screen) {
+    screens.forEach(
+      function(screen) {
 
-      screen.classList.remove("active");
+        screen.classList.remove(
+          "active"
+        );
 
-    });
+      }
+    );
 
 
     const selectedScreen =
-      document.getElementById(screenId);
+      document.getElementById(
+        screenId
+      );
 
 
     if (selectedScreen) {
 
-      selectedScreen.classList.add("active");
+      selectedScreen.classList.add(
+        "active"
+      );
 
     }
 
 
     const navButtons =
-      document.querySelectorAll(".nav button");
+      document.querySelectorAll(
+        ".nav button"
+      );
 
 
-    navButtons.forEach(function(navButton) {
+    navButtons.forEach(
+      function(navButton) {
 
-      navButton.classList.remove("active");
+        navButton.classList.remove(
+          "active"
+        );
 
-    });
+      }
+    );
 
 
     if (button) {
 
-      button.classList.add("active");
+      button.classList.add(
+        "active"
+      );
 
     }
 
@@ -1522,396 +2051,39 @@
 
 
   /* =====================================================
-     SAMPLE REALITY
+     CREATE DROP
   ====================================================== */
 
-  function openSampleReality() {
+  function createReality() {
 
-    const sampleReality = {
-
-      name: "Academy Soccer Day",
-
-      category: "SPORTS",
-
-      description:
-        "Experience a realistic soccer training routine using basic equipment.",
-
-      missions: [
-
-        {
-          name: "Warm Up",
-          description:
-            "Complete a 5-minute light jog or brisk walk, followed by 5 minutes of comfortable dynamic movements.",
-          flux: 40
-        },
-
-        {
-          name: "Ball Mastery",
-          description:
-            "Spend 5 minutes practicing simple touches such as toe taps, foundations, and inside/outside touches.",
-          flux: 50
-        },
-
-        {
-          name: "Controlled Passing",
-          description:
-            "Complete 50 controlled passes using a wall, partner, or safe solo alternative.",
-          flux: 50
-        },
-
-        {
-          name: "Finishing",
-          description:
-            "Complete 20 controlled shots toward a safe target. A goal is not required.",
-          flux: 50
-        },
-
-        {
-          name: "Player Routine",
-          description:
-            "Spend 10 minutes stretching, reviewing your performance, or learning basic soccer tactics.",
-          flux: 30
-        },
-
-        {
-          name: "SWYCH Reflection",
-          description:
-            "Think about what felt different about experiencing someone else's soccer routine.",
-          flux: 30
-        }
-
-      ]
-
-    };
-
-
-    openReality(sampleReality);
-
-  }
-
-
-
-  /* =====================================================
-     OPEN REALITY
-  ====================================================== */
-
-  function openReality(reality) {
-
-    selectedReality = reality;
+    document
+      .getElementById("realityName")
+      .value = "";
 
 
     document
-      .getElementById("realityTitle")
-      .innerText =
-        reality.name;
-
-
-    document
-      .getElementById("realityCategoryDisplay")
-      .innerText =
-        reality.category;
+      .getElementById("realityCategory")
+      .value =
+        "SPORTS";
 
 
     document
       .getElementById("realityDescription")
-      .innerText =
-        reality.description;
-
-
-    const totalFlux =
-      reality.missions.reduce(
-        function(total, mission) {
-
-          return total + mission.flux;
-
-        },
-        0
-      );
+      .value = "";
 
 
     document
-      .getElementById("realityStats")
-      .innerText =
-        reality.missions.length +
-        " MISSIONS · +" +
-        totalFlux +
-        " FLUX";
+      .getElementById("missionBuilder")
+      .innerHTML = "";
 
 
-    const missionPreview =
-      document.getElementById(
-        "realityMissionPreview"
-      );
+    missionCount = 0;
 
 
-    missionPreview.innerHTML = "";
+    addMission();
 
 
-    reality.missions.forEach(
-      function(mission, index) {
-
-        const div =
-          document.createElement("div");
-
-        div.className =
-          "preview-mission";
-
-
-        div.innerHTML =
-
-          "<div class='small'>MISSION " +
-          String(index + 1).padStart(2, "0") +
-          "</div>" +
-
-          "<h3>" +
-          escapeHTML(mission.name) +
-          "</h3>" +
-
-          "<p>" +
-          escapeHTML(mission.description) +
-          "</p>" +
-
-          "<div class='small'>+" +
-          mission.flux +
-          " FLUX</div>";
-
-
-        missionPreview.appendChild(div);
-
-      }
-    );
-
-
-    showScreen("reality");
-
-  }
-
-
-
-  /* =====================================================
-     START SELECTED REALITY
-  ====================================================== */
-
-  function startSelectedReality() {
-
-    if (!selectedReality) {
-
-      return;
-
-    }
-
-
-    completedMissions = 0;
-
-    earnedFlux = 0;
-
-
-    document
-      .getElementById("activeRealityTitle")
-      .innerText =
-        selectedReality.name;
-
-
-    document
-      .getElementById("missionProgress")
-      .innerText =
-        "0 / " +
-        selectedReality.missions.length;
-
-
-    document
-      .getElementById("missionFlux")
-      .innerText =
-        "0 ⚡";
-
-
-    const list =
-      document.getElementById(
-        "activeMissionList"
-      );
-
-
-    list.innerHTML = "";
-
-
-    selectedReality.missions.forEach(
-      function(mission, index) {
-
-        const card =
-          document.createElement("div");
-
-        card.className =
-          "card";
-
-        card.id =
-          "activeMission" + index;
-
-
-        card.innerHTML =
-
-          "<div class='small'>MISSION " +
-          String(index + 1).padStart(2, "0") +
-          "</div>" +
-
-          "<h3>" +
-          escapeHTML(mission.name) +
-          "</h3>" +
-
-          "<p>" +
-          escapeHTML(mission.description) +
-          "</p>" +
-
-          "<div class='small'>+" +
-          mission.flux +
-          " FLUX</div>" +
-
-          "<button class='main-button' " +
-          "onclick='completeSelectedMission(" +
-          index +
-          ")'>" +
-          "COMPLETE MISSION" +
-          "</button>";
-
-
-        list.appendChild(card);
-
-      }
-    );
-
-
-    showScreen("missions");
-
-  }
-
-
-
-  /* =====================================================
-     COMPLETE MISSION
-  ====================================================== */
-
-  function completeSelectedMission(
-    missionIndex
-  ) {
-
-    if (!selectedReality) {
-
-      return;
-
-    }
-
-
-    const card =
-      document.getElementById(
-        "activeMission" + missionIndex
-      );
-
-
-    if (!card) {
-
-      return;
-
-    }
-
-
-    const button =
-      card.querySelector("button");
-
-
-    if (button.disabled) {
-
-      return;
-
-    }
-
-
-    button.disabled = true;
-
-    button.innerText =
-      "✓ COMPLETED";
-
-
-    card.style.opacity =
-      "0.5";
-
-
-    const mission =
-      selectedReality.missions[
-        missionIndex
-      ];
-
-
-    completedMissions++;
-
-    earnedFlux += mission.flux;
-
-
-    document
-      .getElementById("missionProgress")
-      .innerText =
-        completedMissions +
-        " / " +
-        selectedReality.missions.length;
-
-
-    document
-      .getElementById("missionFlux")
-      .innerText =
-        earnedFlux +
-        " ⚡";
-
-
-    if (
-      completedMissions ===
-      selectedReality.missions.length
-    ) {
-
-      userFlux += earnedFlux;
-
-
-      document
-        .getElementById("finalFlux")
-        .innerText =
-          "+" +
-          earnedFlux +
-          " ⚡";
-
-
-      updateFlux();
-
-
-      setTimeout(
-        function() {
-
-          showScreen("complete");
-
-        },
-        500
-      );
-
-    }
-
-  }
-
-
-
-  /* =====================================================
-     UPDATE FLUX
-  ====================================================== */
-
-  function updateFlux() {
-
-    document
-      .getElementById("homeFlux")
-      .innerText =
-        userFlux +
-        " ⚡";
-
-
-    document
-      .getElementById("profileFlux")
-      .innerText =
-        userFlux +
-        " ⚡";
+    showScreen("drop");
 
   }
 
@@ -1923,20 +2095,10 @@
 
   function addMission() {
 
-    const builder =
-      document.getElementById(
-        "missionBuilder"
-      );
-
-
-    const missionNumber =
-      builder.children.length + 1;
-
-
-    if (missionNumber > 10) {
+    if (missionCount >= 10) {
 
       alert(
-        "You can have up to 10 missions in one Reality."
+        "A Reality can have a maximum of 10 missions."
       );
 
       return;
@@ -1944,8 +2106,19 @@
     }
 
 
+    missionCount++;
+
+
+    const builder =
+      document.getElementById(
+        "missionBuilder"
+      );
+
+
     const mission =
-      document.createElement("div");
+      document.createElement(
+        "div"
+      );
 
 
     mission.className =
@@ -1954,44 +2127,80 @@
 
     mission.innerHTML =
 
-      "<button class='remove-button' " +
+      "<button " +
+
+      "class='remove-button' " +
+
       "onclick='removeMission(this)'>" +
+
       "REMOVE" +
+
       "</button>" +
 
       "<div class='mission-number'>" +
+
       "MISSION " +
-      String(missionNumber).padStart(2, "0") +
+
+      String(missionCount)
+        .padStart(2, "0") +
+
       "</div>" +
 
       "<label class='input-label'>" +
+
       "MISSION NAME" +
+
       "</label>" +
 
-      "<input class='input mission-name' " +
-      "type='text' maxlength='50' " +
-      "placeholder='e.g. Read for 20 Minutes'>" +
+      "<input " +
+
+      "class='input mission-name' " +
+
+      "type='text' " +
+
+      "maxlength='50' " +
+
+      "placeholder='e.g. Morning Walk'>" +
 
       "<label class='input-label'>" +
+
       "WHAT DO THEY DO?" +
+
       "</label>" +
 
-      "<textarea class='textarea mission-description' " +
+      "<textarea " +
+
+      "class='textarea mission-description' " +
+
       "maxlength='200' " +
-      "placeholder='Be specific about what someone should do.'>" +
+
+      "placeholder='Be specific about exactly what they should do.'>" +
+
       "</textarea>" +
 
       "<label class='input-label'>" +
+
       "FLUX REWARD" +
+
       "</label>" +
 
-      "<input class='input mission-flux' " +
-      "type='number' min='10' max='500' value='50'>";
+      "<input " +
+
+      "class='input mission-flux' " +
+
+      "type='number' " +
+
+      "min='10' " +
+
+      "max='500' " +
+
+      "value='50'>";
 
 
-    builder.appendChild(mission);
+    builder.appendChild(
+      mission
+    );
 
-    updateMissionNumbers();
 
     mission.scrollIntoView({
       behavior: "smooth",
@@ -2006,13 +2215,19 @@
      REMOVE MISSION
   ====================================================== */
 
-  function removeMission(button) {
+  function removeMission(
+    button
+  ) {
 
     const mission =
       button.parentElement;
 
 
     mission.remove();
+
+
+    missionCount--;
+
 
     updateMissionNumbers();
 
@@ -2033,7 +2248,10 @@
 
 
     missions.forEach(
-      function(mission, index) {
+      function(
+        mission,
+        index
+      ) {
 
         const number =
           mission.querySelector(
@@ -2041,13 +2259,10 @@
           );
 
 
-        if (number) {
-
-          number.innerText =
-            "MISSION " +
-            String(index + 1).padStart(2, "0");
-
-        }
+        number.innerText =
+          "MISSION " +
+          String(index + 1)
+            .padStart(2, "0");
 
       }
     );
@@ -2057,7 +2272,7 @@
 
 
   /* =====================================================
-     READ DROP FORM
+     GET DROP DATA
   ====================================================== */
 
   function getDropData() {
@@ -2077,12 +2292,14 @@
 
     const description =
       document
-        .getElementById("realityDescription")
+        .getElementById(
+          "realityDescription"
+        )
         .value
         .trim();
 
 
-    const missionElements =
+    const elements =
       document.querySelectorAll(
         ".mission-builder"
       );
@@ -2091,27 +2308,33 @@
     const missions = [];
 
 
-    missionElements.forEach(
+    elements.forEach(
       function(element) {
 
         const missionName =
           element
-            .querySelector(".mission-name")
+            .querySelector(
+              ".mission-name"
+            )
             .value
             .trim();
 
 
         const missionDescription =
           element
-            .querySelector(".mission-description")
+            .querySelector(
+              ".mission-description"
+            )
             .value
             .trim();
 
 
-        const flux =
+        const fluxValue =
           parseInt(
             element
-              .querySelector(".mission-flux")
+              .querySelector(
+                ".mission-flux"
+              )
               .value
           );
 
@@ -2123,13 +2346,22 @@
 
           missions.push({
 
-            name: missionName,
+            name:
+              missionName,
 
             description:
               missionDescription,
 
             flux:
-              isNaN(flux) ? 50 : flux
+              isNaN(fluxValue)
+                ? 50
+                : Math.min(
+                    500,
+                    Math.max(
+                      10,
+                      fluxValue
+                    )
+                  )
 
           });
 
@@ -2141,10 +2373,17 @@
 
     return {
 
-      name,
-      category,
-      description,
-      missions
+      name:
+        name,
+
+      category:
+        category,
+
+      description:
+        description,
+
+      missions:
+        missions
 
     };
 
@@ -2165,7 +2404,7 @@
     if (data.name === "") {
 
       alert(
-        "Give your Reality a name first."
+        "Give your Reality a name."
       );
 
       return;
@@ -2176,7 +2415,7 @@
     if (data.description === "") {
 
       alert(
-        "Add a description for your Reality."
+        "Add a description."
       );
 
       return;
@@ -2196,34 +2435,46 @@
 
 
     document
-      .getElementById("previewName")
+      .getElementById(
+        "previewName"
+      )
       .innerText =
         data.name;
 
 
     document
-      .getElementById("previewDescription")
+      .getElementById(
+        "previewDescription"
+      )
       .innerText =
         data.description;
 
 
     document
-      .getElementById("previewCategory")
+      .getElementById(
+        "previewCategory"
+      )
       .innerText =
         data.category;
 
 
     document
-      .getElementById("previewMissionCount")
+      .getElementById(
+        "previewMissionCount"
+      )
       .innerText =
         data.missions.length;
 
 
     const totalFlux =
       data.missions.reduce(
-        function(total, mission) {
+        function(
+          total,
+          mission
+        ) {
 
-          return total + mission.flux;
+          return total +
+            mission.flux;
 
         },
         0
@@ -2231,7 +2482,9 @@
 
 
     document
-      .getElementById("previewFlux")
+      .getElementById(
+        "previewFlux"
+      )
       .innerText =
         totalFlux +
         " ⚡";
@@ -2247,10 +2500,15 @@
 
 
     data.missions.forEach(
-      function(mission, index) {
+      function(
+        mission,
+        index
+      ) {
 
         const div =
-          document.createElement("div");
+          document.createElement(
+            "div"
+          );
 
 
         div.className =
@@ -2260,30 +2518,48 @@
         div.innerHTML =
 
           "<div class='small'>" +
+
           "MISSION " +
-          String(index + 1).padStart(2, "0") +
+
+          String(index + 1)
+            .padStart(2, "0") +
+
           "</div>" +
 
           "<h3>" +
-          escapeHTML(mission.name) +
+
+          escapeHTML(
+            mission.name
+          ) +
+
           "</h3>" +
 
           "<p>" +
-          escapeHTML(mission.description) +
+
+          escapeHTML(
+            mission.description
+          ) +
+
           "</p>" +
 
           "<div class='small'>+" +
+
           mission.flux +
+
           " FLUX</div>";
 
 
-        preview.appendChild(div);
+        preview.appendChild(
+          div
+        );
 
       }
     );
 
 
-    showScreen("dropPreview");
+    showScreen(
+      "dropPreview"
+    );
 
   }
 
@@ -2306,7 +2582,7 @@
     ) {
 
       alert(
-        "Complete your Reality before publishing."
+        "Complete your DROP before publishing."
       );
 
       return;
@@ -2334,34 +2610,50 @@
     };
 
 
-    publishedDrops.push(drop);
+    publishedDrops.push(
+      drop
+    );
 
 
-    addDropToExplore(drop);
+    addDropToExplore(
+      drop
+    );
 
 
     document
-      .getElementById("publishedName")
+      .getElementById(
+        "publishedName"
+      )
       .innerText =
         drop.name;
 
 
     document
-      .getElementById("publishedInfo")
+      .getElementById(
+        "publishedInfo"
+      )
       .innerText =
+
         drop.category +
+
         " · " +
+
         drop.missions.length +
-        " missions · Your DROP is now live in Explore.";
+
+        " missions · Your DROP is now live.";
 
 
     document
-      .getElementById("profileDrops")
+      .getElementById(
+        "profileDrops"
+      )
       .innerText =
         publishedDrops.length;
 
 
-    showScreen("publishedReality");
+    showScreen(
+      "publishedReality"
+    );
 
   }
 
@@ -2371,7 +2663,22 @@
      ADD DROP TO EXPLORE
   ====================================================== */
 
-  function addDropToExplore(drop) {
+  function addDropToExplore(
+    drop
+  ) {
+
+    const empty =
+      document.getElementById(
+        "exploreEmpty"
+      );
+
+
+    if (empty) {
+
+      empty.remove();
+
+    }
+
 
     const list =
       document.getElementById(
@@ -2380,7 +2687,9 @@
 
 
     const card =
-      document.createElement("div");
+      document.createElement(
+        "div"
+      );
 
 
     card.className =
@@ -2397,9 +2706,13 @@
 
     const totalFlux =
       drop.missions.reduce(
-        function(total, mission) {
+        function(
+          total,
+          mission
+        ) {
 
-          return total + mission.flux;
+          return total +
+            mission.flux;
 
         },
         0
@@ -2409,59 +2722,675 @@
     card.innerHTML =
 
       "<div class='small'>" +
-      escapeHTML(drop.category) +
+
+      escapeHTML(
+        drop.category
+      ) +
+
       " · YOUR DROP" +
+
       "</div>" +
 
       "<h3>" +
-      escapeHTML(drop.name) +
+
+      escapeHTML(
+        drop.name
+      ) +
+
       "</h3>" +
 
       "<p>" +
-      escapeHTML(drop.description) +
+
+      escapeHTML(
+        drop.description
+      ) +
+
       "</p>" +
 
       "<div class='small'>" +
+
       drop.missions.length +
+
       " MISSIONS · +" +
+
       totalFlux +
-      " FLUX" +
-      "</div>" +
+
+      " FLUX</div>" +
 
       "<button class='main-button'>" +
+
       "VIEW REALITY" +
+
       "</button>";
 
 
     const button =
-      card.querySelector("button");
+      card.querySelector(
+        "button"
+      );
 
 
     button.addEventListener(
       "click",
       function() {
 
-        openReality(drop);
+        openReality(
+          drop
+        );
 
       }
     );
 
 
-    list.appendChild(card);
+    list.appendChild(
+      card
+    );
 
   }
 
 
 
   /* =====================================================
-     FILTER REALITIES
+     OPEN REALITY
+  ====================================================== */
+
+  function openReality(
+    reality
+  ) {
+
+    selectedReality =
+      reality;
+
+
+    document
+      .getElementById(
+        "realityTitle"
+      )
+      .innerText =
+        reality.name;
+
+
+    document
+      .getElementById(
+        "realityCategoryDisplay"
+      )
+      .innerText =
+        reality.category;
+
+
+    document
+      .getElementById(
+        "realityDescription"
+      )
+      .innerText =
+        reality.description;
+
+
+    const totalFlux =
+      reality.missions.reduce(
+        function(
+          total,
+          mission
+        ) {
+
+          return total +
+            mission.flux;
+
+        },
+        0
+      );
+
+
+    document
+      .getElementById(
+        "realityStats"
+      )
+      .innerText =
+
+        reality.missions.length +
+
+        " MISSIONS · +" +
+
+        totalFlux +
+
+        " FLUX";
+
+
+    const preview =
+      document.getElementById(
+        "realityMissionPreview"
+      );
+
+
+    preview.innerHTML = "";
+
+
+    reality.missions.forEach(
+      function(
+        mission,
+        index
+      ) {
+
+        const div =
+          document.createElement(
+            "div"
+          );
+
+
+        div.className =
+          "preview-mission";
+
+
+        div.innerHTML =
+
+          "<div class='small'>" +
+
+          "MISSION " +
+
+          String(index + 1)
+            .padStart(2, "0") +
+
+          "</div>" +
+
+          "<h3>" +
+
+          escapeHTML(
+            mission.name
+          ) +
+
+          "</h3>" +
+
+          "<p>" +
+
+          escapeHTML(
+            mission.description
+          ) +
+
+          "</p>" +
+
+          "<div class='small'>+" +
+
+          mission.flux +
+
+          " FLUX</div>";
+
+
+        preview.appendChild(
+          div
+        );
+
+      }
+    );
+
+
+    showScreen(
+      "reality"
+    );
+
+  }
+
+
+
+  /* =====================================================
+     START REALITY
+  ====================================================== */
+
+  function startSelectedReality() {
+
+    if (!selectedReality) {
+
+      return;
+
+    }
+
+
+    completedMissions =
+      0;
+
+
+    earnedFlux =
+      0;
+
+
+    document
+      .getElementById(
+        "activeRealityTitle"
+      )
+      .innerText =
+        selectedReality.name;
+
+
+    document
+      .getElementById(
+        "missionProgress"
+      )
+      .innerText =
+
+        "0 / " +
+
+        selectedReality.missions.length;
+
+
+    document
+      .getElementById(
+        "missionFlux"
+      )
+      .innerText =
+        "0 ⚡";
+
+
+    const list =
+      document.getElementById(
+        "activeMissionList"
+      );
+
+
+    list.innerHTML = "";
+
+
+    selectedReality.missions.forEach(
+      function(
+        mission,
+        index
+      ) {
+
+        const card =
+          document.createElement(
+            "div"
+          );
+
+
+        card.className =
+          "card";
+
+
+        card.id =
+          "activeMission" +
+          index;
+
+
+        card.innerHTML =
+
+          "<div class='small'>" +
+
+          "MISSION " +
+
+          String(index + 1)
+            .padStart(2, "0") +
+
+          "</div>" +
+
+          "<h3>" +
+
+          escapeHTML(
+            mission.name
+          ) +
+
+          "</h3>" +
+
+          "<p>" +
+
+          escapeHTML(
+            mission.description
+          ) +
+
+          "</p>" +
+
+          "<div class='small'>+" +
+
+          mission.flux +
+
+          " FLUX</div>" +
+
+          "<button " +
+
+          "class='main-button' " +
+
+          "onclick='completeMission(" +
+
+          index +
+
+          ")'>" +
+
+          "COMPLETE MISSION" +
+
+          "</button>";
+
+
+        list.appendChild(
+          card
+        );
+
+      }
+    );
+
+
+    showScreen(
+      "missions"
+    );
+
+  }
+
+
+
+  /* =====================================================
+     COMPLETE MISSION
+  ====================================================== */
+
+  function completeMission(
+    missionIndex
+  ) {
+
+    if (!selectedReality) {
+
+      return;
+
+    }
+
+
+    const card =
+      document.getElementById(
+        "activeMission" +
+        missionIndex
+      );
+
+
+    if (!card) {
+
+      return;
+
+    }
+
+
+    const button =
+      card.querySelector(
+        "button"
+      );
+
+
+    if (button.disabled) {
+
+      return;
+
+    }
+
+
+    button.disabled =
+      true;
+
+
+    button.innerText =
+      "✓ COMPLETED";
+
+
+    card.style.opacity =
+      "0.5";
+
+
+    const mission =
+      selectedReality.missions[
+        missionIndex
+      ];
+
+
+    completedMissions++;
+
+
+    earnedFlux +=
+      mission.flux;
+
+
+    document
+      .getElementById(
+        "missionProgress"
+      )
+      .innerText =
+
+        completedMissions +
+
+        " / " +
+
+        selectedReality.missions.length;
+
+
+    document
+      .getElementById(
+        "missionFlux"
+      )
+      .innerText =
+
+        earnedFlux +
+
+        " ⚡";
+
+
+    if (
+      completedMissions ===
+      selectedReality.missions.length
+    ) {
+
+      userFlux +=
+        earnedFlux;
+
+
+      document
+        .getElementById(
+          "finalFlux"
+        )
+        .innerText =
+
+        "+" +
+
+        earnedFlux +
+
+        " ⚡";
+
+
+      updateFlux();
+
+
+      setTimeout(
+        function() {
+
+          showScreen(
+            "complete"
+          );
+
+        },
+        500
+      );
+
+    }
+
+  }
+
+
+
+  /* =====================================================
+     FLUX UPDATE
+  ====================================================== */
+
+  function updateFlux() {
+
+    document
+      .getElementById(
+        "homeFlux"
+      )
+      .innerText =
+
+        userFlux +
+
+        " ⚡";
+
+
+    document
+      .getElementById(
+        "profileFlux"
+      )
+      .innerText =
+
+        userFlux +
+
+        " ⚡";
+
+
+    updateFluxLevel();
+
+  }
+
+
+
+  /* =====================================================
+     FLUX LEVEL
+  ====================================================== */
+
+  function updateFluxLevel() {
+
+    let currentLevel =
+      fluxLevels[0];
+
+
+    for (
+      let i = 0;
+      i < fluxLevels.length;
+      i++
+    ) {
+
+      if (
+        userFlux >=
+        fluxLevels[i].min
+      ) {
+
+        currentLevel =
+          fluxLevels[i];
+
+      }
+
+    }
+
+
+    document
+      .getElementById(
+        "profileLevel"
+      )
+      .innerText =
+        currentLevel.name;
+
+
+    document
+      .getElementById(
+        "currentLevelText"
+      )
+      .innerText =
+
+        currentLevel.name;
+
+
+    if (
+      currentLevel.next ===
+      null
+    ) {
+
+      document
+        .getElementById(
+          "nextLevelText"
+        )
+        .innerText =
+          "MAX LEVEL";
+
+
+      document
+        .getElementById(
+          "fluxProgress"
+        )
+        .style.width =
+          "100%";
+
+
+      document
+        .getElementById(
+          "homeLevel"
+        )
+        .innerText =
+          "PRIME · MAX LEVEL";
+
+
+      return;
+
+    }
+
+
+    document
+      .getElementById(
+        "nextLevelText"
+      )
+      .innerText =
+
+        "NEXT · " +
+
+        currentLevel.next +
+        " FLUX";
+
+
+    const levelRange =
+      currentLevel.next -
+      currentLevel.min;
+
+
+    const progress =
+      userFlux -
+      currentLevel.min;
+
+
+    const percentage =
+      Math.min(
+        100,
+        Math.max(
+          0,
+          (progress /
+            levelRange) *
+            100
+        )
+      );
+
+
+    document
+      .getElementById(
+        "fluxProgress"
+      )
+      .style.width =
+        percentage + "%";
+
+
+    document
+      .getElementById(
+        "homeLevel"
+      )
+      .innerText =
+
+        currentLevel.name +
+
+        " · " +
+
+        currentLevel.next +
+
+        " FLUX TO NEXT LEVEL";
+
+  }
+
+
+
+  /* =====================================================
+     SEARCH
   ====================================================== */
 
   function filterRealities() {
 
     const search =
       document
-        .getElementById("exploreSearch")
+        .getElementById(
+          "exploreSearch"
+        )
         .value
         .toLowerCase()
         .trim();
@@ -2473,27 +3402,36 @@
       );
 
 
-    let visibleCount = 0;
+    let visible =
+      0;
 
 
     cards.forEach(
       function(card) {
 
         const title =
-          card.dataset.title || "";
+          card.dataset.title ||
+          "";
 
 
         const category =
-          card.dataset.category || "";
+          card.dataset.category ||
+          "";
 
 
         const matchesSearch =
-          title.includes(search);
+          title.includes(
+            search
+          );
 
 
         const matchesCategory =
-          currentCategory === "ALL" ||
-          category === currentCategory;
+
+          currentCategory ===
+          "ALL" ||
+
+          category ===
+          currentCategory;
 
 
         if (
@@ -2504,7 +3442,8 @@
           card.style.display =
             "block";
 
-          visibleCount++;
+
+          visible++;
 
         } else {
 
@@ -2517,12 +3456,20 @@
     );
 
 
-    document
-      .getElementById("emptyExplore")
-      .style.display =
-        visibleCount === 0
+    const empty =
+      document.getElementById(
+        "exploreEmpty"
+      );
+
+
+    if (empty) {
+
+      empty.style.display =
+        visible === 0
           ? "block"
           : "none";
+
+    }
 
   }
 
@@ -2570,53 +3517,17 @@
 
 
   /* =====================================================
-     CREATE REALITY RESET
+     ESCAPE HTML
   ====================================================== */
 
-  function createReality() {
-
-    document
-      .getElementById("realityName")
-      .value = "";
-
-
-    document
-      .getElementById("realityCategory")
-      .value =
-        "SPORTS";
-
-
-    document
-      .getElementById("realityDescription")
-      .value = "";
-
-
-    const builder =
-      document.getElementById(
-        "missionBuilder"
-      );
-
-
-    builder.innerHTML = "";
-
-
-    addMission();
-
-
-    showScreen("drop");
-
-  }
-
-
-
-  /* =====================================================
-     ESCAPE USER TEXT
-  ====================================================== */
-
-  function escapeHTML(text) {
+  function escapeHTML(
+    text
+  ) {
 
     const div =
-      document.createElement("div");
+      document.createElement(
+        "div"
+      );
 
 
     div.innerText =
@@ -2626,6 +3537,23 @@
     return div.innerHTML;
 
   }
+
+
+
+  /* =====================================================
+     STARTUP
+  ====================================================== */
+
+  window.addEventListener(
+    "load",
+    function() {
+
+      loadProfile();
+
+      updateFlux();
+
+    }
+  );
 
 </script>
 
