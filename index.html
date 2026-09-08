@@ -5392,16 +5392,6 @@ function renderVerificationStatus(
 }
 
 
-/*
-  PROTOTYPE ONLY.
-
-  This simulates verification so you
-  can test the feature.
-
-  In production, verification should
-  be controlled by a backend/admin system.
-*/
-
 function toggleDemoVerification() {
 
   const account =
@@ -5420,24 +5410,16 @@ function toggleDemoVerification() {
 
   renderDropCreatorStatus();
 
-  renderExplore();
-
   showToast(
     account.verified
-      ? "Demo verification enabled."
-      : "Demo verification removed."
+      ? "Creator verified."
+      : "Verification removed."
   );
 
 }
 
 
-/* =========================
-   MY DROPS
-========================= */
-
-function renderMyDrops(
-  account
-) {
+function renderMyDrops(account) {
 
   const container =
     document.getElementById(
@@ -5456,173 +5438,69 @@ function renderMyDrops(
   if (!drops.length) {
 
     container.innerHTML = `
-
-      <div
-        class="empty-state"
-        style="min-height:170px"
-      >
-
-        <div>
-
-          <div class="empty-title">
-            NO DROPS YET.
-          </div>
-
-          <div class="empty-text">
-            Your published Realities will appear here.
-          </div>
-
+      <div class="empty-state" style="min-height:140px;padding:20px;">
+        <div class="empty-text">
+          You haven't dropped any Realities yet.
         </div>
-
       </div>
-
     `;
 
     return;
 
   }
 
-  let html =
-    "";
+  let html = "";
 
-  drops.forEach(
-    drop => {
+  drops.forEach(drop => {
 
-      const verified =
-        account.verified;
-
-      html += `
-
-        <div class="my-drop-card">
-
-          <div class="my-drop-top">
-
-            <div>
-
-              <div class="my-drop-title">
-                ${escapeHTML(
-                  drop.title
-                )}
-              </div>
-
-              <div class="my-drop-meta">
-
-                ${drop.missions.length}
-                ${drop.missions.length === 1
-                  ? "mission"
-                  : "missions"
-                }
-
-                ·
-
-                ${escapeHTML(
-                  drop.category
-                )}
-
-              </div>
-
-              <div style="margin-top:9px">
-                ${getSwychSignalHTML(
-                  account
-                )}
-              </div>
-
-              ${
-                verified
-                ? `
-                  <div
-                    style="
-                      display:flex;
-                      align-items:center;
-                      gap:6px;
-                      margin-top:9px;
-                      color:#ccc;
-                      font-size:9px;
-                      font-weight:700;
-                    "
-                  >
-                    <span class="verified-badge">
-                      ✓
-                    </span>
-                    VERIFIED CREATOR
-                  </div>
-                `
-                : ""
-              }
-
+    html += `
+      <div class="my-drop-card">
+        <div class="my-drop-top">
+          <div>
+            <div class="my-drop-title">
+              ${escapeHTML(drop.title)}
             </div>
-
-            <button
-              class="delete-button"
-              onclick="deleteDrop('${drop.id}')"
-            >
-              DELETE
-            </button>
-
+            <div class="my-drop-meta">
+              ${drop.missions.length} missions · ${escapeHTML(drop.category)}
+            </div>
           </div>
-
+          <button
+            class="delete-button"
+            type="button"
+            onclick="deleteDrop('${drop.id}')"
+          >
+            DELETE
+          </button>
         </div>
+      </div>
+    `;
 
-      `;
+  });
 
-    }
-  );
-
-  container.innerHTML =
-    html;
+  container.innerHTML = html;
 
 }
 
 
-function deleteDrop(
-  dropId
-) {
+function deleteDrop(dropId) {
+
+  let drops = getDrops();
+
+  drops = drops.filter(
+    drop => drop.id !== dropId
+  );
+
+  saveDrops(drops);
 
   const account =
     getCurrentAccount();
 
-  if (!account) return;
-
-  const drops =
-    getDrops();
-
-  const drop =
-    drops.find(
-      item =>
-        item.id === dropId
-    );
-
-  if (!drop) return;
-
-  if (
-    drop.creatorId !==
-    account.id
-  ) {
-
-    showToast(
-      "You can only delete your own Drops."
-    );
-
-    return;
-
+  if (account) {
+    renderMyDrops(account);
   }
 
-  const updated =
-    drops.filter(
-      item =>
-        item.id !== dropId
-    );
-
-  saveDrops(
-    updated
-  );
-
-  renderProfile();
-
-  renderExplore();
-
   showToast(
-    "Drop deleted."
+    "Reality deleted."
   );
 
 }
@@ -5681,13 +5559,20 @@ function saveProfile() {
       "editBio"
     ).value.trim();
 
-  if (
-    !name ||
-    !username
-  ) {
+  if (!name) {
 
     showToast(
-      "Name and username are required."
+      "Enter a display name."
+    );
+
+    return;
+
+  }
+
+  if (!username) {
+
+    showToast(
+      "Enter a username."
     );
 
     return;
@@ -5697,14 +5582,14 @@ function saveProfile() {
   const accounts =
     getAccounts();
 
-  const usernameTaken =
+  const exists =
     accounts.some(
-      other =>
-        other.id !== account.id &&
-        other.username === username
+      acc =>
+        acc.username === username &&
+        acc.id !== account.id
     );
 
-  if (usernameTaken) {
+  if (exists) {
 
     showToast(
       "That username is already taken."
@@ -5726,8 +5611,6 @@ function saveProfile() {
   saveCurrentAccount(
     account
   );
-
-  renderProfile();
 
   showToast(
     "Profile updated."
@@ -5759,9 +5642,7 @@ function getAccountById(id) {
 
 function getInitial(name) {
 
-  if (!name) {
-    return "?";
-  }
+  if (!name) return "U";
 
   return name
     .trim()
@@ -5771,11 +5652,11 @@ function getInitial(name) {
 }
 
 
-function escapeHTML(value) {
+function escapeHTML(str) {
 
-  return String(
-    value ?? ""
-  )
+  if (!str) return "";
+
+  return String(str)
     .replace(
       /&/g,
       "&amp;"
@@ -5807,6 +5688,8 @@ function showToast(message) {
       "toast"
     );
 
+  if (!toast) return;
+
   toast.textContent =
     message;
 
@@ -5814,72 +5697,49 @@ function showToast(message) {
     "show"
   );
 
-  clearTimeout(
-    window.toastTimeout
+  setTimeout(
+    () => {
+
+      toast.classList.remove(
+        "show"
+      );
+
+    },
+    2500
   );
 
-  window.toastTimeout =
-    setTimeout(
-      () => {
-
-        toast.classList.remove(
-          "show"
-        );
-
-      },
-      2200
-    );
-
 }
 
 
 /* =========================
-   INITIALIZE
+   INITIALIZATION
 ========================= */
 
-function initializeApp() {
+window.addEventListener(
+  "DOMContentLoaded",
+  () => {
 
-  const account =
-    getCurrentAccount();
+    const session =
+      getSession();
 
-  if (account) {
+    if (session) {
 
-    showScreen(
-      "home"
-    );
+      const account =
+        getCurrentAccount();
 
-  } else {
+      if (account) {
+        showScreen("home");
+        return;
+      }
 
-    showScreen(
-      "welcome"
-    );
+    }
 
-  }
+    clearSession();
 
-  const missionContainer =
-    document.getElementById(
-      "missionBuilders"
-    );
-
-  if (
-    missionContainer &&
-    missionContainer.children.length === 0
-  ) {
-
-    addMission();
+    showScreen("welcome");
 
   }
-
-}
-
-
-/* =========================
-   RUN
-========================= */
-
-initializeApp();
-
+);
 </script>
-
 </body>
 </html>
