@@ -3,131 +3,197 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>SWYCHED</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+html {
+    background: #000;
+}
+
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #ffffff;
-    color: #000000;
+    font-family: "Space Grotesk", sans-serif;
+    background: #000;
+    color: #fff;
+    min-height: 100vh;
 }
 
 button,
 input,
 textarea,
 select {
-    font-family: inherit;
+    font-family: "Space Grotesk", sans-serif;
 }
 
 button {
     cursor: pointer;
 }
 
+button:disabled {
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   SCREENS
+========================================================= */
+
 .screen {
     display: none;
     min-height: 100vh;
-    padding: 24px 20px 100px;
+    padding: 25px 20px 105px;
 }
 
 .screen.active {
     display: block;
 }
 
-/* =========================
+.container {
+    width: 100%;
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   TYPOGRAPHY
+========================================================= */
+
+.title {
+    font-size: 38px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: -2px;
+}
+
+.subtitle {
+    margin-top: 9px;
+    color: #8d8d8d;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.small {
+    color: #777;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+}
+
+.logo {
+    font-size: 58px;
+    line-height: .9;
+    font-weight: 700;
+    letter-spacing: -4px;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.primary {
+    width: 100%;
+    border: 1px solid #fff;
+    background: #fff;
+    color: #000;
+    border-radius: 11px;
+    padding: 15px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .4px;
+}
+
+.primary:hover {
+    background: #e8e8e8;
+}
+
+.secondary {
+    width: 100%;
+    border: 1px solid #444;
+    background: #000;
+    color: #fff;
+    border-radius: 11px;
+    padding: 15px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.secondary:hover {
+    border-color: #fff;
+}
+
+.back {
+    border: none;
+    background: transparent;
+    color: #888;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 27px;
+    padding: 0;
+}
+
+.back:hover {
+    color: #fff;
+}
+
+
+/* =========================================================
    WELCOME
-========================= */
+========================================================= */
 
 #welcome {
+    display: none;
     min-height: 100vh;
     padding: 25px 20px;
-    display: none;
     flex-direction: column;
     justify-content: center;
+    background: #000;
 }
 
 #welcome.active {
     display: flex;
 }
 
-.logo {
-    font-size: 52px;
-    font-weight: 900;
-    letter-spacing: -4px;
-}
-
-.tagline {
-    margin-top: 10px;
-    font-size: 18px;
-    color: #666;
+.welcome-tagline {
+    margin-top: 13px;
+    color: #8b8b8b;
+    font-size: 16px;
 }
 
 .welcome-buttons {
-    margin-top: 45px;
+    margin-top: 48px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
 }
 
-/* =========================
-   GENERAL
-========================= */
 
-.container {
-    width: 100%;
-    max-width: 650px;
-    margin: auto;
+/* =========================================================
+   AUTH
+========================================================= */
+
+.auth-wrap {
+    padding-top: 40px;
 }
 
-.top-space {
-    margin-top: 35px;
-}
-
-.title {
-    font-size: 34px;
-    font-weight: 900;
-    letter-spacing: -1px;
-}
-
-.subtitle {
-    color: #777;
-    margin-top: 7px;
-    line-height: 1.4;
-}
-
-button.primary {
-    width: 100%;
-    background: #000;
-    color: #fff;
-    border: none;
-    padding: 16px;
-    border-radius: 12px;
-    font-size: 15px;
-    font-weight: 800;
-}
-
-button.secondary {
-    width: 100%;
-    background: #fff;
-    color: #000;
-    border: 1px solid #000;
-    padding: 16px;
-    border-radius: 12px;
-    font-size: 15px;
-    font-weight: 800;
-}
-
-.back {
-    background: none;
-    border: none;
-    font-size: 14px;
-    font-weight: 700;
-    margin-bottom: 25px;
+.auth-logo {
+    margin-bottom: 45px;
 }
 
 .form-group {
@@ -136,22 +202,39 @@ button.secondary {
 
 label {
     display: block;
-    font-size: 12px;
-    font-weight: 800;
     margin-bottom: 7px;
-    text-transform: uppercase;
+    color: #aaa;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
 input,
 textarea,
 select {
     width: 100%;
-    border: 1px solid #d5d5d5;
+    border: 1px solid #303030;
+    background: #111;
+    color: #fff;
     border-radius: 10px;
     padding: 14px;
-    font-size: 15px;
+    font-size: 14px;
     outline: none;
-    background: #fff;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #555;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: #fff;
+}
+
+select {
+    appearance: none;
 }
 
 textarea {
@@ -159,132 +242,115 @@ textarea {
     min-height: 110px;
 }
 
-input:focus,
-textarea:focus,
-select:focus {
-    border-color: #000;
+.auth-note {
+    margin-top: 15px;
+    color: #555;
+    font-size: 10px;
+    line-height: 1.5;
 }
 
+.auth-submit {
+    margin-top: 25px;
+}
+
+
+/* =========================================================
+   HOME
+========================================================= */
+
+.home-top {
+    margin-top: 28px;
+}
+
+.home-heading {
+    margin-top: 13px;
+    font-size: 43px;
+    line-height: .95;
+    font-weight: 700;
+    letter-spacing: -3px;
+}
+
+.home-copy {
+    margin-top: 14px;
+    color: #777;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.flux-card {
+    margin-top: 30px;
+    padding: 22px;
+    border: 1px solid #242424;
+    border-radius: 17px;
+    background: #0c0c0c;
+}
+
+.flux-value {
+    font-size: 40px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: -2px;
+}
+
+.flux-label {
+    margin-top: 7px;
+    color: #666;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.home-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.home-card {
+    border: 1px solid #292929;
+    background: #080808;
+    color: #fff;
+    border-radius: 14px;
+    padding: 20px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.home-card:hover {
+    border-color: #fff;
+}
+
+
+/* =========================================================
+   CARDS
+========================================================= */
+
 .card {
-    border: 1px solid #dedede;
+    border: 1px solid #292929;
+    background: #080808;
     border-radius: 15px;
     padding: 18px;
-    margin-top: 14px;
-    background: #fff;
+    margin-top: 13px;
 }
 
 .card-title {
     font-size: 20px;
-    font-weight: 900;
-}
-
-.small {
-    font-size: 12px;
-    color: #777;
-}
-
-.muted {
-    color: #777;
+    font-weight: 700;
+    letter-spacing: -.7px;
 }
 
 .divider {
     height: 1px;
-    background: #e5e5e5;
-    margin: 25px 0;
+    background: #242424;
+    margin: 28px 0;
 }
 
-/* =========================
-   ACCOUNT
-========================= */
 
-.account-switch {
-    display: flex;
-    gap: 8px;
-    margin-top: 25px;
-}
-
-.account-switch button {
-    flex: 1;
-    padding: 12px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    background: #fff;
-    font-weight: 800;
-}
-
-.account-switch button.active {
-    background: #000;
-    color: #fff;
-    border-color: #000;
-}
-
-.auth-note {
-    margin-top: 15px;
-    font-size: 12px;
-    color: #777;
-    line-height: 1.5;
-}
-
-/* =========================
-   HOME
-========================= */
-
-.home-hero {
-    margin-top: 40px;
-}
-
-.home-hero h1 {
-    font-size: 46px;
-    line-height: .95;
-    letter-spacing: -3px;
-    font-weight: 900;
-}
-
-.home-hero p {
-    margin-top: 15px;
-    color: #777;
-    line-height: 1.5;
-}
-
-.flux-box {
-    margin-top: 30px;
-    background: #000;
-    color: #fff;
-    border-radius: 18px;
-    padding: 22px;
-}
-
-.flux-number {
-    font-size: 38px;
-    font-weight: 900;
-}
-
-.flux-label {
-    font-size: 12px;
-    color: #aaa;
-    font-weight: 800;
-    margin-top: 3px;
-}
-
-.home-actions {
-    margin-top: 20px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-}
-
-.home-action {
-    border: 1px solid #ddd;
-    border-radius: 14px;
-    padding: 18px;
-    font-weight: 900;
-    background: #fff;
-    text-align: left;
-}
-
-/* =========================
+/* =========================================================
    EXPLORE
-========================= */
+========================================================= */
 
 .search {
     margin-top: 22px;
@@ -292,822 +358,1180 @@ select:focus {
 
 .chips {
     display: flex;
-    gap: 8px;
+    gap: 7px;
     overflow-x: auto;
-    margin-top: 14px;
+    margin-top: 12px;
     padding-bottom: 4px;
 }
 
 .chip {
-    white-space: nowrap;
-    border: 1px solid #ddd;
+    flex: 0 0 auto;
+    border: 1px solid #303030;
+    background: #000;
+    color: #777;
     border-radius: 30px;
-    padding: 9px 14px;
-    background: #fff;
-    font-size: 12px;
-    font-weight: 800;
+    padding: 8px 13px;
+    font-size: 10px;
+    font-weight: 700;
 }
 
 .chip.active {
-    background: #000;
+    border-color: #fff;
     color: #fff;
-    border-color: #000;
-}
-
-.reality-card {
-    position: relative;
 }
 
 .reality-top {
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
     gap: 15px;
 }
 
 .category {
-    font-size: 10px;
-    font-weight: 900;
-    border: 1px solid #ddd;
-    padding: 6px 8px;
+    flex-shrink: 0;
+    border: 1px solid #333;
+    color: #888;
     border-radius: 20px;
-    height: fit-content;
+    padding: 5px 8px;
+    font-size: 9px;
+    font-weight: 700;
 }
 
 .reality-description {
-    margin-top: 10px;
-    color: #666;
-    font-size: 14px;
-    line-height: 1.45;
+    margin-top: 9px;
+    color: #777;
+    font-size: 13px;
+    line-height: 1.5;
 }
 
 .creator {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-top: 18px;
+    margin-top: 17px;
 }
 
 .avatar {
     width: 34px;
     height: 34px;
+    flex-shrink: 0;
     border-radius: 50%;
-    background: #000;
-    color: #fff;
+    background: #fff;
+    color: #000;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 13px;
-    font-weight: 900;
+    font-size: 12px;
+    font-weight: 700;
 }
 
 .creator-name {
-    font-size: 13px;
-    font-weight: 800;
+    color: #ddd;
+    font-size: 12px;
+    font-weight: 700;
 }
 
 .creator-username {
-    font-size: 11px;
-    color: #777;
+    margin-top: 2px;
+    color: #555;
+    font-size: 10px;
 }
 
 .card-footer {
     display: flex;
-    gap: 8px;
-    margin-top: 18px;
+    gap: 7px;
+    margin-top: 17px;
 }
 
 .card-footer button {
     flex: 1;
-    padding: 11px;
+    border: 1px solid #333;
+    background: #000;
+    color: #fff;
     border-radius: 9px;
-    font-size: 12px;
-    font-weight: 900;
-    border: 1px solid #000;
-    background: #fff;
+    padding: 10px;
+    font-size: 10px;
+    font-weight: 700;
 }
 
 .card-footer .open-btn {
-    background: #000;
-    color: #fff;
+    border-color: #fff;
+    background: #fff;
+    color: #000;
 }
 
 .empty {
-    text-align: center;
     padding: 70px 20px;
-    color: #777;
+    text-align: center;
+    color: #666;
+    font-size: 13px;
+    line-height: 1.5;
 }
 
 .empty strong {
     display: block;
-    color: #000;
-    font-size: 18px;
-    margin-bottom: 8px;
+    margin-bottom: 7px;
+    color: #fff;
+    font-size: 17px;
 }
 
-/* =========================
+
+/* =========================================================
    EXCL
-========================= */
+========================================================= */
+
+.excl-wrapper {
+    margin-top: 32px;
+}
+
+.excl-heading {
+    color: #777;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+}
 
 .excl-card {
-    border: 1px solid #c6a44a;
-    background: linear-gradient(135deg, #fffdf4, #ffffff);
     position: relative;
-    overflow: hidden;
+    margin-top: 10px;
+    padding: 20px;
+    border: 1px solid #27200d;
+    background: #080705;
+    border-radius: 16px;
 }
 
-.excl-header {
+.excl-card.locked {
+    opacity: .85;
+}
+
+.excl-card.unlocked {
+    border-color: #80651b;
+}
+
+.excl-top {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
 }
 
 .excl-icon {
-    width: 44px;
-    height: 44px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
-    background: #d4af37;
-    color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 900;
-    font-size: 14px;
+
+    /* GOLD */
+    background: #D4AF37;
+    color: #000;
+
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .5px;
 }
 
-.excl-title {
-    font-size: 24px;
-    font-weight: 900;
-    margin-top: 15px;
+.excl-card-title {
+    margin-top: 17px;
+    font-size: 23px;
+    font-weight: 700;
 }
 
-.excl-text {
+.excl-description {
     margin-top: 7px;
     color: #777;
-    font-size: 13px;
-    line-height: 1.4;
+    font-size: 12px;
+    line-height: 1.5;
 }
 
 .excl-lock {
     margin-top: 15px;
-    font-size: 11px;
-    font-weight: 900;
-    letter-spacing: .5px;
+    color: #8b7123;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .7px;
 }
 
-.excl-unlocked {
-    background: #000;
-    color: #fff;
-    border-color: #000;
-}
 
-.excl-unlocked .excl-text {
-    color: #bbb;
-}
-
-/* =========================
-   DROP
-========================= */
+/* =========================================================
+   DROP BUILDER
+========================================================= */
 
 .mission-builder {
-    border: 1px solid #ddd;
+    margin-top: 13px;
+    padding: 16px;
+    border: 1px solid #292929;
     border-radius: 13px;
-    padding: 15px;
-    margin-top: 14px;
+    background: #080808;
 }
 
 .mission-number {
+    color: #777;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.add-mission {
+    width: 100%;
+    margin-top: 12px;
+    padding: 13px;
+    border: 1px dashed #444;
+    background: #000;
+    color: #aaa;
+    border-radius: 10px;
     font-size: 11px;
-    font-weight: 900;
-    margin-bottom: 12px;
+    font-weight: 700;
 }
 
 .remove-mission {
     margin-top: 10px;
-    background: none;
     border: none;
-    color: #777;
-    font-size: 11px;
-    font-weight: 800;
+    background: transparent;
+    color: #555;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 0;
 }
 
-.add-mission {
-    margin-top: 15px;
-    width: 100%;
-    padding: 13px;
-    background: #fff;
-    border: 1px dashed #999;
-    border-radius: 10px;
-    font-weight: 800;
+.remove-mission:hover {
+    color: #fff;
 }
 
-.preview-box {
-    border: 1px solid #ddd;
-    border-radius: 15px;
-    padding: 20px;
-    margin-top: 20px;
-}
 
-/* =========================
-   REALITY
-========================= */
+/* =========================================================
+   REALITY / MISSIONS
+========================================================= */
 
 .reality-hero {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .reality-hero h1 {
-    font-size: 38px;
-    font-weight: 900;
-    letter-spacing: -2px;
+    margin-top: 7px;
+    font-size: 40px;
+    line-height: .95;
+    font-weight: 700;
+    letter-spacing: -2.5px;
 }
 
 .mission-item {
-    border: 1px solid #ddd;
-    border-radius: 14px;
-    padding: 17px;
     margin-top: 12px;
+    padding: 17px;
+    border: 1px solid #292929;
+    background: #080808;
+    border-radius: 13px;
 }
 
 .mission-item h3 {
-    font-size: 17px;
+    font-size: 16px;
+    font-weight: 700;
 }
 
 .mission-item p {
     margin-top: 7px;
-    font-size: 13px;
     color: #777;
-    line-height: 1.45;
+    font-size: 12px;
+    line-height: 1.5;
 }
 
 .reward {
     margin-top: 12px;
-    font-size: 11px;
-    font-weight: 900;
+    color: #aaa;
+    font-size: 10px;
+    font-weight: 700;
 }
 
-/* =========================
+
+/* =========================================================
    PROFILE
-========================= */
+========================================================= */
 
 .profile-header {
     display: flex;
     align-items: center;
-    gap: 15px;
-    margin-top: 25px;
+    gap: 14px;
+    margin-top: 28px;
 }
 
 .profile-avatar {
-    width: 70px;
-    height: 70px;
+    width: 68px;
+    height: 68px;
     border-radius: 50%;
-    background: #000;
-    color: #fff;
+    background: #fff;
+    color: #000;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 24px;
-    font-weight: 900;
+    font-weight: 700;
 }
 
 .profile-name {
-    font-size: 24px;
-    font-weight: 900;
+    font-size: 23px;
+    font-weight: 700;
 }
 
 .profile-username {
-    margin-top: 4px;
-    color: #777;
-    font-size: 13px;
+    margin-top: 3px;
+    color: #666;
+    font-size: 11px;
 }
 
 .profile-bio {
-    margin-top: 18px;
-    color: #555;
+    margin-top: 17px;
+    color: #777;
+    font-size: 13px;
     line-height: 1.5;
-    font-size: 14px;
 }
 
 .edit-button {
-    margin-top: 18px;
-    border: 1px solid #000;
-    background: #fff;
+    margin-top: 15px;
+    border: 1px solid #333;
+    background: #000;
+    color: #fff;
     border-radius: 9px;
-    padding: 10px 15px;
-    font-size: 12px;
-    font-weight: 900;
+    padding: 10px 14px;
+    font-size: 10px;
+    font-weight: 700;
 }
+
+
+/* =========================================================
+   LEVEL / PROGRESS
+========================================================= */
 
 .level-card {
     margin-top: 25px;
-    border: 1px solid #ddd;
+    padding: 19px;
+    border: 1px solid #292929;
+    background: #080808;
     border-radius: 15px;
-    padding: 20px;
 }
 
 .level-row {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
 }
 
 .level-name {
-    font-size: 19px;
-    font-weight: 900;
+    font-size: 18px;
+    font-weight: 700;
 }
 
 .level-flux {
-    font-size: 12px;
     color: #777;
+    font-size: 10px;
+    font-weight: 700;
 }
 
 .progress-track {
-    height: 10px;
-    background: #e7e7e7;
+    width: 100%;
+    height: 8px;
+    margin-top: 16px;
+    background: #252525;
     border-radius: 20px;
-    margin-top: 15px;
     overflow: hidden;
 }
 
 .progress-bar {
     height: 100%;
-    background: #000;
     width: 0%;
+    background: #fff;
     border-radius: 20px;
     transition: width .3s ease;
 }
 
 .progress-text {
     margin-top: 9px;
-    font-size: 11px;
-    color: #777;
+    color: #555;
+    font-size: 10px;
 }
 
 .profile-stats {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-top: 15px;
+    gap: 9px;
+    margin-top: 10px;
 }
 
 .stat {
-    border: 1px solid #ddd;
-    border-radius: 13px;
     padding: 17px;
+    border: 1px solid #292929;
+    background: #080808;
+    border-radius: 13px;
 }
 
 .stat-number {
-    font-size: 25px;
-    font-weight: 900;
+    font-size: 24px;
+    font-weight: 700;
 }
 
 .stat-label {
     margin-top: 4px;
-    font-size: 11px;
-    color: #777;
+    color: #555;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
-/* =========================
-   NAV
-========================= */
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
 
 #nav {
     display: none;
     position: fixed;
-    bottom: 0;
+    z-index: 100;
     left: 0;
     right: 0;
-    height: 72px;
-    background: rgba(255,255,255,.97);
-    border-top: 1px solid #ddd;
-    z-index: 100;
+    bottom: 0;
+    height: 70px;
+    background: rgba(0,0,0,.97);
+    border-top: 1px solid #222;
 }
 
 .nav-inner {
-    max-width: 650px;
+    width: 100%;
+    max-width: 680px;
     height: 100%;
-    margin: auto;
+    margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(5,1fr);
 }
 
 .nav-btn {
     border: none;
     background: transparent;
-    font-size: 10px;
-    font-weight: 900;
+    color: #555;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .5px;
 }
 
-.nav-btn.active {
-    font-weight: 900;
+.nav-btn:hover {
+    color: #fff;
 }
 
-/* =========================
+
+/* =========================================================
    MOBILE
-========================= */
+========================================================= */
 
 @media (max-width: 500px) {
+
     .logo {
-        font-size: 46px;
+        font-size: 50px;
     }
 
-    .home-hero h1 {
-        font-size: 40px;
+    .home-heading {
+        font-size: 38px;
     }
+
+    .title {
+        font-size: 34px;
+    }
+
 }
+
 </style>
 </head>
 
+
 <body>
 
-<!-- =========================
+
+<!-- ========================================================
      WELCOME
-========================= -->
+========================================================= -->
 
 <section id="welcome" class="screen active">
+
     <div class="container">
-        <div class="logo">SWYCHED</div>
-        <div class="tagline">Live someone else's reality.</div>
+
+        <div class="logo">
+            SWYCHED
+        </div>
+
+        <div class="welcome-tagline">
+            Live someone else's reality.
+        </div>
 
         <div class="welcome-buttons">
-            <button class="primary" onclick="showAuth('signup')">
+
+            <button
+                class="primary"
+                onclick="showAuth('signup')"
+            >
                 CREATE ACCOUNT
             </button>
 
-            <button class="secondary" onclick="showAuth('login')">
+            <button
+                class="secondary"
+                onclick="showAuth('login')"
+            >
                 LOG IN
             </button>
+
         </div>
+
     </div>
+
 </section>
 
 
-<!-- =========================
+<!-- ========================================================
      AUTH
-========================= -->
+========================================================= -->
 
 <section id="auth" class="screen">
-    <div class="container">
 
-        <button class="back" onclick="showScreen('welcome')">
+    <div class="container auth-wrap">
+
+        <button
+            class="back"
+            onclick="showScreen('welcome')"
+        >
             ← BACK
         </button>
 
-        <div class="title" id="authTitle">CREATE ACCOUNT</div>
+        <div class="auth-logo">
 
-        <div class="subtitle" id="authSubtitle">
+            <div class="logo">
+                SWYCHED
+            </div>
+
+        </div>
+
+        <div
+            class="title"
+            id="authTitle"
+        >
+            CREATE ACCOUNT
+        </div>
+
+        <div
+            class="subtitle"
+            id="authSubtitle"
+        >
             Create your SWYCHED account.
         </div>
+
+
+        <!-- SIGN UP ONLY -->
 
         <div id="signupFields">
 
             <div class="form-group">
-                <label>Display Name</label>
-                <input id="authName" type="text" placeholder="Your name">
+
+                <label>
+                    DISPLAY NAME
+                </label>
+
+                <input
+                    id="authName"
+                    type="text"
+                    placeholder="Your name"
+                >
+
             </div>
+
 
             <div class="form-group">
-                <label>Username</label>
-                <input id="authUsername" type="text" placeholder="@username">
+
+                <label>
+                    USERNAME
+                </label>
+
+                <input
+                    id="authUsername"
+                    type="text"
+                    placeholder="@username"
+                >
+
             </div>
 
         </div>
 
-        <div class="form-group">
-            <label>Password</label>
-            <input id="authPassword" type="password" placeholder="Password">
+
+        <!-- USERNAME FOR LOGIN -->
+
+        <div id="loginUsernameField"
+             class="form-group"
+             style="display:none;">
+
+            <label>
+                USERNAME
+            </label>
+
+            <input
+                id="loginUsername"
+                type="text"
+                placeholder="@username"
+            >
+
         </div>
 
+
         <div class="form-group">
-            <button class="primary" id="authButton" onclick="submitAuth()">
+
+            <label>
+                PASSWORD
+            </label>
+
+            <input
+                id="authPassword"
+                type="password"
+                placeholder="Password"
+            >
+
+        </div>
+
+
+        <div class="auth-submit">
+
+            <button
+                id="authButton"
+                class="primary"
+                onclick="submitAuth()"
+            >
                 CREATE ACCOUNT
             </button>
+
         </div>
 
+
         <div class="auth-note">
-            This prototype stores your account locally in your browser.
-            It is not a production authentication system yet.
+            Prototype account system. Account information is stored locally in this browser.
         </div>
 
     </div>
+
 </section>
 
 
-<!-- =========================
+<!-- ========================================================
      HOME
-========================= -->
+========================================================= -->
 
 <section id="home" class="screen">
+
     <div class="container">
 
-        <div class="home-hero">
-            <div class="small">WELCOME BACK</div>
-            <h1 id="homeGreeting">SWYCH YOUR REALITY.</h1>
+        <div class="home-top">
 
-            <p>
-                Enter other people's realities, complete missions,
-                and earn FLUX.
-            </p>
+            <div class="small">
+                SWYCHED
+            </div>
+
+            <div
+                class="home-heading"
+                id="homeGreeting"
+            >
+                WELCOME.
+            </div>
+
+            <div class="home-copy">
+                Enter someone else's Reality.
+                Complete their missions.
+                Earn FLUX.
+            </div>
+
         </div>
 
-        <div class="flux-box">
-            <div class="flux-number" id="homeFlux">0</div>
-            <div class="flux-label">FLUX</div>
+
+        <div class="flux-card">
+
+            <div
+                class="flux-value"
+                id="homeFlux"
+            >
+                0
+            </div>
+
+            <div class="flux-label">
+                FLUX
+            </div>
+
         </div>
 
-        <div class="home-actions">
-            <button class="home-action" onclick="showScreen('explore')">
+
+        <div class="home-grid">
+
+            <button
+                class="home-card"
+                onclick="showScreen('explore')"
+            >
                 EXPLORE
             </button>
 
-            <button class="home-action" onclick="createReality()">
+            <button
+                class="home-card"
+                onclick="createReality()"
+            >
                 DROP
             </button>
+
         </div>
 
     </div>
+
 </section>
 
 
-<!-- =========================
+<!-- ========================================================
      EXPLORE
-========================= -->
+========================================================= -->
 
 <section id="explore" class="screen">
+
     <div class="container">
 
-        <div class="title">EXPLORE</div>
+        <div class="title">
+            EXPLORE
+        </div>
 
         <div class="subtitle">
             Find a Reality to SWYCH.
         </div>
 
+
         <div class="search">
+
             <input
                 id="searchInput"
                 type="text"
                 placeholder="Search realities..."
                 oninput="filterRealities()"
             >
+
         </div>
+
+
+        <!-- NO EXCL HERE -->
 
         <div class="chips">
 
-            <button class="chip active" onclick="selectCategory(this,'ALL')">
+            <button
+                class="chip active"
+                onclick="selectCategory(this,'ALL')"
+            >
                 ALL
             </button>
 
-            <button class="chip" onclick="selectCategory(this,'SPORTS')">
+            <button
+                class="chip"
+                onclick="selectCategory(this,'SPORTS')"
+            >
                 SPORTS
             </button>
 
-            <button class="chip" onclick="selectCategory(this,'STUDENT')">
+            <button
+                class="chip"
+                onclick="selectCategory(this,'STUDENT')"
+            >
                 STUDENT
             </button>
 
-            <button class="chip" onclick="selectCategory(this,'GAMING')">
+            <button
+                class="chip"
+                onclick="selectCategory(this,'GAMING')"
+            >
                 GAMING
             </button>
 
-            <button class="chip" onclick="selectCategory(this,'MUSIC')">
+            <button
+                class="chip"
+                onclick="selectCategory(this,'MUSIC')"
+            >
                 MUSIC
             </button>
 
-            <button class="chip" onclick="selectCategory(this,'EXCL')">
-                EXCL
-            </button>
-
         </div>
+
 
         <div id="exploreList"></div>
 
-        <div id="exploreEmpty" class="empty">
-            <strong>NOTHING HERE YET.</strong>
-            Be the first person to DROP a Reality.
-            <br><br>
 
-            <button class="primary" onclick="createReality()">
-                DROP YOUR REALITY
-            </button>
+        <div
+            id="exploreEmpty"
+            class="empty"
+        >
+
+            <strong>
+                NOTHING HERE YET.
+            </strong>
+
+            Be the first person to DROP a Reality.
+
+            <div style="margin-top:20px;">
+
+                <button
+                    class="primary"
+                    onclick="createReality()"
+                >
+                    DROP YOUR REALITY
+                </button>
+
+            </div>
+
         </div>
 
-        <!-- EXCL -->
-        <div id="exclSection"></div>
+
+        <!-- EXCL IS SEPARATE FROM EXPLORE -->
+
+        <div
+            id="exclSection"
+            class="excl-wrapper"
+        ></div>
 
     </div>
+
 </section>
 
 
-<!-- =========================
+<!-- ========================================================
      DROP
-========================= -->
+========================================================= -->
 
 <section id="drop" class="screen">
+
     <div class="container">
 
-        <button class="back" onclick="showScreen('explore')">
+        <button
+            class="back"
+            onclick="showScreen('explore')"
+        >
             ← BACK
         </button>
 
-        <div class="title">DROP</div>
-
-        <div class="subtitle">
-            Create a Reality that other people can enter.
+        <div class="title">
+            DROP
         </div>
 
+        <div class="subtitle">
+            Create a Reality for other people to experience.
+        </div>
+
+
         <div class="form-group">
-            <label>Reality Name</label>
+
+            <label>
+                REALITY NAME
+            </label>
+
             <input
                 id="realityName"
                 type="text"
                 placeholder="e.g. A Day As A Soccer Player"
             >
+
         </div>
 
+
         <div class="form-group">
-            <label>Category</label>
+
+            <label>
+                CATEGORY
+            </label>
 
             <select id="realityCategory">
-                <option value="SPORTS">SPORTS</option>
-                <option value="STUDENT">STUDENT</option>
-                <option value="GAMING">GAMING</option>
-                <option value="MUSIC">MUSIC</option>
+
+                <option value="SPORTS">
+                    SPORTS
+                </option>
+
+                <option value="STUDENT">
+                    STUDENT
+                </option>
+
+                <option value="GAMING">
+                    GAMING
+                </option>
+
+                <option value="MUSIC">
+                    MUSIC
+                </option>
+
             </select>
+
         </div>
 
+
         <div class="form-group">
-            <label>Description</label>
+
+            <label>
+                DESCRIPTION
+            </label>
 
             <textarea
                 id="realityDescription"
-                placeholder="Explain what someone will experience..."
+                placeholder="What is this Reality about?"
             ></textarea>
+
         </div>
+
 
         <div class="divider"></div>
 
-        <div class="title" style="font-size:24px;">
+
+        <div class="title"
+             style="font-size:25px;">
             MISSIONS
         </div>
 
         <div class="subtitle">
-            Give people specific, realistic missions they can actually complete.
+            Make every mission specific and realistic.
         </div>
+
 
         <div id="missionBuilder"></div>
 
-        <button class="add-mission" onclick="addMission()">
+
+        <button
+            class="add-mission"
+            onclick="addMission()"
+        >
             + ADD MISSION
         </button>
 
+
         <div style="margin-top:25px;">
-            <button class="primary" onclick="previewDrop()">
+
+            <button
+                class="primary"
+                onclick="previewDrop()"
+            >
                 PREVIEW DROP
             </button>
+
         </div>
 
     </div>
+
 </section>
 
 
-<!-- =========================
+<!-- ========================================================
      DROP PREVIEW
-========================= -->
+========================================================= -->
 
 <section id="dropPreview" class="screen">
+
     <div class="container">
 
-        <button class="back" onclick="showScreen('drop')">
+        <button
+            class="back"
+            onclick="showScreen('drop')"
+        >
             ← EDIT
         </button>
 
-        <div class="title">PREVIEW</div>
+        <div class="title">
+            PREVIEW
+        </div>
 
         <div id="dropPreviewContent"></div>
 
         <div style="margin-top:25px;">
-            <button class="primary" onclick="publishDrop()">
+
+            <button
+                class="primary"
+                onclick="publishDrop()"
+            >
                 PUBLISH DROP
             </button>
+
         </div>
 
     </div>
+
 </section>
 
 
-<!-- =========================
+<!-- ========================================================
      PUBLISHED
-========================= -->
+========================================================= -->
 
 <section id="publishedReality" class="screen">
+
     <div class="container">
 
-        <div class="title">DROP LIVE.</div>
+        <div style="margin-top:100px;">
 
-        <div class="subtitle">
-            Your Reality is now available in Explore.
+            <div class="small">
+                DROP STATUS
+            </div>
+
+            <div
+                class="title"
+                style="margin-top:10px;"
+            >
+                DROP LIVE.
+            </div>
+
+            <div class="subtitle">
+                Your Reality is now in Explore and on your profile.
+            </div>
+
         </div>
+
 
         <div style="margin-top:30px;">
-            <button class="primary" onclick="showScreen('explore')">
-                VIEW IN EXPLORE
+
+            <button
+                class="primary"
+                onclick="showScreen('explore')"
+            >
+                VIEW EXPLORE
             </button>
+
         </div>
 
+
         <div style="margin-top:10px;">
-            <button class="secondary" onclick="createReality()">
-                CREATE ANOTHER
+
+            <button
+                class="secondary"
+                onclick="showScreen('profile')"
+            >
+                VIEW PROFILE
             </button>
+
         </div>
 
     </div>
+
 </section>
 
 
-<!-- =========================
+<!-- ========================================================
      REALITY
-========================= -->
+========================================================= -->
 
 <section id="reality" class="screen">
+
     <div class="container">
 
-        <button class="back" onclick="showScreen('explore')">
+        <button
+            class="back"
+            onclick="showScreen('explore')"
+        >
             ← EXPLORE
         </button>
 
         <div id="realityContent"></div>
 
     </div>
+
 </section>
 
 
-<!-- =========================
+<!-- ========================================================
      MISSIONS
-========================= -->
+========================================================= -->
 
 <section id="missions" class="screen">
+
     <div class="container">
 
-        <button class="back" onclick="showScreen('reality')">
+        <button
+            class="back"
+            onclick="showScreen('reality')"
+        >
             ← REALITY
         </button>
 
-        <div class="title">MISSIONS</div>
+        <div class="title">
+            MISSIONS
+        </div>
 
         <div class="subtitle">
-            Complete the missions in this Reality.
+            Complete the Reality.
         </div>
 
         <div id="missionList"></div>
 
         <div style="margin-top:25px;">
-            <button class="primary" onclick="completeReality()">
+
+            <button
+                class="primary"
+                onclick="completeReality()"
+            >
                 COMPLETE SWYCH
             </button>
+
         </div>
 
     </div>
+
 </section>
 
 
-<!-- =========================
+<!-- ========================================================
      COMPLETE
-========================= -->
+========================================================= -->
 
 <section id="complete" class="screen">
+
     <div class="container">
 
-        <div style="margin-top:100px;text-align:center;">
-            <div class="small">REALITY COMPLETE</div>
+        <div
+            style="
+                margin-top:110px;
+                text-align:center;
+            "
+        >
 
-            <div class="title" style="margin-top:10px;">
-                YOU SWYCHED IT.
+            <div class="small">
+                REALITY COMPLETE
+            </div>
+
+            <div
+                class="title"
+                style="margin-top:10px;"
+            >
+                SWYCH COMPLETE.
             </div>
 
             <div
                 id="earnedText"
-                style="margin-top:15px;color:#777;"
+                class="subtitle"
+                style="margin-top:15px;"
             ></div>
 
+
             <div style="margin-top:30px;">
-                <button class="primary" onclick="showScreen('explore')">
+
+                <button
+                    class="primary"
+                    onclick="showScreen('explore')"
+                >
                     EXPLORE
                 </button>
+
             </div>
 
         </div>
 
     </div>
+
 </section>
 
 
-<!-- =========================
+<!-- ========================================================
      SWYCH
-========================= -->
+========================================================= -->
 
 <section id="swych" class="screen">
+
     <div class="container">
 
-        <div class="title">SWYCH</div>
+        <div class="title">
+            SWYCH
+        </div>
 
         <div class="subtitle">
             Your completed realities.
@@ -1116,62 +1540,99 @@ select:focus {
         <div id="swychList"></div>
 
     </div>
+
 </section>
 
 
-<!-- =========================
+<!-- ========================================================
      PROFILE
-========================= -->
+========================================================= -->
 
 <section id="profile" class="screen">
+
     <div class="container">
 
-        <div class="title">PROFILE</div>
+        <div class="title">
+            PROFILE
+        </div>
+
 
         <div class="profile-header">
 
-            <div class="profile-avatar" id="profileAvatar">
+            <div
+                class="profile-avatar"
+                id="profileAvatar"
+            >
                 A
             </div>
 
             <div>
-                <div class="profile-name" id="profileName">
+
+                <div
+                    class="profile-name"
+                    id="profileName"
+                >
                     User
                 </div>
 
-                <div class="profile-username" id="profileUsername">
+                <div
+                    class="profile-username"
+                    id="profileUsername"
+                >
                     @user
                 </div>
+
             </div>
 
         </div>
 
-        <div class="profile-bio" id="profileBio"></div>
 
-        <button class="edit-button" onclick="openEditProfile()">
+        <div
+            class="profile-bio"
+            id="profileBio"
+        ></div>
+
+
+        <button
+            class="edit-button"
+            onclick="openEditProfile()"
+        >
             EDIT PROFILE
         </button>
+
+
+        <!-- FLUX PROGRESS -->
 
         <div class="level-card">
 
             <div class="level-row">
 
-                <div class="level-name" id="levelName">
+                <div
+                    class="level-name"
+                    id="levelName"
+                >
                     LEVEL 1
                 </div>
 
-                <div class="level-flux" id="levelFlux">
+                <div
+                    class="level-flux"
+                    id="levelFlux"
+                >
                     0 FLUX
                 </div>
 
             </div>
 
+
             <div class="progress-track">
+
                 <div
                     id="progressBar"
                     class="progress-bar"
                 ></div>
+
             </div>
+
 
             <div
                 id="progressText"
@@ -1182,101 +1643,154 @@ select:focus {
 
         </div>
 
+
         <div class="profile-stats">
 
             <div class="stat">
-                <div class="stat-number" id="profileDrops">
+
+                <div
+                    class="stat-number"
+                    id="profileDrops"
+                >
                     0
                 </div>
 
                 <div class="stat-label">
                     DROPS
                 </div>
+
             </div>
 
+
             <div class="stat">
-                <div class="stat-number" id="profileSwcyhes">
+
+                <div
+                    class="stat-number"
+                    id="profileSwcyhes"
+                >
                     0
                 </div>
 
                 <div class="stat-label">
                     SWYCHES
                 </div>
+
             </div>
 
         </div>
 
+
         <div class="divider"></div>
 
-        <div class="title" style="font-size:22px;">
+
+        <div
+            class="title"
+            style="font-size:24px;"
+        >
             YOUR DROPS
         </div>
+
 
         <div id="profileDropsList"></div>
 
     </div>
+
 </section>
 
 
-<!-- =========================
+<!-- ========================================================
      EDIT PROFILE
-========================= -->
+========================================================= -->
 
 <section id="editProfile" class="screen">
+
     <div class="container">
 
-        <button class="back" onclick="showScreen('profile')">
+        <button
+            class="back"
+            onclick="showScreen('profile')"
+        >
             ← PROFILE
         </button>
 
-        <div class="title">EDIT PROFILE</div>
+        <div class="title">
+            EDIT PROFILE
+        </div>
+
 
         <div class="form-group">
-            <label>Display Name</label>
+
+            <label>
+                DISPLAY NAME
+            </label>
 
             <input
                 id="editDisplayName"
                 type="text"
             >
+
         </div>
 
+
         <div class="form-group">
-            <label>Username</label>
+
+            <label>
+                USERNAME
+            </label>
 
             <input
                 id="editUsername"
                 type="text"
             >
+
         </div>
 
+
         <div class="form-group">
-            <label>Bio</label>
+
+            <label>
+                BIO
+            </label>
 
             <textarea
                 id="editBio"
-                placeholder="Tell people about your Reality..."
+                placeholder="Tell people about yourself..."
             ></textarea>
+
         </div>
+
 
         <div style="margin-top:25px;">
-            <button class="primary" onclick="saveProfile()">
+
+            <button
+                class="primary"
+                onclick="saveProfile()"
+            >
                 SAVE CHANGES
             </button>
+
         </div>
 
+
         <div style="margin-top:10px;">
-            <button class="secondary" onclick="logout()">
+
+            <button
+                class="secondary"
+                onclick="logout()"
+            >
                 LOG OUT
             </button>
+
         </div>
 
     </div>
+
 </section>
 
 
-<!-- =========================
-     NAV
-========================= -->
+<!-- ========================================================
+     NAVIGATION
+========================================================= -->
 
 <div id="nav">
 
@@ -1324,13 +1838,16 @@ select:focus {
 
 <script>
 
-/* =====================================================
-   DATA
-===================================================== */
+/* =========================================================
+   VARIABLES
+========================================================= */
 
 let currentAuthMode = "signup";
 
+let currentUser = null;
+
 let userFlux = 0;
+
 let completedSwcyhes = 0;
 
 let publishedDrops = [];
@@ -1343,90 +1860,121 @@ let missionCount = 0;
 
 let currentMissionTotal = 0;
 
-let currentUser = null;
 
-
-/* =====================================================
+/* =========================================================
    LEVELS
-===================================================== */
+========================================================= */
 
 const levels = [
+
     {
         level: 1,
         min: 0,
         next: 500
     },
+
     {
         level: 2,
         min: 500,
         next: 2000
     },
+
     {
         level: 3,
         min: 2000,
         next: 5000
     },
+
     {
         level: 4,
         min: 5000,
         next: 10000
     },
+
     {
         level: 5,
         min: 10000,
         next: 25000
     },
+
     {
         level: 6,
         min: 25000,
         next: null
     }
+
 ];
 
 
-/* =====================================================
-   SCREEN CONTROL
-===================================================== */
+/* =========================================================
+   SCREEN SYSTEM
+========================================================= */
 
 function showScreen(id) {
 
-    document.querySelectorAll(".screen").forEach(function(screen) {
-        screen.classList.remove("active");
-    });
+    document
+        .querySelectorAll(".screen")
+        .forEach(function(screen) {
 
-    const target = document.getElementById(id);
+            screen.classList.remove("active");
+
+        });
+
+
+    const target =
+        document.getElementById(id);
+
 
     if (target) {
+
         target.classList.add("active");
+
     }
+
 
     if (id === "profile") {
+
         loadProfile();
+
     }
+
 
     if (id === "explore") {
+
         renderExplore();
+
     }
+
 
     if (id === "swych") {
+
         renderSwcyhes();
+
     }
 
-    window.scrollTo(0, 0);
+
+    window.scrollTo(0,0);
+
 }
 
 
-/* =====================================================
+/* =========================================================
    AUTH
-===================================================== */
+========================================================= */
 
 function showAuth(mode) {
 
     currentAuthMode = mode;
 
+
     document.getElementById("authName").value = "";
+
     document.getElementById("authUsername").value = "";
+
+    document.getElementById("loginUsername").value = "";
+
     document.getElementById("authPassword").value = "";
+
 
     if (mode === "signup") {
 
@@ -1439,10 +1987,16 @@ function showAuth(mode) {
         document.getElementById("signupFields").style.display =
             "block";
 
+        document.getElementById("loginUsernameField").style.display =
+            "none";
+
         document.getElementById("authButton").textContent =
             "CREATE ACCOUNT";
 
-    } else {
+    }
+
+
+    else {
 
         document.getElementById("authTitle").textContent =
             "LOG IN";
@@ -1453,335 +2007,637 @@ function showAuth(mode) {
         document.getElementById("signupFields").style.display =
             "none";
 
+        document.getElementById("loginUsernameField").style.display =
+            "block";
+
         document.getElementById("authButton").textContent =
             "LOG IN";
+
     }
 
+
     showScreen("auth");
+
 }
 
+
+/* =========================================================
+   SUBMIT AUTH
+========================================================= */
 
 function submitAuth() {
 
     const password =
-        document.getElementById("authPassword").value.trim();
+        document
+        .getElementById("authPassword")
+        .value
+        .trim();
+
 
     if (password === "") {
+
         alert("Enter a password.");
+
         return;
+
     }
+
+
+    /* CREATE ACCOUNT */
 
     if (currentAuthMode === "signup") {
 
         const name =
-            document.getElementById("authName").value.trim();
+            document
+            .getElementById("authName")
+            .value
+            .trim();
+
 
         const username =
-            document.getElementById("authUsername").value.trim();
+            document
+            .getElementById("authUsername")
+            .value
+            .trim();
+
 
         if (name === "") {
+
             alert("Enter a display name.");
+
             return;
+
         }
+
 
         if (username === "") {
+
             alert("Choose a username.");
+
             return;
+
         }
 
+
         currentUser = {
+
             name: name,
+
             username: username,
+
             password: password,
+
             bio: ""
+
         };
+
 
         localStorage.setItem(
             "swychedUser",
             JSON.stringify(currentUser)
         );
 
+
         userFlux = 0;
+
         completedSwcyhes = 0;
 
         saveProgress();
 
-        enterApp();
-
-    } else {
-
-        const saved =
-            localStorage.getItem("swychedUser");
-
-        if (!saved) {
-            alert("No account found. Create an account first.");
-            return;
-        }
-
-        const account = JSON.parse(saved);
-
-        if (password !== account.password) {
-            alert("Incorrect password.");
-            return;
-        }
-
-        currentUser = account;
-
-        loadProgress();
 
         enterApp();
+
+        return;
+
     }
+
+
+    /* LOGIN */
+
+    const saved =
+        localStorage.getItem("swychedUser");
+
+
+    if (!saved) {
+
+        alert(
+            "No account exists yet. Create an account first."
+        );
+
+        return;
+
+    }
+
+
+    const account =
+        JSON.parse(saved);
+
+
+    const enteredUsername =
+        document
+        .getElementById("loginUsername")
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const savedUsername =
+        account.username
+        .replace("@","")
+        .toLowerCase();
+
+
+    if (enteredUsername === "") {
+
+        alert("Enter your username.");
+
+        return;
+
+    }
+
+
+    if (enteredUsername !== savedUsername) {
+
+        alert("Incorrect username.");
+
+        return;
+
+    }
+
+
+    if (password !== account.password) {
+
+        alert("Incorrect password.");
+
+        return;
+
+    }
+
+
+    currentUser = account;
+
+    loadProgress();
+
+    enterApp();
+
 }
 
+
+/* =========================================================
+   ENTER APP
+========================================================= */
 
 function enterApp() {
 
-    document.getElementById("welcome").classList.remove("active");
-    document.getElementById("auth").classList.remove("active");
+    document
+        .getElementById("welcome")
+        .classList.remove("active");
 
-    document.getElementById("home").classList.add("active");
 
-    document.getElementById("nav").style.display = "block";
+    document
+        .getElementById("auth")
+        .classList.remove("active");
+
+
+    document
+        .getElementById("home")
+        .classList.add("active");
+
+
+    document
+        .getElementById("nav")
+        .style.display = "block";
+
 
     loadProfile();
+
     updateFlux();
+
     renderExplore();
 
-    window.scrollTo(0, 0);
 }
 
+
+/* =========================================================
+   LOGOUT
+========================================================= */
 
 function logout() {
 
     currentUser = null;
 
-    document.getElementById("nav").style.display = "none";
+    document
+        .getElementById("nav")
+        .style.display = "none";
 
-    document.querySelectorAll(".screen").forEach(function(screen) {
-        screen.classList.remove("active");
-    });
 
-    document.getElementById("welcome").classList.add("active");
+    document
+        .querySelectorAll(".screen")
+        .forEach(function(screen) {
+
+            screen.classList.remove("active");
+
+        });
+
+
+    document
+        .getElementById("welcome")
+        .classList.add("active");
+
 }
 
 
-/* =====================================================
-   LOCAL STORAGE
-===================================================== */
+/* =========================================================
+   PROGRESS STORAGE
+========================================================= */
 
 function saveProgress() {
 
     localStorage.setItem(
+
         "swychedProgress",
+
         JSON.stringify({
+
             flux: userFlux,
+
             swyches: completedSwcyhes
+
         })
+
     );
+
 }
 
 
 function loadProgress() {
 
     const saved =
-        localStorage.getItem("swychedProgress");
+        localStorage.getItem(
+            "swychedProgress"
+        );
+
 
     if (!saved) {
+
         userFlux = 0;
+
         completedSwcyhes = 0;
+
         return;
+
     }
 
-    const progress = JSON.parse(saved);
 
-    userFlux = progress.flux || 0;
-    completedSwcyhes = progress.swyches || 0;
+    const progress =
+        JSON.parse(saved);
+
+
+    userFlux =
+        progress.flux || 0;
+
+
+    completedSwcyhes =
+        progress.swyches || 0;
+
 }
 
+
+/* =========================================================
+   DROP STORAGE
+========================================================= */
 
 function saveDrops() {
 
     localStorage.setItem(
+
         "swychedDrops",
+
         JSON.stringify(publishedDrops)
+
     );
+
 }
 
 
 function loadDrops() {
 
     const saved =
-        localStorage.getItem("swychedDrops");
+        localStorage.getItem(
+            "swychedDrops"
+        );
+
 
     if (!saved) {
+
         publishedDrops = [];
+
         return;
+
     }
 
+
     try {
-        publishedDrops = JSON.parse(saved);
-    } catch {
-        publishedDrops = [];
+
+        publishedDrops =
+            JSON.parse(saved);
+
     }
+
+    catch {
+
+        publishedDrops = [];
+
+    }
+
 }
 
 
-/* =====================================================
+/* =========================================================
    PROFILE
-===================================================== */
+========================================================= */
 
 function loadProfile() {
 
     const saved =
-        localStorage.getItem("swychedUser");
+        localStorage.getItem(
+            "swychedUser"
+        );
+
 
     if (saved) {
-        currentUser = JSON.parse(saved);
+
+        currentUser =
+            JSON.parse(saved);
+
     }
+
 
     if (!currentUser) {
+
         return;
+
     }
 
-    const name = currentUser.name || "User";
+
+    const name =
+        currentUser.name || "User";
+
 
     const username =
         currentUser.username || "@user";
 
-    document.getElementById("profileName").textContent =
-        name;
 
-    document.getElementById("profileUsername").textContent =
-        username.startsWith("@")
-        ? username
-        : "@" + username;
+    document
+        .getElementById("profileName")
+        .textContent = name;
 
-    document.getElementById("profileBio").textContent =
-        currentUser.bio || "";
 
-    document.getElementById("profileAvatar").textContent =
-        name.charAt(0).toUpperCase();
+    document
+        .getElementById("profileUsername")
+        .textContent =
+            username.startsWith("@")
+            ? username
+            : "@" + username;
 
-    document.getElementById("homeGreeting").textContent =
-        "WELCOME, " + name.toUpperCase() + ".";
 
-    document.getElementById("profileDrops").textContent =
-        getUserDrops().length;
+    document
+        .getElementById("profileBio")
+        .textContent =
+            currentUser.bio || "";
 
-    document.getElementById("profileSwcyhes").textContent =
-        completedSwcyhes;
+
+    document
+        .getElementById("profileAvatar")
+        .textContent =
+            name.charAt(0).toUpperCase();
+
+
+    document
+        .getElementById("homeGreeting")
+        .textContent =
+            "WELCOME, " +
+            name.toUpperCase() +
+            ".";
+
+
+    document
+        .getElementById("profileDrops")
+        .textContent =
+            getUserDrops().length;
+
+
+    document
+        .getElementById("profileSwcyhes")
+        .textContent =
+            completedSwcyhes;
+
 
     updateFlux();
 
     renderProfileDrops();
+
 }
 
+
+/* =========================================================
+   EDIT PROFILE
+========================================================= */
 
 function openEditProfile() {
 
     if (!currentUser) return;
 
-    document.getElementById("editDisplayName").value =
-        currentUser.name || "";
 
-    document.getElementById("editUsername").value =
-        currentUser.username || "";
+    document
+        .getElementById("editDisplayName")
+        .value =
+            currentUser.name || "";
 
-    document.getElementById("editBio").value =
-        currentUser.bio || "";
+
+    document
+        .getElementById("editUsername")
+        .value =
+            currentUser.username || "";
+
+
+    document
+        .getElementById("editBio")
+        .value =
+            currentUser.bio || "";
+
 
     showScreen("editProfile");
+
 }
 
 
 function saveProfile() {
 
     const name =
-        document.getElementById("editDisplayName").value.trim();
+        document
+        .getElementById("editDisplayName")
+        .value
+        .trim();
+
 
     const username =
-        document.getElementById("editUsername").value.trim();
+        document
+        .getElementById("editUsername")
+        .value
+        .trim();
+
 
     const bio =
-        document.getElementById("editBio").value.trim();
+        document
+        .getElementById("editBio")
+        .value
+        .trim();
+
 
     if (name === "") {
-        alert("Display name cannot be empty.");
+
+        alert(
+            "Display name cannot be empty."
+        );
+
         return;
+
     }
+
 
     if (username === "") {
-        alert("Username cannot be empty.");
+
+        alert(
+            "Username cannot be empty."
+        );
+
         return;
+
     }
 
-    currentUser.name = name;
-    currentUser.username = username;
-    currentUser.bio = bio;
+
+    currentUser.name =
+        name;
+
+
+    currentUser.username =
+        username;
+
+
+    currentUser.bio =
+        bio;
+
 
     localStorage.setItem(
+
         "swychedUser",
+
         JSON.stringify(currentUser)
+
     );
+
 
     loadProfile();
 
     showScreen("profile");
+
 }
 
 
-/* =====================================================
-   FLUX
-===================================================== */
+/* =========================================================
+   FLUX LEVEL SYSTEM
+========================================================= */
 
 function getCurrentLevel() {
 
-    let current = levels[0];
+    let current =
+        levels[0];
 
-    for (let i = 0; i < levels.length; i++) {
 
-        if (userFlux >= levels[i].min) {
-            current = levels[i];
+    for (
+        let i = 0;
+        i < levels.length;
+        i++
+    ) {
+
+        if (
+            userFlux >=
+            levels[i].min
+        ) {
+
+            current =
+                levels[i];
+
         }
+
     }
 
+
     return current;
+
 }
 
 
 function updateFlux() {
 
-    const level = getCurrentLevel();
+    const level =
+        getCurrentLevel();
 
-    document.getElementById("homeFlux").textContent =
-        userFlux.toLocaleString();
 
-    document.getElementById("levelName").textContent =
-        "LEVEL " + level.level;
+    document
+        .getElementById("homeFlux")
+        .textContent =
+            userFlux.toLocaleString();
 
-    document.getElementById("levelFlux").textContent =
-        userFlux.toLocaleString() + " FLUX";
 
-    const progressBar =
-        document.getElementById("progressBar");
+    document
+        .getElementById("levelName")
+        .textContent =
+            "LEVEL " +
+            level.level;
 
-    const progressText =
-        document.getElementById("progressText");
+
+    document
+        .getElementById("levelFlux")
+        .textContent =
+            userFlux.toLocaleString() +
+            " FLUX";
+
+
+    const bar =
+        document
+        .getElementById("progressBar");
+
+
+    const text =
+        document
+        .getElementById("progressText");
+
 
     if (level.next === null) {
 
-        progressBar.style.width = "100%";
+        bar.style.width =
+            "100%";
 
-        progressText.textContent =
-            "25,000+ FLUX • EXCL UNLOCKED";
 
-    } else {
+        text.textContent =
+            "MAX LEVEL • EXCL UNLOCKED";
+
+
+    }
+
+    else {
 
         const range =
-            level.next - level.min;
+            level.next -
+            level.min;
+
 
         const amount =
-            userFlux - level.min;
+            userFlux -
+            level.min;
+
 
         const percentage =
             Math.max(
@@ -1792,43 +2648,66 @@ function updateFlux() {
                 )
             );
 
-        progressBar.style.width =
+
+        bar.style.width =
             percentage + "%";
 
-        const remaining =
-            level.next - userFlux;
 
-        progressText.textContent =
-            remaining.toLocaleString() +
-            " FLUX to next level";
+        text.textContent =
+            (
+                level.next -
+                userFlux
+            ).toLocaleString() +
+            " FLUX TO NEXT LEVEL";
+
     }
+
+
+    renderEXCL();
+
 }
 
 
-/* =====================================================
-   DROP CREATION
-===================================================== */
+/* =========================================================
+   CREATE DROP
+========================================================= */
 
 function createReality() {
 
-    document.getElementById("realityName").value = "";
+    document
+        .getElementById("realityName")
+        .value = "";
 
-    document.getElementById("realityCategory").value =
-        "SPORTS";
 
-    document.getElementById("realityDescription").value =
-        "";
+    document
+        .getElementById("realityCategory")
+        .value = "SPORTS";
 
-    document.getElementById("missionBuilder").innerHTML =
-        "";
+
+    document
+        .getElementById("realityDescription")
+        .value = "";
+
+
+    document
+        .getElementById("missionBuilder")
+        .innerHTML = "";
+
 
     missionCount = 0;
 
+
     addMission();
 
+
     showScreen("drop");
+
 }
 
+
+/* =========================================================
+   ADD MISSION
+========================================================= */
 
 function addMission() {
 
@@ -1839,18 +2718,25 @@ function addMission() {
         );
 
         return;
+
     }
+
 
     missionCount++;
 
+
     const builder =
-        document.getElementById("missionBuilder");
+        document
+        .getElementById("missionBuilder");
+
 
     const mission =
         document.createElement("div");
 
+
     mission.className =
         "mission-builder";
+
 
     mission.innerHTML = `
 
@@ -1858,27 +2744,42 @@ function addMission() {
             MISSION ${missionCount}
         </div>
 
-        <div class="form-group" style="margin-top:0;">
-            <label>Mission Name</label>
+
+        <div class="form-group"
+             style="margin-top:14px;">
+
+            <label>
+                MISSION NAME
+            </label>
 
             <input
                 class="mission-name"
                 type="text"
                 placeholder="e.g. Complete a 30 minute training session"
             >
+
         </div>
 
+
         <div class="form-group">
-            <label>Mission Description</label>
+
+            <label>
+                MISSION DESCRIPTION
+            </label>
 
             <textarea
                 class="mission-description"
-                placeholder="Be specific about exactly what the person has to do."
+                placeholder="Explain exactly what the person needs to do."
             ></textarea>
+
         </div>
 
+
         <div class="form-group">
-            <label>FLUX Reward</label>
+
+            <label>
+                FLUX REWARD
+            </label>
 
             <input
                 class="mission-flux"
@@ -1887,7 +2788,9 @@ function addMission() {
                 max="500"
                 value="50"
             >
+
         </div>
+
 
         <button
             class="remove-mission"
@@ -1898,30 +2801,47 @@ function addMission() {
 
     `;
 
+
     builder.appendChild(mission);
+
 }
 
+
+/* =========================================================
+   GET DROP DATA
+========================================================= */
 
 function getDropData() {
 
     const name =
-        document.getElementById("realityName")
+        document
+        .getElementById("realityName")
         .value
         .trim();
+
 
     const category =
-        document.getElementById("realityCategory")
+        document
+        .getElementById("realityCategory")
         .value;
 
+
     const description =
-        document.getElementById("realityDescription")
+        document
+        .getElementById("realityDescription")
         .value
         .trim();
 
+
     const elements =
-        document.querySelectorAll(".mission-builder");
+        document
+        .querySelectorAll(
+            ".mission-builder"
+        );
+
 
     const missions = [];
+
 
     elements.forEach(function(element) {
 
@@ -1931,11 +2851,13 @@ function getDropData() {
             .value
             .trim();
 
+
         const missionDescription =
             element
             .querySelector(".mission-description")
             .value
             .trim();
+
 
         let flux =
             parseInt(
@@ -1944,15 +2866,23 @@ function getDropData() {
                 .value
             );
 
+
         if (isNaN(flux)) {
+
             flux = 50;
+
         }
+
 
         flux =
             Math.min(
                 500,
-                Math.max(10, flux)
+                Math.max(
+                    10,
+                    flux
+                )
             );
+
 
         if (
             missionName !== "" &&
@@ -1960,145 +2890,216 @@ function getDropData() {
         ) {
 
             missions.push({
+
                 name: missionName,
-                description: missionDescription,
+
+                description:
+                    missionDescription,
+
                 flux: flux
+
             });
 
         }
 
     });
 
+
     return {
+
         name: name,
+
         category: category,
+
         description: description,
+
         missions: missions
+
     };
+
 }
 
 
-/* =====================================================
-   DROP PREVIEW
-===================================================== */
+/* =========================================================
+   PREVIEW DROP
+========================================================= */
 
 function previewDrop() {
 
     const data =
         getDropData();
 
+
     if (data.name === "") {
-        alert("Give your Reality a name.");
+
+        alert(
+            "Give your Reality a name."
+        );
+
         return;
+
     }
+
 
     if (data.description === "") {
-        alert("Add a description.");
+
+        alert(
+            "Add a description."
+        );
+
         return;
+
     }
 
+
     if (data.missions.length === 0) {
+
         alert(
             "Add at least one complete mission."
         );
+
         return;
+
     }
+
 
     let missionsHTML = "";
 
-    data.missions.forEach(function(mission, index) {
 
-        missionsHTML += `
+    data.missions.forEach(
+        function(mission,index) {
 
-            <div class="mission-item">
+            missionsHTML += `
 
-                <h3>
-                    ${escapeHTML(mission.name)}
-                </h3>
+                <div class="mission-item">
 
-                <p>
-                    ${escapeHTML(mission.description)}
-                </p>
+                    <h3>
+                        ${index + 1}.
+                        ${escapeHTML(
+                            mission.name
+                        )}
+                    </h3>
 
-                <div class="reward">
-                    +${mission.flux} FLUX
+                    <p>
+                        ${escapeHTML(
+                            mission.description
+                        )}
+                    </p>
+
+                    <div class="reward">
+                        +${mission.flux} FLUX
+                    </div>
+
                 </div>
+
+            `;
+
+        }
+    );
+
+
+    const username =
+        currentUser.username
+            .startsWith("@")
+            ? currentUser.username
+            : "@" +
+              currentUser.username;
+
+
+    document
+        .getElementById(
+            "dropPreviewContent"
+        )
+        .innerHTML = `
+
+            <div class="card">
+
+                <div class="small">
+                    ${escapeHTML(
+                        data.category
+                    )}
+                </div>
+
+
+                <div
+                    class="card-title"
+                    style="margin-top:7px;"
+                >
+                    ${escapeHTML(
+                        data.name
+                    )}
+                </div>
+
+
+                <div class="reality-description">
+                    ${escapeHTML(
+                        data.description
+                    )}
+                </div>
+
+
+                <div class="creator">
+
+                    <div class="avatar">
+                        ${escapeHTML(
+                            currentUser.name
+                                .charAt(0)
+                                .toUpperCase()
+                        )}
+                    </div>
+
+
+                    <div>
+
+                        <div class="creator-name">
+                            ${escapeHTML(
+                                currentUser.name
+                            )}
+                        </div>
+
+                        <div class="creator-username">
+                            ${escapeHTML(
+                                username
+                            )}
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div style="margin-top:27px;">
+
+                <div
+                    class="title"
+                    style="font-size:23px;"
+                >
+                    MISSIONS
+                </div>
+
+                ${missionsHTML}
 
             </div>
 
         `;
 
-    });
-
-    document.getElementById(
-        "dropPreviewContent"
-    ).innerHTML = `
-
-        <div class="card">
-
-            <div class="small">
-                ${escapeHTML(data.category)}
-            </div>
-
-            <div class="card-title"
-                 style="margin-top:7px;">
-                ${escapeHTML(data.name)}
-            </div>
-
-            <div class="reality-description">
-                ${escapeHTML(data.description)}
-            </div>
-
-            <div class="creator">
-
-                <div class="avatar">
-                    ${currentUser.name
-                        .charAt(0)
-                        .toUpperCase()}
-                </div>
-
-                <div>
-                    <div class="creator-name">
-                        ${escapeHTML(currentUser.name)}
-                    </div>
-
-                    <div class="creator-username">
-                        ${escapeHTML(
-                            currentUser.username
-                                .startsWith("@")
-                                ? currentUser.username
-                                : "@" + currentUser.username
-                        )}
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-        <div style="margin-top:25px;">
-            <div class="title"
-                 style="font-size:22px;">
-                MISSIONS
-            </div>
-
-            ${missionsHTML}
-        </div>
-
-    `;
 
     showScreen("dropPreview");
+
 }
 
 
-/* =====================================================
+/* =========================================================
    PUBLISH DROP
-===================================================== */
+========================================================= */
 
 function publishDrop() {
 
     const data =
         getDropData();
+
 
     const drop = {
 
@@ -2112,116 +3113,168 @@ function publishDrop() {
 
         missions: data.missions,
 
-        creatorName: currentUser.name,
+        creatorName:
+            currentUser.name,
 
-        creatorUsername: currentUser.username,
+        creatorUsername:
+            currentUser.username,
 
-        creatorId: currentUser.username
+        creatorId:
+            currentUser.username
 
     };
 
+
     publishedDrops.unshift(drop);
+
 
     saveDrops();
 
-    showScreen("publishedReality");
+
+    showScreen(
+        "publishedReality"
+    );
+
 }
 
 
-/* =====================================================
+/* =========================================================
    EXPLORE
-===================================================== */
+========================================================= */
 
 function renderExplore() {
 
     const list =
-        document.getElementById("exploreList");
+        document
+        .getElementById(
+            "exploreList"
+        );
+
 
     const empty =
-        document.getElementById("exploreEmpty");
+        document
+        .getElementById(
+            "exploreEmpty"
+        );
+
 
     list.innerHTML = "";
 
+
     const search =
-        document.getElementById("searchInput")
-        ? document.getElementById("searchInput")
-            .value
-            .toLowerCase()
-        : "";
+        document
+        .getElementById(
+            "searchInput"
+        )
+        .value
+        .toLowerCase();
 
-    let filtered =
-        publishedDrops.filter(function(drop) {
 
-            const matchesCategory =
-                currentCategory === "ALL" ||
-                drop.category === currentCategory;
+    const filtered =
+        publishedDrops.filter(
+            function(drop) {
 
-            const matchesSearch =
-                drop.name
-                    .toLowerCase()
-                    .includes(search) ||
-                drop.description
-                    .toLowerCase()
-                    .includes(search);
+                const categoryMatch =
+                    currentCategory === "ALL" ||
+                    drop.category ===
+                        currentCategory;
 
-            return matchesCategory &&
-                   matchesSearch;
-        });
+
+                const searchMatch =
+                    drop.name
+                        .toLowerCase()
+                        .includes(search) ||
+
+                    drop.description
+                        .toLowerCase()
+                        .includes(search);
+
+
+                return (
+                    categoryMatch &&
+                    searchMatch
+                );
+
+            }
+        );
+
 
     if (filtered.length === 0) {
 
-        empty.style.display = "block";
-
-    } else {
-
-        empty.style.display = "none";
-
-        filtered.forEach(function(drop) {
-
-            list.appendChild(
-                createDropCard(drop)
-            );
-
-        });
+        empty.style.display =
+            "block";
 
     }
 
+    else {
+
+        empty.style.display =
+            "none";
+
+
+        filtered.forEach(
+            function(drop) {
+
+                list.appendChild(
+                    createDropCard(drop)
+                );
+
+            }
+        );
+
+    }
+
+
     renderEXCL();
+
 }
 
+
+/* =========================================================
+   CREATE DROP CARD
+========================================================= */
 
 function createDropCard(drop) {
 
     const card =
         document.createElement("div");
 
+
     card.className =
-        "card reality-card";
+        "card";
+
 
     const isOwner =
         currentUser &&
-        drop.creatorId === currentUser.username;
+        drop.creatorId ===
+            currentUser.username;
 
-    const deleteButton =
-        isOwner
-        ? `
-            <button
-                onclick="deleteDrop(${drop.id})"
-                style="
-                    border-color:#ddd;
-                    color:#777;
-                "
-            >
-                DELETE
-            </button>
-          `
-        : "";
 
     const username =
         drop.creatorUsername
             .startsWith("@")
             ? drop.creatorUsername
-            : "@" + drop.creatorUsername;
+            : "@" +
+              drop.creatorUsername;
+
+
+    let deleteButton = "";
+
+
+    if (isOwner) {
+
+        deleteButton = `
+
+            <button
+                onclick="deleteDrop(${drop.id})"
+            >
+                DELETE
+            </button>
+
+        `;
+
+    }
+
 
     card.innerHTML = `
 
@@ -2230,25 +3283,40 @@ function createDropCard(drop) {
             <div>
 
                 <div class="small">
-                    ${escapeHTML(drop.category)}
+                    ${escapeHTML(
+                        drop.category
+                    )}
                 </div>
 
-                <div class="card-title"
-                     style="margin-top:6px;">
-                    ${escapeHTML(drop.name)}
+
+                <div
+                    class="card-title"
+                    style="margin-top:6px;"
+                >
+                    ${escapeHTML(
+                        drop.name
+                    )}
                 </div>
 
             </div>
+
 
             <div class="category">
-                ${drop.missions.length} MISSIONS
+                ${drop.missions.length}
+                MISSIONS
             </div>
 
         </div>
 
+
         <div class="reality-description">
-            ${escapeHTML(drop.description)}
+            ${escapeHTML(
+                drop.description
+            )}
         </div>
+
+
+        <!-- CREATOR PROFILE -->
 
         <div class="creator">
 
@@ -2260,19 +3328,26 @@ function createDropCard(drop) {
                 )}
             </div>
 
+
             <div>
 
                 <div class="creator-name">
-                    ${escapeHTML(drop.creatorName)}
+                    ${escapeHTML(
+                        drop.creatorName
+                    )}
                 </div>
 
+
                 <div class="creator-username">
-                    ${escapeHTML(username)}
+                    ${escapeHTML(
+                        username
+                    )}
                 </div>
 
             </div>
 
         </div>
+
 
         <div class="card-footer">
 
@@ -2289,232 +3364,326 @@ function createDropCard(drop) {
 
     `;
 
+
     return card;
+
 }
 
+
+/* =========================================================
+   OPEN REALITY
+========================================================= */
 
 function openRealityById(id) {
 
     const drop =
         publishedDrops.find(
             function(item) {
+
                 return item.id === id;
+
             }
         );
 
+
     if (!drop) return;
 
+
     openReality(drop);
+
 }
 
 
 function openReality(drop) {
 
-    selectedReality = drop;
+    selectedReality =
+        drop;
+
 
     const username =
         drop.creatorUsername
             .startsWith("@")
             ? drop.creatorUsername
-            : "@" + drop.creatorUsername;
+            : "@" +
+              drop.creatorUsername;
 
-    let missionHTML = "";
 
-    drop.missions.forEach(function(mission, index) {
+    let missionsHTML = "";
 
-        missionHTML += `
 
-            <div class="mission-item">
+    drop.missions.forEach(
+        function(mission,index) {
 
-                <h3>
-                    ${index + 1}. 
-                    ${escapeHTML(mission.name)}
-                </h3>
+            missionsHTML += `
 
-                <p>
-                    ${escapeHTML(mission.description)}
-                </p>
+                <div class="mission-item">
 
-                <div class="reward">
-                    +${mission.flux} FLUX
+                    <h3>
+                        ${index + 1}.
+                        ${escapeHTML(
+                            mission.name
+                        )}
+                    </h3>
+
+
+                    <p>
+                        ${escapeHTML(
+                            mission.description
+                        )}
+                    </p>
+
+
+                    <div class="reward">
+                        +${mission.flux} FLUX
+                    </div>
+
                 </div>
 
-            </div>
+            `;
 
-        `;
+        }
+    );
 
-    });
 
-    const owner =
+    const isOwner =
         currentUser &&
-        drop.creatorId === currentUser.username;
+        drop.creatorId ===
+            currentUser.username;
 
-    document.getElementById(
-        "realityContent"
-    ).innerHTML = `
 
-        <div class="reality-hero">
+    document
+        .getElementById(
+            "realityContent"
+        )
+        .innerHTML = `
 
-            <div class="small">
-                ${escapeHTML(drop.category)}
-            </div>
+            <div class="reality-hero">
 
-            <h1>
-                ${escapeHTML(drop.name)}
-            </h1>
-
-            <p class="subtitle">
-                ${escapeHTML(drop.description)}
-            </p>
-
-            <div class="creator">
-
-                <div class="avatar">
+                <div class="small">
                     ${escapeHTML(
-                        drop.creatorName
-                            .charAt(0)
-                            .toUpperCase()
+                        drop.category
                     )}
                 </div>
 
-                <div>
 
-                    <div class="creator-name">
-                        ${escapeHTML(drop.creatorName)}
+                <h1>
+                    ${escapeHTML(
+                        drop.name
+                    )}
+                </h1>
+
+
+                <div class="subtitle">
+                    ${escapeHTML(
+                        drop.description
+                    )}
+                </div>
+
+
+                <!-- CREATOR -->
+
+                <div class="creator">
+
+                    <div class="avatar">
+                        ${escapeHTML(
+                            drop.creatorName
+                                .charAt(0)
+                                .toUpperCase()
+                        )}
                     </div>
 
-                    <div class="creator-username">
-                        ${escapeHTML(username)}
+
+                    <div>
+
+                        <div class="creator-name">
+                            ${escapeHTML(
+                                drop.creatorName
+                            )}
+                        </div>
+
+
+                        <div class="creator-username">
+                            ${escapeHTML(
+                                username
+                            )}
+                        </div>
+
                     </div>
 
                 </div>
 
             </div>
 
-        </div>
 
-        <div style="margin-top:30px;">
+            <div style="margin-top:30px;">
 
-            <div class="title"
-                 style="font-size:22px;">
-                ${drop.missions.length} MISSIONS
+                <div
+                    class="title"
+                    style="font-size:23px;"
+                >
+                    MISSIONS
+                </div>
+
+
+                ${missionsHTML}
+
             </div>
 
-            ${missionHTML}
 
-        </div>
+            <div style="margin-top:25px;">
 
-        <div style="margin-top:25px;">
+                <button
+                    class="primary"
+                    onclick="startReality()"
+                >
+                    SWYCH THIS REALITY
+                </button>
 
-            <button
-                class="primary"
-                onclick="startReality()"
-            >
-                SWYCH THIS REALITY
-            </button>
+            </div>
 
-        </div>
 
-        ${
-            owner
-            ? `
-                <div style="margin-top:10px;">
-                    <button
-                        class="secondary"
-                        onclick="deleteDrop(${drop.id})"
-                    >
-                        DELETE DROP
-                    </button>
-                </div>
-              `
-            : ""
-        }
+            ${
+                isOwner
+                ? `
 
-    `;
+                    <div style="margin-top:10px;">
+
+                        <button
+                            class="secondary"
+                            onclick="deleteDrop(${drop.id})"
+                        >
+                            DELETE DROP
+                        </button>
+
+                    </div>
+
+                `
+                : ""
+            }
+
+        `;
+
 
     showScreen("reality");
+
 }
 
 
-/* =====================================================
-   DELETE DROPS
-===================================================== */
+/* =========================================================
+   DELETE DROP
+========================================================= */
 
 function deleteDrop(id) {
 
     const drop =
         publishedDrops.find(
             function(item) {
+
                 return item.id === id;
+
             }
         );
 
+
     if (!drop) return;
+
 
     if (
         !currentUser ||
-        drop.creatorId !== currentUser.username
+        drop.creatorId !==
+            currentUser.username
     ) {
-        alert("You can only delete your own Drops.");
+
+        alert(
+            "You can only delete your own Drops."
+        );
+
         return;
+
     }
+
 
     const confirmed =
         confirm(
             "Delete this Drop? This cannot be undone."
         );
 
+
     if (!confirmed) return;
+
 
     publishedDrops =
         publishedDrops.filter(
             function(item) {
+
                 return item.id !== id;
+
             }
         );
 
+
     saveDrops();
 
-    selectedReality = null;
+
+    selectedReality =
+        null;
+
 
     renderExplore();
 
+    loadProfile();
+
     showScreen("explore");
+
 }
 
 
-/* =====================================================
+/* =========================================================
    START REALITY
-===================================================== */
+========================================================= */
 
 function startReality() {
 
     if (!selectedReality) return;
 
+
     const list =
-        document.getElementById("missionList");
+        document
+        .getElementById(
+            "missionList"
+        );
+
 
     list.innerHTML = "";
 
+
     selectedReality.missions.forEach(
-        function(mission, index) {
+        function(mission,index) {
 
             const item =
                 document.createElement("div");
 
+
             item.className =
                 "mission-item";
+
 
             item.innerHTML = `
 
                 <h3>
-                    ${index + 1}. 
-                    ${escapeHTML(mission.name)}
+                    ${index + 1}.
+                    ${escapeHTML(
+                        mission.name
+                    )}
                 </h3>
 
+
                 <p>
-                    ${escapeHTML(mission.description)}
+                    ${escapeHTML(
+                        mission.description
+                    )}
                 </p>
+
 
                 <div class="reward">
                     +${mission.flux} FLUX
@@ -2522,58 +3691,82 @@ function startReality() {
 
             `;
 
+
             list.appendChild(item);
 
         }
     );
 
+
     currentMissionTotal =
         selectedReality.missions.reduce(
-            function(total, mission) {
-                return total + mission.flux;
+            function(total,mission) {
+
+                return (
+                    total +
+                    mission.flux
+                );
+
             },
             0
         );
 
+
     showScreen("missions");
+
 }
 
 
-/* =====================================================
+/* =========================================================
    COMPLETE REALITY
-===================================================== */
+========================================================= */
 
 function completeReality() {
 
     if (!selectedReality) return;
 
-    userFlux += currentMissionTotal;
+
+    userFlux +=
+        currentMissionTotal;
+
 
     completedSwcyhes++;
 
+
     saveProgress();
 
-    document.getElementById(
-        "earnedText"
-    ).textContent =
-        "+" +
-        currentMissionTotal.toLocaleString() +
-        " FLUX";
+
+    document
+        .getElementById(
+            "earnedText"
+        )
+        .textContent =
+            "+" +
+            currentMissionTotal
+                .toLocaleString() +
+            " FLUX";
+
 
     updateFlux();
 
+
     showScreen("complete");
+
 }
 
 
-/* =====================================================
+/* =========================================================
    SWYCH
-===================================================== */
+========================================================= */
 
 function renderSwcyhes() {
 
     const list =
-        document.getElementById("swychList");
+        document
+        .getElementById(
+            "swychList"
+        );
+
 
     if (completedSwcyhes === 0) {
 
@@ -2585,65 +3778,80 @@ function renderSwcyhes() {
                     NO SWYCHES YET.
                 </strong>
 
-                Enter a Reality from Explore
-                to start your first SWYCH.
+                Complete a Reality to see it here.
 
             </div>
 
         `;
 
         return;
+
     }
+
 
     list.innerHTML = `
 
         <div class="card">
 
             <div class="card-title">
-                ${completedSwcyhes} COMPLETED
+                ${completedSwcyhes}
+                COMPLETED
             </div>
 
+
             <div class="reality-description">
-                Keep exploring different realities
-                to build your FLUX.
+                Your completed realities appear here.
             </div>
 
         </div>
 
     `;
+
 }
 
 
-/* =====================================================
+/* =========================================================
    PROFILE DROPS
-===================================================== */
+========================================================= */
 
 function getUserDrops() {
 
-    if (!currentUser) return [];
+    if (!currentUser) {
+
+        return [];
+
+    }
+
 
     return publishedDrops.filter(
         function(drop) {
 
-            return drop.creatorId ===
-                currentUser.username;
+            return (
+                drop.creatorId ===
+                currentUser.username
+            );
 
         }
     );
+
 }
 
 
 function renderProfileDrops() {
 
     const list =
-        document.getElementById(
+        document
+        .getElementById(
             "profileDropsList"
         );
 
+
     if (!list) return;
+
 
     const drops =
         getUserDrops();
+
 
     if (drops.length === 0) {
 
@@ -2662,53 +3870,74 @@ function renderProfileDrops() {
         `;
 
         return;
+
     }
+
 
     list.innerHTML = "";
 
-    drops.forEach(function(drop) {
 
-        list.appendChild(
-            createDropCard(drop)
-        );
+    drops.forEach(
+        function(drop) {
 
-    });
+            list.appendChild(
+                createDropCard(drop)
+            );
+
+        }
+    );
+
 }
 
 
-/* =====================================================
+/* =========================================================
    EXCL
-===================================================== */
+========================================================= */
 
 function renderEXCL() {
 
     const section =
-        document.getElementById("exclSection");
+        document
+        .getElementById(
+            "exclSection"
+        );
+
 
     if (!section) return;
+
 
     const unlocked =
         userFlux >= 25000;
 
+
     section.innerHTML = `
 
+        <div class="excl-heading">
+            ${unlocked
+                ? "EXCLUSIVE ACCESS"
+                : "LOCKED FEATURE"}
+        </div>
+
+
         <div
-            class="card excl-card ${
-                unlocked
-                ? "excl-unlocked"
-                : ""
-            }"
+            class="
+                excl-card
+                ${unlocked
+                    ? "unlocked"
+                    : "locked"}
+            "
         >
 
-            <div class="excl-header">
+            <div class="excl-top">
 
-                <div>
-                    <div class="small">
-                        ${unlocked
-                            ? "UNLOCKED"
-                            : "LOCKED"}
-                    </div>
+                <div class="small">
+                    ${unlocked
+                        ? "UNLOCKED"
+                        : "LOCKED"}
                 </div>
+
+
+                <!-- GOLD EXCL ICON -->
 
                 <div class="excl-icon">
                     EXCL
@@ -2716,25 +3945,32 @@ function renderEXCL() {
 
             </div>
 
-            <div class="excl-title">
+
+            <div class="excl-card-title">
                 EXCL
             </div>
 
-            <div class="excl-text">
+
+            <div class="excl-description">
 
                 ${
                     unlocked
-                    ? "Exclusive realities are now available to you."
+
+                    ? "Exclusive realities are now available."
+
                     : "Reach 25,000 FLUX to unlock exclusive realities."
                 }
 
             </div>
 
+
             <div class="excl-lock">
 
                 ${
                     unlocked
+
                     ? "ACCESS UNLOCKED"
+
                     : "🔒 25,000 FLUX REQUIRED"
                 }
 
@@ -2743,74 +3979,137 @@ function renderEXCL() {
         </div>
 
     `;
+
+
+    /* IMPORTANT:
+       NO onclick exists on this card.
+       Therefore it cannot be clicked.
+    */
+
 }
 
 
-/* =====================================================
-   SEARCH / FILTER
-===================================================== */
+/* =========================================================
+   SEARCH
+========================================================= */
 
 function filterRealities() {
+
     renderExplore();
+
 }
 
 
-function selectCategory(button, category) {
+function selectCategory(button,category) {
 
-    currentCategory = category;
+    currentCategory =
+        category;
 
-    document.querySelectorAll(".chip")
-        .forEach(function(chip) {
-            chip.classList.remove("active");
-        });
 
-    button.classList.add("active");
+    document
+        .querySelectorAll(".chip")
+        .forEach(
+            function(chip) {
+
+                chip.classList.remove(
+                    "active"
+                );
+
+            }
+        );
+
+
+    button.classList.add(
+        "active"
+    );
+
 
     renderExplore();
+
 }
 
 
-/* =====================================================
-   SECURITY / HTML ESCAPE
-===================================================== */
+/* =========================================================
+   HTML ESCAPE
+========================================================= */
 
 function escapeHTML(text) {
 
     return String(text)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
 }
 
 
-/* =====================================================
+/* =========================================================
    STARTUP
-===================================================== */
+========================================================= */
 
-window.addEventListener("load", function() {
+window.addEventListener(
+    "load",
+    function() {
 
-    loadDrops();
+        loadDrops();
 
-    const savedUser =
-        localStorage.getItem("swychedUser");
+        updateFlux();
 
-    if (savedUser) {
+        /*
+          Always starts at the login/signup page.
+          The user must enter their username + password
+          to enter the app.
+        */
 
-        currentUser =
-            JSON.parse(savedUser);
+        document
+            .querySelectorAll(".screen")
+            .forEach(
+                function(screen) {
 
-        loadProgress();
+                    screen.classList.remove(
+                        "active"
+                    );
 
-        document.getElementById("welcome")
-            .classList.add("active");
+                }
+            );
+
+
+        document
+            .getElementById("welcome")
+            .classList.add(
+                "active"
+            );
+
+
+        document
+            .getElementById("nav")
+            .style.display =
+                "none";
 
     }
-
-    updateFlux();
-
-});
+);
 
 </script>
 
