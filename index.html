@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#050505">
 <title>SWYCHED</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,238 +15,246 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 :root {
-  --bg: #000;
-  --app: #080808;
-  --card: #111;
-  --card2: #151515;
-  --border: #242424;
-  --muted: #777;
-  --soft: #aaa;
-  --white: #fff;
-  --gold: #d8b45a;
+  --bg: #050505;
+  --surface: #0d0d0d;
+  --surface-2: #121212;
+  --surface-3: #181818;
+  --border: #252525;
+  --border-light: #333;
+  --white: #ffffff;
+  --muted: #8c8c8c;
+  --muted-2: #5f5f5f;
+  --gold: #d4af37;
+  --gold-soft: rgba(212,175,55,.12);
+  --danger: #ff5f5f;
+  --success: #73e6a0;
 }
 
-html {
-  background: #000;
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--white);
+  font-family: "Space Grotesk", sans-serif;
 }
 
 body {
-  background: #000;
-  color: #fff;
-  font-family: "Space Grotesk", sans-serif;
-  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 button,
 input,
 textarea,
 select {
-  font-family: inherit;
+  font: inherit;
 }
 
 button {
+  border: 0;
   cursor: pointer;
 }
 
-.app-shell {
-  width: min(100%, 460px);
-  min-height: 100vh;
-  margin: 0 auto;
-  background:
-    radial-gradient(circle at 50% -10%, #181818 0%, transparent 32%),
-    #080808;
-  border-left: 1px solid #181818;
-  border-right: 1px solid #181818;
-  position: relative;
-  overflow-x: hidden;
-  box-shadow: 0 0 80px rgba(255,255,255,.025);
+input,
+textarea,
+select {
+  outline: none;
 }
 
-@media (min-width: 500px) {
-  body {
-    padding: 0 20px;
-  }
-
-  .app-shell {
-    min-height: 100vh;
-  }
+.hidden {
+  display: none !important;
 }
 
 /* =========================
-   SCREENS
+   APP SHELL
 ========================= */
 
-.screen {
-  display: none;
+.app-shell {
+  width: 100%;
+  max-width: 480px;
   min-height: 100vh;
-}
-
-.screen.active {
-  display: block;
+  margin: 0 auto;
+  background: var(--bg);
+  position: relative;
+  overflow-x: hidden;
 }
 
 .app-screen {
-  padding: 22px 18px 125px;
+  min-height: 100vh;
+  padding: 24px 18px 120px;
 }
 
 /* =========================
-   AUTH / WELCOME
+   ICONS
 ========================= */
 
-.auth-screen {
+.app-icon {
+  width: 22px;
+  height: 22px;
+  display: block;
+  flex-shrink: 0;
+}
+
+.app-icon.small {
+  width: 18px;
+  height: 18px;
+}
+
+.app-icon.large {
+  width: 26px;
+  height: 26px;
+}
+
+/* =========================
+   WELCOME
+========================= */
+
+#welcome {
   min-height: 100vh;
-  padding: 26px 22px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  padding: 42px 24px 34px;
 }
 
-.brand {
-  font-size: 20px;
+.welcome-top {
+  padding-top: 42px;
+}
+
+.logo {
+  font-size: 42px;
   font-weight: 700;
-  letter-spacing: -1px;
+  letter-spacing: -2px;
 }
 
-.brand span {
-  color: #666;
+.logo-sub {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 10px;
+  letter-spacing: .8px;
 }
 
-.welcome-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 40px 0;
-}
-
-.welcome-eyebrow {
-  color: #666;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  margin-bottom: 18px;
+.welcome-center {
+  padding: 30px 0;
 }
 
 .welcome-title {
-  font-size: clamp(48px, 15vw, 72px);
-  line-height: .88;
+  font-size: clamp(43px, 12vw, 68px);
+  line-height: .92;
   letter-spacing: -4px;
   font-weight: 700;
-  margin-bottom: 24px;
+  max-width: 400px;
 }
 
-.welcome-title span {
-  color: #555;
-}
-
-.welcome-subtitle {
-  color: #999;
+.welcome-description {
+  margin-top: 24px;
+  color: var(--muted);
   font-size: 15px;
   line-height: 1.6;
-  max-width: 330px;
+  max-width: 340px;
 }
 
-.auth-buttons {
-  display: flex;
-  flex-direction: column;
+.welcome-actions {
+  display: grid;
   gap: 12px;
-  padding-bottom: 12px;
 }
 
-.primary-btn,
-.secondary-btn {
+.primary-button,
+.secondary-button {
+  min-height: 56px;
+  border-radius: 16px;
   width: 100%;
-  min-height: 58px;
-  border-radius: 17px;
-  font-size: 12px;
   font-weight: 700;
-  letter-spacing: .8px;
-  border: none;
-  transition: .2s;
+  letter-spacing: .3px;
 }
 
-.primary-btn {
-  background: #fff;
+.primary-button {
+  background: var(--white);
   color: #000;
 }
 
-.secondary-btn {
-  background: #151515;
-  color: #fff;
-  border: 1px solid #282828;
+.primary-button:active {
+  transform: scale(.98);
 }
 
-.primary-btn:active,
-.secondary-btn:active,
-.action-card:active,
-.nav-btn:active {
+.secondary-button {
+  background: var(--surface);
+  color: var(--white);
+  border: 1px solid var(--border);
+}
+
+.secondary-button:active {
   transform: scale(.98);
 }
 
 /* =========================
-   FORM
+   AUTH
 ========================= */
 
-.auth-container {
-  min-height: 100vh;
-  padding: 26px 22px;
+.auth-header {
+  margin-bottom: 34px;
 }
 
-.back-btn {
-  background: none;
-  border: none;
-  color: #777;
-  font-size: 13px;
-  margin-bottom: 50px;
-  padding: 8px 0;
+.back-button {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 32px;
 }
 
-.form-title {
-  font-size: 34px;
-  line-height: 1;
-  letter-spacing: -1.5px;
-  margin-bottom: 12px;
+.auth-title {
+  font-size: 36px;
+  letter-spacing: -1.8px;
+  font-weight: 700;
 }
 
-.form-subtitle {
-  color: #777;
-  font-size: 13px;
-  line-height: 1.5;
-  margin-bottom: 35px;
+.auth-subtitle {
+  color: var(--muted);
+  margin-top: 9px;
+  font-size: 14px;
+}
+
+.form-stack {
+  display: grid;
+  gap: 19px;
 }
 
 .form-group {
-  margin-bottom: 17px;
+  display: grid;
+  gap: 8px;
 }
 
 .form-label {
-  display: block;
-  color: #777;
-  font-size: 10px;
+  color: #bdbdbd;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 1.5px;
-  margin-bottom: 8px;
+  letter-spacing: 1px;
 }
 
 .form-input,
 .form-textarea,
 .form-select {
   width: 100%;
-  background: #121212;
-  color: #fff;
-  border: 1px solid #242424;
-  border-radius: 16px;
-  min-height: 56px;
-  padding: 0 16px;
-  outline: none;
-  font-size: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  color: var(--white);
+  padding: 15px;
+  min-height: 52px;
 }
 
 .form-textarea {
-  padding: 16px;
-  min-height: 110px;
+  min-height: 115px;
   resize: vertical;
 }
 
@@ -255,626 +264,660 @@ button {
   border-color: #555;
 }
 
-.form-note {
-  color: #555;
-  font-size: 10px;
-  line-height: 1.5;
-  margin-top: 14px;
-}
-
-.error-message {
-  color: #ff7070;
-  font-size: 12px;
-  margin-bottom: 16px;
-  display: none;
+.auth-error {
+  color: var(--danger);
+  font-size: 13px;
+  min-height: 18px;
 }
 
 /* =========================
    TOP BAR
 ========================= */
 
-.topbar {
+.top-bar {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 30px;
 }
 
-.topbar-brand {
-  font-size: 17px;
+.top-logo {
+  font-size: 24px;
   font-weight: 700;
   letter-spacing: -1px;
 }
 
-.topbar-right {
+.top-right {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 9px;
 }
 
 .flux-pill {
-  background: #141414;
-  border: 1px solid #242424;
-  border-radius: 100px;
-  padding: 8px 11px;
-  font-size: 10px;
-  font-weight: 700;
-  color: #ddd;
-}
-
-.avatar-mini {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: #202020;
-  border: 1px solid #303030;
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 11px;
+  gap: 6px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 8px 11px;
+  font-size: 12px;
   font-weight: 700;
 }
 
-/* =========================
-   SECTION HEADERS
-========================= */
-
-.page-header {
-  margin-bottom: 28px;
-}
-
-.page-kicker {
-  color: #666;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1.8px;
-  margin-bottom: 9px;
-}
-
-.page-title {
-  font-size: 34px;
-  line-height: 1;
-  letter-spacing: -1.8px;
-}
-
-.page-description {
-  color: #777;
-  font-size: 13px;
-  line-height: 1.5;
-  margin-top: 12px;
+.flux-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: white;
 }
 
 /* =========================
    HOME
 ========================= */
 
-.greeting-card {
-  background: linear-gradient(145deg, #151515, #0e0e0e);
-  border: 1px solid #242424;
-  border-radius: 24px;
-  padding: 25px;
-  margin-bottom: 18px;
-}
-
-.greeting-small {
-  color: #666;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  margin-bottom: 12px;
-}
-
-.greeting-name {
-  font-size: 28px;
-  letter-spacing: -1.2px;
-  line-height: 1.1;
-}
-
-.greeting-name span {
-  color: #555;
-}
-
-.flux-card {
-  background: #fff;
-  color: #000;
-  border-radius: 24px;
-  padding: 25px;
-  margin-bottom: 28px;
-}
-
-.flux-card-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+.home-greeting {
   margin-bottom: 30px;
 }
 
-.flux-label {
-  font-size: 10px;
+.eyebrow {
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 1.5px;
   font-weight: 700;
-  letter-spacing: 1.7px;
+  text-transform: uppercase;
 }
 
-.flux-number {
-  font-size: 43px;
+.home-title {
+  font-size: 34px;
+  line-height: 1;
+  letter-spacing: -1.7px;
+  margin-top: 8px;
+}
+
+.level-card {
+  background: linear-gradient(145deg, #151515, #0b0b0b);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 22px;
+  margin-bottom: 28px;
+}
+
+.level-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.level-number {
+  font-size: 42px;
+  font-weight: 700;
   line-height: 1;
   letter-spacing: -2px;
-  font-weight: 700;
 }
 
-.level-text {
+.level-label {
+  color: var(--muted);
   font-size: 11px;
-  font-weight: 700;
-  color: #555;
+  letter-spacing: 1px;
+  margin-top: 5px;
+}
+
+.level-flux {
+  text-align: right;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.level-flux span {
+  color: var(--muted);
+  font-weight: 400;
 }
 
 .progress-track {
-  height: 7px;
-  background: #d8d8d8;
-  border-radius: 100px;
+  width: 100%;
+  height: 6px;
+  border-radius: 99px;
+  background: #242424;
+  margin-top: 22px;
   overflow: hidden;
 }
 
 .progress-fill {
   height: 100%;
-  width: 0%;
-  background: #000;
-  border-radius: 100px;
-  transition: width .3s;
+  background: var(--white);
+  border-radius: inherit;
+  transition: width .4s ease;
 }
 
 .progress-caption {
   display: flex;
   justify-content: space-between;
-  margin-top: 10px;
-  font-size: 9px;
-  color: #666;
-  font-weight: 600;
+  margin-top: 9px;
+  color: var(--muted);
+  font-size: 10px;
 }
 
-.section-title {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1.7px;
-  color: #666;
-  margin-bottom: 14px;
-}
-
-.action-grid {
+.home-actions {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   gap: 12px;
-  margin-bottom: 34px;
+  margin-bottom: 32px;
 }
 
-.action-card {
-  min-height: 145px;
-  border-radius: 21px;
-  border: 1px solid #242424;
-  background: #111;
-  padding: 19px;
+.home-action {
+  width: 100%;
+  min-height: 92px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 20px;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
+  gap: 17px;
+  color: var(--white);
   text-align: left;
-  color: #fff;
-  transition: .2s;
+}
+
+.home-action:active {
+  transform: scale(.985);
 }
 
 .action-icon {
-  font-size: 22px;
+  width: 48px;
+  height: 48px;
+  border-radius: 15px;
+  border: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
-.action-name {
-  font-size: 15px;
+.action-text {
+  min-width: 0;
+}
+
+.action-title {
+  font-size: 16px;
   font-weight: 700;
 }
 
 .action-description {
-  color: #666;
-  font-size: 10px;
-  line-height: 1.4;
+  color: var(--muted);
+  font-size: 12px;
   margin-top: 5px;
+  line-height: 1.35;
 }
 
-.how-card {
-  background: #101010;
-  border: 1px solid #222;
-  border-radius: 22px;
-  padding: 23px;
-}
-
-.how-step {
-  display: flex;
-  gap: 16px;
-  padding: 16px 0;
-}
-
-.how-step + .how-step {
-  border-top: 1px solid #1e1e1e;
-}
-
-.how-number {
-  width: 28px;
-  height: 28px;
-  min-width: 28px;
-  border-radius: 50%;
-  background: #1d1d1d;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #777;
-  font-size: 10px;
-  font-weight: 700;
-}
-
-.how-name {
-  font-size: 13px;
-  font-weight: 700;
-  margin-bottom: 5px;
-}
-
-.how-text {
-  color: #666;
+.home-section-title {
   font-size: 11px;
-  line-height: 1.5;
+  color: var(--muted);
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin-bottom: 13px;
 }
 
 /* =========================
    EXPLORE
 ========================= */
 
-.search-box {
-  position: relative;
-  margin-bottom: 17px;
+.page-heading {
+  margin-bottom: 25px;
 }
 
-.search-icon {
-  position: absolute;
-  left: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #555;
-  font-size: 14px;
+.page-title {
+  font-size: 35px;
+  line-height: 1;
+  letter-spacing: -1.8px;
 }
 
-.search-input {
-  width: 100%;
-  height: 54px;
-  background: #111;
-  border: 1px solid #242424;
-  border-radius: 17px;
-  color: #fff;
-  padding: 0 16px 0 43px;
-  outline: none;
+.page-description {
+  color: var(--muted);
   font-size: 13px;
+  margin-top: 9px;
+  line-height: 1.5;
 }
 
-.category-scroll {
+.explore-list {
+  display: grid;
+  gap: 16px;
+}
+
+.empty-state {
+  min-height: 280px;
+  border: 1px dashed var(--border-light);
+  border-radius: 22px;
   display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  padding-bottom: 5px;
-  margin-bottom: 29px;
-  scrollbar-width: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 30px;
 }
 
-.category-scroll::-webkit-scrollbar {
-  display: none;
+.empty-icon {
+  width: 50px;
+  height: 50px;
+  margin: 0 auto 17px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.category-chip {
-  white-space: nowrap;
-  padding: 10px 14px;
-  border-radius: 100px;
-  border: 1px solid #272727;
-  background: #101010;
-  color: #777;
-  font-size: 10px;
+.empty-title {
   font-weight: 700;
+  font-size: 16px;
 }
 
-.category-chip.active {
-  background: #fff;
-  color: #000;
-  border-color: #fff;
-}
-
-.reality-feed {
-  display: flex;
-  flex-direction: column;
-  gap: 17px;
+.empty-text {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+  margin-top: 7px;
 }
 
 .reality-card {
-  background: #101010;
-  border: 1px solid #232323;
-  border-radius: 23px;
-  padding: 22px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  overflow: hidden;
+}
+
+.reality-card-top {
+  padding: 20px;
+}
+
+.reality-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.category-tag {
+  display: inline-flex;
+  border: 1px solid var(--border-light);
+  border-radius: 999px;
+  padding: 6px 9px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .8px;
+  color: #ccc;
+}
+
+.reality-title {
+  font-size: 24px;
+  letter-spacing: -1px;
+  line-height: 1.05;
+  margin-top: 16px;
+}
+
+.reality-description {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+  margin-top: 9px;
 }
 
 .creator-row {
   display: flex;
   align-items: center;
   gap: 11px;
-  margin-bottom: 21px;
+  margin-top: 20px;
 }
 
-.creator-avatar {
+.avatar {
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  background: #242424;
+  background: #1c1c1c;
+  border: 1px solid var(--border-light);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 700;
+  flex-shrink: 0;
+}
+
+.creator-info {
+  min-width: 0;
 }
 
 .creator-name {
-  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
   font-weight: 700;
 }
 
 .creator-username {
-  color: #666;
-  font-size: 10px;
+  color: var(--muted);
+  font-size: 11px;
   margin-top: 2px;
 }
 
-.reality-title {
-  font-size: 22px;
-  letter-spacing: -.8px;
-  margin-bottom: 9px;
-}
-
-.reality-description {
-  color: #777;
-  font-size: 12px;
-  line-height: 1.55;
-  margin-bottom: 20px;
-}
-
-.reality-meta {
-  display: flex;
-  gap: 7px;
-  flex-wrap: wrap;
-  margin-bottom: 18px;
-}
-
-.meta-pill {
-  background: #191919;
-  border: 1px solid #262626;
-  border-radius: 100px;
-  padding: 7px 9px;
-  color: #888;
+.verified-badge {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: white;
+  color: black;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-size: 9px;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+
+.reality-card-bottom {
+  border-top: 1px solid var(--border);
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.mission-count {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.flux-reward {
+  font-size: 12px;
   font-weight: 700;
 }
 
-.reality-button {
-  width: 100%;
-  min-height: 50px;
-  border-radius: 15px;
-  background: #fff;
-  border: none;
-  color: #000;
+.flux-reward span {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.view-button {
+  background: white;
+  color: black;
+  border-radius: 11px;
+  padding: 10px 14px;
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: .6px;
 }
 
-.empty-state {
-  border: 1px dashed #292929;
-  border-radius: 23px;
-  padding: 42px 25px;
-  text-align: center;
-  margin-bottom: 35px;
+/* =========================
+   MUSIC / EXCL
+========================= */
+
+.music-section {
+  margin-top: 34px;
 }
 
-.empty-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: #141414;
-  margin: 0 auto 18px;
+.music-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 19px;
+}
+
+.music-row {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.music-art {
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  background: #1a1a1a;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #666;
-  font-size: 21px;
 }
 
-.empty-title {
-  font-size: 15px;
+.music-title {
+  font-size: 13px;
   font-weight: 700;
-  margin-bottom: 8px;
 }
 
-.empty-text {
-  color: #666;
-  font-size: 11px;
-  line-height: 1.5;
+.music-sub {
+  color: var(--muted);
+  font-size: 10px;
+  margin-top: 3px;
 }
 
 .excl-section {
-  margin-top: 45px;
+  margin-top: 28px;
 }
 
 .excl-card {
-  border-radius: 24px;
-  padding: 25px;
-  background: linear-gradient(145deg, #211b0d, #0f0e0b);
-  border: 1px solid #705d2d;
+  border: 1px solid #5d4a16;
+  background:
+    radial-gradient(circle at top right, rgba(212,175,55,.12), transparent 45%),
+    #0c0c0c;
+  border-radius: 22px;
+  padding: 22px;
 }
 
 .excl-card.locked {
-  opacity: .8;
+  opacity: .9;
 }
 
 .excl-label {
   color: var(--gold);
   font-size: 10px;
+  letter-spacing: 1.5px;
   font-weight: 700;
-  letter-spacing: 2px;
-  margin-bottom: 18px;
 }
 
 .excl-title {
-  font-size: 24px;
-  letter-spacing: -.8px;
-  margin-bottom: 8px;
+  font-size: 23px;
+  margin-top: 12px;
+  letter-spacing: -1px;
 }
 
-.excl-text {
-  color: #9a8d6c;
-  font-size: 11px;
+.excl-description {
+  color: #a5a5a5;
+  font-size: 12px;
   line-height: 1.5;
-  margin-bottom: 21px;
+  margin-top: 7px;
 }
 
 .excl-lock {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding-top: 17px;
+  border-top: 1px solid rgba(212,175,55,.18);
+}
+
+.excl-requirement {
+  font-size: 11px;
+  color: #bbb;
+}
+
+.excl-requirement strong {
+  color: white;
+}
+
+.excl-button {
+  background: #27200c;
+  border: 1px solid #5d4a16;
   color: var(--gold);
+  border-radius: 11px;
+  padding: 10px 13px;
   font-size: 10px;
   font-weight: 700;
 }
 
+.excl-unlocked {
+  border-color: var(--gold);
+}
+
+.excl-unlocked .excl-button {
+  background: var(--gold);
+  color: black;
+}
+
 /* =========================
-   DROP
+   DROP BUILDER
 ========================= */
 
-.intro-card {
-  background: #111;
-  border: 1px solid #242424;
+.section-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 22px;
-  padding: 22px;
-  margin-bottom: 30px;
+  padding: 21px;
+  margin-bottom: 16px;
 }
 
-.intro-card-title {
-  font-size: 17px;
+.section-heading {
+  font-size: 14px;
   font-weight: 700;
-  margin-bottom: 8px;
+  margin-bottom: 17px;
 }
 
-.intro-card-text {
-  color: #707070;
+.section-subheading {
+  color: var(--muted);
   font-size: 11px;
-  line-height: 1.55;
-}
-
-.drop-form {
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
+  line-height: 1.5;
+  margin-top: -8px;
+  margin-bottom: 18px;
 }
 
 .mission-builder {
-  background: #101010;
-  border: 1px solid #232323;
-  border-radius: 23px;
-  padding: 22px;
+  border: 1px solid var(--border);
+  background: #0a0a0a;
+  border-radius: 18px;
+  padding: 18px;
+  margin-bottom: 14px;
+}
+
+.mission-builder:last-child {
+  margin-bottom: 0;
 }
 
 .mission-builder-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 21px;
-}
-
-.mission-number {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  color: #777;
-}
-
-.remove-mission {
-  background: none;
-  border: none;
-  color: #555;
-  font-size: 10px;
-  font-weight: 700;
-}
-
-.mission-builder .form-group {
+  justify-content: space-between;
   margin-bottom: 15px;
 }
 
-.mission-reward-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
+.mission-number {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  color: var(--muted);
+}
+
+.remove-mission {
+  color: var(--muted);
+  background: transparent;
+  font-size: 11px;
+}
+
+.remove-mission:hover {
+  color: var(--danger);
 }
 
 .proof-setting {
-  margin-top: 17px;
-  padding-top: 17px;
-  border-top: 1px solid #222;
+  margin-top: 18px;
 }
 
 .proof-setting-label {
+  color: #aaa;
+  font-size: 10px;
+  letter-spacing: 1px;
+  font-weight: 700;
+  margin-bottom: 9px;
+}
+
+.proof-toggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+}
+
+.proof-toggle-btn {
+  min-height: 45px;
+  border-radius: 12px;
+  background: #111;
+  border: 1px solid var(--border);
   color: #777;
   font-size: 10px;
   font-weight: 700;
-  letter-spacing: 1px;
-  margin-bottom: 11px;
 }
 
-.proof-options {
-  display: flex;
-  gap: 8px;
+.proof-toggle-btn.active {
+  background: white;
+  color: black;
+  border-color: white;
 }
 
-.proof-option {
-  flex: 1;
-  position: relative;
+.creator-status-card {
+  border: 1px solid var(--border);
+  background: #0a0a0a;
+  border-radius: 17px;
+  padding: 17px;
 }
 
-.proof-option input {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.proof-option label {
-  min-height: 44px;
-  border-radius: 13px;
-  background: #151515;
-  border: 1px solid #252525;
+.creator-status-top {
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: #777;
-  font-size: 9px;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.creator-status-label {
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 1px;
   font-weight: 700;
-  cursor: pointer;
-  padding: 8px;
 }
 
-.proof-option input:checked + label {
-  background: #fff;
-  color: #000;
-  border-color: #fff;
+.creator-status-value {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 700;
 }
 
-.add-mission-btn {
-  width: 100%;
-  min-height: 58px;
-  background: transparent;
-  border: 1px dashed #343434;
-  border-radius: 18px;
+.status-unverified {
   color: #888;
+}
+
+.status-note {
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.5;
+  margin-top: 10px;
+}
+
+.add-mission-button {
+  width: 100%;
+  min-height: 48px;
+  border: 1px dashed #3a3a3a;
+  border-radius: 14px;
+  background: transparent;
+  color: white;
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: .8px;
 }
 
-.publish-btn {
-  margin-top: 6px;
+.add-mission-button:active {
+  background: var(--surface-2);
+}
+
+.drop-bottom-actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 25px;
 }
 
 /* =========================
@@ -882,197 +925,268 @@ button {
 ========================= */
 
 .preview-card {
-  background: #111;
-  border: 1px solid #252525;
-  border-radius: 25px;
-  padding: 25px;
-  margin-bottom: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  overflow: hidden;
+  margin-bottom: 18px;
 }
 
-.preview-title {
-  font-size: 28px;
-  line-height: 1.05;
-  letter-spacing: -1.2px;
-  margin-bottom: 12px;
-}
-
-.preview-description {
-  color: #777;
-  font-size: 12px;
-  line-height: 1.55;
+.preview-main {
+  padding: 22px;
 }
 
 .preview-missions {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  border-top: 1px solid var(--border);
+  padding: 19px 22px;
 }
 
 .preview-mission {
-  background: #151515;
-  border: 1px solid #252525;
-  border-radius: 17px;
-  padding: 18px;
+  display: flex;
+  gap: 13px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--border);
 }
 
-.preview-mission-title {
-  font-size: 13px;
-  line-height: 1.45;
-  margin-bottom: 9px;
+.preview-mission:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
 }
 
-.preview-mission-reward {
-  color: #aaa;
-  font-size: 10px;
+.preview-mission:first-child {
+  padding-top: 0;
+}
+
+.mission-index {
+  width: 25px;
+  height: 25px;
+  border-radius: 8px;
+  border: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
   font-weight: 700;
+  flex-shrink: 0;
+}
+
+.preview-mission-text {
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.preview-mission-flux {
+  color: var(--muted);
+  font-size: 10px;
+  margin-top: 4px;
 }
 
 /* =========================
-   REALITY / MISSION
+   REALITY
 ========================= */
 
 .reality-hero {
-  background: #111;
-  border: 1px solid #252525;
-  border-radius: 25px;
-  padding: 26px;
-  margin-bottom: 26px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 23px;
+  margin-bottom: 17px;
 }
 
 .reality-hero-title {
-  font-size: 31px;
+  font-size: 30px;
   line-height: 1;
-  letter-spacing: -1.5px;
-  margin-bottom: 13px;
+  letter-spacing: -1.4px;
+  margin-top: 15px;
 }
 
 .reality-hero-description {
-  color: #777;
-  font-size: 12px;
+  color: var(--muted);
+  font-size: 13px;
   line-height: 1.55;
+  margin-top: 10px;
+}
+
+.reality-creator {
+  margin-top: 21px;
 }
 
 .mission-list {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+  display: grid;
+  gap: 12px;
 }
 
 .mission-card {
-  background: #111;
-  border: 1px solid #242424;
-  border-radius: 21px;
-  padding: 21px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 18px;
+  display: flex;
+  gap: 14px;
 }
 
-.mission-card-title {
-  font-size: 15px;
+.mission-card-number {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  border: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.mission-card-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.mission-card-text {
+  font-size: 13px;
   line-height: 1.45;
-  margin-bottom: 11px;
 }
 
-.mission-card-bottom {
+.mission-card-reward {
+  color: var(--muted);
+  font-size: 10px;
+  margin-top: 6px;
+}
+
+.mission-card-button {
+  background: white;
+  color: black;
+  border-radius: 10px;
+  padding: 9px 11px;
+  font-size: 10px;
+  font-weight: 700;
+  margin-top: 12px;
+}
+
+/* =========================
+   MISSION
+========================= */
+
+.mission-progress {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 11px;
+  margin-bottom: 15px;
+}
+
+.mission-experience-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 23px;
+  padding: 23px;
+}
+
+.mission-big-number {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+.mission-big-title {
+  font-size: 28px;
+  line-height: 1.05;
+  letter-spacing: -1.2px;
+  margin-top: 15px;
+}
+
+.mission-big-description {
+  color: #aaa;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-top: 14px;
+}
+
+.reward-box {
+  margin-top: 24px;
+  padding: 15px;
+  background: #101010;
+  border: 1px solid var(--border);
+  border-radius: 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.mission-flux {
+.reward-label {
+  color: var(--muted);
   font-size: 10px;
-  font-weight: 700;
-  color: #aaa;
+  letter-spacing: 1px;
 }
 
-.mission-proof-status {
-  font-size: 9px;
-  color: #666;
-  font-weight: 700;
-}
-
-.mission-open-btn {
-  width: 100%;
-  min-height: 49px;
-  margin-top: 17px;
-  background: #fff;
-  color: #000;
-  border: none;
-  border-radius: 14px;
-  font-size: 10px;
+.reward-value {
+  font-size: 16px;
   font-weight: 700;
 }
 
-/* =========================
-   PROOF UPLOAD
-========================= */
-
-.proof-upload {
-  margin-top: 19px;
-  padding-top: 18px;
-  border-top: 1px solid #222;
+.proof-area {
+  margin-top: 24px;
 }
 
-.proof-title {
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 1.5px;
-  color: #777;
-  margin-bottom: 11px;
-}
-
-.proof-required {
-  color: #aaa;
-  font-size: 9px;
-  margin-top: -5px;
-  margin-bottom: 11px;
+.proof-required-message {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
+  margin-bottom: 10px;
 }
 
 .proof-button {
   min-height: 56px;
-  border: 1px dashed #383838;
-  border-radius: 16px;
-  background: #141414;
+  width: 100%;
+  border: 1px dashed #444;
+  border-radius: 15px;
+  background: transparent;
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 9px;
-  color: white;
   font-size: 11px;
-  font-weight: 800;
+  font-weight: 700;
   cursor: pointer;
 }
 
-.proof-button span:first-child {
-  font-size: 22px;
-  font-weight: 400;
+.proof-button input {
+  display: none;
 }
 
 .proof-preview {
-  margin-top: 12px;
-}
-
-.proof-image-wrap {
   position: relative;
+  margin-top: 12px;
+  border-radius: 15px;
+  overflow: hidden;
+  border: 1px solid var(--border);
 }
 
-.proof-image {
-  width: 100%;
-  max-height: 280px;
-  object-fit: cover;
-  border-radius: 16px;
+.proof-preview img {
   display: block;
+  width: 100%;
+  max-height: 320px;
+  object-fit: cover;
 }
 
 .remove-proof {
-  width: 100%;
-  margin-top: 8px;
-  height: 42px;
-  border: 1px solid #292929;
-  border-radius: 12px;
-  background: #161616;
-  color: #aaa;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 1px;
+  position: absolute;
+  top: 9px;
+  right: 9px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(0,0,0,.75);
+  color: white;
+  font-size: 16px;
+}
+
+.complete-button {
+  margin-top: 22px;
 }
 
 /* =========================
@@ -1080,209 +1194,268 @@ button {
 ========================= */
 
 .complete-screen {
-  min-height: 100vh;
-  padding: 25px 20px;
+  min-height: 75vh;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
+  text-align: center;
 }
 
-.complete-icon {
-  width: 70px;
-  height: 70px;
+.complete-check {
+  width: 76px;
+  height: 76px;
+  border: 1px solid white;
   border-radius: 50%;
-  background: #fff;
-  color: #000;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 28px;
-  margin-bottom: 28px;
+  margin-bottom: 25px;
 }
 
 .complete-title {
-  font-size: 44px;
-  line-height: .95;
-  letter-spacing: -2.2px;
-  margin-bottom: 17px;
+  font-size: 39px;
+  letter-spacing: -2px;
 }
 
 .complete-flux {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 700;
-  margin-bottom: 10px;
+  margin-top: 12px;
 }
 
-.complete-text {
-  color: #777;
+.complete-sub {
+  color: var(--muted);
   font-size: 12px;
-  line-height: 1.5;
-  margin-bottom: 35px;
+  margin-top: 8px;
 }
 
 /* =========================
    SWYCH
 ========================= */
 
-.stat-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-bottom: 29px;
+.swych-header {
+  margin-bottom: 25px;
 }
 
-.stat-card {
-  background: #111;
-  border: 1px solid #242424;
-  border-radius: 21px;
-  padding: 22px;
+.swych-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 24px;
+}
+
+.swych-icon-box {
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  border: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.swych-card-title {
+  font-size: 27px;
+  letter-spacing: -1.2px;
+}
+
+.swych-card-description {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+  margin-top: 9px;
+}
+
+.swych-stat-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 21px;
+}
+
+.stat-box {
+  border: 1px solid var(--border);
+  background: #0a0a0a;
+  border-radius: 14px;
+  padding: 15px;
 }
 
 .stat-number {
-  font-size: 30px;
-  letter-spacing: -1px;
-  margin-bottom: 7px;
+  font-size: 21px;
+  font-weight: 700;
 }
 
 .stat-label {
-  color: #666;
+  color: var(--muted);
   font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 1px;
-}
-
-.empty-history {
-  background: #101010;
-  border: 1px dashed #292929;
-  border-radius: 22px;
-  padding: 38px 23px;
-  text-align: center;
+  margin-top: 4px;
+  letter-spacing: .7px;
 }
 
 /* =========================
    PROFILE
 ========================= */
 
-.profile-card {
-  background: #111;
-  border: 1px solid #242424;
-  border-radius: 25px;
-  padding: 24px;
-  margin-bottom: 18px;
-}
-
-.profile-top {
-  display: flex;
-  align-items: center;
-  gap: 17px;
-  margin-bottom: 25px;
+.profile-header {
+  text-align: center;
+  padding: 12px 0 25px;
 }
 
 .profile-avatar {
-  width: 66px;
-  height: 66px;
+  width: 82px;
+  height: 82px;
+  margin: 0 auto;
   border-radius: 50%;
-  background: #252525;
+  background: #151515;
+  border: 1px solid #333;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  font-size: 25px;
   font-weight: 700;
+}
+
+.profile-name-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  margin-top: 17px;
 }
 
 .profile-name {
-  font-size: 22px;
-  font-weight: 700;
-  margin-bottom: 4px;
+  font-size: 25px;
+  letter-spacing: -1px;
 }
 
 .profile-username {
-  color: #666;
-  font-size: 11px;
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 5px;
 }
 
 .profile-bio {
-  color: #888;
+  color: #aaa;
   font-size: 12px;
   line-height: 1.5;
-  margin-bottom: 19px;
+  max-width: 310px;
+  margin: 12px auto 0;
 }
 
-.edit-btn {
-  width: 100%;
-  height: 47px;
-  border-radius: 14px;
-  background: #191919;
-  border: 1px solid #292929;
-  color: #fff;
+.profile-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+  margin-top: 19px;
+}
+
+.small-button {
+  min-height: 43px;
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: white;
   font-size: 10px;
   font-weight: 700;
-  letter-spacing: .7px;
 }
 
-.profile-flux {
-  background: #fff;
-  color: #000;
-  border-radius: 23px;
-  padding: 23px;
-  margin-bottom: 17px;
+.profile-level-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 19px;
+  padding: 19px;
+  margin-bottom: 15px;
 }
 
-.profile-flux-top {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 22px;
+.profile-section {
+  margin-top: 27px;
 }
 
-.profile-flux-number {
-  font-size: 35px;
-  font-weight: 700;
-  letter-spacing: -1.5px;
-}
-
-.profile-level {
+.profile-section-title {
+  color: var(--muted);
   font-size: 10px;
+  letter-spacing: 1.4px;
   font-weight: 700;
-  color: #666;
-}
-
-.profile-flux .progress-track {
-  background: #ddd;
-}
-
-.profile-flux .progress-fill {
-  background: #000;
-}
-
-.my-drop {
-  background: #111;
-  border: 1px solid #242424;
-  border-radius: 20px;
-  padding: 20px;
   margin-bottom: 12px;
 }
 
+.my-drop-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 17px;
+  padding: 17px;
+  margin-bottom: 10px;
+}
+
+.my-drop-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
 .my-drop-title {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
-  margin-bottom: 7px;
 }
 
 .my-drop-meta {
-  color: #666;
+  color: var(--muted);
   font-size: 10px;
-  margin-bottom: 16px;
+  margin-top: 5px;
 }
 
-.delete-btn {
+.delete-button {
+  color: var(--danger);
   background: transparent;
-  border: 1px solid #292929;
-  color: #777;
-  border-radius: 12px;
-  min-height: 39px;
-  padding: 0 13px;
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
+}
+
+/* =========================
+   VERIFICATION
+========================= */
+
+.verification-card {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 19px;
+  padding: 19px;
+}
+
+.verification-status {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.verification-description {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.55;
+  margin-top: 10px;
+}
+
+.demo-verify-button {
+  margin-top: 15px;
+  width: 100%;
+  min-height: 44px;
+  border-radius: 12px;
+  background: white;
+  color: black;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+/* =========================
+   EDIT PROFILE
+========================= */
+
+.edit-header {
+  margin-bottom: 28px;
 }
 
 /* =========================
@@ -1292,113 +1465,111 @@ button {
 .bottom-nav {
   position: fixed;
   z-index: 100;
-  bottom: 13px;
   left: 50%;
+  bottom: 0;
   transform: translateX(-50%);
-  width: min(calc(100% - 24px), 430px);
-  height: 76px;
-  background: rgba(16,16,16,.96);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid #292929;
-  border-radius: 24px;
+  width: min(100%, 480px);
+  height: 82px;
+  background: rgba(7,7,7,.96);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid var(--border);
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  padding: 7px;
-  box-shadow: 0 10px 40px rgba(0,0,0,.7);
+  grid-template-columns: repeat(5, 1fr);
+  padding: 9px 9px 10px;
 }
 
-.nav-btn {
-  position: relative;
-  border: none;
+.nav-item {
   background: transparent;
-  color: #555;
-  border-radius: 18px;
+  color: #6f6f6f;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 5px;
-  font-size: 9px;
+  font-size: 8px;
   font-weight: 700;
-  transition: .2s;
+  letter-spacing: .4px;
+  position: relative;
 }
 
-.nav-icon {
-  font-size: 17px;
-  line-height: 1;
+.nav-item.active {
+  color: white;
 }
 
-.nav-btn.active {
-  color: #fff;
-  background: #1d1d1d;
-}
-
-.nav-btn.drop-nav {
-  transform: translateY(-15px);
-  width: 59px;
-  height: 59px;
-  align-self: center;
-  justify-self: center;
+.nav-item.active::after {
+  content: "";
+  position: absolute;
+  bottom: 1px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
-  background: #fff;
-  color: #000;
-  border: 5px solid #080808;
-  box-shadow: 0 5px 20px rgba(255,255,255,.08);
+  background: white;
 }
 
-.nav-btn.drop-nav .nav-icon {
-  font-size: 23px;
+.nav-drop {
+  width: 53px;
+  height: 53px;
+  border-radius: 17px;
+  background: white;
+  color: black;
+  margin-top: -25px;
+  border: 5px solid var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-drop .app-icon {
+  width: 22px;
+  height: 22px;
 }
 
 /* =========================
-   UTILITIES
+   TOAST
 ========================= */
 
-.hidden {
-  display: none !important;
-}
-
-.mt-large {
-  margin-top: 30px;
-}
-
-.bottom-space {
-  height: 15px;
-}
-
-.logout-btn {
-  width: 100%;
-  min-height: 50px;
-  border-radius: 15px;
-  background: transparent;
-  border: 1px solid #252525;
-  color: #777;
-  font-size: 10px;
-  font-weight: 700;
-  margin-top: 28px;
-}
-
-.flash-message {
+.toast {
   position: fixed;
   z-index: 200;
-  top: 20px;
   left: 50%;
-  transform: translateX(-50%);
-  width: min(calc(100% - 36px), 400px);
-  background: #fff;
-  color: #000;
-  padding: 15px 17px;
-  border-radius: 15px;
+  bottom: 96px;
+  transform: translateX(-50%) translateY(15px);
+  width: min(calc(100% - 36px), 430px);
+  background: white;
+  color: black;
+  border-radius: 13px;
+  padding: 13px 15px;
   font-size: 11px;
   font-weight: 700;
-  display: none;
-  box-shadow: 0 10px 30px rgba(0,0,0,.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: .25s ease;
+  text-align: center;
 }
 
-@media (min-width: 500px) {
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (min-width: 481px) {
+  body {
+    background:
+      radial-gradient(circle at top, #151515 0%, #050505 35%);
+  }
+
+  .app-shell {
+    border-left: 1px solid #111;
+    border-right: 1px solid #111;
+  }
+
   .bottom-nav {
-    left: 50%;
+    border-left: 1px solid #222;
+    border-right: 1px solid #222;
   }
 }
 </style>
@@ -1408,994 +1579,926 @@ button {
 
 <div class="app-shell">
 
-<!-- =========================
-     WELCOME
-========================= -->
-
-<section id="welcome" class="screen active">
-  <div class="auth-screen">
-
-    <div class="brand">
-      SWYCHED<span>.</span>
+  <!-- =========================
+       WELCOME
+  ========================== -->
+  <section id="welcome" class="screen">
+    <div class="welcome-top">
+      <div class="logo">SWYCHED</div>
+      <div class="logo-sub">LIVE SOMEONE ELSE'S REALITY.</div>
     </div>
 
-    <div class="welcome-content">
-      <div class="welcome-eyebrow">LIVE SOMEONE ELSE'S REALITY</div>
+    <div class="welcome-center">
+      <div class="welcome-title">
+        YOU<br>
+        WOULDN'T<br>
+        LAST.
+      </div>
 
-      <h1 class="welcome-title">
-        GET<br>
-        <span>SWYCHED.</span>
-      </h1>
-
-      <p class="welcome-subtitle">
-        Enter other people's realities. Complete their missions.
-        Earn FLUX. Then drop your own.
-      </p>
+      <div class="welcome-description">
+        Drop your reality. Enter someone else's. Complete the mission. Earn FLUX.
+      </div>
     </div>
 
-    <div class="auth-buttons">
-      <button class="primary-btn" onclick="openSignup()">
+    <div class="welcome-actions">
+      <button class="primary-button" onclick="showAuth('signup')">
         CREATE ACCOUNT
       </button>
 
-      <button class="secondary-btn" onclick="openLogin()">
+      <button class="secondary-button" onclick="showAuth('login')">
         LOG IN
       </button>
     </div>
-
-  </div>
-</section>
+  </section>
 
 
-<!-- =========================
-     AUTH
-========================= -->
+  <!-- =========================
+       AUTH
+  ========================== -->
+  <section id="auth" class="screen hidden app-screen">
 
-<section id="auth" class="screen">
+    <div class="auth-header">
+      <button class="back-button" onclick="showScreen('welcome')">
+        <svg class="app-icon small" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="1.8"
+             stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </button>
 
-  <div class="auth-container">
-
-    <button class="back-btn" onclick="showScreen('welcome')">
-      ← BACK
-    </button>
-
-    <div id="signupForm">
-
-      <div class="form-title">Create account.</div>
-
-      <div class="form-subtitle">
-        Build your profile and start getting SWYCHED.
+      <div id="authTitle" class="auth-title">CREATE ACCOUNT</div>
+      <div id="authSubtitle" class="auth-subtitle">
+        Create your SWYCHED identity.
       </div>
+    </div>
 
-      <div id="signupError" class="error-message"></div>
+    <form id="authForm" class="form-stack" onsubmit="handleAuth(event)">
 
-      <div class="form-group">
+      <div id="nameGroup" class="form-group">
         <label class="form-label">DISPLAY NAME</label>
-        <input id="signupName" class="form-input" placeholder="Your name">
+        <input
+          id="authName"
+          class="form-input"
+          type="text"
+          maxlength="30"
+          placeholder="Your name"
+        >
       </div>
 
       <div class="form-group">
         <label class="form-label">USERNAME</label>
-        <input id="signupUsername" class="form-input" placeholder="@username">
+        <input
+          id="authUsername"
+          class="form-input"
+          type="text"
+          maxlength="20"
+          autocomplete="username"
+          placeholder="@username"
+          required
+        >
       </div>
 
       <div class="form-group">
         <label class="form-label">PASSWORD</label>
-        <input id="signupPassword" type="password" class="form-input" placeholder="Password">
+        <input
+          id="authPassword"
+          class="form-input"
+          type="password"
+          minlength="4"
+          autocomplete="current-password"
+          placeholder="Password"
+          required
+        >
       </div>
 
-      <button class="primary-btn" onclick="createAccount()">
+      <div id="authError" class="auth-error"></div>
+
+      <button id="authSubmit" class="primary-button" type="submit">
         CREATE ACCOUNT
       </button>
 
-      <div class="form-note">
-        This prototype stores account information locally in your browser.
-        It is not production-level authentication.
-      </div>
+    </form>
 
+  </section>
+
+
+  <!-- =========================
+       HOME
+  ========================== -->
+  <section id="home" class="screen hidden app-screen">
+
+    <div class="top-bar">
+      <div class="top-logo">SWYCHED</div>
+
+      <div class="top-right">
+        <div class="flux-pill">
+          <span class="flux-dot"></span>
+          <span id="homeFlux">0 FLUX</span>
+        </div>
+      </div>
     </div>
 
+    <div class="home-greeting">
+      <div class="eyebrow">WELCOME BACK</div>
+      <div id="homeTitle" class="home-title">READY TO SWYCH?</div>
+    </div>
 
-    <div id="loginForm" class="hidden">
+    <div class="level-card">
+      <div class="level-row">
+        <div>
+          <div id="homeLevel" class="level-number">1</div>
+          <div class="level-label">LEVEL</div>
+        </div>
 
-      <div class="form-title">Welcome back.</div>
-
-      <div class="form-subtitle">
-        Log in and get back to the action.
+        <div id="homeLevelFlux" class="level-flux">
+          0 FLUX
+          <span>/ 500</span>
+        </div>
       </div>
 
-      <div id="loginError" class="error-message"></div>
-
-      <div class="form-group">
-        <label class="form-label">USERNAME</label>
-        <input id="loginUsername" class="form-input" placeholder="@username">
+      <div class="progress-track">
+        <div id="homeProgress" class="progress-fill" style="width:0%"></div>
       </div>
 
-      <div class="form-group">
-        <label class="form-label">PASSWORD</label>
-        <input id="loginPassword" type="password" class="form-input" placeholder="Password">
+      <div class="progress-caption">
+        <span id="homeProgressCurrent">0 FLUX</span>
+        <span id="homeProgressTarget">500 FLUX</span>
       </div>
+    </div>
 
-      <button class="primary-btn" onclick="login()">
-        LOG IN
+    <div class="home-section-title">START HERE</div>
+
+    <div class="home-actions">
+
+      <button class="home-action" onclick="showScreen('explore')">
+        <div class="action-icon">
+          <!-- SAME EXPLORE ICON USED IN NAV -->
+          <svg class="app-icon" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="1.8"
+               stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="10.8" cy="10.8" r="6.5"/>
+            <path d="m16 16 4.5 4.5"/>
+          </svg>
+        </div>
+
+        <div class="action-text">
+          <div class="action-title">EXPLORE</div>
+          <div class="action-description">
+            Find a Reality you wouldn't normally live.
+          </div>
+        </div>
+      </button>
+
+      <button class="home-action" onclick="showScreen('drop')">
+        <div class="action-icon">
+          <!-- SAME DROP ICON USED IN NAV -->
+          <svg class="app-icon" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="1.8"
+               stroke-linecap="round">
+            <path d="M12 5v14"/>
+            <path d="M5 12h14"/>
+          </svg>
+        </div>
+
+        <div class="action-text">
+          <div class="action-title">DROP YOUR REALITY</div>
+          <div class="action-description">
+            Create missions from your own life.
+          </div>
+        </div>
+      </button>
+
+      <button class="home-action" onclick="showScreen('swych')">
+        <div class="action-icon">
+          <!-- SAME SWYCH ICON USED IN NAV -->
+          <svg class="app-icon" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="1.8"
+               stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 7h10l-3-3"/>
+            <path d="M17 17H7l3 3"/>
+            <path d="M17 7a6 6 0 0 1 0 10"/>
+            <path d="M7 17a6 6 0 0 1 0-10"/>
+          </svg>
+        </div>
+
+        <div class="action-text">
+          <div class="action-title">SWYCH</div>
+          <div class="action-description">
+            Continue the Reality you entered.
+          </div>
+        </div>
       </button>
 
     </div>
 
-  </div>
+    <div class="home-section-title">YOUR PROGRESS</div>
 
-</section>
-
-
-<!-- =========================
-     HOME
-========================= -->
-
-<section id="home" class="screen app-screen">
-
-  <div class="topbar">
-
-    <div class="topbar-brand">
-      SWYCHED.
-    </div>
-
-    <div class="topbar-right">
-      <div class="flux-pill">
-        <span id="topFlux">0</span> FLUX
-      </div>
-
-      <div class="avatar-mini" id="topAvatar">
-        ?
-      </div>
-    </div>
-
-  </div>
-
-
-  <div class="greeting-card">
-
-    <div class="greeting-small">
-      WELCOME BACK
-    </div>
-
-    <div class="greeting-name">
-      <span>HEY,</span> <span id="homeName">USER</span>
-    </div>
-
-  </div>
-
-
-  <div class="flux-card">
-
-    <div class="flux-card-top">
-
-      <div>
-        <div class="flux-label">YOUR FLUX</div>
-
-        <div class="level-text" id="homeLevel">
-          LEVEL 1
+    <div class="section-card">
+      <div class="level-row">
+        <div>
+          <div class="section-heading" style="margin:0">
+            FLUX
+          </div>
+          <div class="section-subheading" style="margin:5px 0 0">
+            Earn up to 250 FLUX per mission.
+          </div>
         </div>
-      </div>
 
-      <div class="flux-number" id="homeFlux">
-        0
-      </div>
-
-    </div>
-
-    <div class="progress-track">
-      <div id="homeProgress" class="progress-fill"></div>
-    </div>
-
-    <div class="progress-caption">
-      <span id="progressCurrent">0 FLUX</span>
-      <span id="progressNext">500 FLUX</span>
-    </div>
-
-  </div>
-
-
-  <div class="section-title">
-    WHAT DO YOU WANT TO DO?
-  </div>
-
-  <div class="action-grid">
-
-    <button class="action-card" onclick="showScreen('explore')">
-
-      <div class="action-icon">↗</div>
-
-      <div>
-        <div class="action-name">EXPLORE</div>
-        <div class="action-description">
-          Find a Reality to enter.
-        </div>
-      </div>
-
-    </button>
-
-
-    <button class="action-card" onclick="showScreen('drop')">
-
-      <div class="action-icon">＋</div>
-
-      <div>
-        <div class="action-name">DROP</div>
-        <div class="action-description">
-          Create your own Reality.
-        </div>
-      </div>
-
-    </button>
-
-
-    <button class="action-card" onclick="showScreen('swych')">
-
-      <div class="action-icon">↔</div>
-
-      <div>
-        <div class="action-name">SWYCH</div>
-        <div class="action-description">
-          See your completed challenges.
-        </div>
-      </div>
-
-    </button>
-
-
-    <button class="action-card" onclick="showScreen('profile')">
-
-      <div class="action-icon">○</div>
-
-      <div>
-        <div class="action-name">PROFILE</div>
-        <div class="action-description">
-          Your progress and Drops.
-        </div>
-      </div>
-
-    </button>
-
-  </div>
-
-
-  <div class="section-title">
-    HOW SWYCHED WORKS
-  </div>
-
-  <div class="how-card">
-
-    <div class="how-step">
-      <div class="how-number">1</div>
-      <div>
-        <div class="how-name">ENTER</div>
-        <div class="how-text">
-          Find a Reality that sounds like something you would actually try.
+        <div id="homeSwitched" style="font-size:20px;font-weight:700">
+          0
         </div>
       </div>
     </div>
 
-    <div class="how-step">
-      <div class="how-number">2</div>
-      <div>
-        <div class="how-name">SWYCH</div>
-        <div class="how-text">
-          Complete the missions inside someone else's Reality.
+  </section>
+
+
+  <!-- =========================
+       EXPLORE
+  ========================== -->
+  <section id="explore" class="screen hidden app-screen">
+
+    <div class="top-bar">
+      <div class="top-logo">EXPLORE</div>
+
+      <div class="top-right">
+        <div class="flux-pill">
+          <span class="flux-dot"></span>
+          <span id="exploreFlux">0 FLUX</span>
         </div>
       </div>
     </div>
 
-    <div class="how-step">
-      <div class="how-number">3</div>
-      <div>
-        <div class="how-name">EARN</div>
-        <div class="how-text">
-          Every completed mission earns FLUX, up to 250 per mission.
+    <div class="page-heading">
+      <div class="page-title">REALITIES</div>
+      <div class="page-description">
+        Someone else's life. Someone else's rules.
+      </div>
+    </div>
+
+    <div id="exploreList" class="explore-list"></div>
+
+    <!-- MUSIC -->
+    <div class="music-section">
+      <div class="home-section-title">MUSIC</div>
+
+      <div class="music-card">
+        <div class="music-row">
+          <div class="music-art">
+            <svg class="app-icon small" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.7"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 18V5l10-2v13"/>
+              <circle cx="6" cy="18" r="3"/>
+              <circle cx="16" cy="16" r="3"/>
+            </svg>
+          </div>
+
+          <div>
+            <div class="music-title">SWYCHED SOUND</div>
+            <div class="music-sub">Your Reality deserves a soundtrack.</div>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="how-step">
-      <div class="how-number">4</div>
-      <div>
-        <div class="how-name">DROP</div>
-        <div class="how-text">
-          Create a Reality of your own and challenge other people.
+    <!-- EXCL -->
+    <div class="excl-section">
+      <div class="home-section-title">EXCLUSIVE</div>
+
+      <div id="exclCard" class="excl-card locked">
+        <div class="excl-label">EXCL</div>
+
+        <div class="excl-title">THE REALITIES YOU HAVEN'T SEEN.</div>
+
+        <div class="excl-description">
+          Exclusive creator drops and high-level experiences reserved for advanced SWYCHERS.
+        </div>
+
+        <div class="excl-lock">
+          <div class="excl-requirement">
+            Requires <strong>25,000 FLUX</strong>
+          </div>
+
+          <button
+            id="exclButton"
+            class="excl-button"
+            type="button"
+            disabled
+          >
+            LOCKED
+          </button>
         </div>
       </div>
     </div>
 
-  </div>
-
-</section>
+  </section>
 
 
-<!-- =========================
-     EXPLORE
-========================= -->
+  <!-- =========================
+       DROP
+  ========================== -->
+  <section id="drop" class="screen hidden app-screen">
 
-<section id="explore" class="screen app-screen">
-
-  <div class="topbar">
-
-    <div>
-      <div class="page-kicker">DISCOVER</div>
-      <div class="page-title">Explore.</div>
+    <div class="top-bar">
+      <div class="top-logo">DROP</div>
     </div>
 
-    <div class="flux-pill">
-      <span id="exploreFlux">0</span>
+    <div class="page-heading">
+      <div class="page-title">YOUR REALITY.</div>
+      <div class="page-description">
+        Give someone a reason to live a day like you.
+      </div>
     </div>
 
-  </div>
+    <div class="section-card">
 
+      <div class="section-heading">REALITY DETAILS</div>
 
-  <div class="search-box">
+      <div class="form-stack">
 
-    <div class="search-icon">⌕</div>
+        <div class="form-group">
+          <label class="form-label">TITLE</label>
+          <input
+            id="dropTitle"
+            class="form-input"
+            maxlength="50"
+            placeholder="e.g. A Day as a Student Athlete"
+          >
+        </div>
 
-    <input
-      id="searchInput"
-      class="search-input"
-      placeholder="Search Realities..."
-      oninput="renderExplore()"
-    >
+        <div class="form-group">
+          <label class="form-label">CATEGORY</label>
+          <select id="dropCategory" class="form-select">
+            <option value="SPORTS">SPORTS</option>
+            <option value="SCHOOL">SCHOOL</option>
+            <option value="LIFESTYLE">LIFESTYLE</option>
+            <option value="CREATIVE">CREATIVE</option>
+            <option value="FITNESS">FITNESS</option>
+            <option value="FOOD">FOOD</option>
+            <option value="OTHER">OTHER</option>
+          </select>
+        </div>
 
-  </div>
+        <div class="form-group">
+          <label class="form-label">DESCRIPTION</label>
+          <textarea
+            id="dropDescription"
+            class="form-textarea"
+            maxlength="300"
+            placeholder="What is this Reality actually like?"
+          ></textarea>
+        </div>
 
-
-  <div id="categoryScroll" class="category-scroll">
-
-    <button class="category-chip active" onclick="setCategory('ALL', this)">
-      ALL
-    </button>
-
-    <button class="category-chip" onclick="setCategory('SPORTS', this)">
-      SPORTS
-    </button>
-
-    <button class="category-chip" onclick="setCategory('FITNESS', this)">
-      FITNESS
-    </button>
-
-    <button class="category-chip" onclick="setCategory('LIFE', this)">
-      LIFE
-    </button>
-
-    <button class="category-chip" onclick="setCategory('SCHOOL', this)">
-      SCHOOL
-    </button>
-
-    <button class="category-chip" onclick="setCategory('OTHER', this)">
-      OTHER
-    </button>
-
-  </div>
-
-
-  <div id="realityFeed" class="reality-feed"></div>
-
-
-  <div id="exploreEmpty" class="empty-state hidden">
-
-    <div class="empty-icon">＋</div>
-
-    <div class="empty-title">
-      NO REALITIES YET
+      </div>
     </div>
 
-    <div class="empty-text">
-      Be the first person to Drop a Reality.
-    </div>
 
-  </div>
+    <!-- CREATOR STATUS -->
+    <div class="section-card">
 
+      <div class="section-heading">CREATOR STATUS</div>
 
-  <div class="excl-section">
+      <div class="creator-status-card">
+        <div class="creator-status-top">
 
-    <div class="section-title">
-      SOMETHING DIFFERENT
-    </div>
+          <div class="creator-status-label">
+            VERIFICATION
+          </div>
 
-    <div id="exclContainer"></div>
+          <div id="dropCreatorStatus" class="creator-status-value">
+          </div>
 
-  </div>
+        </div>
 
-</section>
-
-
-<!-- =========================
-     DROP
-========================= -->
-
-<section id="drop" class="screen app-screen">
-
-  <div class="topbar">
-
-    <div>
-      <div class="page-kicker">CREATE</div>
-      <div class="page-title">Drop.</div>
-    </div>
-
-  </div>
-
-
-  <div class="intro-card">
-
-    <div class="intro-card-title">
-      Drop your Reality.
-    </div>
-
-    <div class="intro-card-text">
-      Create a set of missions based on something you actually do,
-      know, or experience. Other people will try to live it.
-    </div>
-
-  </div>
-
-
-  <form id="dropForm" class="drop-form" onsubmit="event.preventDefault(); previewDrop();">
-
-    <div class="form-group">
-
-      <label class="form-label">REALITY NAME</label>
-
-      <input
-        id="dropTitle"
-        class="form-input"
-        maxlength="60"
-        placeholder="e.g. Weekend League"
-        required
-      >
+        <div class="status-note">
+          Verified creators have been recognized by SWYCHED as reliable creators.
+          Verification is not something a creator can simply select on a Drop.
+        </div>
+      </div>
 
     </div>
 
 
-    <div class="form-group">
+    <!-- MISSIONS -->
+    <div class="section-card">
 
-      <label class="form-label">CATEGORY</label>
+      <div class="section-heading">MISSIONS</div>
 
-      <select id="dropCategory" class="form-select">
-        <option value="SPORTS">SPORTS</option>
-        <option value="FITNESS">FITNESS</option>
-        <option value="LIFE">LIFE</option>
-        <option value="SCHOOL">SCHOOL</option>
-        <option value="OTHER">OTHER</option>
-      </select>
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label class="form-label">DESCRIPTION</label>
-
-      <textarea
-        id="dropDescription"
-        class="form-textarea"
-        maxlength="220"
-        placeholder="What is this Reality actually like?"
-        required
-      ></textarea>
-
-    </div>
-
-
-    <div>
-
-      <div class="section-title">
-        MISSIONS
+      <div class="section-subheading">
+        Create realistic, specific missions. Each mission can reward up to 250 FLUX.
       </div>
 
       <div id="missionBuilders"></div>
 
+      <button
+        class="add-mission-button"
+        type="button"
+        onclick="addMission()"
+      >
+        + ADD MISSION
+      </button>
+
     </div>
 
 
+    <div class="drop-bottom-actions">
+
+      <button
+        class="primary-button"
+        type="button"
+        onclick="previewDrop()"
+      >
+        PREVIEW DROP
+      </button>
+
+      <button
+        class="secondary-button"
+        type="button"
+        onclick="clearDropBuilder()"
+      >
+        CLEAR
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       DROP PREVIEW
+  ========================== -->
+  <section id="dropPreview" class="screen hidden app-screen">
+
+    <div class="top-bar">
+      <button class="back-button" onclick="showScreen('drop')" style="margin:0">
+        <svg class="app-icon small" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="1.8"
+             stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </button>
+
+      <div class="top-logo">PREVIEW</div>
+
+      <div style="width:42px"></div>
+    </div>
+
+    <div id="dropPreviewContent"></div>
+
     <button
+      class="primary-button"
       type="button"
-      class="add-mission-btn"
-      onclick="addMission()"
+      onclick="publishDrop()"
     >
-      ＋ ADD MISSION
+      DROP REALITY
     </button>
 
-
-    <button
-      type="submit"
-      class="primary-btn publish-btn"
-    >
-      PREVIEW DROP
-    </button>
-
-  </form>
-
-</section>
+  </section>
 
 
-<!-- =========================
-     DROP PREVIEW
-========================= -->
+  <!-- =========================
+       PUBLISHED REALITY
+  ========================== -->
+  <section id="publishedReality" class="screen hidden app-screen">
 
-<section id="dropPreview" class="screen app-screen">
+    <div class="complete-screen" style="min-height:70vh">
 
-  <div class="topbar">
-
-    <button class="back-btn" onclick="showScreen('drop')" style="margin:0;">
-      ← EDIT
-    </button>
-
-    <div class="page-kicker">
-      PREVIEW
-    </div>
-
-  </div>
-
-
-  <div id="dropPreviewContent"></div>
-
-  <button
-    class="primary-btn"
-    onclick="publishDrop()"
-  >
-    PUBLISH REALITY
-  </button>
-
-</section>
-
-
-<!-- =========================
-     PUBLISHED REALITY
-========================= -->
-
-<section id="publishedReality" class="screen app-screen">
-
-  <div class="topbar">
-    <div class="topbar-brand">SWYCHED.</div>
-  </div>
-
-  <div class="complete-icon">✓</div>
-
-  <div class="complete-title">
-    REALITY<br>LIVE.
-  </div>
-
-  <div class="complete-text">
-    Your Reality is now available in Explore.
-    Time to see who can handle it.
-  </div>
-
-  <button
-    class="primary-btn"
-    onclick="showScreen('explore')"
-  >
-    VIEW IN EXPLORE
-  </button>
-
-  <div style="height:12px;"></div>
-
-  <button
-    class="secondary-btn"
-    onclick="showScreen('home')"
-  >
-    GO HOME
-  </button>
-
-</section>
-
-
-<!-- =========================
-     REALITY DETAILS
-========================= -->
-
-<section id="reality" class="screen app-screen">
-
-  <div class="topbar">
-
-    <button class="back-btn" onclick="showScreen('explore')" style="margin:0;">
-      ← EXPLORE
-    </button>
-
-  </div>
-
-  <div id="realityContent"></div>
-
-</section>
-
-
-<!-- =========================
-     MISSIONS
-========================= -->
-
-<section id="missions" class="screen app-screen">
-
-  <div class="topbar">
-
-    <button class="back-btn" onclick="showScreen('reality')" style="margin:0;">
-      ← REALITY
-    </button>
-
-  </div>
-
-  <div id="missionsContent"></div>
-
-</section>
-
-
-<!-- =========================
-     COMPLETE
-========================= -->
-
-<section id="complete" class="screen">
-
-  <div class="complete-screen">
-
-    <div class="complete-icon">
-      ✓
-    </div>
-
-    <div class="complete-title">
-      SWYCH<br>COMPLETE.
-    </div>
-
-    <div id="completeFlux" class="complete-flux">
-      +0 FLUX
-    </div>
-
-    <div id="completeText" class="complete-text">
-      Mission completed.
-    </div>
-
-    <button
-      class="primary-btn"
-      onclick="showScreen('explore')"
-    >
-      KEEP SWYCHING
-    </button>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     SWYCH
-========================= -->
-
-<section id="swych" class="screen app-screen">
-
-  <div class="topbar">
-
-    <div>
-      <div class="page-kicker">YOUR ACTIVITY</div>
-      <div class="page-title">SWYCH.</div>
-    </div>
-
-  </div>
-
-
-  <div class="stat-grid">
-
-    <div class="stat-card">
-
-      <div id="swychCount" class="stat-number">
-        0
+      <div class="complete-check">
+        <svg class="app-icon large" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="1.8"
+             stroke-linecap="round" stroke-linejoin="round">
+          <path d="m5 12 4 4L19 6"/>
+        </svg>
       </div>
 
-      <div class="stat-label">
-        SWYCHES
+      <div class="complete-title">DROPPED.</div>
+
+      <div class="complete-sub">
+        Your Reality is now live in Explore.
       </div>
+
+      <button
+        class="primary-button"
+        style="margin-top:28px"
+        onclick="showScreen('explore')"
+      >
+        VIEW EXPLORE
+      </button>
 
     </div>
 
+  </section>
 
-    <div class="stat-card">
 
-      <div id="swychFlux" class="stat-number">
-        0
+  <!-- =========================
+       REALITY
+  ========================== -->
+  <section id="reality" class="screen hidden app-screen">
+
+    <div class="top-bar">
+      <button class="back-button" onclick="showScreen('explore')" style="margin:0">
+        <svg class="app-icon small" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="1.8"
+             stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </button>
+
+      <div class="top-logo">REALITY</div>
+
+      <div style="width:42px"></div>
+    </div>
+
+    <div id="realityContent"></div>
+
+  </section>
+
+
+  <!-- =========================
+       MISSIONS
+  ========================== -->
+  <section id="missions" class="screen hidden app-screen">
+
+    <div class="top-bar">
+      <button class="back-button" onclick="showScreen('reality')" style="margin:0">
+        <svg class="app-icon small" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="1.8"
+             stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </button>
+
+      <div class="top-logo">MISSIONS</div>
+
+      <div style="width:42px"></div>
+    </div>
+
+    <div id="missionsContent"></div>
+
+  </section>
+
+
+  <!-- =========================
+       SWYCH MISSION
+  ========================== -->
+  <section id="swych" class="screen hidden app-screen">
+
+    <div class="top-bar">
+      <div class="top-logo">SWYCH</div>
+    </div>
+
+    <div class="swych-header">
+      <div class="page-title">LIVE IT.</div>
+      <div class="page-description">
+        Complete someone else's mission. Earn FLUX.
+      </div>
+    </div>
+
+    <div id="swychContent"></div>
+
+  </section>
+
+
+  <!-- =========================
+       COMPLETE
+  ========================== -->
+  <section id="complete" class="screen hidden app-screen">
+
+    <div class="complete-screen">
+
+      <div class="complete-check">
+        <svg class="app-icon large" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="1.8"
+             stroke-linecap="round" stroke-linejoin="round">
+          <path d="m5 12 4 4L19 6"/>
+        </svg>
       </div>
 
-      <div class="stat-label">
-        FLUX EARNED
+      <div class="complete-title">SWYCH COMPLETE.</div>
+
+      <div id="completeFlux" class="complete-flux">
+        +0 FLUX
       </div>
+
+      <div class="complete-sub">
+        Mission completed.
+      </div>
+
+      <button
+        class="primary-button"
+        style="margin-top:28px"
+        onclick="showScreen('explore')"
+      >
+        BACK TO EXPLORE
+      </button>
 
     </div>
 
-  </div>
+  </section>
 
 
-  <div class="section-title">
-    COMPLETED MISSIONS
-  </div>
+  <!-- =========================
+       PROFILE
+  ========================== -->
+  <section id="profile" class="screen hidden app-screen">
 
+    <div class="top-bar">
+      <div class="top-logo">PROFILE</div>
 
-  <div id="swychHistory"></div>
-
-</section>
-
-
-<!-- =========================
-     PROFILE
-========================= -->
-
-<section id="profile" class="screen app-screen">
-
-  <div class="topbar">
-
-    <div>
-      <div class="page-kicker">ACCOUNT</div>
-      <div class="page-title">Profile.</div>
+      <div class="top-right">
+        <div class="flux-pill">
+          <span class="flux-dot"></span>
+          <span id="profileFlux">0 FLUX</span>
+        </div>
+      </div>
     </div>
 
-  </div>
-
-
-  <div class="profile-card">
-
-    <div class="profile-top">
+    <div class="profile-header">
 
       <div id="profileAvatar" class="profile-avatar">
-        ?
+        A
       </div>
 
-      <div>
+      <div class="profile-name-row">
+        <div id="profileName" class="profile-name">Name</div>
+        <span id="profileVerifiedBadge" class="verified-badge hidden">✓</span>
+      </div>
 
-        <div id="profileName" class="profile-name">
-          User
+      <div id="profileUsername" class="profile-username">
+        @username
+      </div>
+
+      <div id="profileBio" class="profile-bio">
+      </div>
+
+      <div class="profile-actions">
+        <button
+          class="small-button"
+          onclick="showScreen('editProfile')"
+        >
+          EDIT PROFILE
+        </button>
+
+        <button
+          class="small-button"
+          onclick="logout()"
+        >
+          LOG OUT
+        </button>
+      </div>
+
+    </div>
+
+
+    <!-- LEVEL -->
+    <div class="profile-level-card">
+
+      <div class="level-row">
+        <div>
+          <div id="profileLevel" class="level-number">1</div>
+          <div class="level-label">LEVEL</div>
         </div>
 
-        <div id="profileUsername" class="profile-username">
-          @username
+        <div id="profileLevelFlux" class="level-flux">
+          0 FLUX <span>/ 500</span>
         </div>
+      </div>
+
+      <div class="progress-track">
+        <div id="profileProgress" class="progress-fill" style="width:0%"></div>
+      </div>
+
+      <div class="progress-caption">
+        <span id="profileProgressCurrent">0 FLUX</span>
+        <span id="profileProgressTarget">500 FLUX</span>
+      </div>
+
+    </div>
+
+
+    <!-- CREATOR VERIFICATION -->
+    <div class="profile-section">
+
+      <div class="profile-section-title">
+        CREATOR STATUS
+      </div>
+
+      <div class="verification-card">
+
+        <div id="profileVerificationStatus" class="verification-status">
+        </div>
+
+        <div class="verification-description">
+          Verified creators are marked as reliable by SWYCHED.
+          In the real app, verification would be granted by SWYCHED staff
+          or an admin system rather than self-selected.
+        </div>
+
+        <!-- Prototype-only control -->
+        <button
+          id="demoVerifyButton"
+          class="demo-verify-button"
+          onclick="toggleDemoVerification()"
+        >
+          DEMO: VERIFY CREATOR
+        </button>
 
       </div>
 
     </div>
 
 
-    <div id="profileBio" class="profile-bio">
-      No bio yet.
+    <!-- MY DROPS -->
+    <div class="profile-section">
+
+      <div class="profile-section-title">
+        MY DROPS
+      </div>
+
+      <div id="myDrops"></div>
+
     </div>
 
+  </section>
+
+
+  <!-- =========================
+       EDIT PROFILE
+  ========================== -->
+  <section id="editProfile" class="screen hidden app-screen">
+
+    <div class="edit-header">
+
+      <button
+        class="back-button"
+        onclick="showScreen('profile')"
+      >
+        <svg class="app-icon small" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="1.8"
+             stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </button>
+
+      <div class="page-title">EDIT PROFILE</div>
+
+    </div>
+
+    <div class="section-card">
+
+      <div class="form-stack">
+
+        <div class="form-group">
+          <label class="form-label">DISPLAY NAME</label>
+          <input
+            id="editName"
+            class="form-input"
+            maxlength="30"
+          >
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">USERNAME</label>
+          <input
+            id="editUsername"
+            class="form-input"
+            maxlength="20"
+          >
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">BIO</label>
+          <textarea
+            id="editBio"
+            class="form-textarea"
+            maxlength="160"
+            placeholder="Tell people what your Reality is about."
+          ></textarea>
+        </div>
+
+      </div>
+
+    </div>
 
     <button
-      class="edit-btn"
-      onclick="openEditProfile()"
+      class="primary-button"
+      onclick="saveProfile()"
     >
-      EDIT PROFILE
+      SAVE PROFILE
     </button>
 
-  </div>
+  </section>
 
 
-  <div class="profile-flux">
+  <!-- =========================
+       BOTTOM NAV
+  ========================== -->
+  <nav id="bottomNav" class="bottom-nav hidden">
 
-    <div class="profile-flux-top">
-
-      <div>
-
-        <div class="profile-level" id="profileLevel">
-          LEVEL 1
-        </div>
-
-      </div>
-
-      <div class="profile-flux-number" id="profileFlux">
-        0
-      </div>
-
-    </div>
-
-
-    <div class="progress-track">
-      <div id="profileProgress" class="progress-fill"></div>
-    </div>
-
-    <div class="progress-caption">
-
-      <span id="profileCurrent">
-        0 FLUX
-      </span>
-
-      <span id="profileNext">
-        500 FLUX
-      </span>
-
-    </div>
-
-  </div>
-
-
-  <div class="stat-grid">
-
-    <div class="stat-card">
-
-      <div id="profileSwcyhes" class="stat-number">
-        0
-      </div>
-
-      <div class="stat-label">
-        SWYCHES
-      </div>
-
-    </div>
-
-
-    <div class="stat-card">
-
-      <div id="profileDropsCount" class="stat-number">
-        0
-      </div>
-
-      <div class="stat-label">
-        DROPS
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <div class="section-title">
-    MY DROPS
-  </div>
-
-
-  <div id="myDrops"></div>
-
-
-  <button
-    class="logout-btn"
-    onclick="logout()"
-  >
-    LOG OUT
-  </button>
-
-</section>
-
-
-<!-- =========================
-     EDIT PROFILE
-========================= -->
-
-<section id="editProfile" class="screen app-screen">
-
-  <div class="topbar">
-
+    <!-- HOME -->
     <button
-      class="back-btn"
+      id="navHome"
+      class="nav-item"
+      onclick="showScreen('home')"
+    >
+      <svg class="app-icon" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="1.8"
+           stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3.5 10.5 12 3.5l8.5 7"/>
+        <path d="M5.5 9.5v10h13v-10"/>
+        <path d="M9.5 19.5v-5h5v5"/>
+      </svg>
+      <span>HOME</span>
+    </button>
+
+
+    <!-- EXPLORE -->
+    <button
+      id="navExplore"
+      class="nav-item"
+      onclick="showScreen('explore')"
+    >
+      <svg class="app-icon" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="1.8"
+           stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="10.8" cy="10.8" r="6.5"/>
+        <path d="m16 16 4.5 4.5"/>
+      </svg>
+      <span>EXPLORE</span>
+    </button>
+
+
+    <!-- DROP -->
+    <button
+      id="navDrop"
+      class="nav-item"
+      onclick="showScreen('drop')"
+    >
+      <div class="nav-drop">
+        <svg class="app-icon" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="1.8"
+             stroke-linecap="round">
+          <path d="M12 5v14"/>
+          <path d="M5 12h14"/>
+        </svg>
+      </div>
+      <span>DROP</span>
+    </button>
+
+
+    <!-- SWYCH -->
+    <button
+      id="navSwych"
+      class="nav-item"
+      onclick="showScreen('swych')"
+    >
+      <svg class="app-icon" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="1.8"
+           stroke-linecap="round" stroke-linejoin="round">
+        <path d="M7 7h10l-3-3"/>
+        <path d="M17 17H7l3 3"/>
+        <path d="M17 7a6 6 0 0 1 0 10"/>
+        <path d="M7 17a6 6 0 0 1 0-10"/>
+      </svg>
+      <span>SWYCH</span>
+    </button>
+
+
+    <!-- PROFILE -->
+    <button
+      id="navProfile"
+      class="nav-item"
       onclick="showScreen('profile')"
-      style="margin:0;"
     >
-      ← PROFILE
+      <!-- HEAD + BODY OUTLINE -->
+      <svg class="app-icon" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="1.8"
+           stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="7.5" r="3"/>
+        <path d="M5.5 20c.8-3.5 3.1-5.5 6.5-5.5s5.7 2 6.5 5.5"/>
+      </svg>
+      <span>PROFILE</span>
     </button>
 
-  </div>
-
-
-  <div class="page-header">
-
-    <div class="page-kicker">
-      ACCOUNT
-    </div>
-
-    <div class="page-title">
-      Edit profile.
-    </div>
-
-  </div>
-
-
-  <div id="editError" class="error-message"></div>
-
-
-  <div class="form-group">
-
-    <label class="form-label">
-      DISPLAY NAME
-    </label>
-
-    <input
-      id="editName"
-      class="form-input"
-    >
-
-  </div>
-
-
-  <div class="form-group">
-
-    <label class="form-label">
-      USERNAME
-    </label>
-
-    <input
-      id="editUsername"
-      class="form-input"
-    >
-
-  </div>
-
-
-  <div class="form-group">
-
-    <label class="form-label">
-      BIO
-    </label>
-
-    <textarea
-      id="editBio"
-      class="form-textarea"
-      maxlength="160"
-      placeholder="Tell people what your Reality is about."
-    ></textarea>
-
-  </div>
-
-
-  <button
-    class="primary-btn"
-    onclick="saveProfile()"
-  >
-    SAVE CHANGES
-  </button>
-
-</section>
-
-
-<!-- =========================
-     NAV
-========================= -->
-
-<nav id="bottomNav" class="bottom-nav hidden">
-
-  <button class="nav-btn" data-screen="home" onclick="showScreen('home')">
-    <div class="nav-icon">⌂</div>
-    <div>HOME</div>
-  </button>
-
-  <button class="nav-btn" data-screen="explore" onclick="showScreen('explore')">
-    <div class="nav-icon">⌕</div>
-    <div>EXPLORE</div>
-  </button>
-
-  <button class="nav-btn drop-nav" data-screen="drop" onclick="showScreen('drop')">
-    <div class="nav-icon">＋</div>
-    <div>DROP</div>
-  </button>
-
-  <button class="nav-btn" data-screen="swych" onclick="showScreen('swych')">
-    <div class="nav-icon">↔</div>
-    <div>SWYCH</div>
-  </button>
-
-  <button class="nav-btn" data-screen="profile" onclick="showScreen('profile')">
-    <div class="nav-icon">○</div>
-    <div>PROFILE</div>
-  </button>
-
-</nav>
-
-<div id="flashMessage" class="flash-message"></div>
+  </nav>
 
 </div>
 
 
+<div id="toast" class="toast"></div>
+
+
 <script>
-/* =====================================================
-   SWYCHED APP
-===================================================== */
-
-let currentScreen = "welcome";
-let currentCategory = "ALL";
-let selectedRealityId = null;
-let selectedMissionIndex = null;
-let previewDropData = null;
+/* ============================================================
+   SWYCHED
+   Local prototype
+============================================================ */
 
 
-/* =====================================================
+/* =========================
    STORAGE
-===================================================== */
+========================= */
 
 function getAccounts() {
   try {
@@ -2406,7 +2509,10 @@ function getAccounts() {
 }
 
 function saveAccounts(accounts) {
-  localStorage.setItem("swychedAccounts", JSON.stringify(accounts));
+  localStorage.setItem(
+    "swychedAccounts",
+    JSON.stringify(accounts)
+  );
 }
 
 function getSession() {
@@ -2422,7 +2528,6 @@ function clearSession() {
 }
 
 function getCurrentAccount() {
-
   const session = getSession();
 
   if (!session) {
@@ -2431,14 +2536,25 @@ function getCurrentAccount() {
 
   const accounts = getAccounts();
 
-  return accounts.find(account => account.id === session) || null;
+  const account = accounts.find(
+    account => account.id === session
+  );
+
+  if (account && typeof account.verified !== "boolean") {
+    account.verified = false;
+    saveCurrentAccount(account);
+  }
+
+  return account || null;
 }
 
 function saveCurrentAccount(updated) {
 
   const accounts = getAccounts();
 
-  const index = accounts.findIndex(a => a.id === updated.id);
+  const index = accounts.findIndex(
+    account => account.id === updated.id
+  );
 
   if (index !== -1) {
     accounts[index] = updated;
@@ -2454,56 +2570,17 @@ function normalizeUsername(username) {
 }
 
 
-/* =====================================================
-   OLD DATA MIGRATION
-===================================================== */
-
-function migrateOldData() {
-
-  const oldUser = localStorage.getItem("swychedUser");
-
-  if (!oldUser) return;
-
-  try {
-
-    const parsed = JSON.parse(oldUser);
-
-    let accounts = getAccounts();
-
-    if (accounts.length === 0) {
-
-      const account = {
-        id: "account_" + Date.now(),
-        name: parsed.name || "User",
-        username: normalizeUsername(parsed.username || "user"),
-        password: parsed.password || "",
-        bio: parsed.bio || "",
-        flux: parseInt(localStorage.getItem("swychedProgress")) || 0,
-        swyches: 0
-      };
-
-      accounts.push(account);
-
-      saveAccounts(accounts);
-      setSession(account.id);
-    }
-
-  } catch (error) {
-    console.log("Migration skipped.");
-  }
-}
-
-migrateOldData();
-
-
-/* =====================================================
-   DROPS
-===================================================== */
+/* =========================
+   DROPS STORAGE
+========================= */
 
 function getDrops() {
 
   try {
-    return JSON.parse(localStorage.getItem("swychedDrops")) || [];
+    return JSON.parse(
+      localStorage.getItem("swychedDrops")
+    ) || [];
+
   } catch {
     return [];
   }
@@ -2511,215 +2588,203 @@ function getDrops() {
 }
 
 function saveDrops(drops) {
-  localStorage.setItem("swychedDrops", JSON.stringify(drops));
+
+  localStorage.setItem(
+    "swychedDrops",
+    JSON.stringify(drops)
+  );
+
 }
 
 
-/* =====================================================
-   ACCOUNT
-===================================================== */
+/* =========================
+   SESSION DATA
+========================= */
 
-function createAccount() {
+let authMode = "signup";
+let currentScreen = "welcome";
 
-  const name = document.getElementById("signupName").value.trim();
-  const username = normalizeUsername(
-    document.getElementById("signupUsername").value
-  );
-  const password = document.getElementById("signupPassword").value;
+let currentReality = null;
+let currentMissionIndex = 0;
 
-  const error = document.getElementById("signupError");
+let currentProofData = null;
+let pendingDrop = null;
 
-  error.style.display = "none";
 
-  if (!name || !username || !password) {
-    showError(error, "Please fill in every field.");
-    return;
+/* =========================
+   LEVEL SYSTEM
+========================= */
+
+const LEVELS = [
+  {
+    level: 1,
+    min: 0,
+    next: 500
+  },
+  {
+    level: 2,
+    min: 500,
+    next: 2000
+  },
+  {
+    level: 3,
+    min: 2000,
+    next: 5000
+  },
+  {
+    level: 4,
+    min: 5000,
+    next: 10000
+  },
+  {
+    level: 5,
+    min: 10000,
+    next: 25000
+  },
+  {
+    level: 6,
+    min: 25000,
+    next: null
+  }
+];
+
+function getLevel(flux) {
+
+  let result = LEVELS[0];
+
+  for (const level of LEVELS) {
+
+    if (flux >= level.min) {
+      result = level;
+    }
+
   }
 
-  if (username.length < 3) {
-    showError(error, "Username must be at least 3 characters.");
-    return;
+  return result;
+
+}
+
+function getProgress(flux) {
+
+  const level = getLevel(flux);
+
+  if (level.next === null) {
+    return {
+      percentage: 100,
+      current: flux,
+      target: "MAX"
+    };
   }
 
-  if (password.length < 4) {
-    showError(error, "Password must be at least 4 characters.");
-    return;
-  }
+  const range = level.next - level.min;
 
-  const accounts = getAccounts();
+  const progress = flux - level.min;
 
-  if (
-    accounts.some(
-      account => account.username.toLowerCase() === username.toLowerCase()
+  const percentage = Math.max(
+    0,
+    Math.min(
+      100,
+      (progress / range) * 100
     )
-  ) {
-    showError(error, "That username is already taken.");
-    return;
-  }
+  );
 
-  const account = {
-    id: "account_" + Date.now() + "_" + Math.random().toString(36).slice(2),
-    name,
-    username,
-    password,
-    bio: "",
-    flux: 0,
-    swyches: 0
+  return {
+    percentage,
+    current: flux,
+    target: level.next
   };
 
-  accounts.push(account);
-
-  saveAccounts(accounts);
-  setSession(account.id);
-
-  showFlash("Account created.");
-
-  clearAuthFields();
-
-  initializeApp();
-
-  showScreen("home");
 }
 
 
-function login() {
+/* =========================
+   FLUX
+========================= */
 
-  const username = normalizeUsername(
-    document.getElementById("loginUsername").value
+function addFlux(amount) {
+
+  const account = getCurrentAccount();
+
+  if (!account) return;
+
+  /*
+    Individual missions can never award
+    more than 250 FLUX.
+  */
+
+  const safeAmount = Math.min(
+    250,
+    Math.max(
+      0,
+      Number(amount) || 0
+    )
   );
 
-  const password = document.getElementById("loginPassword").value;
+  account.flux =
+    Number(account.flux || 0) +
+    safeAmount;
 
-  const error = document.getElementById("loginError");
+  account.swyches =
+    Number(account.swyches || 0) +
+    1;
 
-  error.style.display = "none";
+  saveCurrentAccount(account);
 
-  const accounts = getAccounts();
-
-  const account = accounts.find(
-    a =>
-      a.username.toLowerCase() === username.toLowerCase() &&
-      a.password === password
-  );
-
-  if (!account) {
-    showError(error, "Incorrect username or password.");
-    return;
-  }
-
-  setSession(account.id);
-
-  showFlash("Logged in.");
-
-  clearAuthFields();
-
-  initializeApp();
-
-  showScreen("home");
+  return safeAmount;
 }
 
 
-function logout() {
+/* =========================
+   SCREEN MANAGEMENT
+========================= */
 
-  clearSession();
-
-  document.getElementById("bottomNav").classList.add("hidden");
-
-  showScreen("welcome");
-}
-
-
-function clearAuthFields() {
-
-  const ids = [
-    "signupName",
-    "signupUsername",
-    "signupPassword",
-    "loginUsername",
-    "loginPassword"
-  ];
-
-  ids.forEach(id => {
-    const el = document.getElementById(id);
-
-    if (el) {
-      el.value = "";
-    }
-  });
-}
-
-
-/* =====================================================
-   AUTH UI
-===================================================== */
-
-function openSignup() {
-
-  document.getElementById("signupForm").classList.remove("hidden");
-  document.getElementById("loginForm").classList.add("hidden");
-
-  showScreen("auth");
-}
-
-function openLogin() {
-
-  document.getElementById("signupForm").classList.add("hidden");
-  document.getElementById("loginForm").classList.remove("hidden");
-
-  showScreen("auth");
-}
-
-function showError(element, message) {
-
-  element.textContent = message;
-  element.style.display = "block";
-}
-
-
-/* =====================================================
-   SCREEN CONTROL
-===================================================== */
+const appScreens = [
+  "welcome",
+  "auth",
+  "home",
+  "explore",
+  "drop",
+  "dropPreview",
+  "publishedReality",
+  "reality",
+  "missions",
+  "swych",
+  "complete",
+  "profile",
+  "editProfile"
+];
 
 function showScreen(screenId) {
 
-  const protectedScreens = [
-    "home",
-    "explore",
-    "drop",
-    "dropPreview",
-    "publishedReality",
-    "reality",
-    "missions",
-    "complete",
-    "swych",
-    "profile",
-    "editProfile"
-  ];
-
   if (
-    protectedScreens.includes(screenId) &&
-    !getCurrentAccount()
+    !getCurrentAccount() &&
+    !["welcome", "auth"].includes(screenId)
   ) {
     screenId = "welcome";
   }
 
-  document.querySelectorAll(".screen").forEach(screen => {
-    screen.classList.remove("active");
+  appScreens.forEach(id => {
+
+    const screen = document.getElementById(id);
+
+    if (!screen) return;
+
+    screen.classList.toggle(
+      "hidden",
+      id !== screenId
+    );
+
   });
 
-  const target = document.getElementById(screenId);
-
-  if (target) {
-    target.classList.add("active");
-  }
-
   currentScreen = screenId;
+
+  const account = getCurrentAccount();
 
   const nav = document.getElementById("bottomNav");
 
   if (
-    getCurrentAccount() &&
-    protectedScreens.includes(screenId)
+    account &&
+    !["welcome", "auth"].includes(screenId)
   ) {
     nav.classList.remove("hidden");
   } else {
@@ -2729,241 +2794,374 @@ function showScreen(screenId) {
   updateNav(screenId);
 
   if (screenId === "home") {
-    loadHome();
+    renderHome();
   }
 
   if (screenId === "explore") {
     renderExplore();
-    renderEXCL();
+  }
+
+  if (screenId === "drop") {
+    renderDropCreatorStatus();
   }
 
   if (screenId === "profile") {
-    loadProfile();
+    renderProfile();
   }
 
-  if (screenId === "swych") {
-    loadSWYCH();
+  if (screenId === "editProfile") {
+    loadEditProfile();
   }
 
-  window.scrollTo({
-    top: 0,
-    behavior: "instant"
-  });
 }
 
 
+/* =========================
+   NAV
+========================= */
+
 function updateNav(screenId) {
 
-  document.querySelectorAll(".nav-btn").forEach(btn => {
+  const navMap = {
+    home: "navHome",
+    explore: "navExplore",
+    drop: "navDrop",
+    swych: "navSwych",
+    profile: "navProfile"
+  };
 
-    btn.classList.remove("active");
+  Object.values(navMap).forEach(id => {
 
-    if (btn.dataset.screen === screenId) {
-      btn.classList.add("active");
+    const element =
+      document.getElementById(id);
+
+    if (element) {
+      element.classList.remove("active");
     }
 
   });
 
-}
+  const activeId =
+    navMap[screenId];
 
+  if (activeId) {
 
-/* =====================================================
-   INITIALIZE
-===================================================== */
+    const active =
+      document.getElementById(activeId);
 
-function initializeApp() {
+    if (active) {
+      active.classList.add("active");
+    }
 
-  const account = getCurrentAccount();
-
-  if (!account) return;
-
-  updateTopBars();
-  loadHome();
-  renderExplore();
-  loadProfile();
-  loadSWYCH();
-
-}
-
-
-/* =====================================================
-   FLUX
-===================================================== */
-
-function getLevel(flux) {
-
-  if (flux >= 25000) {
-    return 6;
   }
 
-  if (flux >= 10000) {
-    return 5;
+}
+
+
+/* =========================
+   AUTH
+========================= */
+
+function showAuth(mode) {
+
+  authMode = mode;
+
+  const title =
+    document.getElementById("authTitle");
+
+  const subtitle =
+    document.getElementById("authSubtitle");
+
+  const nameGroup =
+    document.getElementById("nameGroup");
+
+  const submit =
+    document.getElementById("authSubmit");
+
+  const nameInput =
+    document.getElementById("authName");
+
+  const error =
+    document.getElementById("authError");
+
+  error.textContent = "";
+
+  document.getElementById("authForm").reset();
+
+  if (mode === "signup") {
+
+    title.textContent =
+      "CREATE ACCOUNT";
+
+    subtitle.textContent =
+      "Create your SWYCHED identity.";
+
+    nameGroup.classList.remove("hidden");
+
+    nameInput.required = true;
+
+    submit.textContent =
+      "CREATE ACCOUNT";
+
+  } else {
+
+    title.textContent =
+      "LOG IN";
+
+    subtitle.textContent =
+      "Enter your SWYCHED account.";
+
+    nameGroup.classList.add("hidden");
+
+    nameInput.required = false;
+
+    submit.textContent =
+      "LOG IN";
+
   }
 
-  if (flux >= 5000) {
-    return 4;
+  showScreen("auth");
+
+}
+
+
+function handleAuth(event) {
+
+  event.preventDefault();
+
+  const username =
+    normalizeUsername(
+      document.getElementById("authUsername").value
+    );
+
+  const password =
+    document.getElementById("authPassword").value;
+
+  const name =
+    document.getElementById("authName").value.trim();
+
+  const error =
+    document.getElementById("authError");
+
+  error.textContent = "";
+
+  if (!username || !password) {
+
+    error.textContent =
+      "Enter your username and password.";
+
+    return;
+
   }
 
-  if (flux >= 2000) {
-    return 3;
-  }
+  const accounts = getAccounts();
 
-  if (flux >= 500) {
-    return 2;
-  }
+  if (authMode === "signup") {
 
-  return 1;
-}
+    if (!name) {
 
+      error.textContent =
+        "Enter a display name.";
 
-function getLevelStart(flux) {
+      return;
 
-  if (flux >= 25000) return 25000;
-  if (flux >= 10000) return 10000;
-  if (flux >= 5000) return 5000;
-  if (flux >= 2000) return 2000;
-  if (flux >= 500) return 500;
+    }
 
-  return 0;
-}
+    const exists =
+      accounts.some(
+        account =>
+          account.username === username
+      );
 
+    if (exists) {
 
-function getLevelNext(flux) {
+      error.textContent =
+        "That username is already taken.";
 
-  if (flux >= 25000) return 25000;
-  if (flux >= 10000) return 25000;
-  if (flux >= 5000) return 10000;
-  if (flux >= 2000) return 5000;
-  if (flux >= 500) return 2000;
+      return;
 
-  return 500;
-}
+    }
 
+    const account = {
 
-function getProgress(flux) {
+      id:
+        "user_" +
+        Date.now() +
+        "_" +
+        Math.random()
+          .toString(36)
+          .slice(2, 8),
 
-  if (flux >= 25000) {
-    return 100;
-  }
+      name,
 
-  const start = getLevelStart(flux);
-  const next = getLevelNext(flux);
+      username,
 
-  return ((flux - start) / (next - start)) * 100;
-}
+      password,
 
+      bio: "",
 
-function addFlux(amount) {
+      flux: 0,
 
-  const account = getCurrentAccount();
+      swyches: 0,
 
-  if (!account) return;
+      /*
+        Verification starts false.
 
-  const safeAmount = Math.min(250, Math.max(0, Number(amount) || 0));
+        In a real production version this value
+        must be controlled by a backend/admin system.
+      */
+      verified: false
 
-  account.flux += safeAmount;
+    };
 
-  saveCurrentAccount(account);
+    accounts.push(account);
 
-  updateTopBars();
-}
+    saveAccounts(accounts);
 
+    setSession(account.id);
 
-/* =====================================================
-   TOP BAR
-===================================================== */
+    showToast(
+      "Account created."
+    );
 
-function getInitials(name) {
+    showScreen("home");
 
-  if (!name) return "?";
-
-  return name
-    .split(" ")
-    .map(part => part[0])
-    .join("")
-    .slice(0, 2)
-    .toUpperCase();
-}
-
-
-function updateTopBars() {
-
-  const account = getCurrentAccount();
-
-  if (!account) return;
-
-  const flux = account.flux || 0;
-
-  const topFlux = document.getElementById("topFlux");
-  const exploreFlux = document.getElementById("exploreFlux");
-  const topAvatar = document.getElementById("topAvatar");
-
-  if (topFlux) topFlux.textContent = flux.toLocaleString();
-  if (exploreFlux) exploreFlux.textContent = flux.toLocaleString();
-  if (topAvatar) topAvatar.textContent = getInitials(account.name);
-
-}
-
-
-/* =====================================================
-   HOME
-===================================================== */
-
-function loadHome() {
-
-  const account = getCurrentAccount();
-
-  if (!account) return;
-
-  const flux = account.flux || 0;
-
-  document.getElementById("homeName").textContent =
-    account.name.toUpperCase();
-
-  document.getElementById("homeFlux").textContent =
-    flux.toLocaleString();
-
-  document.getElementById("homeLevel").textContent =
-    "LEVEL " + getLevel(flux);
-
-  document.getElementById("homeProgress").style.width =
-    getProgress(flux) + "%";
-
-  document.getElementById("progressCurrent").textContent =
-    flux.toLocaleString() + " FLUX";
-
-  document.getElementById("progressNext").textContent =
-    flux >= 25000
-      ? "MAX"
-      : getLevelNext(flux).toLocaleString() + " FLUX";
-
-  updateTopBars();
-}
-
-
-/* =====================================================
-   DROP BUILDER
-===================================================== */
-
-function addMission() {
-
-  const container = document.getElementById("missionBuilders");
-
-  const currentCount =
-    container.querySelectorAll(".mission-builder").length;
-
-  if (currentCount >= 10) {
-    showFlash("Maximum 10 missions.");
     return;
   }
 
-  const missionNumber = currentCount + 1;
 
-  const div = document.createElement("div");
+  /* LOGIN */
 
-  div.className = "mission-builder";
+  const account =
+    accounts.find(
+      account =>
+        account.username === username &&
+        account.password === password
+    );
 
-  div.innerHTML = `
+  if (!account) {
+
+    error.textContent =
+      "Incorrect username or password.";
+
+    return;
+
+  }
+
+  setSession(account.id);
+
+  showToast(
+    "Welcome back."
+  );
+
+  showScreen("home");
+
+}
+
+
+function logout() {
+
+  clearSession();
+
+  currentReality = null;
+  currentProofData = null;
+  pendingDrop = null;
+
+  showScreen("welcome");
+
+}
+
+
+/* =========================
+   HOME
+========================= */
+
+function renderHome() {
+
+  const account =
+    getCurrentAccount();
+
+  if (!account) return;
+
+  const flux =
+    Number(account.flux || 0);
+
+  const level =
+    getLevel(flux);
+
+  const progress =
+    getProgress(flux);
+
+  document.getElementById(
+    "homeFlux"
+  ).textContent =
+    `${flux} FLUX`;
+
+  document.getElementById(
+    "homeTitle"
+  ).textContent =
+    `READY TO SWYCH, ${account.name.split(" ")[0].toUpperCase()}?`;
+
+  document.getElementById(
+    "homeLevel"
+  ).textContent =
+    level.level;
+
+  document.getElementById(
+    "homeLevelFlux"
+  ).innerHTML =
+    `${flux} FLUX <span>/ ${progress.target}</span>`;
+
+  document.getElementById(
+    "homeProgress"
+  ).style.width =
+    `${progress.percentage}%`;
+
+  document.getElementById(
+    "homeProgressCurrent"
+  ).textContent =
+    `${flux} FLUX`;
+
+  document.getElementById(
+    "homeProgressTarget"
+  ).textContent =
+    progress.target === "MAX"
+      ? "MAX LEVEL"
+      : `${progress.target} FLUX`;
+
+  document.getElementById(
+    "homeSwitched"
+  ).textContent =
+    Number(account.swyches || 0);
+
+}
+
+
+/* =========================
+   DROP BUILDER
+========================= */
+
+let missionNumber = 0;
+
+function addMission() {
+
+  missionNumber++;
+
+  const container =
+    document.getElementById(
+      "missionBuilders"
+    );
+
+  const wrapper =
+    document.createElement("div");
+
+  wrapper.className =
+    "mission-builder";
+
+  wrapper.dataset.mission =
+    missionNumber;
+
+  wrapper.innerHTML = `
 
     <div class="mission-builder-header">
 
@@ -2971,76 +3169,49 @@ function addMission() {
         MISSION ${missionNumber}
       </div>
 
-      ${
-        missionNumber > 1
-          ? `<button
-               type="button"
-               class="remove-mission"
-               onclick="removeMission(this)"
-             >
-               REMOVE
-             </button>`
-          : ""
-      }
+      <button
+        type="button"
+        class="remove-mission"
+        onclick="removeMission(this)"
+      >
+        REMOVE
+      </button>
 
     </div>
-
 
     <div class="form-group">
 
       <label class="form-label">
-        CHALLENGE
+        MISSION
       </label>
 
       <textarea
         class="form-textarea mission-description"
-        maxlength="220"
-        placeholder="What does the person have to do?"
-        required
+        maxlength="300"
+        placeholder="What does the person need to do?"
       ></textarea>
 
     </div>
 
+    <div
+      class="form-group"
+      style="margin-top:16px"
+    >
 
-    <div class="mission-reward-row">
+      <label class="form-label">
+        FLUX REWARD — MAX 250
+      </label>
 
-      <div class="form-group">
-
-        <label class="form-label">
-          FLUX REWARD
-        </label>
-
-        <input
-          type="number"
-          class="form-input mission-flux"
-          min="1"
-          max="250"
-          value="100"
-          required
-          oninput="capFluxInput(this)"
-        >
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label class="form-label">
-          MAXIMUM
-        </label>
-
-        <input
-          type="text"
-          class="form-input"
-          value="250 FLUX"
-          disabled
-          style="color:#555;"
-        >
-
-      </div>
+      <input
+        class="form-input mission-flux"
+        type="number"
+        min="1"
+        max="250"
+        value="100"
+        oninput="capFluxInput(this)"
+      >
 
     </div>
-
 
     <div class="proof-setting">
 
@@ -3048,59 +3219,89 @@ function addMission() {
         PHOTO PROOF
       </div>
 
-      <div class="proof-options">
+      <!--
+        CUSTOM BUTTONS ARE USED INSTEAD OF
+        HIDDEN RADIO INPUTS.
 
-        <div class="proof-option">
+        This makes REQUIRED fully clickable
+        on mobile and desktop.
+      -->
 
-          <input
-            type="radio"
-            name="proof_${Date.now()}_${missionNumber}"
-            value="false"
-            checked
-          >
+      <div class="proof-toggle">
 
-          <label>
-            NOT REQUIRED
-          </label>
+        <button
+          type="button"
+          class="proof-toggle-btn active"
+          onclick="setProofRequirement(this, false)"
+        >
+          NOT REQUIRED
+        </button>
 
-        </div>
-
-
-        <div class="proof-option">
-
-          <input
-            type="radio"
-            name="proof_${Date.now()}_${missionNumber}"
-            value="true"
-          >
-
-          <label>
-            REQUIRED
-          </label>
-
-        </div>
+        <button
+          type="button"
+          class="proof-toggle-btn"
+          onclick="setProofRequirement(this, true)"
+        >
+          REQUIRED
+        </button>
 
       </div>
+
+      <input
+        type="hidden"
+        class="mission-proof-required"
+        value="false"
+      >
 
     </div>
 
   `;
 
-  container.appendChild(div);
+  container.appendChild(wrapper);
 
 }
 
 
-function capFluxInput(input) {
+function setProofRequirement(
+  button,
+  required
+) {
 
-  let value = Number(input.value);
+  const builder =
+    button.closest(
+      ".mission-builder"
+    );
 
-  if (value > 250) {
-    input.value = 250;
-  }
+  if (!builder) return;
 
-  if (value < 0) {
-    input.value = 1;
+  builder
+    .querySelectorAll(
+      ".proof-toggle-btn"
+    )
+    .forEach(btn => {
+
+      btn.classList.remove(
+        "active"
+      );
+
+    });
+
+  button.classList.add(
+    "active"
+  );
+
+  const hidden =
+    builder.querySelector(
+      ".mission-proof-required"
+    );
+
+  if (hidden) {
+
+    hidden.value =
+      required
+        ? "true"
+        : "false";
+
   }
 
 }
@@ -3108,67 +3309,190 @@ function capFluxInput(input) {
 
 function removeMission(button) {
 
-  const builder = button.closest(".mission-builder");
+  const builder =
+    button.closest(
+      ".mission-builder"
+    );
 
-  if (builder) {
-    builder.remove();
-  }
+  if (!builder) return;
+
+  builder.remove();
 
   renumberMissions();
+
 }
 
 
 function renumberMissions() {
 
   const builders =
-    document.querySelectorAll(".mission-builder");
+    document.querySelectorAll(
+      "#missionBuilders .mission-builder"
+    );
 
-  builders.forEach((builder, index) => {
+  builders.forEach(
+    (builder, index) => {
 
-    const number =
-      builder.querySelector(".mission-number");
+      builder.dataset.mission =
+        index + 1;
 
-    if (number) {
-      number.textContent =
-        "MISSION " + (index + 1);
+      const label =
+        builder.querySelector(
+          ".mission-number"
+        );
+
+      if (label) {
+
+        label.textContent =
+          `MISSION ${index + 1}`;
+
+      }
+
     }
+  );
 
-  });
+  missionNumber =
+    builders.length;
+
+}
+
+
+function capFluxInput(input) {
+
+  let value =
+    Number(input.value);
+
+  if (value > 250) {
+
+    input.value = 250;
+
+  }
+
+  if (value < 1) {
+
+    input.value = 1;
+
+  }
+
+}
+
+
+function clearDropBuilder() {
+
+  document.getElementById(
+    "dropTitle"
+  ).value = "";
+
+  document.getElementById(
+    "dropDescription"
+  ).value = "";
+
+  document.getElementById(
+    "dropCategory"
+  ).value = "SPORTS";
+
+  document.getElementById(
+    "missionBuilders"
+  ).innerHTML = "";
+
+  missionNumber = 0;
+
+  addMission();
 
 }
 
 
 function collectDropData() {
 
+  const account =
+    getCurrentAccount();
+
+  if (!account) return null;
+
   const title =
-    document.getElementById("dropTitle").value.trim();
+    document.getElementById(
+      "dropTitle"
+    ).value.trim();
 
   const category =
-    document.getElementById("dropCategory").value;
+    document.getElementById(
+      "dropCategory"
+    ).value;
 
   const description =
-    document.getElementById("dropDescription").value.trim();
+    document.getElementById(
+      "dropDescription"
+    ).value.trim();
 
   const builders =
-    document.querySelectorAll(".mission-builder");
+    document.querySelectorAll(
+      "#missionBuilders .mission-builder"
+    );
+
+  if (!title) {
+
+    showToast(
+      "Add a Reality title."
+    );
+
+    return null;
+
+  }
+
+  if (!description) {
+
+    showToast(
+      "Add a Reality description."
+    );
+
+    return null;
+
+  }
+
+  if (builders.length === 0) {
+
+    showToast(
+      "Add at least one mission."
+    );
+
+    return null;
+
+  }
 
   const missions = [];
 
-  builders.forEach(builder => {
+  for (let i = 0; i < builders.length; i++) {
+
+    const builder =
+      builders[i];
 
     const descriptionEl =
-      builder.querySelector(".mission-description");
+      builder.querySelector(
+        ".mission-description"
+      );
 
     const fluxEl =
-      builder.querySelector(".mission-flux");
-
-    const checkedProof =
       builder.querySelector(
-        'input[type="radio"]:checked'
+        ".mission-flux"
+      );
+
+    const proofEl =
+      builder.querySelector(
+        ".mission-proof-required"
       );
 
     const missionDescription =
       descriptionEl.value.trim();
+
+    if (!missionDescription) {
+
+      showToast(
+        `Add a description for Mission ${i + 1}.`
+      );
+
+      return null;
+
+    }
 
     const flux =
       Math.min(
@@ -3179,923 +3503,1137 @@ function collectDropData() {
         )
       );
 
+    const proofRequired =
+      proofEl?.value === "true";
+
     missions.push({
+
       id:
         "mission_" +
         Date.now() +
         "_" +
-        Math.random().toString(36).slice(2),
+        i,
 
-      description: missionDescription,
+      description:
+        missionDescription,
 
       flux,
 
-      proofRequired:
-        checkedProof
-          ? checkedProof.value === "true"
-          : false
+      proofRequired
+
     });
 
-  });
+  }
 
   return {
-    title,
-    category,
-    description,
-    missions
-  };
-}
-
-
-function previewDrop() {
-
-  const data = collectDropData();
-
-  if (!data.title || !data.description) {
-    showFlash("Complete the Reality information.");
-    return;
-  }
-
-  if (data.missions.length === 0) {
-    showFlash("Add at least one mission.");
-    return;
-  }
-
-  for (const mission of data.missions) {
-
-    if (!mission.description) {
-      showFlash("Every mission needs a challenge.");
-      return;
-    }
-
-  }
-
-  previewDropData = data;
-
-  renderDropPreview();
-
-  showScreen("dropPreview");
-}
-
-
-function renderDropPreview() {
-
-  if (!previewDropData) return;
-
-  const data = previewDropData;
-
-  const totalFlux =
-    data.missions.reduce(
-      (sum, mission) => sum + mission.flux,
-      0
-    );
-
-  const missionHTML =
-    data.missions.map((mission, index) => {
-
-      return `
-
-        <div class="preview-mission">
-
-          <div class="preview-mission-title">
-            ${escapeHTML(mission.description)}
-          </div>
-
-          <div class="preview-mission-reward">
-            +${mission.flux} FLUX
-            ${
-              mission.proofRequired
-                ? " · PHOTO REQUIRED"
-                : ""
-            }
-          </div>
-
-        </div>
-
-      `;
-
-    }).join("");
-
-
-  document.getElementById("dropPreviewContent").innerHTML = `
-
-    <div class="preview-card">
-
-      <div class="page-kicker">
-        ${escapeHTML(data.category)}
-      </div>
-
-      <div class="preview-title">
-        ${escapeHTML(data.title)}
-      </div>
-
-      <div class="preview-description">
-        ${escapeHTML(data.description)}
-      </div>
-
-    </div>
-
-
-    <div class="section-title">
-      ${data.missions.length} MISSIONS · ${totalFlux} TOTAL FLUX
-    </div>
-
-
-    <div class="preview-missions">
-      ${missionHTML}
-    </div>
-
-    <div style="height:24px;"></div>
-
-  `;
-
-}
-
-
-function publishDrop() {
-
-  if (!previewDropData) return;
-
-  const account = getCurrentAccount();
-
-  if (!account) return;
-
-  const drops = getDrops();
-
-  const newDrop = {
 
     id:
       "drop_" +
       Date.now() +
       "_" +
-      Math.random().toString(36).slice(2),
+      Math.random()
+        .toString(36)
+        .slice(2, 7),
 
-    creatorId: account.id,
+    creatorId:
+      account.id,
 
-    title: previewDropData.title,
+    title,
 
-    category: previewDropData.category,
+    category,
 
-    description: previewDropData.description,
+    description,
 
-    missions: previewDropData.missions,
+    missions,
 
-    createdAt: new Date().toISOString()
+    createdAt:
+      Date.now()
 
   };
 
-  drops.unshift(newDrop);
+}
 
-  saveDrops(drops);
 
-  previewDropData = null;
+/* =========================
+   CREATOR STATUS
+========================= */
 
-  resetDropForm();
+function getVerifiedBadgeHTML(
+  account
+) {
 
-  showScreen("publishedReality");
+  if (!account || !account.verified) {
+    return "";
+  }
 
-  showFlash("Reality published.");
+  return `
+    <span
+      class="verified-badge"
+      title="Verified creator"
+    >✓</span>
+  `;
 
 }
 
 
-function resetDropForm() {
+function renderDropCreatorStatus() {
 
-  document.getElementById("dropForm").reset();
+  const account =
+    getCurrentAccount();
 
-  document.getElementById("missionBuilders").innerHTML = "";
+  const element =
+    document.getElementById(
+      "dropCreatorStatus"
+    );
 
-  addMission();
+  if (!account || !element) return;
 
-}
+  if (account.verified) {
 
+    element.innerHTML = `
+      <span class="verified-badge">✓</span>
+      VERIFIED CREATOR
+    `;
 
-/* =====================================================
-   EXPLORE
-===================================================== */
+  } else {
 
-function setCategory(category, button) {
-
-  currentCategory = category;
-
-  document
-    .querySelectorAll(".category-chip")
-    .forEach(chip => chip.classList.remove("active"));
-
-  button.classList.add("active");
-
-  renderExplore();
-}
-
-
-function renderExplore() {
-
-  const drops = getDrops();
-
-  const search =
-    document.getElementById("searchInput")?.value
-      .trim()
-      .toLowerCase() || "";
-
-  const filtered = drops.filter(drop => {
-
-    const matchesCategory =
-      currentCategory === "ALL" ||
-      drop.category === currentCategory;
-
-    const matchesSearch =
-      !search ||
-      drop.title.toLowerCase().includes(search) ||
-      drop.description.toLowerCase().includes(search) ||
-      drop.category.toLowerCase().includes(search);
-
-    return matchesCategory && matchesSearch;
-
-  });
-
-
-  const feed =
-    document.getElementById("realityFeed");
-
-  const empty =
-    document.getElementById("exploreEmpty");
-
-
-  if (filtered.length === 0) {
-
-    feed.innerHTML = "";
-
-    empty.classList.remove("hidden");
-
-    return;
+    element.innerHTML = `
+      <span class="status-unverified">
+        NOT VERIFIED
+      </span>
+    `;
 
   }
 
-
-  empty.classList.add("hidden");
-
-
-  feed.innerHTML =
-    filtered.map(drop => {
-
-      const creator =
-        findAccountById(drop.creatorId);
-
-      const creatorName =
-        creator?.name || "Unknown creator";
-
-      const creatorUsername =
-        creator?.username
-          ? "@" + creator.username
-          : "@unknown";
-
-      const initials =
-        getInitials(creatorName);
+}
 
 
-      return `
+/* =========================
+   DROP PREVIEW
+========================= */
 
-        <div class="reality-card">
+function previewDrop() {
 
-          <div class="creator-row">
+  const drop =
+    collectDropData();
 
-            <div class="creator-avatar">
-              ${escapeHTML(initials)}
+  if (!drop) return;
+
+  pendingDrop = drop;
+
+  const creator =
+    getCurrentAccount();
+
+  let missionsHTML = "";
+
+  drop.missions.forEach(
+    (mission, index) => {
+
+      missionsHTML += `
+
+        <div class="preview-mission">
+
+          <div class="mission-index">
+            ${index + 1}
+          </div>
+
+          <div>
+
+            <div class="preview-mission-text">
+              ${escapeHTML(
+                mission.description
+              )}
             </div>
 
-            <div>
-
-              <div class="creator-name">
-                ${escapeHTML(creatorName)}
-              </div>
-
-              <div class="creator-username">
-                ${escapeHTML(creatorUsername)}
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <div class="page-kicker">
-            ${escapeHTML(drop.category)}
-          </div>
-
-
-          <div class="reality-title">
-            ${escapeHTML(drop.title)}
-          </div>
-
-
-          <div class="reality-description">
-            ${escapeHTML(drop.description)}
-          </div>
-
-
-          <div class="reality-meta">
-
-            <div class="meta-pill">
-              ${drop.missions.length} MISSIONS
-            </div>
-
-            <div class="meta-pill">
-              ${
-                drop.missions.reduce(
-                  (sum, mission) =>
-                    sum + Math.min(250, mission.flux),
-                  0
-                )
-              } FLUX
+            <div class="preview-mission-flux">
+              +${mission.flux} FLUX
+              ${mission.proofRequired
+                ? " · PHOTO PROOF REQUIRED"
+                : ""
+              }
             </div>
 
           </div>
-
-
-          <button
-            class="reality-button"
-            onclick="openReality('${drop.id}')"
-          >
-            ENTER REALITY
-          </button>
 
         </div>
 
       `;
 
-    }).join("");
+    }
+  );
 
-}
+  document.getElementById(
+    "dropPreviewContent"
+  ).innerHTML = `
 
+    <div class="preview-card">
 
-function findAccountById(id) {
+      <div class="preview-main">
 
-  const accounts = getAccounts();
-
-  return accounts.find(account => account.id === id) || null;
-
-}
-
-
-/* =====================================================
-   EXCL
-===================================================== */
-
-function renderEXCL() {
-
-  const account = getCurrentAccount();
-
-  if (!account) return;
-
-  const container =
-    document.getElementById("exclContainer");
-
-  const unlocked =
-    account.flux >= 25000;
-
-
-  if (!unlocked) {
-
-    container.innerHTML = `
-
-      <div class="excl-card locked">
-
-        <div class="excl-label">
-          EXCL
+        <div class="category-tag">
+          ${escapeHTML(drop.category)}
         </div>
 
-        <div class="excl-title">
-          Exclusive Realities.
+        <div class="reality-title">
+          ${escapeHTML(drop.title)}
         </div>
 
-        <div class="excl-text">
-          Unlock access to exclusive, high-level
-          Realities once you reach 25,000 FLUX.
+        <div class="reality-description">
+          ${escapeHTML(drop.description)}
         </div>
 
-        <div class="excl-lock">
-          🔒 ${account.flux.toLocaleString()} / 25,000 FLUX
+        <div class="creator-row">
+
+          <div class="avatar">
+            ${getInitial(
+              creator.name
+            )}
+          </div>
+
+          <div class="creator-info">
+
+            <div class="creator-name">
+
+              ${escapeHTML(
+                creator.name
+              )}
+
+              ${getVerifiedBadgeHTML(
+                creator
+              )}
+
+            </div>
+
+            <div class="creator-username">
+              @${escapeHTML(
+                creator.username
+              )}
+            </div>
+
+          </div>
+
         </div>
 
       </div>
 
-    `;
+      <div class="preview-missions">
 
-    return;
-  }
+        ${missionsHTML}
 
-
-  container.innerHTML = `
-
-    <div class="excl-card">
-
-      <div class="excl-label">
-        EXCL · UNLOCKED
-      </div>
-
-      <div class="excl-title">
-        You're in.
-      </div>
-
-      <div class="excl-text">
-        Exclusive Realities are now available to you.
-      </div>
-
-      <div class="excl-lock">
-        ✓ 25,000+ FLUX
       </div>
 
     </div>
 
   `;
 
+  showScreen(
+    "dropPreview"
+  );
+
 }
 
 
-/* =====================================================
-   OPEN REALITY
-===================================================== */
+/* =========================
+   PUBLISH
+========================= */
 
-function openReality(id) {
+function publishDrop() {
 
-  const drop =
-    getDrops().find(d => d.id === id);
+  if (!pendingDrop) {
 
-  if (!drop) return;
+    showToast(
+      "Nothing to publish."
+    );
 
-  selectedRealityId = id;
+    return;
 
-  const creator =
-    findAccountById(drop.creatorId);
+  }
 
-  const creatorName =
-    creator?.name || "Unknown creator";
+  const drops =
+    getDrops();
 
-  const creatorUsername =
-    creator?.username
-      ? "@" + creator.username
-      : "@unknown";
+  drops.unshift(
+    pendingDrop
+  );
+
+  saveDrops(drops);
+
+  pendingDrop = null;
+
+  clearDropBuilder();
+
+  showScreen(
+    "publishedReality"
+  );
+
+  showToast(
+    "Reality dropped."
+  );
+
+}
 
 
-  document.getElementById("realityContent").innerHTML = `
+/* =========================
+   EXPLORE
+========================= */
 
-    <div class="creator-row">
+function renderExplore() {
 
-      <div class="creator-avatar">
-        ${escapeHTML(getInitials(creatorName))}
-      </div>
+  const account =
+    getCurrentAccount();
 
-      <div>
+  if (!account) return;
 
-        <div class="creator-name">
-          ${escapeHTML(creatorName)}
+  document.getElementById(
+    "exploreFlux"
+  ).textContent =
+    `${account.flux || 0} FLUX`;
+
+  const drops =
+    getDrops();
+
+  const container =
+    document.getElementById(
+      "exploreList"
+    );
+
+  if (!drops.length) {
+
+    container.innerHTML = `
+
+      <div class="empty-state">
+
+        <div>
+
+          <div class="empty-icon">
+
+            <svg
+              class="app-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="10.8" cy="10.8" r="6.5"/>
+              <path d="m16 16 4.5 4.5"/>
+            </svg>
+
+          </div>
+
+          <div class="empty-title">
+            NO REALITIES YET.
+          </div>
+
+          <div class="empty-text">
+            Be the first person to drop one.
+          </div>
+
         </div>
 
-        <div class="creator-username">
-          ${escapeHTML(creatorUsername)}
-        </div>
-
       </div>
 
-    </div>
+    `;
 
+    renderExcl(account);
 
-    <div class="reality-hero">
+    return;
 
-      <div class="page-kicker">
-        ${escapeHTML(drop.category)}
-      </div>
+  }
 
-      <div class="reality-hero-title">
-        ${escapeHTML(drop.title)}
-      </div>
+  let html = "";
 
-      <div class="reality-hero-description">
-        ${escapeHTML(drop.description)}
-      </div>
+  drops.forEach(
+    drop => {
 
-    </div>
+      const creator =
+        getAccountById(
+          drop.creatorId
+        );
 
+      if (!creator) return;
 
-    <div class="section-title">
-      ${drop.missions.length} MISSIONS
-    </div>
+      const totalFlux =
+        drop.missions.reduce(
+          (sum, mission) =>
+            sum +
+            Math.min(
+              250,
+              Number(
+                mission.flux
+              ) || 0
+            ),
+          0
+        );
 
+      html += `
 
-    <div class="mission-list">
+        <div class="reality-card">
 
-      ${
-        drop.missions.map((mission, index) => `
+          <div class="reality-card-top">
 
-          <div class="mission-card">
+            <div class="reality-meta">
 
-            <div class="mission-card-title">
-              ${escapeHTML(mission.description)}
-            </div>
-
-            <div class="mission-card-bottom">
-
-              <div class="mission-flux">
-                +${Math.min(250, mission.flux)} FLUX
+              <div class="category-tag">
+                ${escapeHTML(
+                  drop.category
+                )}
               </div>
 
-              <div class="mission-proof-status">
-                ${
-                  mission.proofRequired
-                    ? "PHOTO REQUIRED"
-                    : "PHOTO OPTIONAL"
+            </div>
+
+            <div class="reality-title">
+              ${escapeHTML(
+                drop.title
+              )}
+            </div>
+
+            <div class="reality-description">
+              ${escapeHTML(
+                drop.description
+              )}
+            </div>
+
+            <div class="creator-row">
+
+              <div class="avatar">
+                ${getInitial(
+                  creator.name
+                )}
+              </div>
+
+              <div class="creator-info">
+
+                <div class="creator-name">
+
+                  ${escapeHTML(
+                    creator.name
+                  )}
+
+                  ${getVerifiedBadgeHTML(
+                    creator
+                  )}
+
+                </div>
+
+                <div class="creator-username">
+                  @${escapeHTML(
+                    creator.username
+                  )}
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="reality-card-bottom">
+
+            <div>
+
+              <div class="mission-count">
+                ${drop.missions.length}
+                ${drop.missions.length === 1
+                  ? "MISSION"
+                  : "MISSIONS"
                 }
+              </div>
+
+              <div class="flux-reward">
+                UP TO ${totalFlux}
+                <span>FLUX</span>
               </div>
 
             </div>
 
             <button
-              class="mission-open-btn"
-              onclick="openMission(${index})"
+              class="view-button"
+              onclick="openReality('${drop.id}')"
             >
-              START MISSION
+              VIEW
             </button>
 
           </div>
 
-        `).join("")
-      }
+        </div>
 
-    </div>
+      `;
 
-  `;
+    }
+  );
 
-  showScreen("reality");
+  container.innerHTML =
+    html ||
+    `
+      <div class="empty-state">
+        <div>
+          <div class="empty-title">
+            NO REALITIES YET.
+          </div>
+        </div>
+      </div>
+    `;
+
+  renderExcl(account);
+
 }
 
 
-/* =====================================================
-   MISSION
-===================================================== */
+function renderExcl(account) {
 
-function openMission(index) {
+  const card =
+    document.getElementById(
+      "exclCard"
+    );
 
-  if (!selectedRealityId) return;
+  const button =
+    document.getElementById(
+      "exclButton"
+    );
 
-  const drop =
-    getDrops().find(d => d.id === selectedRealityId);
+  if (!card || !button) return;
 
-  if (!drop || !drop.missions[index]) return;
+  if (
+    Number(account.flux || 0) >= 25000
+  ) {
 
-  selectedMissionIndex = index;
+    card.classList.remove(
+      "locked"
+    );
 
-  const mission = drop.missions[index];
+    card.classList.add(
+      "excl-unlocked"
+    );
 
-  const flux = Math.min(250, mission.flux);
+    button.disabled = false;
+
+    button.textContent =
+      "ENTER EXCL";
+
+    button.onclick = function() {
+
+      showToast(
+        "EXCL is unlocked."
+      );
+
+    };
+
+  } else {
+
+    card.classList.add(
+      "locked"
+    );
+
+    card.classList.remove(
+      "excl-unlocked"
+    );
+
+    /*
+      IMPORTANT:
+      The locked EXCL button is disabled,
+      so it cannot be clicked.
+    */
+
+    button.disabled = true;
+
+    button.textContent =
+      "LOCKED";
+
+    button.onclick = null;
+
+  }
+
+}
 
 
-  document.getElementById("missionsContent").innerHTML = `
+/* =========================
+   OPEN REALITY
+========================= */
 
-    <div class="page-header">
+function openReality(dropId) {
 
-      <div class="page-kicker">
-        MISSION ${index + 1}
+  const drops =
+    getDrops();
+
+  const reality =
+    drops.find(
+      drop =>
+        drop.id === dropId
+    );
+
+  if (!reality) {
+
+    showToast(
+      "Reality no longer exists."
+    );
+
+    return;
+
+  }
+
+  currentReality =
+    reality;
+
+  renderReality();
+
+  showScreen(
+    "reality"
+  );
+
+}
+
+
+function renderReality() {
+
+  if (!currentReality) return;
+
+  const creator =
+    getAccountById(
+      currentReality.creatorId
+    );
+
+  if (!creator) return;
+
+  document.getElementById(
+    "realityContent"
+  ).innerHTML = `
+
+    <div class="reality-hero">
+
+      <div class="category-tag">
+        ${escapeHTML(
+          currentReality.category
+        )}
       </div>
 
-      <div class="page-title">
-        Complete it.
+      <div class="reality-hero-title">
+        ${escapeHTML(
+          currentReality.title
+        )}
+      </div>
+
+      <div class="reality-hero-description">
+        ${escapeHTML(
+          currentReality.description
+        )}
+      </div>
+
+      <div class="creator-row reality-creator">
+
+        <div class="avatar">
+          ${getInitial(
+            creator.name
+          )}
+        </div>
+
+        <div class="creator-info">
+
+          <div class="creator-name">
+
+            ${escapeHTML(
+              creator.name
+            )}
+
+            ${getVerifiedBadgeHTML(
+              creator
+            )}
+
+          </div>
+
+          <div class="creator-username">
+            @${escapeHTML(
+              creator.username
+            )}
+          </div>
+
+        </div>
+
       </div>
 
     </div>
-
-
-    <div class="mission-card">
-
-      <div class="mission-card-title">
-        ${escapeHTML(mission.description)}
-      </div>
-
-
-      <div class="mission-card-bottom">
-
-        <div class="mission-flux">
-          +${flux} FLUX
-        </div>
-
-        <div class="mission-proof-status">
-          ${
-            mission.proofRequired
-              ? "PHOTO REQUIRED"
-              : "PHOTO OPTIONAL"
-          }
-        </div>
-
-      </div>
-
-
-      <div class="proof-upload">
-
-        <div class="proof-title">
-          PHOTO PROOF
-        </div>
-
-        ${
-          mission.proofRequired
-            ? `
-              <div class="proof-required">
-                A photo is required to complete this mission.
-              </div>
-            `
-            : `
-              <div class="proof-required">
-                Optional — add a photo to show your proof.
-              </div>
-            `
-        }
-
-
-        <label class="proof-button">
-
-          <span>＋</span>
-          <span>ADD PHOTO</span>
-
-          <input
-            id="missionProofInput"
-            type="file"
-            accept="image/*"
-            capture="environment"
-            hidden
-            onchange="previewMissionProof(this)"
-          >
-
-        </label>
-
-
-        <div id="missionProofPreview" class="proof-preview"></div>
-
-      </div>
-
-    </div>
-
-
-    <div style="height:20px;"></div>
-
 
     <button
-      class="primary-btn"
-      onclick="completeMission()"
+      class="primary-button"
+      onclick="showMissions()"
     >
-      COMPLETE MISSION
+      ENTER REALITY
     </button>
 
   `;
 
-  showScreen("missions");
 }
 
 
-/* =====================================================
+/* =========================
+   MISSIONS
+========================= */
+
+function showMissions() {
+
+  if (!currentReality) return;
+
+  let html = `
+    <div class="page-heading">
+      <div class="page-title">
+        CHOOSE YOUR MISSION.
+      </div>
+
+      <div class="page-description">
+        Complete a mission to earn its FLUX reward.
+      </div>
+    </div>
+
+    <div class="mission-list">
+  `;
+
+  currentReality.missions.forEach(
+    (mission, index) => {
+
+      html += `
+
+        <div class="mission-card">
+
+          <div class="mission-card-number">
+            ${index + 1}
+          </div>
+
+          <div class="mission-card-body">
+
+            <div class="mission-card-text">
+              ${escapeHTML(
+                mission.description
+              )}
+            </div>
+
+            <div class="mission-card-reward">
+
+              +${Math.min(
+                250,
+                mission.flux
+              )} FLUX
+
+              ${mission.proofRequired
+                ? " · PHOTO PROOF"
+                : ""
+              }
+
+            </div>
+
+            <button
+              class="mission-card-button"
+              onclick="startMission(${index})"
+            >
+              SWYCH THIS
+            </button>
+
+          </div>
+
+        </div>
+
+      `;
+
+    }
+  );
+
+  html += `
+    </div>
+  `;
+
+  document.getElementById(
+    "missionsContent"
+  ).innerHTML =
+    html;
+
+  showScreen(
+    "missions"
+  );
+
+}
+
+
+/* =========================
+   START MISSION
+========================= */
+
+function startMission(index) {
+
+  if (!currentReality) return;
+
+  currentMissionIndex =
+    index;
+
+  currentProofData =
+    null;
+
+  renderSwychMission();
+
+  showScreen(
+    "swych"
+  );
+
+}
+
+
+function renderSwychMission() {
+
+  if (!currentReality) return;
+
+  const mission =
+    currentReality.missions[
+      currentMissionIndex
+    ];
+
+  if (!mission) return;
+
+  const safeFlux =
+    Math.min(
+      250,
+      Number(
+        mission.flux
+      ) || 0
+    );
+
+  currentProofData = null;
+
+  document.getElementById(
+    "swychContent"
+  ).innerHTML = `
+
+    <div class="mission-progress">
+
+      <span>
+        MISSION
+        ${currentMissionIndex + 1}
+        /
+        ${currentReality.missions.length}
+      </span>
+
+      <span>
+        ${safeFlux} FLUX
+      </span>
+
+    </div>
+
+    <div class="mission-experience-card">
+
+      <div class="mission-big-number">
+        YOUR MISSION
+      </div>
+
+      <div class="mission-big-title">
+        ${escapeHTML(
+          mission.description
+        )}
+      </div>
+
+      <div class="mission-big-description">
+        Complete this mission as described.
+        Keep it realistic and safe.
+      </div>
+
+      <div class="reward-box">
+
+        <div class="reward-label">
+          REWARD
+        </div>
+
+        <div class="reward-value">
+          +${safeFlux} FLUX
+        </div>
+
+      </div>
+
+      ${
+        mission.proofRequired
+        ? `
+          <div class="proof-area">
+
+            <div class="proof-required-message">
+              PHOTO PROOF IS REQUIRED FOR THIS MISSION.
+              Take a photo or choose one from your device.
+            </div>
+
+            <label class="proof-button">
+
+              <span>＋</span>
+              <span>ADD PHOTO</span>
+
+              <input
+                id="missionProofInput"
+                type="file"
+                accept="image/*"
+                capture="environment"
+                onchange="previewMissionProof(this)"
+              >
+
+            </label>
+
+            <div
+              id="proofPreview"
+              class="proof-preview hidden"
+            ></div>
+
+          </div>
+        `
+        : `
+          <div class="proof-area">
+
+            <div class="proof-required-message">
+              PHOTO PROOF IS OPTIONAL FOR THIS MISSION.
+            </div>
+
+            <label class="proof-button">
+
+              <span>＋</span>
+              <span>ADD PHOTO</span>
+
+              <input
+                id="missionProofInput"
+                type="file"
+                accept="image/*"
+                capture="environment"
+                onchange="previewMissionProof(this)"
+              >
+
+            </label>
+
+            <div
+              id="proofPreview"
+              class="proof-preview hidden"
+            ></div>
+
+          </div>
+        `
+      }
+
+      <button
+        class="primary-button complete-button"
+        onclick="completeMission()"
+      >
+        COMPLETE MISSION
+      </button>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================
    PHOTO PROOF
-===================================================== */
+========================= */
 
 function previewMissionProof(input) {
 
+  const file =
+    input.files &&
+    input.files[0];
+
   const preview =
-    document.getElementById("missionProofPreview");
+    document.getElementById(
+      "proofPreview"
+    );
 
-  if (!input.files || !input.files[0]) {
-    preview.innerHTML = "";
-    return;
-  }
+  if (!file || !preview) return;
 
-  const file = input.files[0];
+  if (
+    !file.type.startsWith(
+      "image/"
+    )
+  ) {
 
-  if (!file.type.startsWith("image/")) {
-    showFlash("Please select an image.");
+    showToast(
+      "Please choose an image."
+    );
+
     input.value = "";
+
     return;
+
   }
 
-  const reader = new FileReader();
+  const reader =
+    new FileReader();
 
-  reader.onload = function(event) {
+  reader.onload =
+    function(event) {
 
-    preview.innerHTML = `
+      currentProofData =
+        event.target.result;
 
-      <div class="proof-image-wrap">
+      preview.classList.remove(
+        "hidden"
+      );
+
+      preview.innerHTML = `
 
         <img
-          src="${event.target.result}"
-          class="proof-image"
+          src="${currentProofData}"
           alt="Mission proof"
         >
 
         <button
-          type="button"
           class="remove-proof"
+          type="button"
           onclick="removeMissionProof()"
         >
-          REMOVE PHOTO
+          ×
         </button>
 
-      </div>
+      `;
 
-    `;
+    };
 
-  };
-
-  reader.readAsDataURL(file);
+  reader.readAsDataURL(
+    file
+  );
 
 }
 
 
 function removeMissionProof() {
 
+  currentProofData =
+    null;
+
   const input =
-    document.getElementById("missionProofInput");
+    document.getElementById(
+      "missionProofInput"
+    );
 
   const preview =
-    document.getElementById("missionProofPreview");
+    document.getElementById(
+      "proofPreview"
+    );
 
   if (input) {
     input.value = "";
   }
 
   if (preview) {
-    preview.innerHTML = "";
+
+    preview.classList.add(
+      "hidden"
+    );
+
+    preview.innerHTML =
+      "";
+
   }
 
 }
 
 
-/* =====================================================
+/* =========================
    COMPLETE MISSION
-===================================================== */
+========================= */
 
 function completeMission() {
 
-  if (
-    selectedRealityId === null ||
-    selectedMissionIndex === null
-  ) {
-    return;
-  }
+  if (!currentReality) return;
 
-  const drops = getDrops();
-
-  const drop =
-    drops.find(d => d.id === selectedRealityId);
-
-  if (!drop) return;
-
-  const mission =
-    drop.missions[selectedMissionIndex];
-
-  if (!mission) return;
-
-
-  const proofInput =
-    document.getElementById("missionProofInput");
-
-  const hasProof =
-    proofInput &&
-    proofInput.files &&
-    proofInput.files.length > 0;
-
-
-  if (mission.proofRequired && !hasProof) {
-
-    showFlash(
-      "Photo proof is required for this mission."
-    );
-
-    return;
-  }
-
-
-  const account = getCurrentAccount();
+  const account =
+    getCurrentAccount();
 
   if (!account) return;
 
+  const mission =
+    currentReality.missions[
+      currentMissionIndex
+    ];
 
-  const flux =
-    Math.min(250, mission.flux);
+  if (!mission) return;
 
+  if (
+    mission.proofRequired &&
+    !currentProofData
+  ) {
+
+    showToast(
+      "Photo proof is required."
+    );
+
+    return;
+
+  }
+
+  const reward =
+    addFlux(
+      Math.min(
+        250,
+        Number(
+          mission.flux
+        ) || 0
+      )
+    );
 
   /*
-    Save completion history.
+    Store local completion history.
 
-    Photo data is stored locally in this browser.
-    This is suitable for the prototype, but not
-    for real cross-user proof verification.
+    In a real app this should be stored
+    server-side so creators can actually
+    review proof from other users.
   */
 
-  let history = [];
+  saveCompletion({
 
-  try {
-    history =
-      JSON.parse(
-        localStorage.getItem(
-          "swychedHistory_" + account.id
-        )
-      ) || [];
-  } catch {
-    history = [];
-  }
+    id:
+      "completion_" +
+      Date.now(),
 
+    userId:
+      account.id,
 
-  const finish = (proofData) => {
+    dropId:
+      currentReality.id,
 
-    history.unshift({
+    missionId:
+      mission.id,
 
-      id:
-        "completion_" +
-        Date.now() +
-        "_" +
-        Math.random().toString(36).slice(2),
+    reward,
 
-      realityId: drop.id,
+    proof:
+      currentProofData
+        ? {
+            image:
+              currentProofData
+          }
+        : null,
 
-      realityTitle: drop.title,
+    completedAt:
+      Date.now()
 
-      missionDescription: mission.description,
+  });
 
-      flux,
+  document.getElementById(
+    "completeFlux"
+  ).textContent =
+    `+${reward} FLUX`;
 
-      completedAt:
-        new Date().toISOString(),
+  currentProofData =
+    null;
 
-      proof: proofData || null
-
-    });
-
-
-    localStorage.setItem(
-      "swychedHistory_" + account.id,
-      JSON.stringify(history)
-    );
-
-
-    account.flux =
-      (account.flux || 0) + flux;
-
-    account.swyches =
-      (account.swyches || 0) + 1;
-
-    saveCurrentAccount(account);
-
-
-    document.getElementById("completeFlux").textContent =
-      "+" + flux + " FLUX";
-
-
-    document.getElementById("completeText").textContent =
-      mission.proofRequired
-        ? "Mission completed with photo proof."
-        : "Mission completed. Keep going.";
-
-
-    selectedMissionIndex = null;
-
-
-    showScreen("complete");
-
-    updateTopBars();
-
-  };
-
-
-  if (hasProof) {
-
-    const reader = new FileReader();
-
-    reader.onload = function(event) {
-
-      finish({
-        image: event.target.result
-      });
-
-    };
-
-    reader.readAsDataURL(
-      proofInput.files[0]
-    );
-
-  } else {
-
-    finish(null);
-
-  }
+  showScreen(
+    "complete"
+  );
 
 }
 
 
-/* =====================================================
-   SWYCH HISTORY
-===================================================== */
+/* =========================
+   COMPLETIONS
+========================= */
 
-function getHistory(accountId) {
+function getCompletions() {
 
   try {
 
     return JSON.parse(
       localStorage.getItem(
-        "swychedHistory_" + accountId
+        "swychedCompletions"
       )
     ) || [];
 
@@ -4108,184 +4646,260 @@ function getHistory(accountId) {
 }
 
 
-function loadSWYCH() {
+function saveCompletion(completion) {
 
-  const account = getCurrentAccount();
+  const completions =
+    getCompletions();
 
-  if (!account) return;
+  completions.unshift(
+    completion
+  );
 
-  const history =
-    getHistory(account.id);
+  /*
+    Keep the local prototype from
+    growing forever.
+  */
 
-  document.getElementById("swychCount").textContent =
-    account.swyches || 0;
+  const limited =
+    completions.slice(
+      0,
+      100
+    );
 
-  document.getElementById("swychFlux").textContent =
-    account.flux || 0;
-
-
-  const container =
-    document.getElementById("swychHistory");
-
-
-  if (history.length === 0) {
-
-    container.innerHTML = `
-
-      <div class="empty-history">
-
-        <div class="empty-icon">
-          ↔
-        </div>
-
-        <div class="empty-title">
-          NOTHING HERE YET
-        </div>
-
-        <div class="empty-text">
-          Complete a mission and your SWYCH history
-          will show up here.
-        </div>
-
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  container.innerHTML =
-    history.map(item => `
-
-      <div class="my-drop">
-
-        <div class="my-drop-title">
-          ${escapeHTML(item.realityTitle)}
-        </div>
-
-        <div class="my-drop-meta">
-          ${escapeHTML(item.missionDescription)}
-          · +${item.flux} FLUX
-        </div>
-
-        ${
-          item.proof
-            ? `
-              <div style="
-                color:#777;
-                font-size:9px;
-                font-weight:700;
-                margin-top:8px;
-              ">
-                ✓ PHOTO PROOF ATTACHED
-              </div>
-            `
-            : ""
-        }
-
-      </div>
-
-    `).join("");
+  localStorage.setItem(
+    "swychedCompletions",
+    JSON.stringify(
+      limited
+    )
+  );
 
 }
 
 
-/* =====================================================
+/* =========================
    PROFILE
-===================================================== */
+========================= */
 
-function loadProfile() {
+function renderProfile() {
 
-  const account = getCurrentAccount();
+  const account =
+    getCurrentAccount();
 
   if (!account) return;
 
   const flux =
-    account.flux || 0;
+    Number(account.flux || 0);
 
-  const drops =
-    getDrops().filter(
-      drop => drop.creatorId === account.id
+  const level =
+    getLevel(flux);
+
+  const progress =
+    getProgress(flux);
+
+  document.getElementById(
+    "profileFlux"
+  ).textContent =
+    `${flux} FLUX`;
+
+  document.getElementById(
+    "profileAvatar"
+  ).textContent =
+    getInitial(
+      account.name
     );
 
-
-  document.getElementById("profileAvatar").textContent =
-    getInitials(account.name);
-
-  document.getElementById("profileName").textContent =
+  document.getElementById(
+    "profileName"
+  ).textContent =
     account.name;
 
-  document.getElementById("profileUsername").textContent =
-    "@" + account.username;
+  document.getElementById(
+    "profileUsername"
+  ).textContent =
+    `@${account.username}`;
 
-  document.getElementById("profileBio").textContent =
-    account.bio || "No bio yet.";
+  document.getElementById(
+    "profileBio"
+  ).textContent =
+    account.bio || "";
 
+  const verifiedBadge =
+    document.getElementById(
+      "profileVerifiedBadge"
+    );
 
-  document.getElementById("profileFlux").textContent =
-    flux.toLocaleString();
+  verifiedBadge.classList.toggle(
+    "hidden",
+    !account.verified
+  );
 
-  document.getElementById("profileLevel").textContent =
-    "LEVEL " + getLevel(flux);
+  document.getElementById(
+    "profileLevel"
+  ).textContent =
+    level.level;
 
-  document.getElementById("profileProgress").style.width =
-    getProgress(flux) + "%";
+  document.getElementById(
+    "profileLevelFlux"
+  ).innerHTML =
+    `${flux} FLUX <span>/ ${progress.target}</span>`;
 
-  document.getElementById("profileCurrent").textContent =
-    flux.toLocaleString() + " FLUX";
+  document.getElementById(
+    "profileProgress"
+  ).style.width =
+    `${progress.percentage}%`;
 
-  document.getElementById("profileNext").textContent =
-    flux >= 25000
-      ? "MAX"
-      : getLevelNext(flux).toLocaleString() + " FLUX";
+  document.getElementById(
+    "profileProgressCurrent"
+  ).textContent =
+    `${flux} FLUX`;
 
+  document.getElementById(
+    "profileProgressTarget"
+  ).textContent =
+    progress.target === "MAX"
+      ? "MAX LEVEL"
+      : `${progress.target} FLUX`;
 
-  document.getElementById("profileSwcyhes").textContent =
-    account.swyches || 0;
+  renderVerificationStatus(
+    account
+  );
 
-  document.getElementById("profileDropsCount").textContent =
-    drops.length;
-
-
-  renderMyDrops();
+  renderMyDrops(
+    account
+  );
 
 }
 
 
-function renderMyDrops() {
+/* =========================
+   VERIFICATION PROFILE
+========================= */
 
-  const account = getCurrentAccount();
+function renderVerificationStatus(
+  account
+) {
+
+  const status =
+    document.getElementById(
+      "profileVerificationStatus"
+    );
+
+  const button =
+    document.getElementById(
+      "demoVerifyButton"
+    );
+
+  if (!status || !button) return;
+
+  if (account.verified) {
+
+    status.innerHTML = `
+      <span class="verified-badge">
+        ✓
+      </span>
+
+      VERIFIED CREATOR
+    `;
+
+    button.textContent =
+      "DEMO: REMOVE VERIFICATION";
+
+  } else {
+
+    status.innerHTML = `
+      <span
+        style="
+          width:15px;
+          height:15px;
+          border-radius:50%;
+          border:1px solid #555;
+          display:inline-flex;
+        "
+      ></span>
+
+      NOT VERIFIED
+    `;
+
+    button.textContent =
+      "DEMO: VERIFY CREATOR";
+
+  }
+
+}
+
+
+/*
+  PROTOTYPE ONLY.
+
+  This simulates the verification system so
+  you can test how the badge looks.
+
+  In production, users should NOT be able
+  to verify themselves.
+*/
+
+function toggleDemoVerification() {
+
+  const account =
+    getCurrentAccount();
 
   if (!account) return;
 
-  const drops =
-    getDrops().filter(
-      drop => drop.creatorId === account.id
-    );
+  account.verified =
+    !account.verified;
 
+  saveCurrentAccount(
+    account
+  );
+
+  renderProfile();
+  renderDropCreatorStatus();
+  renderExplore();
+
+  showToast(
+    account.verified
+      ? "Demo verification enabled."
+      : "Demo verification removed."
+  );
+
+}
+
+
+/* =========================
+   MY DROPS
+========================= */
+
+function renderMyDrops(account) {
 
   const container =
-    document.getElementById("myDrops");
+    document.getElementById(
+      "myDrops"
+    );
 
+  if (!container) return;
 
-  if (drops.length === 0) {
+  const drops =
+    getDrops().filter(
+      drop =>
+        drop.creatorId === account.id
+    );
+
+  if (!drops.length) {
 
     container.innerHTML = `
 
-      <div class="empty-history">
+      <div class="empty-state" style="min-height:170px">
 
-        <div class="empty-icon">
-          ＋
-        </div>
+        <div>
 
-        <div class="empty-title">
-          NO DROPS YET
-        </div>
+          <div class="empty-title">
+            NO DROPS YET.
+          </div>
 
-        <div class="empty-text">
-          Create your first Reality and see it appear here.
+          <div class="empty-text">
+            Your published Realities will appear here.
+          </div>
+
         </div>
 
       </div>
@@ -4296,259 +4910,400 @@ function renderMyDrops() {
 
   }
 
+  let html = "";
+
+  drops.forEach(
+    drop => {
+
+      const verified =
+        account.verified;
+
+      html += `
+
+        <div class="my-drop-card">
+
+          <div class="my-drop-top">
+
+            <div>
+
+              <div class="my-drop-title">
+                ${escapeHTML(
+                  drop.title
+                )}
+              </div>
+
+              <div class="my-drop-meta">
+
+                ${drop.missions.length}
+                ${drop.missions.length === 1
+                  ? "mission"
+                  : "missions"
+                }
+
+                ·
+
+                ${escapeHTML(
+                  drop.category
+                )}
+
+              </div>
+
+              ${
+                verified
+                ? `
+                  <div
+                    style="
+                      display:flex;
+                      align-items:center;
+                      gap:6px;
+                      margin-top:9px;
+                      color:#ccc;
+                      font-size:9px;
+                      font-weight:700;
+                    "
+                  >
+                    <span class="verified-badge">
+                      ✓
+                    </span>
+                    VERIFIED CREATOR
+                  </div>
+                `
+                : ""
+              }
+
+            </div>
+
+            <button
+              class="delete-button"
+              onclick="deleteDrop('${drop.id}')"
+            >
+              DELETE
+            </button>
+
+          </div>
+
+        </div>
+
+      `;
+
+    }
+  );
 
   container.innerHTML =
-    drops.map(drop => `
-
-      <div class="my-drop">
-
-        <div class="page-kicker">
-          ${escapeHTML(drop.category)}
-        </div>
-
-        <div class="my-drop-title">
-          ${escapeHTML(drop.title)}
-        </div>
-
-        <div class="my-drop-meta">
-          ${drop.missions.length} missions
-        </div>
-
-        <button
-          class="delete-btn"
-          onclick="deleteDrop('${drop.id}')"
-        >
-          DELETE DROP
-        </button>
-
-      </div>
-
-    `).join("");
+    html;
 
 }
 
 
-function deleteDrop(id) {
+function deleteDrop(dropId) {
 
-  const account = getCurrentAccount();
+  const account =
+    getCurrentAccount();
 
   if (!account) return;
 
-  const drops = getDrops();
+  const drops =
+    getDrops();
 
   const drop =
-    drops.find(d => d.id === id);
+    drops.find(
+      item =>
+        item.id === dropId
+    );
 
   if (!drop) return;
 
-  if (drop.creatorId !== account.id) {
-    showFlash("You can only delete your own Drops.");
+  if (
+    drop.creatorId !==
+    account.id
+  ) {
+
+    showToast(
+      "You can only delete your own Drops."
+    );
+
     return;
+
   }
 
-  const confirmed =
-    confirm("Delete this Reality?");
-
-  if (!confirmed) return;
-
   const updated =
-    drops.filter(d => d.id !== id);
+    drops.filter(
+      item =>
+        item.id !== dropId
+    );
 
-  saveDrops(updated);
+  saveDrops(
+    updated
+  );
 
-  loadProfile();
+  renderProfile();
   renderExplore();
 
-  showFlash("Drop deleted.");
+  showToast(
+    "Drop deleted."
+  );
 
 }
 
 
-/* =====================================================
+/* =========================
    EDIT PROFILE
-===================================================== */
+========================= */
 
-function openEditProfile() {
+function loadEditProfile() {
 
-  const account = getCurrentAccount();
+  const account =
+    getCurrentAccount();
 
   if (!account) return;
 
-  document.getElementById("editName").value =
+  document.getElementById(
+    "editName"
+  ).value =
     account.name || "";
 
-  document.getElementById("editUsername").value =
+  document.getElementById(
+    "editUsername"
+  ).value =
     account.username || "";
 
-  document.getElementById("editBio").value =
+  document.getElementById(
+    "editBio"
+  ).value =
     account.bio || "";
 
-  document.getElementById("editError").style.display =
-    "none";
-
-  showScreen("editProfile");
 }
 
 
 function saveProfile() {
 
-  const account = getCurrentAccount();
+  const account =
+    getCurrentAccount();
 
   if (!account) return;
 
   const name =
-    document.getElementById("editName").value.trim();
+    document.getElementById(
+      "editName"
+    ).value.trim();
 
   const username =
     normalizeUsername(
-      document.getElementById("editUsername").value
+      document.getElementById(
+        "editUsername"
+      ).value
     );
 
   const bio =
-    document.getElementById("editBio").value.trim();
-
-  const error =
-    document.getElementById("editError");
-
-  error.style.display = "none";
-
+    document.getElementById(
+      "editBio"
+    ).value.trim();
 
   if (!name || !username) {
 
-    showError(
-      error,
+    showToast(
       "Name and username are required."
     );
 
     return;
-  }
 
+  }
 
   const accounts =
     getAccounts();
-
 
   const usernameTaken =
     accounts.some(
       other =>
         other.id !== account.id &&
-        other.username.toLowerCase() ===
-          username.toLowerCase()
+        other.username === username
     );
-
 
   if (usernameTaken) {
 
-    showError(
-      error,
+    showToast(
       "That username is already taken."
     );
 
     return;
+
   }
 
+  account.name =
+    name;
 
-  account.name = name;
-  account.username = username;
-  account.bio = bio;
+  account.username =
+    username;
 
-  saveCurrentAccount(account);
+  account.bio =
+    bio;
 
-  updateTopBars();
-  loadHome();
-  loadProfile();
+  saveCurrentAccount(
+    account
+  );
 
-  showFlash("Profile updated.");
+  renderProfile();
 
-  showScreen("profile");
+  showToast(
+    "Profile updated."
+  );
+
+  showScreen(
+    "profile"
+  );
 
 }
 
 
-/* =====================================================
-   ESCAPE HTML
-===================================================== */
+/* =========================
+   HELPERS
+========================= */
+
+function getAccountById(id) {
+
+  const accounts =
+    getAccounts();
+
+  return accounts.find(
+    account =>
+      account.id === id
+  ) || null;
+
+}
+
+
+function getInitial(name) {
+
+  if (!name) {
+    return "?";
+  }
+
+  return name
+    .trim()
+    .charAt(0)
+    .toUpperCase();
+
+}
+
 
 function escapeHTML(value) {
 
-  if (value === null || value === undefined) {
-    return "";
-  }
-
-  return String(value)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-
-}
-
-
-/* =====================================================
-   FLASH MESSAGE
-===================================================== */
-
-let flashTimeout;
-
-function showFlash(message) {
-
-  const element =
-    document.getElementById("flashMessage");
-
-  element.textContent = message;
-  element.style.display = "block";
-
-  clearTimeout(flashTimeout);
-
-  flashTimeout =
-    setTimeout(() => {
-
-      element.style.display = "none";
-
-    }, 2300);
+  return String(
+    value ?? ""
+  )
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
 
 }
 
 
-/* =====================================================
-   STARTUP
-===================================================== */
+function showToast(message) {
 
-document.addEventListener("DOMContentLoaded", () => {
+  const toast =
+    document.getElementById(
+      "toast"
+    );
+
+  toast.textContent =
+    message;
+
+  toast.classList.add(
+    "show"
+  );
+
+  clearTimeout(
+    window.toastTimeout
+  );
+
+  window.toastTimeout =
+    setTimeout(
+      () => {
+
+        toast.classList.remove(
+          "show"
+        );
+
+      },
+      2200
+    );
+
+}
+
+
+/* =========================
+   INITIALIZE
+========================= */
+
+function initializeApp() {
+
+  const account =
+    getCurrentAccount();
 
   /*
-    If an existing session exists,
-    automatically enter the app.
+    If someone already has an account
+    logged in, go straight to Home.
   */
 
-  if (getCurrentAccount()) {
+  if (account) {
 
-    initializeApp();
-
-    showScreen("home");
+    showScreen(
+      "home"
+    );
 
   } else {
 
-    showScreen("welcome");
+    showScreen(
+      "welcome"
+    );
 
   }
-
 
   /*
-    Always make sure DROP starts with
-    one mission when opened for the first time.
+    Make sure Drop always starts
+    with one mission available.
   */
 
+  const missionContainer =
+    document.getElementById(
+      "missionBuilders"
+    );
+
   if (
-    document.querySelectorAll(
-      ".mission-builder"
-    ).length === 0
+    missionContainer &&
+    missionContainer.children.length === 0
   ) {
+
     addMission();
+
   }
 
-});
+}
+
+
+/* =========================
+   RUN
+========================= */
+
+initializeApp();
+
 </script>
 
 </body>
