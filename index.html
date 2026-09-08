@@ -1,331 +1,314 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>SWYCHD</title>
 
+  <!-- SWYCHD FONT -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
   <style>
+
+    /* =========================
+       GLOBAL
+    ========================= */
+
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
     }
 
     body {
+      margin: 0;
       background: #000;
       color: #fff;
-      font-family: Arial, sans-serif;
-      min-height: 100vh;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 500;
+      letter-spacing: -0.3px;
     }
 
     .app {
-      width: 100%;
       max-width: 430px;
-      min-height: 100vh;
       margin: auto;
-      padding: 24px;
-      padding-bottom: 100px;
+      min-height: 100vh;
+      padding-bottom: 90px;
     }
+
+
+    /* =========================
+       SCREENS
+    ========================= */
 
     .screen {
       display: none;
+      padding: 25px 20px;
     }
 
     .screen.active {
       display: block;
     }
 
+
+    /* =========================
+       LOGO
+    ========================= */
+
     .logo {
-      font-size: 28px;
-      font-weight: 900;
-      letter-spacing: -1px;
+      font-size: 29px;
+      font-weight: 700;
+      letter-spacing: -1.8px;
     }
 
-    /* WELCOME */
 
-    .welcome {
-      padding-top: 90px;
-      text-align: center;
-    }
+    /* =========================
+       HEADINGS
+    ========================= */
 
-    .welcome h1 {
-      margin-top: 100px;
-      font-size: 52px;
-      line-height: .9;
-      letter-spacing: -4px;
-    }
-
-    .welcome p {
-      margin-top: 22px;
-      color: #999;
-      line-height: 1.6;
-    }
-
-    .button {
-      width: 100%;
-      margin-top: 35px;
-      padding: 17px;
-      border: none;
-      border-radius: 14px;
-      background: #fff;
-      color: #000;
-      font-size: 16px;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    /* HOME */
-
-    .top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .profile-circle {
-      width: 42px;
-      height: 42px;
-      border: 1px solid #444;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-    }
-
-    .greeting {
+    h1 {
+      font-size: 36px;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: -1.5px;
       margin-top: 40px;
     }
 
-    .greeting p {
-      color: #888;
-      font-size: 14px;
+    h2 {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.8px;
     }
 
-    .greeting h2 {
-      margin-top: 5px;
+    h3 {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.4px;
+    }
+
+    p {
+      color: #999;
+      line-height: 1.5;
+      font-size: 15px;
+    }
+
+
+    /* =========================
+       BUTTONS
+    ========================= */
+
+    button {
+      border: none;
+      cursor: pointer;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .main-button {
+      width: 100%;
+      padding: 16px;
+      border-radius: 12px;
+      background: #fff;
+      color: #000;
+      font-weight: 700;
+      font-size: 15px;
+      margin-top: 20px;
+      transition: 0.2s;
+    }
+
+    .main-button:hover {
+      transform: translateY(-2px);
+    }
+
+    .main-button:active {
+      transform: scale(0.98);
+    }
+
+
+    /* =========================
+       CARDS
+    ========================= */
+
+    .card {
+      background: #111;
+      border: 1px solid #1d1d1d;
+      border-radius: 18px;
+      padding: 20px;
+      margin-top: 15px;
+    }
+
+
+    /* =========================
+       FLUX
+    ========================= */
+
+    .flux {
       font-size: 30px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      margin: 6px 0;
     }
 
-    .flux-card {
-      margin-top: 25px;
-      padding: 22px;
+    .small {
+      font-size: 12px;
+      color: #777;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+    }
+
+
+    /* =========================
+       SEARCH
+    ========================= */
+
+    .search {
+      width: 100%;
+      padding: 15px;
+      background: #111;
+      border: 1px solid #292929;
+      border-radius: 12px;
+      color: white;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      outline: none;
+      margin: 20px 0;
+    }
+
+    .search:focus {
+      border-color: #fff;
+    }
+
+
+    /* =========================
+       CATEGORY CHIPS
+    ========================= */
+
+    .chips {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 5px;
+    }
+
+    .chips::-webkit-scrollbar {
+      display: none;
+    }
+
+    .chip {
+      padding: 9px 14px;
+      background: #111;
+      color: #888;
       border-radius: 20px;
+      white-space: nowrap;
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid #222;
+    }
+
+    .chip.selected {
       background: #fff;
       color: #000;
     }
 
-    .flux-title {
-      font-size: 12px;
-      font-weight: bold;
-      letter-spacing: 2px;
-    }
 
-    .flux-number {
-      margin-top: 8px;
-      font-size: 38px;
-      font-weight: 900;
-    }
-
-    .flux-level {
-      margin-top: 5px;
-      font-size: 13px;
-      color: #555;
-    }
-
-    .section-title {
-      margin-top: 35px;
-      margin-bottom: 15px;
-      font-size: 13px;
-      letter-spacing: 2px;
-      color: #888;
-    }
-
-    .reality-card {
-      padding: 20px;
-      margin-bottom: 12px;
-      border: 1px solid #292929;
-      border-radius: 18px;
-    }
-
-    .reality-icon {
-      font-size: 25px;
-    }
-
-    .reality-card h3 {
-      margin-top: 12px;
-      font-size: 20px;
-    }
-
-    .reality-card p {
-      margin-top: 6px;
-      color: #888;
-      font-size: 13px;
-      line-height: 1.4;
-    }
-
-    .enter {
-      margin-top: 15px;
-      padding: 10px 15px;
-      border: 1px solid #444;
-      border-radius: 10px;
-      background: transparent;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    /* EXPLORE */
-
-    .page-header {
-      margin-top: 35px;
-    }
-
-    .page-header p {
-      color: #888;
-      margin-top: 8px;
-      font-size: 14px;
-    }
-
-    .search {
-      width: 100%;
-      margin-top: 25px;
-      padding: 15px;
-      background: #111;
-      border: 1px solid #292929;
-      border-radius: 14px;
-      color: white;
-      outline: none;
-      font-size: 15px;
-    }
-
-    .search::placeholder {
-      color: #666;
-    }
-
-    .categories {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      margin-top: 18px;
-      padding-bottom: 5px;
-    }
-
-    .category {
-      flex-shrink: 0;
-      padding: 9px 14px;
-      background: #111;
-      border: 1px solid #292929;
-      border-radius: 20px;
-      color: #aaa;
-      font-size: 12px;
-      cursor: pointer;
-    }
-
-    .category.selected {
-      background: white;
-      color: black;
-      border-color: white;
-    }
-
-    .drop-card {
-      padding: 20px;
-      margin-bottom: 12px;
-      border: 1px solid #292929;
-      border-radius: 18px;
-    }
-
-    .drop-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .drop-category {
-      color: #888;
-      font-size: 11px;
-      letter-spacing: 1px;
-    }
-
-    .difficulty {
-      font-size: 12px;
-    }
-
-    .drop-card h3 {
-      margin-top: 14px;
-      font-size: 21px;
-    }
-
-    .drop-card p {
-      margin-top: 7px;
-      color: #888;
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    .drop-info {
-      display: flex;
-      gap: 15px;
-      margin-top: 15px;
-      color: #777;
-      font-size: 12px;
-    }
-
-    .swch-button {
-      width: 100%;
-      margin-top: 18px;
-      padding: 13px;
-      border: none;
-      border-radius: 11px;
-      background: white;
-      color: black;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    /* NAVIGATION */
+    /* =========================
+       BOTTOM NAVIGATION
+    ========================= */
 
     .nav {
       position: fixed;
       bottom: 0;
       left: 50%;
       transform: translateX(-50%);
-      width: 100%;
-      max-width: 430px;
-      padding: 12px 15px 18px;
-      background: rgba(0,0,0,.97);
+
+      width: min(430px, 100%);
+      height: 72px;
+
+      background: rgba(10, 10, 10, 0.97);
       border-top: 1px solid #222;
-      display: none;
+
+      display: flex;
       justify-content: space-around;
-      z-index: 10;
+      align-items: center;
+
+      z-index: 9999;
     }
 
     .nav button {
-      background: none;
-      border: none;
-      color: #777;
-      font-size: 11px;
-      cursor: pointer;
+      background: transparent;
+      color: #666;
+
+      font-size: 10px;
+      font-weight: 700;
+
+      padding: 15px 8px;
+
+      letter-spacing: 0.2px;
     }
 
     .nav button.active {
-      color: white;
+      color: #fff;
     }
+
+    .nav button:hover {
+      color: #fff;
+    }
+
+
+    /* =========================
+       WELCOME PAGE
+    ========================= */
+
+    #welcome {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    #welcome h1 {
+      font-size: 48px;
+      margin-top: 35px;
+      letter-spacing: -2.5px;
+    }
+
+    #welcome p {
+      max-width: 330px;
+      font-size: 16px;
+    }
+
+
+    /* =========================
+       REALITY CARDS
+    ========================= */
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 8px;
+    }
+
   </style>
 </head>
 
+
 <body>
 
-<div class="app">
+  <div class="app">
 
-  <!-- WELCOME -->
 
-  <section id="welcome" class="screen active">
+    <!-- =========================
+         WELCOME
+    ========================= -->
 
-    <div class="welcome">
+    <section id="welcome" class="screen active">
 
-      <div class="logo">SWYCHD</div>
+      <div class="logo">
+        SWYCHD
+      </div>
 
       <h1>
         LIVE<br>
@@ -333,383 +316,509 @@
       </h1>
 
       <p>
-        Enter someone else's reality.<br>
-        Complete their challenges.<br>
-        Earn your FLUX.
+        Live someone else's reality.
+        Experience challenges, complete missions,
+        and earn FLUX.
       </p>
 
-      <button class="button" onclick="openHome()">
+      <button
+        class="main-button"
+        onclick="openHome()"
+      >
         GET SWYCHD
       </button>
 
-    </div>
-
-  </section>
+    </section>
 
 
-  <!-- HOME -->
 
-  <section id="home" class="screen">
+    <!-- =========================
+         HOME
+    ========================= -->
 
-    <div class="top">
+    <section id="home" class="screen">
 
-      <div class="logo">SWYCHD</div>
-
-      <div class="profile-circle">
-        A
+      <div class="logo">
+        SWYCHD
       </div>
 
-    </div>
+      <h1>
+        Ready to SWYCH?
+      </h1>
 
-    <div class="greeting">
 
-      <p>WELCOME BACK</p>
+      <!-- FLUX -->
 
-      <h2>Ready to SWYCH?</h2>
+      <div class="card">
 
-    </div>
+        <div class="small">
+          YOUR FLUX
+        </div>
 
-    <div class="flux-card">
+        <div class="flux">
+          0 ⚡
+        </div>
 
-      <div class="flux-title">
-        YOUR FLUX
+        <div class="small">
+          NEW SWITCHER · 500 FLUX TO UNLOCK
+        </div>
+
       </div>
 
-      <div class="flux-number">
-        0 ⚡
+
+      <h2>
+        Trending Realities
+      </h2>
+
+
+      <!-- SOCCER -->
+
+      <div class="card">
+
+        <h3>
+          ⚽ Academy Soccer Day
+        </h3>
+
+        <p>
+          Experience a full day of elite soccer training.
+        </p>
+
+        <button
+          class="main-button"
+          onclick="selectReality()"
+        >
+          SWYCH THIS REALITY
+        </button>
+
       </div>
 
-      <div class="flux-level">
-        NEW SWITCHER · 500 FLUX to unlock
+
+      <!-- GAMING -->
+
+      <div class="card">
+
+        <h3>
+          🎮 Pro Gamer Grind
+        </h3>
+
+        <p>
+          Experience a competitive gaming routine.
+        </p>
+
+        <button
+          class="main-button"
+          onclick="selectReality()"
+        >
+          SWYCH THIS REALITY
+        </button>
+
       </div>
 
-    </div>
-
-    <div class="section-title">
-      TRENDING REALITIES
-    </div>
-
-    <div class="reality-card">
-
-      <div class="reality-icon">⚽</div>
-
-      <h3>Academy Soccer Day</h3>
-
-      <p>
-        Experience a full day as a competitive
-        soccer player.
-      </p>
-
-      <p>
-        8 missions · 🔥 Hard
-      </p>
-
-      <button class="enter">
-        VIEW REALITY
-      </button>
-
-    </div>
-
-    <div class="reality-card">
-
-      <div class="reality-icon">🎮</div>
-
-      <h3>Pro Gamer Grind</h3>
-
-      <p>
-        Can you handle the schedule?
-      </p>
-
-      <p>
-        6 missions · ⚡ Medium
-      </p>
-
-      <button class="enter">
-        VIEW REALITY
-      </button>
-
-    </div>
-
-  </section>
+    </section>
 
 
-  <!-- EXPLORE -->
 
-  <section id="explore" class="screen">
+    <!-- =========================
+         EXPLORE
+    ========================= -->
 
-    <div class="top">
-      <div class="logo">SWYCHD</div>
+    <section id="explore" class="screen">
 
-      <div class="profile-circle">
-        A
+      <div class="logo">
+        SWYCHD
       </div>
-    </div>
 
-    <div class="page-header">
+      <h1>
+        Explore
+      </h1>
 
-      <h2>Explore</h2>
+
+      <input
+        class="search"
+        type="text"
+        placeholder="Search realities..."
+      >
+
+
+      <!-- CATEGORIES -->
+
+      <div class="chips">
+
+        <button
+          class="chip selected"
+          onclick="selectCategory(this)"
+        >
+          ALL
+        </button>
+
+        <button
+          class="chip"
+          onclick="selectCategory(this)"
+        >
+          SPORTS
+        </button>
+
+        <button
+          class="chip"
+          onclick="selectCategory(this)"
+        >
+          STUDENT
+        </button>
+
+        <button
+          class="chip"
+          onclick="selectCategory(this)"
+        >
+          GAMING
+        </button>
+
+        <button
+          class="chip"
+          onclick="selectCategory(this)"
+        >
+          MUSIC
+        </button>
+
+        <button
+          class="chip"
+          onclick="selectCategory(this)"
+        >
+          BUSINESS
+        </button>
+
+      </div>
+
+
+      <h2>
+        Trending DROPS
+      </h2>
+
+
+      <!-- REALITY 1 -->
+
+      <div class="card">
+
+        <h3>
+          ⚽ Academy Soccer Day
+        </h3>
+
+        <p>
+          Train like an academy player.
+        </p>
+
+        <button
+          class="main-button"
+          onclick="selectReality()"
+        >
+          SWYCH THIS REALITY
+        </button>
+
+      </div>
+
+
+      <!-- REALITY 2 -->
+
+      <div class="card">
+
+        <h3>
+          📚 Straight-A Student
+        </h3>
+
+        <p>
+          Experience a productive student routine.
+        </p>
+
+        <button
+          class="main-button"
+          onclick="selectReality()"
+        >
+          SWYCH THIS REALITY
+        </button>
+
+      </div>
+
+
+      <!-- REALITY 3 -->
+
+      <div class="card">
+
+        <h3>
+          💼 Young Entrepreneur
+        </h3>
+
+        <p>
+          Experience the day of a young founder.
+        </p>
+
+        <button
+          class="main-button"
+          onclick="selectReality()"
+        >
+          SWYCH THIS REALITY
+        </button>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         DROP
+    ========================= -->
+
+    <section id="drop" class="screen">
+
+      <div class="logo">
+        SWYCHD
+      </div>
+
+      <h1>
+        DROP
+      </h1>
 
       <p>
-        Find a reality you wouldn't normally live.
+        Create your Reality and let someone else experience it.
       </p>
 
-    </div>
+
+      <div class="card">
+
+        <h2>
+          Coming next
+        </h2>
+
+        <p>
+          Create missions, set rules, and earn FLUX when
+          people successfully SWYCH your Reality.
+        </p>
+
+      </div>
+
+    </section>
 
 
-    <input
-      class="search"
-      type="text"
-      placeholder="Search realities..."
+
+    <!-- =========================
+         SWYCHES
+    ========================= -->
+
+    <section id="swcyhes" class="screen">
+
+      <div class="logo">
+        SWYCHD
+      </div>
+
+      <h1>
+        SWYCHES
+      </h1>
+
+
+      <div class="card">
+
+        <h2>
+          Your active SWYCHES
+        </h2>
+
+        <p>
+          No active realities yet.
+        </p>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         PROFILE
+    ========================= -->
+
+    <section id="profile" class="screen">
+
+      <div class="logo">
+        SWYCHD
+      </div>
+
+      <h1>
+        Your Profile
+      </h1>
+
+
+      <div class="card">
+
+        <h2>
+          A
+        </h2>
+
+        <p>
+          NEW SWITCHER
+        </p>
+
+        <div class="flux">
+          0 ⚡ FLUX
+        </div>
+
+      </div>
+
+    </section>
+
+  </div>
+
+
+
+  <!-- =========================
+       BOTTOM NAVIGATION
+  ========================= -->
+
+  <nav
+    id="nav"
+    class="nav"
+    style="display: none;"
+  >
+
+    <button
+      type="button"
+      class="active"
+      onclick="showScreen('home', this)"
     >
+      HOME
+    </button>
 
 
-    <div class="categories">
+    <button
+      type="button"
+      onclick="showScreen('explore', this)"
+    >
+      EXPLORE
+    </button>
 
-      <button class="category selected">
-        ALL
-      </button>
 
-      <button class="category">
-        ⚽ SPORTS
-      </button>
+    <button
+      type="button"
+      onclick="showScreen('drop', this)"
+    >
+      DROP
+    </button>
 
-      <button class="category">
-        🎓 STUDENT
-      </button>
 
-      <button class="category">
-        🎮 GAMING
-      </button>
+    <button
+      type="button"
+      onclick="showScreen('swcyhes', this)"
+    >
+      SWYCHES
+    </button>
 
-      <button class="category">
-        🎵 MUSIC
-      </button>
 
-      <button class="category">
-        💼 BUSINESS
-      </button>
+    <button
+      type="button"
+      onclick="showScreen('profile', this)"
+    >
+      PROFILE
+    </button>
 
-    </div>
+  </nav>
 
 
-    <div class="section-title">
-      TRENDING DROPS
-    </div>
 
+  <!-- =========================
+       JAVASCRIPT
+  ========================= -->
 
-    <div class="drop-card">
+  <script>
 
-      <div class="drop-top">
+    /* OPEN HOME */
 
-        <span class="drop-category">
-          ⚽ SPORTS
-        </span>
+    function openHome() {
 
-        <span class="difficulty">
-          🔥🔥🔥
-        </span>
+      document
+        .getElementById("welcome")
+        .classList.remove("active");
 
-      </div>
+      document
+        .getElementById("home")
+        .classList.add("active");
 
-      <h3>
-        Academy Soccer Day
-      </h3>
+      document
+        .getElementById("nav")
+        .style.display = "flex";
 
-      <p>
-        See if you can survive a competitive
-        soccer player's schedule.
-      </p>
+    }
 
-      <div class="drop-info">
 
-        <span>8 missions</span>
-        <span>24 hours</span>
-        <span>1.2K SWYCHES</span>
+    /* CHANGE SCREEN */
 
-      </div>
+    function showScreen(screenId, button) {
 
-      <button
-        class="swch-button"
-        onclick="alert('Reality selected 🔄')"
-      >
-        SWYCH THIS REALITY
-      </button>
+      const screens =
+        document.querySelectorAll(".screen");
 
-    </div>
+      screens.forEach(function(screen) {
 
+        screen.classList.remove("active");
 
-    <div class="drop-card">
-
-      <div class="drop-top">
-
-        <span class="drop-category">
-          🎓 STUDENT
-        </span>
-
-        <span class="difficulty">
-          🔥🔥
-        </span>
-
-      </div>
-
-      <h3>
-        Straight-A Student
-      </h3>
-
-      <p>
-        Try balancing classes, studying,
-        activities and everything else.
-      </p>
-
-      <div class="drop-info">
-
-        <span>7 missions</span>
-        <span>12 hours</span>
-        <span>846 SWYCHES</span>
-
-      </div>
-
-      <button
-        class="swch-button"
-        onclick="alert('Reality selected 🔄')"
-      >
-        SWYCH THIS REALITY
-      </button>
-
-    </div>
-
-
-    <div class="drop-card">
-
-      <div class="drop-top">
-
-        <span class="drop-category">
-          💼 BUSINESS
-        </span>
-
-        <span class="difficulty">
-          🔥🔥🔥🔥
-        </span>
-
-      </div>
-
-      <h3>
-        Young Entrepreneur
-      </h3>
-
-      <p>
-        Build, pitch and manage a business
-        during one intense day.
-      </p>
-
-      <div class="drop-info">
-
-        <span>10 missions</span>
-        <span>24 hours</span>
-        <span>531 SWYCHES</span>
-
-      </div>
-
-      <button
-        class="swch-button"
-        onclick="alert('Reality selected 🔄')"
-      >
-        SWYCH THIS REALITY
-      </button>
-
-    </div>
-
-  </section>
-
-</div>
-
-
-<!-- NAVIGATION -->
-
-<nav id="nav" class="nav">
-
-  <button
-    id="homeNav"
-    class="active"
-    onclick="showScreen('home', this)"
-  >
-    🏠<br>HOME
-  </button>
-
-  <button
-    id="exploreNav"
-    onclick="showScreen('explore', this)"
-  >
-    🌎<br>EXPLORE
-  </button>
-
-  <button>
-    ＋<br>DROP
-  </button>
-
-  <button>
-    🔄<br>SWYCHES
-  </button>
-
-  <button>
-    👤<br>PROFILE
-  </button>
-
-</nav>
-
-
-<script>
-
-  function openHome() {
-
-    document.getElementById("welcome").classList.remove("active");
-
-    document.getElementById("home").classList.add("active");
-
-    document.getElementById("nav").style.display = "flex";
-
-  }
-
-
-  function showScreen(screenId, button) {
-
-    const screens = document.querySelectorAll(".screen");
-
-    screens.forEach(function(screen) {
-      screen.classList.remove("active");
-    });
-
-    document.getElementById(screenId).classList.add("active");
-
-
-    const navButtons = document.querySelectorAll(".nav button");
-
-    navButtons.forEach(function(navButton) {
-      navButton.classList.remove("active");
-    });
-
-    button.classList.add("active");
-
-  }
-
-
-  const categories = document.querySelectorAll(".category");
-
-  categories.forEach(function(category) {
-
-    category.addEventListener("click", function() {
-
-      categories.forEach(function(item) {
-        item.classList.remove("selected");
       });
 
-      category.classList.add("selected");
 
-    });
+      const selectedScreen =
+        document.getElementById(screenId);
 
-  });
+      if (selectedScreen) {
 
-</script>
+        selectedScreen.classList.add("active");
+
+      }
+
+
+      const navButtons =
+        document.querySelectorAll(".nav button");
+
+      navButtons.forEach(function(navButton) {
+
+        navButton.classList.remove("active");
+
+      });
+
+
+      if (button) {
+
+        button.classList.add("active");
+
+      }
+
+      window.scrollTo(0, 0);
+
+    }
+
+
+    /* SELECT REALITY */
+
+    function selectReality() {
+
+      alert("Reality selected 🔄");
+
+    }
+
+
+    /* CATEGORY BUTTONS */
+
+    function selectCategory(button) {
+
+      const chips =
+        document.querySelectorAll(".chip");
+
+      chips.forEach(function(chip) {
+
+        chip.classList.remove("selected");
+
+      });
+
+      button.classList.add("selected");
+
+    }
+
+  </script>
 
 </body>
+
 </html>
