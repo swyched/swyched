@@ -36,17 +36,17 @@
       display: block;
     }
 
+    .logo {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+
     /* WELCOME */
 
     .welcome {
       padding-top: 90px;
       text-align: center;
-    }
-
-    .logo {
-      font-size: 28px;
-      font-weight: 900;
-      letter-spacing: -1px;
     }
 
     .welcome h1 {
@@ -162,6 +162,7 @@
       margin-top: 6px;
       color: #888;
       font-size: 13px;
+      line-height: 1.4;
     }
 
     .enter {
@@ -175,6 +176,114 @@
       cursor: pointer;
     }
 
+    /* EXPLORE */
+
+    .page-header {
+      margin-top: 35px;
+    }
+
+    .page-header p {
+      color: #888;
+      margin-top: 8px;
+      font-size: 14px;
+    }
+
+    .search {
+      width: 100%;
+      margin-top: 25px;
+      padding: 15px;
+      background: #111;
+      border: 1px solid #292929;
+      border-radius: 14px;
+      color: white;
+      outline: none;
+      font-size: 15px;
+    }
+
+    .search::placeholder {
+      color: #666;
+    }
+
+    .categories {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      margin-top: 18px;
+      padding-bottom: 5px;
+    }
+
+    .category {
+      flex-shrink: 0;
+      padding: 9px 14px;
+      background: #111;
+      border: 1px solid #292929;
+      border-radius: 20px;
+      color: #aaa;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .category.selected {
+      background: white;
+      color: black;
+      border-color: white;
+    }
+
+    .drop-card {
+      padding: 20px;
+      margin-bottom: 12px;
+      border: 1px solid #292929;
+      border-radius: 18px;
+    }
+
+    .drop-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .drop-category {
+      color: #888;
+      font-size: 11px;
+      letter-spacing: 1px;
+    }
+
+    .difficulty {
+      font-size: 12px;
+    }
+
+    .drop-card h3 {
+      margin-top: 14px;
+      font-size: 21px;
+    }
+
+    .drop-card p {
+      margin-top: 7px;
+      color: #888;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .drop-info {
+      display: flex;
+      gap: 15px;
+      margin-top: 15px;
+      color: #777;
+      font-size: 12px;
+    }
+
+    .swch-button {
+      width: 100%;
+      margin-top: 18px;
+      padding: 13px;
+      border: none;
+      border-radius: 11px;
+      background: white;
+      color: black;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
     /* NAVIGATION */
 
     .nav {
@@ -185,10 +294,11 @@
       width: 100%;
       max-width: 430px;
       padding: 12px 15px 18px;
-      background: rgba(0,0,0,.96);
+      background: rgba(0,0,0,.97);
       border-top: 1px solid #222;
       display: none;
       justify-content: space-around;
+      z-index: 10;
     }
 
     .nav button {
@@ -209,7 +319,7 @@
 
 <div class="app">
 
-  <!-- WELCOME SCREEN -->
+  <!-- WELCOME -->
 
   <section id="welcome" class="screen active">
 
@@ -237,7 +347,7 @@
   </section>
 
 
-  <!-- HOME SCREEN -->
+  <!-- HOME -->
 
   <section id="home" class="screen">
 
@@ -259,7 +369,6 @@
 
     </div>
 
-
     <div class="flux-card">
 
       <div class="flux-title">
@@ -276,11 +385,9 @@
 
     </div>
 
-
     <div class="section-title">
       TRENDING REALITIES
     </div>
-
 
     <div class="reality-card">
 
@@ -302,7 +409,6 @@
       </button>
 
     </div>
-
 
     <div class="reality-card">
 
@@ -326,18 +432,214 @@
 
   </section>
 
+
+  <!-- EXPLORE -->
+
+  <section id="explore" class="screen">
+
+    <div class="top">
+      <div class="logo">SWYCHD</div>
+
+      <div class="profile-circle">
+        A
+      </div>
+    </div>
+
+    <div class="page-header">
+
+      <h2>Explore</h2>
+
+      <p>
+        Find a reality you wouldn't normally live.
+      </p>
+
+    </div>
+
+
+    <input
+      class="search"
+      type="text"
+      placeholder="Search realities..."
+    >
+
+
+    <div class="categories">
+
+      <button class="category selected">
+        ALL
+      </button>
+
+      <button class="category">
+        ⚽ SPORTS
+      </button>
+
+      <button class="category">
+        🎓 STUDENT
+      </button>
+
+      <button class="category">
+        🎮 GAMING
+      </button>
+
+      <button class="category">
+        🎵 MUSIC
+      </button>
+
+      <button class="category">
+        💼 BUSINESS
+      </button>
+
+    </div>
+
+
+    <div class="section-title">
+      TRENDING DROPS
+    </div>
+
+
+    <div class="drop-card">
+
+      <div class="drop-top">
+
+        <span class="drop-category">
+          ⚽ SPORTS
+        </span>
+
+        <span class="difficulty">
+          🔥🔥🔥
+        </span>
+
+      </div>
+
+      <h3>
+        Academy Soccer Day
+      </h3>
+
+      <p>
+        See if you can survive a competitive
+        soccer player's schedule.
+      </p>
+
+      <div class="drop-info">
+
+        <span>8 missions</span>
+        <span>24 hours</span>
+        <span>1.2K SWYCHES</span>
+
+      </div>
+
+      <button
+        class="swch-button"
+        onclick="alert('Reality selected 🔄')"
+      >
+        SWYCH THIS REALITY
+      </button>
+
+    </div>
+
+
+    <div class="drop-card">
+
+      <div class="drop-top">
+
+        <span class="drop-category">
+          🎓 STUDENT
+        </span>
+
+        <span class="difficulty">
+          🔥🔥
+        </span>
+
+      </div>
+
+      <h3>
+        Straight-A Student
+      </h3>
+
+      <p>
+        Try balancing classes, studying,
+        activities and everything else.
+      </p>
+
+      <div class="drop-info">
+
+        <span>7 missions</span>
+        <span>12 hours</span>
+        <span>846 SWYCHES</span>
+
+      </div>
+
+      <button
+        class="swch-button"
+        onclick="alert('Reality selected 🔄')"
+      >
+        SWYCH THIS REALITY
+      </button>
+
+    </div>
+
+
+    <div class="drop-card">
+
+      <div class="drop-top">
+
+        <span class="drop-category">
+          💼 BUSINESS
+        </span>
+
+        <span class="difficulty">
+          🔥🔥🔥🔥
+        </span>
+
+      </div>
+
+      <h3>
+        Young Entrepreneur
+      </h3>
+
+      <p>
+        Build, pitch and manage a business
+        during one intense day.
+      </p>
+
+      <div class="drop-info">
+
+        <span>10 missions</span>
+        <span>24 hours</span>
+        <span>531 SWYCHES</span>
+
+      </div>
+
+      <button
+        class="swch-button"
+        onclick="alert('Reality selected 🔄')"
+      >
+        SWYCH THIS REALITY
+      </button>
+
+    </div>
+
+  </section>
+
 </div>
 
 
-<!-- BOTTOM NAV -->
+<!-- NAVIGATION -->
 
 <nav id="nav" class="nav">
 
-  <button class="active" onclick="showHome()">
+  <button
+    id="homeNav"
+    class="active"
+    onclick="showScreen('home', this)"
+  >
     🏠<br>HOME
   </button>
 
-  <button>
+  <button
+    id="exploreNav"
+    onclick="showScreen('explore', this)"
+  >
     🌎<br>EXPLORE
   </button>
 
@@ -368,13 +670,44 @@
 
   }
 
-  function showHome() {
 
-    document.getElementById("welcome").classList.remove("active");
+  function showScreen(screenId, button) {
 
-    document.getElementById("home").classList.add("active");
+    const screens = document.querySelectorAll(".screen");
+
+    screens.forEach(function(screen) {
+      screen.classList.remove("active");
+    });
+
+    document.getElementById(screenId).classList.add("active");
+
+
+    const navButtons = document.querySelectorAll(".nav button");
+
+    navButtons.forEach(function(navButton) {
+      navButton.classList.remove("active");
+    });
+
+    button.classList.add("active");
 
   }
+
+
+  const categories = document.querySelectorAll(".category");
+
+  categories.forEach(function(category) {
+
+    category.addEventListener("click", function() {
+
+      categories.forEach(function(item) {
+        item.classList.remove("selected");
+      });
+
+      category.classList.add("selected");
+
+    });
+
+  });
 
 </script>
 
